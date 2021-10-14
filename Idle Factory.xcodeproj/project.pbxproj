@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2BD5D3C527189AAD0059AE06 /* MainCurrency.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BD5D3C427189AAD0059AE06 /* MainCurrency.swift */; };
 		487A19F02715504000723065 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 487A19EF2715504000723065 /* AppDelegate.swift */; };
 		487A19F62715504000723065 /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 487A19F52715504000723065 /* GameScene.swift */; };
 		487A19F82715504000723065 /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 487A19F72715504000723065 /* GameViewController.swift */; };
@@ -20,6 +21,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		2BD5D3C427189AAD0059AE06 /* MainCurrency.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCurrency.swift; sourceTree = "<group>"; };
 		487A19EC2715504000723065 /* Idle Factory.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Idle Factory.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		487A19EF2715504000723065 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		487A19F52715504000723065 /* GameScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameScene.swift; sourceTree = "<group>"; };
@@ -81,6 +83,7 @@
 				487A1A08271551BA00723065 /* Generator.swift */,
 				487A1A0A2715520D00723065 /* Upgradable.swift */,
 				487A1A0C2715522F00723065 /* Multiplier.swift */,
+				2BD5D3C427189AAD0059AE06 /* MainCurrency.swift */,
 			);
 			path = Base;
 			sourceTree = "<group>";
@@ -161,6 +164,7 @@
 				487A1A072715516900723065 /* Camera.swift in Sources */,
 				487A19F62715504000723065 /* GameScene.swift in Sources */,
 				487A19F82715504000723065 /* GameViewController.swift in Sources */,
+				2BD5D3C527189AAD0059AE06 /* MainCurrency.swift in Sources */,
 				487A19F02715504000723065 /* AppDelegate.swift in Sources */,
 				487A1A09271551BA00723065 /* Generator.swift in Sources */,
 			);
