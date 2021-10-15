@@ -6,22 +6,30 @@
 //
 
 import Foundation
-import CloudKit
 
 class User {
     
-    private(set) var id: CKRecord.ID
+    private(set) var id: String
     private(set) var name: String
-    private(set) var mainCurrency: Double = 0
-    private(set) var premiumCurrency: Double = 0
+    private(set) var mainCurrency: Double
+    private(set) var premiumCurrency: Double
+    private(set) var generators: [String]
     
-    init(){
-        id = CKRecord.ID()
-        mainCurrency = 0
-        premiumCurrency = 0
-        name = ""
+    /**
+        Substituir o tipo de generators!
+     */
+    init(id:String, name:String, mainCurrency: Double, premiumCurrency: Double, generators:[String]){
+        self.id = id
+        self.mainCurrency = mainCurrency
+        self.premiumCurrency = premiumCurrency
+        self.name = name
+        self.generators = generators
     }
     
+    
+    func setName(newName: String){
+        self.name = newName
+    }
     /**
      Add a value to the current amount. Receives a value as argument and need to be > 0.
      */
