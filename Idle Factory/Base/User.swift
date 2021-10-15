@@ -16,7 +16,7 @@ class User {
     private(set) var generators: [String]
     
     /**
-        Substituir o tipo de generators!
+     TODO: Change the type of generators
      */
     init(id:String, name:String, mainCurrency: Double, premiumCurrency: Double, generators:[String]){
         self.id = id
@@ -26,12 +26,14 @@ class User {
         self.generators = generators
     }
     
-    
+    /**
+     Changes the name
+     */
     func setName(newName: String){
         self.name = newName
     }
     /**
-     Add a value to the current amount. Receives a value as argument and need to be > 0.
+     Add a value to the current amount of mainCurrency. Receives a value as argument and need to be > 0.
      */
     func addMainCurrency(value: Double) {
         if value > 0 {
@@ -41,7 +43,7 @@ class User {
     
     
     /**
-     Remove a value from the current amount.
+     Remove a value from the current amount of mainCurrency.
      */
     func removeMainCurrency(value: Double) {
         if value > 0 && value <= mainCurrency {
@@ -49,7 +51,9 @@ class User {
         }
     }
     
-    
+    /**
+     Add a value to the current amount of premiumCurrency. Receives a value as argument and need to be > 0.
+     */
     func addPremiumCurrency(value: Double) {
         if value > 0 {
             premiumCurrency += value
@@ -58,7 +62,7 @@ class User {
     
     
     /**
-     Remove a value from the current amount.
+     Remove a value from the current amount of premiumCurrency.
      */
     func removePremiumCurrency(value: Double) {
         if value > 0 && value <= premiumCurrency {
