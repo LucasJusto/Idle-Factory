@@ -19,7 +19,7 @@ class GameScene: SKScene {
         cameraNode.position = CGPoint(x:UIScreen.main.bounds.width / 50, y: UIScreen.main.bounds.height / 3.25)
         cameraNode.applyZoomScale(scale: 0.6)
         
-                return cameraNode
+        return cameraNode
     }()
     
     
@@ -34,7 +34,6 @@ class GameScene: SKScene {
 //        createFactory()
         camera = cameraNode
         addChild(cameraNode)
-//        cameraNode.applyZoomScale(scale: 0.1)
 
 
     }
@@ -43,8 +42,7 @@ class GameScene: SKScene {
         background = SKSpriteNode(imageNamed: "BG_with_streets")
         background.name = "Background"
         
-//        let backgroundSize = CGSize(width: (self.scene?.size.width)!, height: (self.scene?.size.height)!)
-//        background.size = backgroundSize
+        
         background.addChild(createFactory())
         addChild(background)
     }
@@ -54,14 +52,12 @@ class GameScene: SKScene {
      Create player object with physics.
      */
     func createFactory() -> SKSpriteNode  {
-        let factory = SKSpriteNode(imageNamed:"Basic_Factory_level_1")
+        let factory = SKSpriteNode(imageNamed:"Factory_NFT_grande")
         factory.name = "factory"
-//        factory.anchorPoint = CGPoint(x: 0, y: 0)
+        factory.anchorPoint = CGPoint(x: 0.5, y: 0)
         factory.zPosition = 1
-//        factory.zRotation = CGFloat(30).degreesToRadians()
 
-//        factory.position = CGPoint(x: -((self.scene?.size.width)! / 2) * 0.7, y: -(((self.scene?.size.height)! / 2) * 0.7))
-        factory.position = CGPoint(x: 0, y: 0)
+        factory.position = CGPoint(x: -417.78, y: -68.25)
 
         return factory
     }
