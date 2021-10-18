@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		48096D2E271A144C00AB22AD /* CKRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48096D2D271A144C00AB22AD /* CKRepository.swift */; };
 		4850FF542718CB3B00C8CE97 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4850FF532718CB3B00C8CE97 /* CloudKit.framework */; };
 		487A19F02715504000723065 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 487A19EF2715504000723065 /* AppDelegate.swift */; };
 		487A19F62715504000723065 /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 487A19F52715504000723065 /* GameScene.swift */; };
@@ -22,6 +23,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		48096D2D271A144C00AB22AD /* CKRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CKRepository.swift; sourceTree = "<group>"; };
 		4850FF512718CB3800C8CE97 /* Idle Factory.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Idle Factory.entitlements"; sourceTree = "<group>"; };
 		4850FF532718CB3B00C8CE97 /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
 		487A19EC2715504000723065 /* Idle Factory.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Idle Factory.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -98,6 +100,7 @@
 				487A1A0A2715520D00723065 /* Upgradable.swift */,
 				55BD52A82718BC2C0057C7C0 /* User.swift */,
 				5567745B271A09A7006BA5C0 /* Factory.swift */,
+				48096D2D271A144C00AB22AD /* CKRepository.swift */,
 			);
 			path = Base;
 			sourceTree = "<group>";
@@ -174,6 +177,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				5567745C271A09A7006BA5C0 /* Factory.swift in Sources */,
+				487A1A0D2715522F00723065 /* Multiplier.swift in Sources */,
+				48096D2E271A144C00AB22AD /* CKRepository.swift in Sources */,
 				487A1A0B2715520D00723065 /* Upgradable.swift in Sources */,
 				487A1A072715516900723065 /* Camera.swift in Sources */,
 				487A19F62715504000723065 /* GameScene.swift in Sources */,
