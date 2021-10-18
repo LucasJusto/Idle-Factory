@@ -58,7 +58,19 @@ public class CKRepository {
     }
     
     static func getUserById(id: String, completion: @escaping (User?) -> Void) {
+        let recordID = CKRecord.ID(recordName: id)
+        let publicDB = container.publicCloudDatabase
         
+        publicDB.fetch(withRecordID: recordID) { userOptional, error in
+            if let userNotNull = userOptional {
+                let name = userNotNull.value(forKey: UsersTable.name.description) as? String
+                let mainCurrency = userNotNull.value(forKey: UsersTable.mainCurrency.description) as? Double
+                let premiumCurrency = userNotNull.value(forKey: UsersTable.premiumCurrency.description) as? Double
+                
+                let user = User(id: id, name: name ?? "", mainCurrency: mainCurrency ?? 0, premiumCurrency: premiumCurrency ?? 0)
+                completion(user)
+            }
+        }
     }
     
     #warning("CHANGE RESOURCES FROM ARRAY OF STRINGS TO ARRAY OF RESOURCES")
