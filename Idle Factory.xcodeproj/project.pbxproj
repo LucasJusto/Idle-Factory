@@ -18,7 +18,7 @@
 		487A1A072715516900723065 /* Camera.swift in Sources */ = {isa = PBXBuildFile; fileRef = 487A1A062715516900723065 /* Camera.swift */; };
 		487A1A09271551BA00723065 /* Generator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 487A1A08271551BA00723065 /* Generator.swift */; };
 		487A1A0B2715520D00723065 /* Upgradable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 487A1A0A2715520D00723065 /* Upgradable.swift */; };
-		487A1A0D2715522F00723065 /* Multiplier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 487A1A0C2715522F00723065 /* Multiplier.swift */; };
+		5567745C271A09A7006BA5C0 /* Factory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5567745B271A09A7006BA5C0 /* Factory.swift */; };
 		55BD52A92718BC2C0057C7C0 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55BD52A82718BC2C0057C7C0 /* User.swift */; };
 /* End PBXBuildFile section */
 
@@ -36,7 +36,7 @@
 		487A1A062715516900723065 /* Camera.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Camera.swift; sourceTree = "<group>"; };
 		487A1A08271551BA00723065 /* Generator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Generator.swift; sourceTree = "<group>"; };
 		487A1A0A2715520D00723065 /* Upgradable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Upgradable.swift; sourceTree = "<group>"; };
-		487A1A0C2715522F00723065 /* Multiplier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Multiplier.swift; sourceTree = "<group>"; };
+		5567745B271A09A7006BA5C0 /* Factory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Factory.swift; sourceTree = "<group>"; };
 		55BD52A82718BC2C0057C7C0 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -98,8 +98,8 @@
 			children = (
 				487A1A08271551BA00723065 /* Generator.swift */,
 				487A1A0A2715520D00723065 /* Upgradable.swift */,
-				487A1A0C2715522F00723065 /* Multiplier.swift */,
 				55BD52A82718BC2C0057C7C0 /* User.swift */,
+				5567745B271A09A7006BA5C0 /* Factory.swift */,
 				48096D2D271A144C00AB22AD /* CKRepository.swift */,
 			);
 			path = Base;
@@ -176,6 +176,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5567745C271A09A7006BA5C0 /* Factory.swift in Sources */,
 				487A1A0D2715522F00723065 /* Multiplier.swift in Sources */,
 				48096D2E271A144C00AB22AD /* CKRepository.swift in Sources */,
 				487A1A0B2715520D00723065 /* Upgradable.swift in Sources */,
@@ -364,8 +365,8 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = "Idle Factory/Idle Factory.entitlements";
-				CODE_SIGN_IDENTITY = "Apple Development";
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 6GD2RK7JQN;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -383,7 +384,7 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "LucasJusto.Idle-Factory";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE_SPECIFIER = IdleFactory;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
