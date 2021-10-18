@@ -11,13 +11,34 @@ import CoreMotion
 
 class GameScene: SKScene {
     
+    // MARK: - Generator slots
+    enum GENERATOR_SLOTS {
+        case first
+        case second
+        case third
+        case fourth
+        case fifth
+        case sixth
+    }
+    
+    // MARK: - Factory positions
+    private(set) var factoriesPositions: [(x: CGFloat, y: CGFloat)] =
+        [
+            (x: -417.78, y: -68.25),
+            (x: -114.40, y: 110),
+            (x: -117.40, y: -235),
+            (x: 184.78, y: -68.25),
+            (x: 181.78, y: -410),
+            (x: 480.70, y: -235)
+        ]
+    
     // MARK: - Nodes
     
     private var background: SKSpriteNode = SKSpriteNode()
     public lazy var cameraNode: Camera = {
         let cameraNode = Camera(sceneView: self.view!, scenario: background)
-        cameraNode.position = CGPoint(x:UIScreen.main.bounds.width / 50, y: UIScreen.main.bounds.height / 3.25)
-        cameraNode.applyZoomScale(scale: 0.6)
+        cameraNode.position = CGPoint(x:UIScreen.main.bounds.width / 50, y: UIScreen.main.bounds.height / 4)
+        cameraNode.applyZoomScale(scale: 0.4)
         
         return cameraNode
     }()
@@ -31,7 +52,16 @@ class GameScene: SKScene {
         self.anchorPoint = CGPoint(x: 0.5, y: 0.5)
         
         createBackground()
-//        createFactory()
+        addFactory(position: .first)
+        addFactory(position: .second)
+        addFactory(position: .third)
+        addFactory(position: .fourth)
+        addFactory(position: .fifth)
+        addFactory(position: .sixth)
+
+        print(UIScreen.main.bounds.width)
+        print(UIScreen.main.bounds.height)
+
         camera = cameraNode
         addChild(cameraNode)
 
@@ -39,12 +69,41 @@ class GameScene: SKScene {
     }
     // MARK: - Function
     func createBackground(){
-        background = SKSpriteNode(imageNamed: "BG_with_streets")
+        background = SKSpriteNode(imageNamed: "BG_Streets")
         background.name = "Background"
-        
-        
-        background.addChild(createFactory())
+                
         addChild(background)
+    }
+    
+    
+    /**
+     Add a factory on the scene. Receives a position which represents what slot player wants to add the new factory.
+     */
+    func addFactory(position: GENERATOR_SLOTS) {
+        let factory = createFactory()
+        
+        switch position {
+        case .first:
+            factory.position = CGPoint(x: factoriesPositions[0].x, y: factoriesPositions[0].y)
+            factory.zPosition = 2
+        case .second:
+            factory.position = CGPoint(x: factoriesPositions[1].x, y: factoriesPositions[1].y)
+            factory.zPosition = 1
+        case .third:
+            factory.position = CGPoint(x: factoriesPositions[2].x, y: factoriesPositions[2].y)
+            factory.zPosition = 2
+        case .fourth:
+            factory.position = CGPoint(x: factoriesPositions[3].x, y: factoriesPositions[3].y)
+            factory.zPosition = 1
+        case .fifth:
+            factory.position = CGPoint(x: factoriesPositions[4].x, y: factoriesPositions[4].y)
+            factory.zPosition = 2
+        case .sixth:
+            factory.position = CGPoint(x: factoriesPositions[5].x, y: factoriesPositions[5].y)
+            factory.zPosition = 1
+        }
+        
+        background.addChild(factory)
     }
     
     
@@ -53,11 +112,8 @@ class GameScene: SKScene {
      */
     func createFactory() -> SKSpriteNode  {
         let factory = SKSpriteNode(imageNamed:"Factory_NFT_grande")
-        factory.name = "factory"
         factory.anchorPoint = CGPoint(x: 0.5, y: 0)
-        factory.zPosition = 1
-
-        factory.position = CGPoint(x: -417.78, y: -68.25)
+        factory.name = "factory"
 
         return factory
     }
