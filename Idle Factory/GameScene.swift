@@ -15,20 +15,24 @@ class GameScene: SKScene {
     
     private var background: SKSpriteNode = SKSpriteNode()
     static var user: User? = nil
+    let semaphore = DispatchSemaphore(value: 0)
     // MARK: - Init
     
     override func didMove(to view: SKView) {
         
         self.anchorPoint = CGPoint(x: 0.5, y: 0.5)
+        
         CKRepository.getUserId { id in
             if let idNotNull = id {
                 CKRepository.getUserById(id: idNotNull) { user in
                     if let userNotnull = user {
                         GameScene.user = userNotnull
+                        self.semaphore.signal()
                     }
                 }
             }
         }
+        semaphore.wait()
         createBackground()
         
     }
