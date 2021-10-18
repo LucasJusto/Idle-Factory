@@ -8,6 +8,52 @@
 import Foundation
 import SpriteKit
 
+class Factory: Generator  {
+    
+    var id: String
+    var perSec: Double
+    var type: FactoryType
+    var isActive: IsActive
+    var energy: Int
+    var resourcesArray: [String]
+    var position: GeneratorPositions
+    var node: SKSpriteNode
+    
+    init(id: String,perSec: Double, resourcesArray:[String] , energy: Int, type: String, texture: SKTexture?, position: String, isActive: String){
+        self.id = id
+        self.perSec = perSec
+        self.resourcesArray = resourcesArray
+        self.energy = energy
+        self.type = getFactoryType(factoryType: type)
+        self.node = SKSpriteNode(texture: texture)
+        self.position = getGeneratorPositions(position: position)
+        self.isActive = IsActive.key(isActive: isActive)
+    }
+}
+
+enum IsActive: CustomStringConvertible {
+    case yes, no
+    
+    var description: String {
+        switch self {
+            case .yes:
+                return "yes"
+            case .no:
+                return "no"
+        }
+    }
+    
+    static func key(isActive: String) -> IsActive {
+        switch isActive {
+            case "yes":
+                return IsActive.yes
+            case "no":
+                return IsActive.no
+            default:
+                return IsActive.yes
+        }
+    }
+}
 
 enum GeneratorPositions: CustomStringConvertible, CaseIterable {
     case first
@@ -108,26 +154,3 @@ func getFactoryType(factoryType: String) -> FactoryType {
     }
 }
 
-class Factory: Generator  {
-    
-    var id: String
-    var perSec: Double
-    var type: FactoryType
-    var energy: Int
-    var resourcesArray: [String]
-    var position: GeneratorPositions
-    var node: SKSpriteNode
-    
-    init(id: String,perSec: Double, resourcesArray:[String] , energy: Int, type: String, texture: SKTexture?, position: String){
-        self.id = id
-        self.perSec = perSec
-        self.resourcesArray = resourcesArray
-        self.energy = energy
-        self.type = getFactoryType(factoryType: type)
-        self.node = SKSpriteNode(texture: texture)
-        self.position = getGeneratorPositions(position: position)
-    }
-    
-    
-    
-}
