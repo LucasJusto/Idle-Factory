@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "BG_with_streets.png",
+      "filename" : "Basic_Factory_level_3.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "BG_with_streets@2x.png",
+      "filename" : "Basic_Factory_level_3@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "BG_with_streets@3x.png",
+      "filename" : "Basic_Factory_level_3@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }
