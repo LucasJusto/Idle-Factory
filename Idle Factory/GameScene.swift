@@ -11,15 +11,6 @@ import CoreMotion
 
 class GameScene: SKScene {
     
-    // MARK: - Generator slots
-    enum GENERATOR_SLOTS {
-        case first
-        case second
-        case third
-        case fourth
-        case fifth
-        case sixth
-    }
     
     // MARK: - Factory positions
     private(set) var factoriesPositions: [(x: CGFloat, y: CGFloat)] =
@@ -79,7 +70,7 @@ class GameScene: SKScene {
     /**
      Add a factory on the scene. Receives a position which represents what slot player wants to add the new factory.
      */
-    func addFactory(position: GENERATOR_SLOTS) {
+    func addFactory(position: GeneratorPositions) {
         let factory = createFactory()
         
         switch position {
