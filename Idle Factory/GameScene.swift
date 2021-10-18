@@ -26,6 +26,8 @@ class GameScene: SKScene {
     // MARK: - Nodes
     
     private var background: SKSpriteNode = SKSpriteNode()
+    static var user: User? = nil
+    let semaphore = DispatchSemaphore(value: 0)
     public lazy var cameraNode: Camera = {
         let cameraNode = Camera(sceneView: self.view!, scenario: background)
         cameraNode.position = CGPoint(x:UIScreen.main.bounds.width / 50, y: UIScreen.main.bounds.height / 4)
@@ -42,6 +44,17 @@ class GameScene: SKScene {
         
         self.anchorPoint = CGPoint(x: 0.5, y: 0.5)
         
+        CKRepository.getUserId { id in
+            if let idNotNull = id {
+                CKRepository.getUserById(id: idNotNull) { user in
+                    if let userNotnull = user {
+                        GameScene.user = userNotnull
+                        self.semaphore.signal()
+                    }
+                }
+            }
+        }
+        semaphore.wait()
         createBackground()
         addFactory(position: .first)
         addFactory(position: .second)

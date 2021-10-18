@@ -13,17 +13,14 @@ class User {
     private(set) var name: String
     private(set) var mainCurrency: Double
     private(set) var premiumCurrency: Double
-    private(set) var generators: [String]
-    
     /**
      TODO: Change the type of generators
      */
-    init(id:String, name:String, mainCurrency: Double, premiumCurrency: Double, generators:[String]){
+    init(id: String, name: String, mainCurrency: Double, premiumCurrency: Double){
         self.id = id
         self.mainCurrency = mainCurrency
         self.premiumCurrency = premiumCurrency
         self.name = name
-        self.generators = generators
     }
     
     /**
