@@ -63,9 +63,6 @@ class GameScene: SKScene {
         addFactory(position: .fifth)
         addFactory(position: .sixth)
 
-        print(UIScreen.main.bounds.width)
-        print(UIScreen.main.bounds.height)
-
         camera = cameraNode
         addChild(cameraNode)
 
