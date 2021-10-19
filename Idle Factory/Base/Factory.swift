@@ -27,7 +27,7 @@ class Factory: Generator  {
         self.type = getFactoryType(factoryType: type)
         self.node = SKSpriteNode(texture: texture)
         self.position = getGeneratorPositions(position: position)
-        self.isActive = IsActive.key(isActive: isActive)
+        self.isActive = IsActive.getKey(isActive: isActive)
     }
 }
 
@@ -43,7 +43,16 @@ enum IsActive: CustomStringConvertible {
         }
     }
     
-    static func key(isActive: String) -> IsActive {
+    var key: String {
+        switch self {
+            case .yes:
+                return "yes"
+            case .no:
+                return "no"
+        }
+    }
+    
+    static func getKey(isActive: String) -> IsActive {
         switch isActive {
             case "yes":
                 return IsActive.yes
