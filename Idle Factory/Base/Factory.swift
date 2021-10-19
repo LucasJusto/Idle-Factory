@@ -24,7 +24,7 @@ class Factory: Generator  {
         self.perSec = perSec
         self.resourcesArray = resourcesArray
         self.energy = energy
-        self.type = getFactoryType(factoryType: type)
+        self.type = FactoryType.getFactoryType(factoryType: type)
         self.node = SKSpriteNode(texture: texture)
         self.position = getGeneratorPositions(position: position)
         self.isActive = IsActive.getKey(isActive: isActive)
@@ -59,7 +59,7 @@ enum IsActive: CustomStringConvertible {
             case "no":
                 return IsActive.no
             default:
-                return IsActive.yes
+                return IsActive.no
         }
     }
 }
@@ -150,16 +150,17 @@ enum FactoryType: CustomStringConvertible, CaseIterable {
         }
     }
     
-}
-
-func getFactoryType(factoryType: String) -> FactoryType {
-    switch factoryType {
-    case "NFT":
-        return .NFT
-    case "Basic":
-        return .Basic
-    default:
-        return .Basic
+    static func getFactoryType(factoryType: String) -> FactoryType {
+        switch factoryType {
+        case "NFT":
+            return .NFT
+        case "Basic":
+            return .Basic
+        default:
+            return .Basic
+        }
     }
 }
+
+
 
