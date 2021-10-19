@@ -10,7 +10,7 @@ class GameViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        backgroundLoadingView.loadGif(asset: "fundo")
+        backgroundLoadingView.loadGif(asset: "fundo-faster")
         CKRepository.getUserId { id in
             if let idNotNull = id {
                 CKRepository.getUserById(id: idNotNull) { user in
@@ -27,7 +27,7 @@ class GameViewController: UIViewController {
     
     
     func didLoadUser(){
-        Thread.sleep(forTimeInterval: 2)
+        Thread.sleep(forTimeInterval: 3)
         if let view = self.view as! SKView? {
             // Load the SKScene from 'GameScene.sks'
             
