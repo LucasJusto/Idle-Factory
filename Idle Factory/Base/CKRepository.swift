@@ -25,10 +25,57 @@ public class CKRepository {
                     CKRepository.errorAlertHandler(CKErrorCode: ckError.code)
                 }
                 if let id = record?.recordName {
+                    currentUserID = id
                     completion(id)
                 }
             }
         }
+    }
+    
+    public static func storeUserData(id: String, name: String, mainCurrency: Double, premiumCurrency: Double, completion: @escaping (CKRecord?, Error?) -> Void){
+        
+        let recordID = CKRecord.ID(recordName: id)
+        let publicDB = container.publicCloudDatabase
+        
+        publicDB.fetch(withRecordID: recordID) { userOptional, error in
+            if let ckError = error as? CKError {
+                CKRepository.errorAlertHandler(CKErrorCode: ckError.code)
+            }
+            
+            if let userNotNull = userOptional {
+                userNotNull.setObject(name as CKRecordValue?, forKey: UsersTable.name.description)
+                userNotNull.setObject(mainCurrency as CKRecordValue?, forKey: UsersTable.mainCurrency.description)
+                userNotNull.setObject(premiumCurrency as CKRecordValue?, forKey: UsersTable.premiumCurrency.description)
+                
+                publicDB.save(userNotNull) { savedRecord, error in
+                    if let ckError = error as? CKError {
+                        CKRepository.errorAlertHandler(CKErrorCode: ckError.code)
+                    }
+                    completion(savedRecord, error)
+                }
+            }
+        }
+    }
+    
+    static func getUserById(id: String, completion: @escaping (User?) -> Void) {
+        let recordID = CKRecord.ID(recordName: id)
+        let publicDB = container.publicCloudDatabase
+        
+        publicDB.fetch(withRecordID: recordID) { userOptional, error in
+            if let userNotNull = userOptional {
+                let name = userNotNull.value(forKey: UsersTable.name.description) as? String
+                let mainCurrency = userNotNull.value(forKey: UsersTable.mainCurrency.description) as? Double
+                let premiumCurrency = userNotNull.value(forKey: UsersTable.premiumCurrency.description) as? Double
+                
+                let user = User(id: id, name: name ?? "", mainCurrency: mainCurrency ?? 0, premiumCurrency: premiumCurrency ?? 0)
+                completion(user)
+            }
+        }
+    }
+    
+    #warning("CHANGE RESOURCES FROM ARRAY OF STRINGS TO ARRAY OF RESOURCES")
+    static func storeGenerators(userID: String, position: GeneratorPositions, energy: Int, isActive: String, type: String, resources: [String]) {
+        
     }
     
     static func errorAlertHandler(CKErrorCode: CKError.Code){
@@ -80,7 +127,7 @@ public class CKRepository {
 }
 
 enum UsersTable: CustomStringConvertible {
-    case recordType, name, generators, mainCurrency, premiumCurrency
+    case recordType, name, mainCurrency, premiumCurrency
     
     var description: String {
         switch self {
@@ -88,8 +135,6 @@ enum UsersTable: CustomStringConvertible {
                 return "Users"
             case .name:
                 return "name"
-            case . generators:
-                return "generators"
             case .mainCurrency:
                 return "mainCurrency"
             case .premiumCurrency:
@@ -141,7 +186,7 @@ enum MarketTable: CustomStringConvertible {
 }
 
 enum GeneratorTable: CustomStringConvertible {
-    case recordType, energy, resources, type
+    case recordType, energy, resources, type, userID
     
     var description: String {
         switch self {
@@ -153,6 +198,8 @@ enum GeneratorTable: CustomStringConvertible {
                 return "resources"
             case .type:
                 return "type"
+            case .userID:
+                return "userID"
         }
     }
 }

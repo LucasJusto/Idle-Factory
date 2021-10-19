@@ -21,6 +21,9 @@
 		487A1A09271551BA00723065 /* Generator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 487A1A08271551BA00723065 /* Generator.swift */; };
 		487A1A0B2715520D00723065 /* Upgradable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 487A1A0A2715520D00723065 /* Upgradable.swift */; };
 		5567745C271A09A7006BA5C0 /* Factory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5567745B271A09A7006BA5C0 /* Factory.swift */; };
+		55BBAC15271F404A00A86A47 /* UIImageExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55BBAC12271F404A00A86A47 /* UIImageExtension.swift */; };
+		55BBAC16271F404A00A86A47 /* GIFPlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55BBAC13271F404A00A86A47 /* GIFPlayerView.swift */; };
+		55BBAC17271F404A00A86A47 /* UIImageViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55BBAC14271F404A00A86A47 /* UIImageViewExtension.swift */; };
 		55BD52A92718BC2C0057C7C0 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55BD52A82718BC2C0057C7C0 /* User.swift */; };
 /* End PBXBuildFile section */
 
@@ -42,6 +45,9 @@
 		487A1A08271551BA00723065 /* Generator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Generator.swift; sourceTree = "<group>"; };
 		487A1A0A2715520D00723065 /* Upgradable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Upgradable.swift; sourceTree = "<group>"; };
 		5567745B271A09A7006BA5C0 /* Factory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Factory.swift; sourceTree = "<group>"; };
+		55BBAC12271F404A00A86A47 /* UIImageExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIImageExtension.swift; sourceTree = "<group>"; };
+		55BBAC13271F404A00A86A47 /* GIFPlayerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GIFPlayerView.swift; sourceTree = "<group>"; };
+		55BBAC14271F404A00A86A47 /* UIImageViewExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIImageViewExtension.swift; sourceTree = "<group>"; };
 		55BD52A82718BC2C0057C7C0 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -86,6 +92,7 @@
 			isa = PBXGroup;
 			children = (
 				2B9C3147271F4C1B008A7676 /* Idle-Factory-Info.plist */,
+				55BBAC11271F3FE500A86A47 /* GIF Extension */,
 				4850FF512718CB3800C8CE97 /* Idle Factory.entitlements */,
 				487A19EF2715504000723065 /* AppDelegate.swift */,
 				487A19F52715504000723065 /* GameScene.swift */,
@@ -111,6 +118,16 @@
 				48096D2D271A144C00AB22AD /* CKRepository.swift */,
 			);
 			path = Base;
+			sourceTree = "<group>";
+		};
+		55BBAC11271F3FE500A86A47 /* GIF Extension */ = {
+			isa = PBXGroup;
+			children = (
+				55BBAC13271F404A00A86A47 /* GIFPlayerView.swift */,
+				55BBAC12271F404A00A86A47 /* UIImageExtension.swift */,
+				55BBAC14271F404A00A86A47 /* UIImageViewExtension.swift */,
+			);
+			path = "GIF Extension";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -187,7 +204,10 @@
 			files = (
 				5567745C271A09A7006BA5C0 /* Factory.swift in Sources */,
 				48096D2E271A144C00AB22AD /* CKRepository.swift in Sources */,
+				55BBAC17271F404A00A86A47 /* UIImageViewExtension.swift in Sources */,
 				487A1A0B2715520D00723065 /* Upgradable.swift in Sources */,
+				55BBAC16271F404A00A86A47 /* GIFPlayerView.swift in Sources */,
+				55BBAC15271F404A00A86A47 /* UIImageExtension.swift in Sources */,
 				487A1A072715516900723065 /* Camera.swift in Sources */,
 				487A19F62715504000723065 /* GameScene.swift in Sources */,
 				487A19F82715504000723065 /* GameViewController.swift in Sources */,

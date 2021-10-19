@@ -29,6 +29,8 @@ class GameScene: SKScene {
     
     // MARK: - Nodes
     private var background: SKSpriteNode = SKSpriteNode()
+    private var loadingScreen: SKSpriteNode = SKSpriteNode()
+    static var user: User? = nil
     public lazy var cameraNode: Camera = {
         let cameraNode = Camera(sceneView: self.view!, scenario: background)
         cameraNode.position = CGPoint(x:UIScreen.main.bounds.width / 50, y: UIScreen.main.bounds.height / 4)
@@ -44,7 +46,7 @@ class GameScene: SKScene {
     override func didMove(to view: SKView) {
         
         self.anchorPoint = CGPoint(x: 0.5, y: 0.5)
-        
+    
         createBackground()
         createTopHud()
         createSidebarHud()
@@ -67,7 +69,6 @@ class GameScene: SKScene {
                 
         addChild(background)
     }
-    
     
     /**
      Create and displays top hud of the game.
