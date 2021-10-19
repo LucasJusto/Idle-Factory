@@ -26,8 +26,8 @@ class GameScene: SKScene {
     // MARK: - Nodes
     
     private var background: SKSpriteNode = SKSpriteNode()
+    private var loadingScreen: SKSpriteNode = SKSpriteNode()
     static var user: User? = nil
-    let semaphore = DispatchSemaphore(value: 0)
     public lazy var cameraNode: Camera = {
         let cameraNode = Camera(sceneView: self.view!, scenario: background)
         cameraNode.position = CGPoint(x:UIScreen.main.bounds.width / 50, y: UIScreen.main.bounds.height / 4)
@@ -43,18 +43,7 @@ class GameScene: SKScene {
     override func didMove(to view: SKView) {
         
         self.anchorPoint = CGPoint(x: 0.5, y: 0.5)
-        
-        CKRepository.getUserId { id in
-            if let idNotNull = id {
-                CKRepository.getUserById(id: idNotNull) { user in
-                    if let userNotnull = user {
-                        GameScene.user = userNotnull
-                        self.semaphore.signal()
-                    }
-                }
-            }
-        }
-        semaphore.wait()
+    
         createBackground()
         addFactory(position: .first)
         addFactory(position: .second)
@@ -62,7 +51,7 @@ class GameScene: SKScene {
         addFactory(position: .fourth)
         addFactory(position: .fifth)
         addFactory(position: .sixth)
-
+        print(GameScene.user?.id)
         print(UIScreen.main.bounds.width)
         print(UIScreen.main.bounds.height)
 
@@ -78,7 +67,6 @@ class GameScene: SKScene {
                 
         addChild(background)
     }
-    
     
     /**
      Add a factory on the scene. Receives a position which represents what slot player wants to add the new factory.
