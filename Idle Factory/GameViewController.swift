@@ -4,10 +4,11 @@ import GameplayKit
 
 class GameViewController: UIViewController {
     
+    @IBOutlet weak var gifView: UIImageView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        gifView.loadGif(asset: "Loader-transparent")
         CKRepository.getUserId { id in
             if let idNotNull = id {
                 CKRepository.getUserById(id: idNotNull) { user in
@@ -24,6 +25,7 @@ class GameViewController: UIViewController {
     
     
     func didLoadUser(){
+        Thread.sleep(forTimeInterval: 2)
         if let view = self.view as! SKView? {
             // Load the SKScene from 'GameScene.sks'
             
@@ -44,6 +46,7 @@ class GameViewController: UIViewController {
 
             view.showsFPS = true
             view.showsNodeCount = true
+            gifView.isHidden = true
         }
     }
     override var shouldAutorotate: Bool {

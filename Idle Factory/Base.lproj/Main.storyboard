@@ -17,7 +17,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Basic_Factory_level_2" translatesAutoresizingMaskIntoConstraints="NO" id="JPQ-ff-5Om">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="JPQ-ff-5Om">
                                 <rect key="frame" x="0.0" y="44" width="414" height="852"/>
                             </imageView>
                         </subviews>
@@ -30,6 +30,9 @@
                             <constraint firstAttribute="bottom" secondItem="JPQ-ff-5Om" secondAttribute="bottom" id="uBo-F3-7ln"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="gifView" destination="JPQ-ff-5Om" id="DbB-MS-9ox"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SZV-WD-TEh" sceneMemberID="firstResponder"/>
             </objects>
@@ -37,7 +40,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="Basic_Factory_level_2" width="469.5" height="288"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
