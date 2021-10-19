@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19162" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BV1-FR-VrT">
-    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <device id="retina6_1" orientation="landscape" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19144"/>
@@ -14,27 +14,27 @@
             <objects>
                 <viewController id="BV1-FR-VrT" customClass="GameViewController" customModule="Idle_Factory" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" multipleTouchEnabled="YES" contentMode="scaleToFill" id="3se-qz-xqx" customClass="SKView">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="896" height="414"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="BG_Streets" translatesAutoresizingMaskIntoConstraints="NO" id="qSa-BR-7ga">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                                <rect key="frame" x="0.0" y="0.0" width="896" height="414"/>
                             </imageView>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="JPQ-ff-5Om">
-                                <rect key="frame" x="0.0" y="44" width="414" height="852"/>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="industries-park" translatesAutoresizingMaskIntoConstraints="NO" id="JPQ-ff-5Om">
+                                <rect key="frame" x="0.0" y="30" width="193" height="91"/>
                             </imageView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="4qk-I5-YsI"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstAttribute="bottom" secondItem="qSa-BR-7ga" secondAttribute="bottom" id="8TI-bV-sfZ"/>
-                            <constraint firstItem="JPQ-ff-5Om" firstAttribute="top" secondItem="3se-qz-xqx" secondAttribute="topMargin" id="GV3-c6-SfR"/>
-                            <constraint firstItem="JPQ-ff-5Om" firstAttribute="leading" secondItem="3se-qz-xqx" secondAttribute="leading" id="LNS-Zf-4Ks"/>
-                            <constraint firstItem="qSa-BR-7ga" firstAttribute="leading" secondItem="3se-qz-xqx" secondAttribute="leading" id="Off-0C-gLh"/>
-                            <constraint firstAttribute="trailing" secondItem="qSa-BR-7ga" secondAttribute="trailing" id="QGE-HZ-0vC"/>
-                            <constraint firstAttribute="trailing" secondItem="JPQ-ff-5Om" secondAttribute="trailing" id="WQ0-3R-hma"/>
-                            <constraint firstItem="qSa-BR-7ga" firstAttribute="top" secondItem="3se-qz-xqx" secondAttribute="top" id="qfa-if-vrL"/>
-                            <constraint firstAttribute="bottom" secondItem="JPQ-ff-5Om" secondAttribute="bottom" id="uBo-F3-7ln"/>
+                            <constraint firstItem="qSa-BR-7ga" firstAttribute="top" secondItem="4qk-I5-YsI" secondAttribute="top" id="1ds-xo-Szl"/>
+                            <constraint firstAttribute="trailing" secondItem="JPQ-ff-5Om" secondAttribute="trailing" constant="703" id="DBt-ma-hWT"/>
+                            <constraint firstItem="qSa-BR-7ga" firstAttribute="centerX" secondItem="3se-qz-xqx" secondAttribute="centerX" id="SED-q9-iTm"/>
+                            <constraint firstAttribute="bottom" secondItem="JPQ-ff-5Om" secondAttribute="bottom" constant="293" id="WCM-hO-rbz"/>
+                            <constraint firstItem="qSa-BR-7ga" firstAttribute="leading" secondItem="3se-qz-xqx" secondAttribute="leading" id="cRq-Wv-707"/>
+                            <constraint firstItem="JPQ-ff-5Om" firstAttribute="leading" secondItem="3se-qz-xqx" secondAttribute="leading" id="diM-yJ-dgQ"/>
+                            <constraint firstItem="JPQ-ff-5Om" firstAttribute="top" secondItem="3se-qz-xqx" secondAttribute="top" constant="30" id="msm-00-OcZ"/>
+                            <constraint firstItem="qSa-BR-7ga" firstAttribute="centerY" secondItem="3se-qz-xqx" secondAttribute="centerY" id="z3Q-lQ-qsE"/>
                         </constraints>
                     </view>
                     <connections>
@@ -44,11 +44,12 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SZV-WD-TEh" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="132" y="84"/>
+            <point key="canvasLocation" x="131.91964285714286" y="82.608695652173921"/>
         </scene>
     </scenes>
     <resources>
         <image name="BG_Streets" width="2806" height="1606"/>
+        <image name="industries-park" width="804" height="369"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

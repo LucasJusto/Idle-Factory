@@ -10,7 +10,7 @@ class GameViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        gifView.loadGif(asset: "Loader-transparent")
+        backgroundLoadingView.loadGif(asset: "Loader-transparent")
         CKRepository.getUserId { id in
             if let idNotNull = id {
                 CKRepository.getUserById(id: idNotNull) { user in
