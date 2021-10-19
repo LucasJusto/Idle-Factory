@@ -7,8 +7,12 @@
 */
 
 //MARK: - CloudKit Errors Alert Handler
-"CKErrorNotLoggedInTitle" = "Não logado no iCloud"
-"CKErrorNotLoggedInMessage" = "Você precisa estar logado no iCloud para utilizar este aplicativo."
-"CKErrorAlertButtonLabel" =  "Ok"
-"CKErrorDefaultTitle" = "Algum erro ocorreu"
-"CKErrorDefaultMessage" = "Algo inesperado aconteceu, seus dados podem não terem sido salvos."
+"CKErrorNotLoggedInTitle" = "Não logado no iCloud";
+"CKErrorNotLoggedInMessage" = "Você precisa estar logado no iCloud para utilizar este aplicativo.";
+"CKErrorAlertButtonLabel" =  "Ok";
+"CKErrorDefaultTitle" = "Algum erro ocorreu";
+"CKErrorDefaultMessage" = "Algo inesperado aconteceu, seus dados podem não terem sido salvos.";
+
+
+//MARK: - ResourceTypes
+"ResourceTypeComputador" = "Computador";
