@@ -73,9 +73,22 @@ public class CKRepository {
         }
     }
     
-    #warning("CHANGE RESOURCES FROM ARRAY OF STRINGS TO ARRAY OF RESOURCES")
-    static func storeGenerators(userID: String, position: GeneratorPositions, energy: Int, isActive: String, type: String, resources: [String]) {
+    static func storeGenerator(userID: String, position: GeneratorPositions, energy: Int, isActive: IsActive, type: FactoryType, resources: [Resource], completion: @escaping (CKRecord?, Error?) -> Void) {
+        let record = CKRecord(recordType: GeneratorTable.recordType.description)
+        let publicDB = container.publicCloudDatabase
         
+        record.setObject(userID as CKRecordValue?, forKey: GeneratorTable.userID.description)
+        record.setObject(energy as CKRecordValue?, forKey: GeneratorTable.energy.description)
+        record.setObject(position.key as CKRecordValue?, forKey: GeneratorTable.position.description)
+        record.setObject(isActive.key as CKRecordValue?, forKey: GeneratorTable.isActive.description)
+        record.setObject(type.key as CKRecordValue?, forKey: GeneratorTable.type.description)
+        
+        publicDB.save(record) { savedRecord, error in
+            if let ckError = error as? CKError {
+                CKRepository.errorAlertHandler(CKErrorCode: ckError.code)
+            }
+            completion(savedRecord, error)
+        }
     }
     
     static func errorAlertHandler(CKErrorCode: CKError.Code){
@@ -186,7 +199,7 @@ enum MarketTable: CustomStringConvertible {
 }
 
 enum GeneratorTable: CustomStringConvertible {
-    case recordType, energy, resources, type, userID
+    case recordType, energy, isActive, type, userID, position
     
     var description: String {
         switch self {
@@ -194,12 +207,14 @@ enum GeneratorTable: CustomStringConvertible {
                 return "Generator"
             case .energy:
                 return "energy"
-            case . resources:
-                return "resources"
+            case .isActive:
+                return "isActive"
             case .type:
                 return "type"
             case .userID:
                 return "userID"
+            case .position:
+                return "position"
         }
     }
 }
