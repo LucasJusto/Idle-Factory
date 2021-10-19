@@ -28,7 +28,6 @@ class GameScene: SKScene {
     private var background: SKSpriteNode = SKSpriteNode()
     private var loadingScreen: SKSpriteNode = SKSpriteNode()
     static var user: User? = nil
-    let semaphore = DispatchSemaphore(value: 0)
     public lazy var cameraNode: Camera = {
         let cameraNode = Camera(sceneView: self.view!, scenario: background)
         cameraNode.position = CGPoint(x:UIScreen.main.bounds.width / 50, y: UIScreen.main.bounds.height / 4)
@@ -44,19 +43,7 @@ class GameScene: SKScene {
     override func didMove(to view: SKView) {
         
         self.anchorPoint = CGPoint(x: 0.5, y: 0.5)
-        createLoadingScreen()
-        CKRepository.getUserId { id in
-            if let idNotNull = id {
-                CKRepository.getUserById(id: idNotNull) { user in
-                    if let userNotnull = user {
-                        GameScene.user = userNotnull
-                        self.semaphore.signal()
-                    }
-                }
-            }
-        }
-        semaphore.wait()
-        removeLoadingScreen()
+    
         createBackground()
         addFactory(position: .first)
         addFactory(position: .second)
@@ -64,7 +51,7 @@ class GameScene: SKScene {
         addFactory(position: .fourth)
         addFactory(position: .fifth)
         addFactory(position: .sixth)
-
+        print(GameScene.user?.id)
         print(UIScreen.main.bounds.width)
         print(UIScreen.main.bounds.height)
 
@@ -79,17 +66,6 @@ class GameScene: SKScene {
         background.name = "Background"
                 
         addChild(background)
-    }
-    
-    func createLoadingScreen(){
-        loadingScreen = SKSpriteNode(imageNamed: "BG_Streets")
-        loadingScreen.name = "loading"
-        loadingScreen.zPosition = 10000
-        cameraNode.addChild(loadingScreen)
-    }
-    
-    func removeLoadingScreen(){
-        cameraNode.removeChildren(in: [loadingScreen])
     }
     
     /**
