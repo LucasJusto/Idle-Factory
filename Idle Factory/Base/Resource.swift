@@ -39,3 +39,30 @@ class Resource: Upgradable {
         perSec = baseQtt + (Double(currentLevel) * qttPLevel)
     }
 }
+
+enum ResourceType: CustomStringConvertible {
+    case computador
+    
+    var description: String {
+        switch self {
+            case .computador:
+                return NSLocalizedString("ResourceTypeComputador", comment: "Computador")
+        }
+    }
+    
+    var key: String {
+        switch self {
+            case .computador:
+                return "Computador"
+        }
+    }
+    
+    static func getKey(key: String) -> ResourceType{
+        switch key {
+            case "Computador":
+                return ResourceType.computador
+            default:
+                return ResourceType.computador
+        }
+    }
+}
