@@ -70,7 +70,7 @@ class GameScene: SKScene {
     
     
     /**
-     Displays game hud.
+     Create and displays top hud of the game.
      */
     func createTopHud() {
         
@@ -103,6 +103,9 @@ class GameScene: SKScene {
     }
     
     
+    /**
+     Create and displays sidebar hud of the game.
+     */
     func createSidebarHud() {
         
         // Sidebar background creation
@@ -116,8 +119,8 @@ class GameScene: SKScene {
         marketPlaceButton.position = CGPoint(x: ((UIScreen.main.bounds.width) / 2.31), y: -30)
         challengeButton.position = CGPoint(x: ((UIScreen.main.bounds.width) / 2.31), y: -120)
 
+        // Add to scene
         cameraNode.addChild(sidebarBackground)
-        
         sidebarBackground.addChild(marketPlaceButton)
         sidebarBackground.addChild(challengeButton)
     }
@@ -155,7 +158,7 @@ class GameScene: SKScene {
     
     
     /**
-     Create player object with physics.
+     Create factory.
      */
     func createFactory() -> SKSpriteNode  {
         let factory = SKSpriteNode(imageNamed:"Factory_NFT_grande")
