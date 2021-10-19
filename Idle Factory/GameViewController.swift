@@ -6,6 +6,8 @@ class GameViewController: UIViewController {
     
     @IBOutlet weak var gifView: UIImageView!
     
+    @IBOutlet weak var backgroundLoadingView: UIImageView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         gifView.loadGif(asset: "Loader-transparent")
@@ -47,6 +49,7 @@ class GameViewController: UIViewController {
             view.showsFPS = true
             view.showsNodeCount = true
             gifView.isHidden = true
+            backgroundLoadingView.isHidden = true
         }
     }
     override var shouldAutorotate: Bool {

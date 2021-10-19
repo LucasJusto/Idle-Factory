@@ -17,6 +17,9 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="BG_Streets" translatesAutoresizingMaskIntoConstraints="NO" id="qSa-BR-7ga">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                            </imageView>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="JPQ-ff-5Om">
                                 <rect key="frame" x="0.0" y="44" width="414" height="852"/>
                             </imageView>
@@ -24,13 +27,18 @@
                         <viewLayoutGuide key="safeArea" id="4qk-I5-YsI"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstAttribute="bottom" secondItem="qSa-BR-7ga" secondAttribute="bottom" id="8TI-bV-sfZ"/>
                             <constraint firstItem="JPQ-ff-5Om" firstAttribute="top" secondItem="3se-qz-xqx" secondAttribute="topMargin" id="GV3-c6-SfR"/>
                             <constraint firstItem="JPQ-ff-5Om" firstAttribute="leading" secondItem="3se-qz-xqx" secondAttribute="leading" id="LNS-Zf-4Ks"/>
+                            <constraint firstItem="qSa-BR-7ga" firstAttribute="leading" secondItem="3se-qz-xqx" secondAttribute="leading" id="Off-0C-gLh"/>
+                            <constraint firstAttribute="trailing" secondItem="qSa-BR-7ga" secondAttribute="trailing" id="QGE-HZ-0vC"/>
                             <constraint firstAttribute="trailing" secondItem="JPQ-ff-5Om" secondAttribute="trailing" id="WQ0-3R-hma"/>
+                            <constraint firstItem="qSa-BR-7ga" firstAttribute="top" secondItem="3se-qz-xqx" secondAttribute="top" id="qfa-if-vrL"/>
                             <constraint firstAttribute="bottom" secondItem="JPQ-ff-5Om" secondAttribute="bottom" id="uBo-F3-7ln"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="backgroundLoadingView" destination="qSa-BR-7ga" id="WdC-4g-QfZ"/>
                         <outlet property="gifView" destination="JPQ-ff-5Om" id="DbB-MS-9ox"/>
                     </connections>
                 </viewController>
@@ -40,6 +48,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="BG_Streets" width="2806" height="1606"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
