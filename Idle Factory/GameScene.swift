@@ -59,16 +59,21 @@ class GameScene: SKScene {
 
         camera = cameraNode
         addChild(cameraNode)
-
-
+        
     }
-    // MARK: - Function
+    
+    
+    // MARK: - BACKGROUND & HUD Creation
+    /**
+     Create scene background.
+     */
     func createBackground(){
         background = SKSpriteNode(imageNamed: "BG_Streets")
         background.name = "Background"
                 
         addChild(background)
     }
+    
     
     /**
      Create and displays top hud of the game.
@@ -78,28 +83,33 @@ class GameScene: SKScene {
         // Top HUD background creation
         let mainCurrencyHudBackground = gameHud.createTopHudBackground(xPos: 50)
         let premiumHudBackground = gameHud.createTopHudBackground(xPos: mainCurrencyHudBackground.calculateAccumulatedFrame().width + 60)
+        let resourceGeneratorBackground = gameHud.createTopHudGenerationBackground()
         
-        // Main and Premium Currency info creation
+        // Main / Premium Currency & resource generation per sec info creation
         let mainCurrencyIcon = gameHud.createMainCurrencyIcon()
         let mainCurrencyData = gameHud.createMainCurrencyLabel()
         let premiumCurrencyIcon = gameHud.createPremiumCurrencyIcon()
         let premiumCurrencyData = gameHud.createPremiumCurrency()
+        let generatorResource = gameHud.createGenerateResource()
         
-        // Positioning currencies on the device
+        // Positioning all info datas on the device
         mainCurrencyIcon.position = CGPoint(x: -((UIScreen.main.bounds.width) / 2) + 80, y: ((UIScreen.main.bounds.height) / 3) + 25)
         mainCurrencyData.position = CGPoint(x: mainCurrencyIcon.position.x + 50, y: ((UIScreen.main.bounds.height) / 3) + 18)
         premiumCurrencyIcon.position = CGPoint(x: -((UIScreen.main.bounds.width) / 2) + 215, y: ((UIScreen.main.bounds.height) / 3) + 25)
         premiumCurrencyData.position = CGPoint(x: premiumCurrencyIcon.position.x + 50, y: ((UIScreen.main.bounds.height) / 3) + 18)
+        generatorResource.position = CGPoint(x: -((UIScreen.main.bounds.width) / 2) + 80, y: ((UIScreen.main.bounds.height) / 3) - 7)
 
         
-        // Adds Hud as a child of the camera to keep Hud always on the camera
+        // Adds all Hud components as a child of the camera to keep Hud always on the camera
         cameraNode.addChild(mainCurrencyHudBackground)
         cameraNode.addChild(premiumHudBackground)
+        cameraNode.addChild(resourceGeneratorBackground)
         
         mainCurrencyHudBackground.addChild(mainCurrencyIcon)
         mainCurrencyHudBackground.addChild(mainCurrencyData)
         premiumHudBackground.addChild(premiumCurrencyIcon)
         premiumHudBackground.addChild(premiumCurrencyData)
+        mainCurrencyHudBackground.addChild(generatorResource)
     
     }
     
@@ -113,20 +123,24 @@ class GameScene: SKScene {
         let sidebarBackground = gameHud.createSidebarBackground()
         
         // HUD action buttons creation
+        let inventoryButton = gameHud.createInventoryButton()
         let marketPlaceButton = gameHud.createMarketplaceButton()
         let challengeButton = gameHud.createChallengeButton()
         
         // Positioning buttons on the device
+        inventoryButton.position = CGPoint(x: ((UIScreen.main.bounds.width) / 2.31), y: 50)
         marketPlaceButton.position = CGPoint(x: ((UIScreen.main.bounds.width) / 2.31), y: -30)
-        challengeButton.position = CGPoint(x: ((UIScreen.main.bounds.width) / 2.31), y: -120)
+        challengeButton.position = CGPoint(x: ((UIScreen.main.bounds.width) / 2.31), y: -123)
 
         // Add to scene
         cameraNode.addChild(sidebarBackground)
+        sidebarBackground.addChild(inventoryButton)
         sidebarBackground.addChild(marketPlaceButton)
         sidebarBackground.addChild(challengeButton)
     }
     
     
+    // MARK: - GENERATORS FUNCTIONS
     /**
      Add a factory on the scene. Receives a position which represents what slot player wants to add the new factory.
      */

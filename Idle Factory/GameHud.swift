@@ -8,6 +8,9 @@
 import SpriteKit
 
 
+/**
+ Class responsible to create all the components which compounds the game hud.
+ */
 class GameHud: SKScene {
     
     
@@ -16,14 +19,16 @@ class GameHud: SKScene {
     private var deviceHeight = UIScreen.main.bounds.height
     
     
-    // MARK: - Top HUD variables
+    // MARK: - Top HUD display components
     private(set) var mainCurrencyIcon: SKSpriteNode = SKSpriteNode()
     private(set) var premiumCurrencyIcon: SKSpriteNode = SKSpriteNode()
     private(set) var mainCurrencyValue: SKLabelNode = SKLabelNode()
     private(set) var premiumCurrencyValue: SKLabelNode = SKLabelNode()
+    private(set) var generatingResourceValue: SKLabelNode = SKLabelNode()
     
     
-    // MARK: - Right Sidebar HUD variables
+    // MARK: - Right Sidebar HUD display components
+    private(set) var inventoryButton: SKSpriteNode = SKSpriteNode()
     private(set) var marketplaceButton: SKSpriteNode = SKSpriteNode()
     private(set) var challengeButton: SKSpriteNode = SKSpriteNode()
     
@@ -33,10 +38,22 @@ class GameHud: SKScene {
      Create a white rounded Rect ShapeNode used to display currency info on the HUD.
      */
     func createTopHudBackground(xPos: CGFloat) -> SKShapeNode {
-        let HudInfoBackground = SKShapeNode(rect: CGRect(x: -((deviceWidth) / 2) + xPos, y: ((deviceHeight) / 3) + 7.5, width: (UIScreen.main.bounds.height) * 0.32, height: (deviceHeight) * 0.09), cornerRadius: 10)
+        let HudInfoBackground = SKShapeNode(rect: CGRect(x: -((deviceWidth) / 2) + xPos, y: ((deviceHeight) / 3) + 7.5, width: (UIScreen.main.bounds.height) * 0.32, height: (deviceHeight) * 0.09), cornerRadius: 7)
         HudInfoBackground.fillColor = .white
-        HudInfoBackground.zPosition = 3
+        HudInfoBackground.zPosition = 4
         return HudInfoBackground
+    }
+    
+    
+    /**
+     Create a black rounded Rect ShapeNode used to display the actual generating resource value info on the HUD.
+     */
+    func createTopHudGenerationBackground() -> SKShapeNode {
+        let generationHudBackground = SKShapeNode(rect: CGRect(x: -((deviceWidth) / 2) + 50, y: ((deviceHeight) / 3) - 9, width: (UIScreen.main.bounds.height) * 0.17, height: (deviceHeight) * 0.10), cornerRadius: 7)
+        generationHudBackground.fillColor = UIColor(named: "Rightbar_background")!
+        generationHudBackground.strokeColor = UIColor(named: "Rightbar_background")!
+        generationHudBackground.zPosition = 3
+        return generationHudBackground
     }
     
     
@@ -90,6 +107,20 @@ class GameHud: SKScene {
     }
     
     
+    /**
+     Create generator resource label to display on the scene.
+     */
+    func createGenerateResource() -> SKLabelNode{
+        generatingResourceValue.name = "GeneratingResource"
+        generatingResourceValue.fontName = "AustralSlabBlur-Regular"
+        generatingResourceValue.text = "+ 0.0 M/s"
+        generatingResourceValue.fontColor = .white
+        generatingResourceValue.fontSize = 11
+        generatingResourceValue.zPosition = 3
+        return generatingResourceValue
+    }
+    
+    
     // MARK: - Right sidebar HUD Functions
     
     /**
@@ -101,6 +132,17 @@ class GameHud: SKScene {
         sidebarBackground.strokeColor = UIColor(named: "Rightbar_background")!
         sidebarBackground.zPosition = 3
         return sidebarBackground
+    }
+    
+    
+    /**
+     Create inventory button for the sidebar hud.
+     */
+    func createInventoryButton() -> SKSpriteNode {
+        inventoryButton = SKSpriteNode(imageNamed: "Button-inventory")
+        inventoryButton.setScale(0.8)
+        inventoryButton.zPosition = 4
+        return inventoryButton
     }
     
     
