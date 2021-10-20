@@ -15,7 +15,7 @@ class Factory: Generator  {
     var type: FactoryType
     var isActive: IsActive
     var energy: Int
-    var resourcesArray: [String]
+    var resourcesArray: [Resource]
     var position: GeneratorPositions
     var node: SKSpriteNode
     
