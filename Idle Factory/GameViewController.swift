@@ -26,6 +26,28 @@ class GameViewController: UIViewController {
     }
     
     
+    func reload(gameSave: GameSave){
+        gifView.isHidden = false
+        backgroundLoadingView.isHidden = false
+        CKRepository.getUserId { id in
+            if let idNotNull = id {
+                CKRepository.getUserById(id: idNotNull) { [self] user in
+                    if let userNotnull = user {
+                        GameScene.user = userNotnull
+                        if let timeAway = gameSave.getTimeAway() {
+                            print(timeAway)
+                            DispatchQueue.main.async {
+                                self.gifView.isHidden = true
+                                self.backgroundLoadingView.isHidden = true
+                            }
+                            //GameScene.user?.addMainCurrency(value: 2 * timeAway)
+                        }
+                    }
+                }
+            }
+        }
+    }
+    
     func didLoadUser(){
         Thread.sleep(forTimeInterval: 3)
         if let view = self.view as! SKView? {
