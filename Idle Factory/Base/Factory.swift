@@ -11,23 +11,24 @@ import SpriteKit
 class Factory: Generator  {
     
     var id: String?
-    var perSec: Double
+    var perSec: Double?
     var type: FactoryType
     var isActive: IsActive
     var energy: Int
     var resourcesArray: [Resource]
     var position: GeneratorPositions
     var node: SKSpriteNode
+    var textureName: String
     
-    init(id: String? = nil, perSec: Double, resourcesArray:[Resource] , energy: Int, type: FactoryType, texture: SKTexture?, position: GeneratorPositions, isActive: IsActive){
+    init(id: String? = nil, resourcesArray:[Resource] , energy: Int, type: FactoryType, texture: String, position: GeneratorPositions, isActive: IsActive){
         self.id = id
-        self.perSec = perSec
         self.resourcesArray = resourcesArray
         self.energy = energy
         self.type = type
-        self.node = SKSpriteNode(texture: texture)
+        self.node = SKSpriteNode(texture: SKTexture(imageNamed: texture))
         self.position = position
         self.isActive = isActive
+        self.textureName = texture
     }
 }
 
@@ -110,27 +111,27 @@ enum GeneratorPositions: CustomStringConvertible, CaseIterable {
                 return "none"
         }
     }
-    
-}
-
-func getGeneratorPositions(position: String) -> GeneratorPositions {
-    switch position {
-    case "first":
-        return .first
-    case "second":
-        return .second
-    case "third":
-        return .third
-    case "fourth":
-        return .fourth
-    case "fifth":
-        return .fifth
-    case "sixth":
-        return .sixth
-    default:
-        return .first
+    static func getGeneratorPositions(position: String) -> GeneratorPositions {
+        switch position {
+        case "first":
+            return .first
+        case "second":
+            return .second
+        case "third":
+            return .third
+        case "fourth":
+            return .fourth
+        case "fifth":
+            return .fifth
+        case "sixth":
+            return .sixth
+        default:
+            return .first
+        }
     }
 }
+
+
 
 enum FactoryType: CustomStringConvertible, CaseIterable {
     case Basic, NFT

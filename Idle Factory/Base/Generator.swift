@@ -9,7 +9,7 @@ import Foundation
 
 protocol Generator {
     
-    var perSec: Double { get set } //generate this amount of currency per sec
+    var perSec: Double? { get set } //generate this amount of currency per sec
     
     var resourcesArray : [Resource] { get set }
 }
@@ -17,7 +17,7 @@ protocol Generator {
 extension Generator {
     func getCurrencyPerSec() -> Double {
         // TODO: Multiply all resources
-        return perSec
+        return 0
     }
 }
 
