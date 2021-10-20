@@ -73,15 +73,15 @@ public class CKRepository {
         }
     }
     
-    static func storeGenerator(userID: String, position: GeneratorPositions, energy: Int, isActive: IsActive, type: FactoryType, resources: [Resource], completion: @escaping (CKRecord?, Error?) -> Void) {
+    static func storeGenerator(userID: String, generator: Factory ,completion: @escaping (CKRecord?, Error?) -> Void) {
         let record = CKRecord(recordType: GeneratorTable.recordType.description)
         let publicDB = container.publicCloudDatabase
         
         record.setObject(userID as CKRecordValue?, forKey: GeneratorTable.userID.description)
-        record.setObject(energy as CKRecordValue?, forKey: GeneratorTable.energy.description)
-        record.setObject(position.key as CKRecordValue?, forKey: GeneratorTable.position.description)
-        record.setObject(isActive.key as CKRecordValue?, forKey: GeneratorTable.isActive.description)
-        record.setObject(type.key as CKRecordValue?, forKey: GeneratorTable.type.description)
+        record.setObject(generator.energy as CKRecordValue?, forKey: GeneratorTable.energy.description)
+        record.setObject(generator.position.key as CKRecordValue?, forKey: GeneratorTable.position.description)
+        record.setObject(generator.isActive.key as CKRecordValue?, forKey: GeneratorTable.isActive.description)
+        record.setObject(generator.type.key as CKRecordValue?, forKey: GeneratorTable.type.description)
         
         publicDB.save(record) { savedRecord, error in
             if let ckError = error as? CKError {
