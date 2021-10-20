@@ -49,7 +49,7 @@ class GameHud: SKScene {
      Create a black rounded Rect ShapeNode used to display the actual generating resource value info on the HUD.
      */
     func createTopHudGenerationBackground() -> SKShapeNode {
-        let generationHudBackground = SKShapeNode(rect: CGRect(x: -((deviceWidth) / 2) + 50, y: ((deviceHeight) / 3) - 9, width: (UIScreen.main.bounds.height) * 0.17, height: (deviceHeight) * 0.10), cornerRadius: 7)
+        let generationHudBackground = SKShapeNode(rect: CGRect(x: -((deviceWidth) / 2) + 50, y: ((deviceHeight) / 3) - 9, width: (UIScreen.main.bounds.height) * 0.19, height: (deviceHeight) * 0.10), cornerRadius: 7)
         generationHudBackground.fillColor = UIColor(named: "Rightbar_background")!
         generationHudBackground.strokeColor = UIColor(named: "Rightbar_background")!
         generationHudBackground.zPosition = 3
@@ -113,7 +113,7 @@ class GameHud: SKScene {
     func createGenerateResource() -> SKLabelNode{
         generatingResourceValue.name = "GeneratingResource"
         generatingResourceValue.fontName = "AustralSlabBlur-Regular"
-        generatingResourceValue.text = "+ 0.0 M/s"
+        generatingResourceValue.text = "+ 999.999 M/s"
         generatingResourceValue.fontColor = .white
         generatingResourceValue.fontSize = 11
         generatingResourceValue.zPosition = 3

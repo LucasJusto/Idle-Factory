@@ -97,7 +97,7 @@ class GameScene: SKScene {
         mainCurrencyData.position = CGPoint(x: mainCurrencyIcon.position.x + 50, y: ((UIScreen.main.bounds.height) / 3) + 18)
         premiumCurrencyIcon.position = CGPoint(x: -((UIScreen.main.bounds.width) / 2) + 215, y: ((UIScreen.main.bounds.height) / 3) + 25)
         premiumCurrencyData.position = CGPoint(x: premiumCurrencyIcon.position.x + 50, y: ((UIScreen.main.bounds.height) / 3) + 18)
-        generatorResource.position = CGPoint(x: -((UIScreen.main.bounds.width) / 2) + 80, y: ((UIScreen.main.bounds.height) / 3) - 7)
+        generatorResource.position = CGPoint(x: -((UIScreen.main.bounds.width) / 2) + 90, y: ((UIScreen.main.bounds.height) / 3) - 7)
 
         
         // Adds all Hud components as a child of the camera to keep Hud always on the camera
