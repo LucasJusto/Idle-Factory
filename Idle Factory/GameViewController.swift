@@ -8,21 +8,11 @@ class GameViewController: UIViewController {
     
     @IBOutlet weak var backgroundLoadingView: UIImageView!
     
+    static var notFirstTime: Bool = false
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         backgroundLoadingView.loadGif(asset: "fundo-faster")
-        CKRepository.getUserId { id in
-            if let idNotNull = id {
-                CKRepository.getUserById(id: idNotNull) { user in
-                    if let userNotnull = user {
-                        GameScene.user = userNotnull
-                        DispatchQueue.main.async {
-                            self.didLoadUser()
-                        }
-                    }
-                }
-            }
-        }
     }
     
     
@@ -39,6 +29,7 @@ class GameViewController: UIViewController {
                             DispatchQueue.main.async {
                                 self.gifView.isHidden = true
                                 self.backgroundLoadingView.isHidden = true
+                                self.didLoadUser()
                             }
                             //GameScene.user?.addMainCurrency(value: 2 * timeAway)
                         }
@@ -49,7 +40,14 @@ class GameViewController: UIViewController {
     }
     
     func didLoadUser(){
-        Thread.sleep(forTimeInterval: 3)
+        if (!GameViewController.notFirstTime){
+            Thread.sleep(forTimeInterval: 3)
+            GameViewController.notFirstTime = true
+            
+        }
+        else {
+            Thread.sleep(forTimeInterval: 1.5)
+        }
         if let view = self.view as! SKView? {
             // Load the SKScene from 'GameScene.sks'
             
