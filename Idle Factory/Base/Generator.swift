@@ -11,7 +11,7 @@ protocol Generator {
     
     var perSec: Double { get set } //generate this amount of currency per sec
     
-    var resourcesArray : [String] { get set }
+    var resourcesArray : [Resource] { get set }
 }
 
 extension Generator {
