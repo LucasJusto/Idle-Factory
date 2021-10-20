@@ -23,15 +23,18 @@ class GameScene: SKScene {
             (x: 480.70, y: -235)
         ]
     
-    // MARK: - Nodes
+    // MARK: - GAME HUD
+    private var gameHud: GameHud = GameHud()
     
+    
+    // MARK: - Nodes
     private var background: SKSpriteNode = SKSpriteNode()
+    private var loadingScreen: SKSpriteNode = SKSpriteNode()
     static var user: User? = nil
-    let semaphore = DispatchSemaphore(value: 0)
     public lazy var cameraNode: Camera = {
         let cameraNode = Camera(sceneView: self.view!, scenario: background)
         cameraNode.position = CGPoint(x:UIScreen.main.bounds.width / 50, y: UIScreen.main.bounds.height / 4)
-        cameraNode.applyZoomScale(scale: 0.4)
+        cameraNode.applyZoomScale(scale: 0.43)
         
         return cameraNode
     }()
@@ -43,19 +46,10 @@ class GameScene: SKScene {
     override func didMove(to view: SKView) {
         
         self.anchorPoint = CGPoint(x: 0.5, y: 0.5)
-        
-        CKRepository.getUserId { id in
-            if let idNotNull = id {
-                CKRepository.getUserById(id: idNotNull) { user in
-                    if let userNotnull = user {
-                        GameScene.user = userNotnull
-                        self.semaphore.signal()
-                    }
-                }
-            }
-        }
-        semaphore.wait()
+    
         createBackground()
+        createTopHud()
+        createSidebarHud()
         addFactory(position: .first)
         addFactory(position: .second)
         addFactory(position: .third)
@@ -74,6 +68,62 @@ class GameScene: SKScene {
         background.name = "Background"
                 
         addChild(background)
+    }
+    
+    /**
+     Create and displays top hud of the game.
+     */
+    func createTopHud() {
+        
+        // Top HUD background creation
+        let mainCurrencyHudBackground = gameHud.createTopHudBackground(xPos: 50)
+        let premiumHudBackground = gameHud.createTopHudBackground(xPos: mainCurrencyHudBackground.calculateAccumulatedFrame().width + 60)
+        
+        // Main and Premium Currency info creation
+        let mainCurrencyIcon = gameHud.createMainCurrencyIcon()
+        let mainCurrencyData = gameHud.createMainCurrencyLabel()
+        let premiumCurrencyIcon = gameHud.createPremiumCurrencyIcon()
+        let premiumCurrencyData = gameHud.createPremiumCurrency()
+        
+        // Positioning currencies on the device
+        mainCurrencyIcon.position = CGPoint(x: -((UIScreen.main.bounds.width) / 2) + 80, y: ((UIScreen.main.bounds.height) / 3) + 25)
+        mainCurrencyData.position = CGPoint(x: mainCurrencyIcon.position.x + 50, y: ((UIScreen.main.bounds.height) / 3) + 18)
+        premiumCurrencyIcon.position = CGPoint(x: -((UIScreen.main.bounds.width) / 2) + 215, y: ((UIScreen.main.bounds.height) / 3) + 25)
+        premiumCurrencyData.position = CGPoint(x: premiumCurrencyIcon.position.x + 50, y: ((UIScreen.main.bounds.height) / 3) + 18)
+
+        
+        // Adds Hud as a child of the camera to keep Hud always on the camera
+        cameraNode.addChild(mainCurrencyHudBackground)
+        cameraNode.addChild(premiumHudBackground)
+        
+        mainCurrencyHudBackground.addChild(mainCurrencyIcon)
+        mainCurrencyHudBackground.addChild(mainCurrencyData)
+        premiumHudBackground.addChild(premiumCurrencyIcon)
+        premiumHudBackground.addChild(premiumCurrencyData)
+    
+    }
+    
+    
+    /**
+     Create and displays sidebar hud of the game.
+     */
+    func createSidebarHud() {
+        
+        // Sidebar background creation
+        let sidebarBackground = gameHud.createSidebarBackground()
+        
+        // HUD action buttons creation
+        let marketPlaceButton = gameHud.createMarketplaceButton()
+        let challengeButton = gameHud.createChallengeButton()
+        
+        // Positioning buttons on the device
+        marketPlaceButton.position = CGPoint(x: ((UIScreen.main.bounds.width) / 2.31), y: -30)
+        challengeButton.position = CGPoint(x: ((UIScreen.main.bounds.width) / 2.31), y: -120)
+
+        // Add to scene
+        cameraNode.addChild(sidebarBackground)
+        sidebarBackground.addChild(marketPlaceButton)
+        sidebarBackground.addChild(challengeButton)
     }
     
     
@@ -109,7 +159,7 @@ class GameScene: SKScene {
     
     
     /**
-     Create player object with physics.
+     Create factory.
      */
     func createFactory() -> SKSpriteNode  {
         let factory = SKSpriteNode(imageNamed:"Factory_NFT_grande")
