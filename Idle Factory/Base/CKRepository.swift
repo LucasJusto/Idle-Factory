@@ -75,6 +75,59 @@ public class CKRepository {
         }
     }
     
+    static func getUserGeneratorsByID(userID: String, completion: @escaping ([Factory]) -> Void) {
+        let publicDB = container.publicCloudDatabase
+        var generators: [Factory] = []
+        
+        let generatorsPredicate = NSPredicate(format: "\(GeneratorTable.userID.description) == %@", userID)
+        let generatorsQuery = CKQuery(recordType: GeneratorTable.recordType.description, predicate: generatorsPredicate)
+        publicDB.perform(generatorsQuery, inZoneWith: nil) { results, error in
+            if let ckError = error as? CKError {
+                CKRepository.errorAlertHandler(CKErrorCode: ckError.code)
+            }
+            if let generatorsNotNull = results {
+                for generator in generatorsNotNull {
+                    let id: String = generator.recordID.recordName
+                    var resources: [Resource] = []
+                    let energy: Int = generator.value(forKey: GeneratorTable.energy.description) as? Int ?? 0
+                    let typeString: String = generator.value(forKey: GeneratorTable.type.description) as? String ?? ""
+                    let type: FactoryType = FactoryType.getFactoryType(factoryType: typeString)
+                    let positionString: String = generator.value(forKey: GeneratorTable.position.description) as? String ?? ""
+                    let position: GeneratorPositions = GeneratorPositions.getGeneratorPositions(position: positionString)
+                    let isActiveString: String = generator.value(forKey: GeneratorTable.isActive.description) as? String ?? ""
+                    let isActive: IsActive = IsActive.getKey(isActive: isActiveString)
+                    let texture: String = generator.value(forKey: GeneratorTable.texture.description) as? String ?? ""
+                    
+                    let resourcesPredicate = NSPredicate(format: "\(ResourceTable.generatorID.description) == %@", id)
+                    let resourcesQuery = CKQuery(recordType: ResourceTable.recordType.description, predicate: resourcesPredicate)
+                    
+                    publicDB.perform(resourcesQuery, inZoneWith: nil) { results2, error in
+                        if let resourcesNotNull = results2 {
+                            for resource in resourcesNotNull {
+                                let rID: String = resource.recordID.recordName
+                                let basePrice: Double = resource.value(forKey: ResourceTable.basePrice.description) as? Double ?? 0
+                                let baseQtt: Double = resource.value(forKey: ResourceTable.baseQtt.description) as? Double ?? 0
+                                let currentLevel: Int = resource.value(forKey: ResourceTable.level.description) as? Int ?? 0
+                                let qttPLevel: Double = resource.value(forKey: ResourceTable.qttPLevel.description) as? Double ?? 0
+                                let typeString2: String = resource.value(forKey: ResourceTable.type.description) as? String ?? ""
+                                let type: ResourceType = ResourceType.getKey(key: typeString2)
+                                let pricePLevelIncreaseTax: Double = resource.value(forKey: ResourceTable.pricePLevelIncreaseTax.description) as? Double ?? 0
+                                
+                                let r = Resource(id: rID, basePrice: basePrice, baseQtt: baseQtt, currentLevel: currentLevel, qttPLevel: qttPLevel, type: type, pricePLevelIncreaseTax: pricePLevelIncreaseTax)
+                                resources.append(r)
+                            }
+                        }
+                    }
+                    
+                    
+                    let factory = Factory(id: id, resourcesArray: resources, energy: energy, type: type, texture: texture, position: position, isActive: isActive)
+                    generators.append(factory)
+                }
+            }
+            completion(generators)
+        }
+    }
+    
     static func storeNewGenerator(userID: String, generator: Factory, completion: ((CKRecord?, Error?) -> Void)? = nil) {
         let record = CKRecord(recordType: GeneratorTable.recordType.description)
         let publicDB = container.publicCloudDatabase
@@ -84,6 +137,7 @@ public class CKRepository {
         record.setObject(generator.position.key as CKRecordValue?, forKey: GeneratorTable.position.description)
         record.setObject(generator.isActive.key as CKRecordValue?, forKey: GeneratorTable.isActive.description)
         record.setObject(generator.type.key as CKRecordValue?, forKey: GeneratorTable.type.description)
+        record.setObject(generator.textureName as CKRecordValue?, forKey: GeneratorTable.texture.description)
         
         publicDB.save(record) { savedRecord, error in
             if let ckError = error as? CKError {
@@ -116,6 +170,7 @@ public class CKRepository {
             record.setObject(factory.position.key as CKRecordValue?, forKey: GeneratorTable.position.description)
             record.setObject(factory.isActive.key as CKRecordValue?, forKey: GeneratorTable.isActive.description)
             record.setObject(factory.type.key as CKRecordValue?, forKey: GeneratorTable.type.description)
+            record.setObject(factory.textureName as CKRecordValue?, forKey: GeneratorTable.texture.description)
         }
         
         let operation = CKModifyRecordsOperation(recordsToSave: records, recordIDsToDelete: nil)
@@ -264,7 +319,7 @@ enum UsersTable: CustomStringConvertible {
 }
 
 enum ResourceTable: CustomStringConvertible {
-    case recordType, basePrice, baseQtt, level, qttPLevel, type, generatorID
+    case recordType, basePrice, baseQtt, level, qttPLevel, type, generatorID, pricePLevelIncreaseTax
     
     var description: String {
         switch self {
@@ -282,6 +337,8 @@ enum ResourceTable: CustomStringConvertible {
                 return "type"
             case .generatorID:
                 return "generatorID"
+            case .pricePLevelIncreaseTax:
+                return "pricePLevelIncreaseTax"
         }
     }
 }
@@ -308,7 +365,7 @@ enum MarketTable: CustomStringConvertible {
 }
 
 enum GeneratorTable: CustomStringConvertible {
-    case recordType, energy, isActive, type, userID, position
+    case recordType, energy, isActive, type, userID, position, texture
     
     var description: String {
         switch self {
@@ -324,6 +381,8 @@ enum GeneratorTable: CustomStringConvertible {
                 return "userID"
             case .position:
                 return "position"
+            case .texture:
+                return "texture"
         }
     }
 }
