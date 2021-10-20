@@ -15,11 +15,11 @@ class Factory: Generator  {
     var type: FactoryType
     var isActive: IsActive
     var energy: Int
-    var resourcesArray: [String]
+    var resourcesArray: [Resource]
     var position: GeneratorPositions
     var node: SKSpriteNode
     
-    init(id: String,perSec: Double, resourcesArray:[String] , energy: Int, type: String, texture: SKTexture?, position: String, isActive: String){
+    init(id: String,perSec: Double, resourcesArray:[Resource] , energy: Int, type: String, texture: SKTexture?, position: String, isActive: String){
         self.id = id
         self.perSec = perSec
         self.resourcesArray = resourcesArray

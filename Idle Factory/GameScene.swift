@@ -29,6 +29,7 @@ class GameScene: SKScene {
     
     // MARK: - Nodes
     private var background: SKSpriteNode = SKSpriteNode()
+    private var lastCurrentTime: Double = Date().timeIntervalSince1970
     private var loadingScreen: SKSpriteNode = SKSpriteNode()
     static var user: User? = nil
     public lazy var cameraNode: Camera = {
@@ -173,5 +174,12 @@ class GameScene: SKScene {
     // MARK: - Update
     
     override func update(_ currentTime: TimeInterval) {
+        let date = Date().timeIntervalSince1970
+        if lastCurrentTime+1 < date {
+            GameScene.user?.addMainCurrency(value: 2)
+            gameHud.mainCurrencyValue.text = "\(GameScene.user?.mainCurrency ?? 0.0)M"
+            print(GameScene.user?.mainCurrency)
+            lastCurrentTime = date
+        }
     }
 }
