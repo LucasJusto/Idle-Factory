@@ -26,10 +26,23 @@ class GameScene: SKScene {
     // MARK: - GAME HUD
     private var gameHud: GameHud = GameHud()
     
+    // MARK: - perSecIncrement
+    lazy var perSecIncrement: SKAction = {
+            let incrementAction = SKAction.run {
+                GameScene.user?.addMainCurrency(value: 2)
+                self.gameHud.mainCurrencyValue.text = "\(GameScene.user?.mainCurrency ?? 0.0)M"
+            }
+            let delay = SKAction.wait(forDuration: 1)
+            
+            let sequence = SKAction.sequence([delay, incrementAction])
+            
+            let actionForever = SKAction.repeatForever(sequence)
+            
+            return actionForever
+        }()
     
     // MARK: - Nodes
     private var background: SKSpriteNode = SKSpriteNode()
-    private var lastCurrentTime: Double = Date().timeIntervalSince1970
     private var loadingScreen: SKSpriteNode = SKSpriteNode()
     static var user: User? = nil
     public lazy var cameraNode: Camera = {
@@ -61,6 +74,7 @@ class GameScene: SKScene {
         camera = cameraNode
         addChild(cameraNode)
 
+        startIncrement()
 
     }
     // MARK: - Function
@@ -69,6 +83,14 @@ class GameScene: SKScene {
         background.name = "Background"
                 
         addChild(background)
+    }
+    
+    func startIncrement() {
+        run(perSecIncrement, withKey: "perSecIncrement")
+    }
+    
+    func stopIncrement() {
+        removeAction(forKey: "perSecIncrement")
     }
     
     /**
@@ -174,12 +196,6 @@ class GameScene: SKScene {
     // MARK: - Update
     
     override func update(_ currentTime: TimeInterval) {
-        let date = Date().timeIntervalSince1970
-        if lastCurrentTime+1 < date {
-            GameScene.user?.addMainCurrency(value: 2)
-            gameHud.mainCurrencyValue.text = "\(GameScene.user?.mainCurrency ?? 0.0)M"
-            print(GameScene.user?.mainCurrency)
-            lastCurrentTime = date
-        }
+        
     }
 }
