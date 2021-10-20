@@ -8,7 +8,7 @@
 import Foundation
 
 class Resource: Upgradable {
-    var id: String
+    var id: String?
     
     var currentLevel: Int
     
@@ -26,7 +26,7 @@ class Resource: Upgradable {
     
     var qttPLevel: Double
     
-    init(id: String, basePrice: Double, baseQtt: Double, currentLevel: Int, qttPLevel: Double, type: ResourceType, pricePLevelIncreaseTax: Double) {
+    init(id: String? = nil, basePrice: Double, baseQtt: Double, currentLevel: Int, qttPLevel: Double, type: ResourceType, pricePLevelIncreaseTax: Double) {
         self.id = id
         self.currentLevel = currentLevel
         self.basePrice = basePrice

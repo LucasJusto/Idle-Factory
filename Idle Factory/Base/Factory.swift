@@ -10,7 +10,7 @@ import SpriteKit
 
 class Factory: Generator  {
     
-    var id: String
+    var id: String?
     var perSec: Double
     var type: FactoryType
     var isActive: IsActive
@@ -19,15 +19,15 @@ class Factory: Generator  {
     var position: GeneratorPositions
     var node: SKSpriteNode
     
-    init(id: String,perSec: Double, resourcesArray:[Resource] , energy: Int, type: String, texture: SKTexture?, position: String, isActive: String){
+    init(id: String? = nil, perSec: Double, resourcesArray:[Resource] , energy: Int, type: FactoryType, texture: SKTexture?, position: GeneratorPositions, isActive: IsActive){
         self.id = id
         self.perSec = perSec
         self.resourcesArray = resourcesArray
         self.energy = energy
-        self.type = FactoryType.getFactoryType(factoryType: type)
+        self.type = type
         self.node = SKSpriteNode(texture: texture)
-        self.position = getGeneratorPositions(position: position)
-        self.isActive = IsActive.getKey(isActive: isActive)
+        self.position = position
+        self.isActive = isActive
     }
 }
 
@@ -71,38 +71,43 @@ enum GeneratorPositions: CustomStringConvertible, CaseIterable {
     case fourth
     case fifth
     case sixth
+    case none //if the generator is not active
     
     var description: String {
         switch self {
-        case .first:
-            return "first"
-        case .second:
-            return "second"
-        case .third:
-            return "third"
-        case .fourth:
-            return "fourth"
-        case .fifth:
-            return "fifth"
-        case .sixth:
-            return "sixth"
+            case .first:
+                return "first"
+            case .second:
+                return "second"
+            case .third:
+                return "third"
+            case .fourth:
+                return "fourth"
+            case .fifth:
+                return "fifth"
+            case .sixth:
+                return "sixth"
+            case .none:
+                return "none"
         }
     }
     
     var key: String {
         switch self {
-        case .first:
-            return "first"
-        case .second:
-            return "second"
-        case .third:
-            return "third"
-        case .fourth:
-            return "fourth"
-        case .fifth:
-            return "fifth"
-        case .sixth:
-            return "sixth"
+            case .first:
+                return "first"
+            case .second:
+                return "second"
+            case .third:
+                return "third"
+            case .fourth:
+                return "fourth"
+            case .fifth:
+                return "fifth"
+            case .sixth:
+                return "sixth"
+            case .none:
+                return "none"
         }
     }
     
