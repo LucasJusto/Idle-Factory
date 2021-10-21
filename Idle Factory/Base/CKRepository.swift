@@ -32,7 +32,7 @@ public class CKRepository {
         }
     }
     
-    public static func storeUserData(id: String, name: String, mainCurrency: Double, premiumCurrency: Double, completion: @escaping (CKRecord?, Error?) -> Void){
+    public static func storeUserData(id: String, name: String, mainCurrency: Double, premiumCurrency: Double, completion: ((CKRecord?, Error?) -> Void)? = nil){
         
         let recordID = CKRecord.ID(recordName: id)
         let publicDB = container.publicCloudDatabase
@@ -51,7 +51,9 @@ public class CKRepository {
                     if let ckError = error as? CKError {
                         CKRepository.errorAlertHandler(CKErrorCode: ckError.code)
                     }
-                    completion(savedRecord, error)
+                    if let completion = completion {
+                        completion(savedRecord, error)
+                    }
                 }
             }
         }
@@ -73,22 +75,214 @@ public class CKRepository {
         }
     }
     
-    static func storeGenerator(userID: String, position: GeneratorPositions, energy: Int, isActive: IsActive, type: FactoryType, resources: [Resource], completion: @escaping (CKRecord?, Error?) -> Void) {
+    static func refreshCurrentUser(completion: @escaping (User?) -> Void) {
+        var user: User? = nil
+        let semaphore = DispatchSemaphore(value: 0)
+        
+        CKRepository.getUserId { userID in
+            if let userID = userID {
+                CKRepository.getUserById(id: userID) { user2 in
+                    if let user2 = user2 {
+                        user = user2
+                        semaphore.signal()
+                    }
+                }
+            }
+        }
+        
+        semaphore.wait()
+        CKRepository.getUserId { userID in
+            if let userID = userID {
+                CKRepository.getUserGeneratorsByID(userID: userID) { generators in
+                    if let user = user {
+                        user.generators = generators
+                        semaphore.signal()
+                    }
+                }
+            }
+        }
+        semaphore.wait()
+        completion(user)
+    }
+    
+    static func getUserGeneratorsByID(userID: String, completion: @escaping ([Factory]) -> Void) {
+        let publicDB = container.publicCloudDatabase
+        var generators: [Factory] = []
+        let semaphore = DispatchSemaphore(value: 0)
+        
+        let generatorsPredicate = NSPredicate(format: "\(GeneratorTable.userID.description) == %@", userID)
+        let generatorsQuery = CKQuery(recordType: GeneratorTable.recordType.description, predicate: generatorsPredicate)
+        publicDB.perform(generatorsQuery, inZoneWith: nil) { results, error in
+            if let ckError = error as? CKError {
+                CKRepository.errorAlertHandler(CKErrorCode: ckError.code)
+            }
+            if let generatorsNotNull = results {
+                for generator in generatorsNotNull {
+                    let id: String = generator.recordID.recordName
+                    var resources: [Resource] = []
+                    let energy: Int = generator.value(forKey: GeneratorTable.energy.description) as? Int ?? 0
+                    let typeString: String = generator.value(forKey: GeneratorTable.type.description) as? String ?? ""
+                    let type: FactoryType = FactoryType.getFactoryType(factoryType: typeString)
+                    let positionString: String = generator.value(forKey: GeneratorTable.position.description) as? String ?? ""
+                    let position: GeneratorPositions = GeneratorPositions.getGeneratorPositions(position: positionString)
+                    let isActiveString: String = generator.value(forKey: GeneratorTable.isActive.description) as? String ?? ""
+                    let isActive: IsActive = IsActive.getKey(isActive: isActiveString)
+                    let texture: String = generator.value(forKey: GeneratorTable.texture.description) as? String ?? ""
+                    
+                    let resourcesPredicate = NSPredicate(format: "\(ResourceTable.generatorID.description) == %@", id)
+                    let resourcesQuery = CKQuery(recordType: ResourceTable.recordType.description, predicate: resourcesPredicate)
+                    
+                    publicDB.perform(resourcesQuery, inZoneWith: nil) { results2, error in
+                        if let resourcesNotNull = results2 {
+                            for resource in resourcesNotNull {
+                                let rID: String = resource.recordID.recordName
+                                let basePrice: Double = resource.value(forKey: ResourceTable.basePrice.description) as? Double ?? 0
+                                let baseQtt: Double = resource.value(forKey: ResourceTable.baseQtt.description) as? Double ?? 0
+                                let currentLevel: Int = resource.value(forKey: ResourceTable.level.description) as? Int ?? 0
+                                let qttPLevel: Double = resource.value(forKey: ResourceTable.qttPLevel.description) as? Double ?? 0
+                                let typeString2: String = resource.value(forKey: ResourceTable.type.description) as? String ?? ""
+                                let type: ResourceType = ResourceType.getKey(key: typeString2)
+                                let pricePLevelIncreaseTax: Double = resource.value(forKey: ResourceTable.pricePLevelIncreaseTax.description) as? Double ?? 0
+                                
+                                let r = Resource(id: rID, basePrice: basePrice, baseQtt: baseQtt, currentLevel: currentLevel, qttPLevel: qttPLevel, type: type, pricePLevelIncreaseTax: pricePLevelIncreaseTax)
+                                resources.append(r)
+                                semaphore.signal()
+                            }
+                        }
+                    }
+                    
+                    semaphore.wait()
+                    let factory = Factory(id: id, resourcesArray: resources, energy: energy, type: type, texture: texture, position: position, isActive: isActive)
+                    generators.append(factory)
+                }
+            }
+            completion(generators)
+        }
+    }
+    
+    static func storeNewGenerator(userID: String, generator: Factory, completion: ((CKRecord?, Error?) -> Void)? = nil) {
         let record = CKRecord(recordType: GeneratorTable.recordType.description)
         let publicDB = container.publicCloudDatabase
         
         record.setObject(userID as CKRecordValue?, forKey: GeneratorTable.userID.description)
-        record.setObject(energy as CKRecordValue?, forKey: GeneratorTable.energy.description)
-        record.setObject(position.key as CKRecordValue?, forKey: GeneratorTable.position.description)
-        record.setObject(isActive.key as CKRecordValue?, forKey: GeneratorTable.isActive.description)
-        record.setObject(type.key as CKRecordValue?, forKey: GeneratorTable.type.description)
+        record.setObject(generator.energy as CKRecordValue?, forKey: GeneratorTable.energy.description)
+        record.setObject(generator.position.key as CKRecordValue?, forKey: GeneratorTable.position.description)
+        record.setObject(generator.isActive.key as CKRecordValue?, forKey: GeneratorTable.isActive.description)
+        record.setObject(generator.type.key as CKRecordValue?, forKey: GeneratorTable.type.description)
+        record.setObject(generator.textureName as CKRecordValue?, forKey: GeneratorTable.texture.description)
         
         publicDB.save(record) { savedRecord, error in
             if let ckError = error as? CKError {
                 CKRepository.errorAlertHandler(CKErrorCode: ckError.code)
             }
-            completion(savedRecord, error)
+            if let savedRecordNotNull = savedRecord {
+                storeResources(generatorID: savedRecordNotNull.recordID.recordName, resources: generator.resourcesArray) { _, error in
+                    if let ckError = error as? CKError {
+                        CKRepository.errorAlertHandler(CKErrorCode: ckError.code)
+                    }
+                }
+            }
+            if let completion = completion {
+                completion(savedRecord, error)
+            }
+            
         }
+    }
+    
+    static func editGenerators(userID: String, generators: [Factory], completion: (([CKRecord]?, Error?) -> Void)? = nil) {
+        
+        let publicDB = container.publicCloudDatabase
+        let records: [CKRecord] = []
+        
+        for factory in generators {
+            let record = CKRecord(recordType: GeneratorTable.recordType.description, recordID: CKRecord.ID(recordName: factory.id ?? ""))
+            
+            record.setObject(userID as CKRecordValue?, forKey: GeneratorTable.userID.description)
+            record.setObject(factory.energy as CKRecordValue?, forKey: GeneratorTable.energy.description)
+            record.setObject(factory.position.key as CKRecordValue?, forKey: GeneratorTable.position.description)
+            record.setObject(factory.isActive.key as CKRecordValue?, forKey: GeneratorTable.isActive.description)
+            record.setObject(factory.type.key as CKRecordValue?, forKey: GeneratorTable.type.description)
+            record.setObject(factory.textureName as CKRecordValue?, forKey: GeneratorTable.texture.description)
+        }
+        
+        let operation = CKModifyRecordsOperation(recordsToSave: records, recordIDsToDelete: nil)
+        operation.savePolicy = .changedKeys
+        operation.modifyRecordsCompletionBlock = { savedRecords, _, error in
+            if let ckError = error as? CKError {
+                CKRepository.errorAlertHandler(CKErrorCode: ckError.code)
+            }
+            editResources(generators: generators) { _, error in
+                if let ckError = error as? CKError {
+                    CKRepository.errorAlertHandler(CKErrorCode: ckError.code)
+                }
+            }
+            if let completion = completion {
+                completion(savedRecords, error)
+            }
+        }
+        publicDB.add(operation)
+    }
+    
+    static func editResources(generators: [Factory], completion: (([CKRecord]?, Error?) -> Void)? = nil) {
+        let publicDB = container.publicCloudDatabase
+        var records: [CKRecord] = []
+        
+        for factory in generators {
+            for resource in factory.resourcesArray {
+                let record = CKRecord(recordType: ResourceTable.recordType.description, recordID: CKRecord.ID(recordName: resource.id ?? ""))
+                
+                record.setObject((factory.id ?? "") as CKRecordValue?, forKey: ResourceTable.generatorID.description)
+                record.setObject(resource.qttPLevel as CKRecordValue?, forKey: ResourceTable.qttPLevel.description)
+                record.setObject(resource.baseQtt as CKRecordValue?, forKey: ResourceTable.baseQtt.description)
+                record.setObject(resource.basePrice as CKRecordValue?, forKey: ResourceTable.basePrice.description)
+                record.setObject(resource.currentLevel as CKRecordValue?, forKey: ResourceTable.level.description)
+                record.setObject(resource.type.key as CKRecordValue?, forKey: ResourceTable.type.description)
+                
+                records.append(record)
+            }
+        }
+        
+        let operation = CKModifyRecordsOperation(recordsToSave: records, recordIDsToDelete: nil)
+        operation.savePolicy = .changedKeys
+        operation.modifyRecordsCompletionBlock = { savedRecords, _, error in
+            if let ckError = error as? CKError {
+                CKRepository.errorAlertHandler(CKErrorCode: ckError.code)
+            }
+            if let completion = completion {
+                completion(savedRecords, error)
+            }
+        }
+        publicDB.add(operation)
+    }
+    
+    static func storeResources(generatorID: String, resources: [Resource] , completion: (([CKRecord]?, Error?) -> Void)? = nil) {
+        let publicDB = container.publicCloudDatabase
+        var records: [CKRecord] = []
+        
+        for resource in resources {
+            let record = CKRecord(recordType: ResourceTable.recordType.description)
+            
+            record.setObject(generatorID as CKRecordValue?, forKey: ResourceTable.generatorID.description)
+            record.setObject(resource.qttPLevel as CKRecordValue?, forKey: ResourceTable.qttPLevel.description)
+            record.setObject(resource.baseQtt as CKRecordValue?, forKey: ResourceTable.baseQtt.description)
+            record.setObject(resource.basePrice as CKRecordValue?, forKey: ResourceTable.basePrice.description)
+            record.setObject(resource.currentLevel as CKRecordValue?, forKey: ResourceTable.level.description)
+            record.setObject(resource.type.key as CKRecordValue?, forKey: ResourceTable.type.description)
+            
+            records.append(record)
+        }
+        
+        let operation = CKModifyRecordsOperation(recordsToSave: records, recordIDsToDelete: nil)
+        operation.savePolicy = .changedKeys
+        operation.modifyRecordsCompletionBlock = { savedRecords, _, error in
+            if let ckError = error as? CKError {
+                CKRepository.errorAlertHandler(CKErrorCode: ckError.code)
+            }
+            if let completion = completion {
+                completion(savedRecords, error)
+            }
+        }
+        publicDB.add(operation)
     }
     
     static func errorAlertHandler(CKErrorCode: CKError.Code){
@@ -157,7 +351,7 @@ enum UsersTable: CustomStringConvertible {
 }
 
 enum ResourceTable: CustomStringConvertible {
-    case recordType, basePrice, baseQtt, level, qttPLevel, type
+    case recordType, basePrice, baseQtt, level, qttPLevel, type, generatorID, pricePLevelIncreaseTax
     
     var description: String {
         switch self {
@@ -173,6 +367,10 @@ enum ResourceTable: CustomStringConvertible {
                 return "qttPLevel"
             case .type:
                 return "type"
+            case .generatorID:
+                return "generatorID"
+            case .pricePLevelIncreaseTax:
+                return "pricePLevelIncreaseTax"
         }
     }
 }
@@ -199,7 +397,7 @@ enum MarketTable: CustomStringConvertible {
 }
 
 enum GeneratorTable: CustomStringConvertible {
-    case recordType, energy, isActive, type, userID, position
+    case recordType, energy, isActive, type, userID, position, texture
     
     var description: String {
         switch self {
@@ -215,6 +413,8 @@ enum GeneratorTable: CustomStringConvertible {
                 return "userID"
             case .position:
                 return "position"
+            case .texture:
+                return "texture"
         }
     }
 }

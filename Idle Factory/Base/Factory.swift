@@ -10,7 +10,7 @@ import SpriteKit
 
 class Factory: Generator  {
     
-    var id: String
+    var id: String?
     var perSec: Double
     var type: FactoryType
     var isActive: IsActive
@@ -18,16 +18,18 @@ class Factory: Generator  {
     var resourcesArray: [Resource]
     var position: GeneratorPositions
     var node: SKSpriteNode
+    var textureName: String
     
-    init(id: String,perSec: Double, resourcesArray:[Resource] , energy: Int, type: String, texture: SKTexture?, position: String, isActive: String){
+    init(id: String? = nil, resourcesArray:[Resource] , energy: Int, type: FactoryType, texture: String, position: GeneratorPositions, isActive: IsActive){
         self.id = id
-        self.perSec = perSec
         self.resourcesArray = resourcesArray
         self.energy = energy
-        self.type = FactoryType.getFactoryType(factoryType: type)
-        self.node = SKSpriteNode(texture: texture)
-        self.position = getGeneratorPositions(position: position)
-        self.isActive = IsActive.getKey(isActive: isActive)
+        self.type = type
+        self.node = SKSpriteNode(texture: SKTexture(imageNamed: texture))
+        self.position = position
+        self.isActive = isActive
+        self.textureName = texture
+        self.perSec = 0
     }
 }
 
@@ -71,61 +73,66 @@ enum GeneratorPositions: CustomStringConvertible, CaseIterable {
     case fourth
     case fifth
     case sixth
+    case none //if the generator is not active
     
     var description: String {
         switch self {
-        case .first:
-            return "first"
-        case .second:
-            return "second"
-        case .third:
-            return "third"
-        case .fourth:
-            return "fourth"
-        case .fifth:
-            return "fifth"
-        case .sixth:
-            return "sixth"
+            case .first:
+                return "first"
+            case .second:
+                return "second"
+            case .third:
+                return "third"
+            case .fourth:
+                return "fourth"
+            case .fifth:
+                return "fifth"
+            case .sixth:
+                return "sixth"
+            case .none:
+                return "none"
         }
     }
     
     var key: String {
         switch self {
-        case .first:
-            return "first"
-        case .second:
-            return "second"
-        case .third:
-            return "third"
-        case .fourth:
-            return "fourth"
-        case .fifth:
-            return "fifth"
-        case .sixth:
-            return "sixth"
+            case .first:
+                return "first"
+            case .second:
+                return "second"
+            case .third:
+                return "third"
+            case .fourth:
+                return "fourth"
+            case .fifth:
+                return "fifth"
+            case .sixth:
+                return "sixth"
+            case .none:
+                return "none"
         }
     }
-    
-}
-
-func getGeneratorPositions(position: String) -> GeneratorPositions {
-    switch position {
-    case "first":
-        return .first
-    case "second":
-        return .second
-    case "third":
-        return .third
-    case "fourth":
-        return .fourth
-    case "fifth":
-        return .fifth
-    case "sixth":
-        return .sixth
-    default:
-        return .first
+    static func getGeneratorPositions(position: String) -> GeneratorPositions {
+        switch position {
+        case "first":
+            return .first
+        case "second":
+            return .second
+        case "third":
+            return .third
+        case "fourth":
+            return .fourth
+        case "fifth":
+            return .fifth
+        case "sixth":
+            return .sixth
+        default:
+            return .first
+        }
     }
 }
+
+
 
 enum FactoryType: CustomStringConvertible, CaseIterable {
     case Basic, NFT

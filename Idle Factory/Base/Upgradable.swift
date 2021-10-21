@@ -8,7 +8,7 @@
 import Foundation
 
 protocol Upgradable: AnyObject {
-    var id: String { get }
+    var id: String? { get }
     var currentPrice: Double { get set} //price to upgrade it now | starts with basePrice
     var basePrice: Double { get set} //price to buy it and calculate next upgrades
     var currentLevel: Int { get set} //current upgrade level | starts at 1
