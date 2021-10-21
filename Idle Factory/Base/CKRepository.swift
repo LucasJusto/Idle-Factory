@@ -75,6 +75,36 @@ public class CKRepository {
         }
     }
     
+    static func refreshCurrentUser(completion: @escaping (User?) -> Void) {
+        var user: User? = nil
+        let semaphore = DispatchSemaphore(value: 0)
+        
+        CKRepository.getUserId { userID in
+            if let userID = userID {
+                CKRepository.getUserById(id: userID) { user2 in
+                    if let user2 = user2 {
+                        user = user2
+                        semaphore.signal()
+                    }
+                }
+            }
+        }
+        
+        semaphore.wait()
+        CKRepository.getUserId { userID in
+            if let userID = userID {
+                CKRepository.getUserGeneratorsByID(userID: userID) { generators in
+                    if let user = user {
+                        user.generators = generators
+                        semaphore.signal()
+                    }
+                }
+            }
+        }
+        semaphore.wait()
+        completion(user)
+    }
+    
     static func getUserGeneratorsByID(userID: String, completion: @escaping ([Factory]) -> Void) {
         let publicDB = container.publicCloudDatabase
         var generators: [Factory] = []
@@ -103,7 +133,6 @@ public class CKRepository {
                     let resourcesQuery = CKQuery(recordType: ResourceTable.recordType.description, predicate: resourcesPredicate)
                     
                     publicDB.perform(resourcesQuery, inZoneWith: nil) { results2, error in
-                        print(error)
                         if let resourcesNotNull = results2 {
                             for resource in resourcesNotNull {
                                 let rID: String = resource.recordID.recordName
