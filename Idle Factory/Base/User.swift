@@ -13,7 +13,7 @@ class User {
     private(set) var name: String
     private(set) var mainCurrency: Double
     private(set) var premiumCurrency: Double
-    var generators: [Factory]?
+    var generators: [Factory] = []
     /**
      TODO: Change the type of generators
      */
