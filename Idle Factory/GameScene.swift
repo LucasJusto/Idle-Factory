@@ -148,24 +148,26 @@ class GameScene: SKScene {
         let factory = createFactory()
         
         switch position {
-        case .first:
-            factory.position = CGPoint(x: factoriesPositions[0].x, y: factoriesPositions[0].y)
-            factory.zPosition = 2
-        case .second:
-            factory.position = CGPoint(x: factoriesPositions[1].x, y: factoriesPositions[1].y)
-            factory.zPosition = 1
-        case .third:
-            factory.position = CGPoint(x: factoriesPositions[2].x, y: factoriesPositions[2].y)
-            factory.zPosition = 2
-        case .fourth:
-            factory.position = CGPoint(x: factoriesPositions[3].x, y: factoriesPositions[3].y)
-            factory.zPosition = 1
-        case .fifth:
-            factory.position = CGPoint(x: factoriesPositions[4].x, y: factoriesPositions[4].y)
-            factory.zPosition = 2
-        case .sixth:
-            factory.position = CGPoint(x: factoriesPositions[5].x, y: factoriesPositions[5].y)
-            factory.zPosition = 1
+            case .first:
+                factory.position = CGPoint(x: factoriesPositions[0].x, y: factoriesPositions[0].y)
+                factory.zPosition = 2
+            case .second:
+                factory.position = CGPoint(x: factoriesPositions[1].x, y: factoriesPositions[1].y)
+                factory.zPosition = 1
+            case .third:
+                factory.position = CGPoint(x: factoriesPositions[2].x, y: factoriesPositions[2].y)
+                factory.zPosition = 2
+            case .fourth:
+                factory.position = CGPoint(x: factoriesPositions[3].x, y: factoriesPositions[3].y)
+                factory.zPosition = 1
+            case .fifth:
+                factory.position = CGPoint(x: factoriesPositions[4].x, y: factoriesPositions[4].y)
+                factory.zPosition = 2
+            case .sixth:
+                factory.position = CGPoint(x: factoriesPositions[5].x, y: factoriesPositions[5].y)
+                factory.zPosition = 1
+            case .none:
+                let _ = 0
         }
         
         background.addChild(factory)
