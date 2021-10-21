@@ -78,6 +78,7 @@ public class CKRepository {
     static func getUserGeneratorsByID(userID: String, completion: @escaping ([Factory]) -> Void) {
         let publicDB = container.publicCloudDatabase
         var generators: [Factory] = []
+        let semaphore = DispatchSemaphore(value: 0)
         
         let generatorsPredicate = NSPredicate(format: "\(GeneratorTable.userID.description) == %@", userID)
         let generatorsQuery = CKQuery(recordType: GeneratorTable.recordType.description, predicate: generatorsPredicate)
@@ -102,6 +103,7 @@ public class CKRepository {
                     let resourcesQuery = CKQuery(recordType: ResourceTable.recordType.description, predicate: resourcesPredicate)
                     
                     publicDB.perform(resourcesQuery, inZoneWith: nil) { results2, error in
+                        print(error)
                         if let resourcesNotNull = results2 {
                             for resource in resourcesNotNull {
                                 let rID: String = resource.recordID.recordName
@@ -115,11 +117,12 @@ public class CKRepository {
                                 
                                 let r = Resource(id: rID, basePrice: basePrice, baseQtt: baseQtt, currentLevel: currentLevel, qttPLevel: qttPLevel, type: type, pricePLevelIncreaseTax: pricePLevelIncreaseTax)
                                 resources.append(r)
+                                semaphore.signal()
                             }
                         }
                     }
                     
-                    
+                    semaphore.wait()
                     let factory = Factory(id: id, resourcesArray: resources, energy: energy, type: type, texture: texture, position: position, isActive: isActive)
                     generators.append(factory)
                 }
