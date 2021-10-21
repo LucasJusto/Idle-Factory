@@ -68,15 +68,15 @@ class Camera: SKCameraNode, UIGestureRecognizerDelegate {
         //initial camera config
         self.scenario = scenario
         self.scenarioFrame = scenario.frame
-        let widthMultiplier = (sceneView.bounds.width)  >= 736 ? 3.05 : 3.70
-        let heightMultiplier = (sceneView.bounds.height) >= 414 ? 3.25 : 3.60
+        let widthMultiplier = (sceneView.bounds.width)  >= 736 ? 3.29 : 3.70
+        let heightMultiplier = (sceneView.bounds.height) >= 414 ? 3.35 : 3.60
         let myBounds = CGRect(x: 0, y: 0, width: (sceneView.bounds.width) * widthMultiplier, height: (sceneView.bounds.height) * heightMultiplier)
         self.screenLimits = myBounds
         
         // determines initial zoom sacle for 1
         zoomScale = 1
         // determines zoom interval
-        zoomInterval = (0.4, 0.8)
+        zoomInterval = (0.43, 0.8)
         //enavles zoom
         enableZoom = true
         enableCamera = true
@@ -91,7 +91,6 @@ class Camera: SKCameraNode, UIGestureRecognizerDelegate {
         swipeNavigation.delegate = self
         
         sceneView.addGestureRecognizer(pinchGestureRecognizer)
-        
         sceneView.addGestureRecognizer(swipeNavigation)
         
     }
