@@ -17,11 +17,24 @@ class GameChallengeScene: SKScene {
     private(set) var sceneBackground: SKShapeNode = SKShapeNode()
     
     
+    /**
+     Create the scene background.
+     */
     func createBackground() -> SKShapeNode {
         sceneBackground = SKShapeNode(rect: CGRect(x: 0, y: 0, width: (deviceWidth), height: (deviceHeight)))
-        sceneBackground.fillColor = .white
-        sceneBackground.strokeColor = .white
-        sceneBackground.zPosition = 3
+        sceneBackground.fillColor = UIColor(named: "HudActions-background")!
+        sceneBackground.zPosition = 10
         return sceneBackground
+    }
+    
+    
+    /**
+     Create the button to close the actual scene.
+     */
+    func createCloseButton() -> SKSpriteNode {
+        let closeAction = SKSpriteNode(color: .white, size: CGSize(width: 90, height: 90))
+        closeAction.name = "CloseChallengeScene"
+        closeAction.zPosition = 11
+        return closeAction
     }
 }
