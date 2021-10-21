@@ -33,7 +33,7 @@ class GameHud: SKScene {
     private(set) var challengeButton: SKSpriteNode = SKSpriteNode()
     
     
-    // MARK: - Top HUD Functions
+    // MARK: - Top HUD components creation
     /**
      Create a white rounded Rect ShapeNode used to display currency info on the HUD.
      */
@@ -121,8 +121,7 @@ class GameHud: SKScene {
     }
     
     
-    // MARK: - Right sidebar HUD Functions
-    
+    // MARK: - Rightside HUD components creation
     /**
      Create a large right side Rect ShapeNode to display HUD actions.
      */
@@ -140,6 +139,7 @@ class GameHud: SKScene {
      */
     func createInventoryButton() -> SKSpriteNode {
         inventoryButton = SKSpriteNode(imageNamed: "Button-inventory")
+        inventoryButton.name = "PlayerInventoryButton"
         inventoryButton.setScale(0.8)
         inventoryButton.zPosition = 4
         return inventoryButton
@@ -151,6 +151,7 @@ class GameHud: SKScene {
      */
     func createMarketplaceButton() -> SKSpriteNode {
         marketplaceButton = SKSpriteNode(imageNamed: "Button-marketplace")
+        marketplaceButton.name = "MarketplaceButton"
         marketplaceButton.setScale(0.8)
         marketplaceButton.zPosition = 4
         return marketplaceButton
@@ -158,10 +159,11 @@ class GameHud: SKScene {
     
     
     /**
-     Create premium currency icon of the game hud.
+     Create challenge button for the sidebar hud.
      */
     func createChallengeButton() -> SKSpriteNode {
         challengeButton = SKSpriteNode(imageNamed: "Button-challenges")
+        challengeButton.name = "ChallengeButton"
         challengeButton.setScale(0.8)
         challengeButton.zPosition = 4
         return challengeButton

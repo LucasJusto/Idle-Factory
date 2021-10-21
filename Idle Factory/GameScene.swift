@@ -27,6 +27,12 @@ class GameScene: SKScene {
     private var gameHud: GameHud = GameHud()
     
     
+    // MARK: - Right buttons
+    private(set) var gameInventoryScene: GameInventoryScene = GameInventoryScene()
+    private(set) var gameMarketplaceScene: GameMarketplaceScene = GameMarketplaceScene()
+    private(set) var gameChallengeScene: GameChallengeScene = GameChallengeScene()
+    
+    
     // MARK: - Nodes
     private var background: SKSpriteNode = SKSpriteNode()
     private var loadingScreen: SKSpriteNode = SKSpriteNode()
@@ -60,6 +66,22 @@ class GameScene: SKScene {
         camera = cameraNode
         addChild(cameraNode)
         
+    }
+    
+    
+    // MARK: - TOUCH SCREEN EVENTS
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        for touch in touches {
+            let location = touch.location(in: self)
+            let touchedNode = atPoint(location)
+            if touchedNode.name == "ChallengeButton" {
+                displayChallenge()
+            }
+            if(touchedNode.name == "backToMenu"){
+                self.view?.isHidden = true
+                //self.removeAllChildren()
+            }
+        }
     }
     
     
@@ -181,6 +203,18 @@ class GameScene: SKScene {
         factory.name = "factory"
 
         return factory
+    }
+    
+    
+    // MARK: - Rightbar Interactions
+    /**
+     Display player inventory
+     */
+    func displayChallenge() {
+        
+        let challengeScene = gameChallengeScene.createBackground()
+        challengeScene.position = CGPoint(x: 0, y: 0)
+        cameraNode.addChild(challengeScene)
     }
     
     
