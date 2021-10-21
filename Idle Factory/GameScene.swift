@@ -23,9 +23,14 @@ class GameScene: SKScene {
         (x: 480.70, y: -235)
     ]
     
-    // MARK: - GAME HUD
+    // MARK: - GAME HUD & HUD SCENE ACTIONS
     private var gameHud: GameHud = GameHud()
     private var actionShapeNode: SKShapeNode = SKShapeNode()
+    
+    private(set) var gameInventoryScene: GameInventoryScene = GameInventoryScene()
+    private(set) var gameMarketplaceScene: GameMarketplaceScene = GameMarketplaceScene()
+    private(set) var gameChallengeScene: GameChallengeScene = GameChallengeScene()
+    
     
     // MARK: - perSecIncrement
     lazy var perSecIncrement: SKAction = {
@@ -51,12 +56,17 @@ class GameScene: SKScene {
         
         return actionForever
     }()
+  
     
-    // MARK: - Right buttons
-    private(set) var gameInventoryScene: GameInventoryScene = GameInventoryScene()
-    private(set) var gameMarketplaceScene: GameMarketplaceScene = GameMarketplaceScene()
-    private(set) var gameChallengeScene: GameChallengeScene = GameChallengeScene()
+    // MARK: - Incrementation Control
+    func startIncrement() {
+        run(perSecIncrement, withKey: "perSecIncrement")
+    }
     
+    func stopIncrement() {
+        removeAction(forKey: "perSecIncrement")
+    }
+
     
     // MARK: - Nodes
     private var background: SKSpriteNode = SKSpriteNode()
@@ -69,7 +79,6 @@ class GameScene: SKScene {
         
         return cameraNode
     }()
-    
     
     
     // MARK: - Init
@@ -116,12 +125,13 @@ class GameScene: SKScene {
                 displayChallenge()
             }
             
-            if touchedNode.name == "CloseChallengeScene" {
-                print("ENTREI")
+            if (
+                touchedNode.name == "CloseInventoryScene" ||
+                touchedNode.name == "CloseMarketplaceScene" ||
+                touchedNode.name == "CloseChallengeScene"
+               ) {
                 actionShapeNode.removeFromParent()
-()
             }
-
         }
     }
     
@@ -137,13 +147,6 @@ class GameScene: SKScene {
         addChild(background)
     }
     
-    func startIncrement() {
-        run(perSecIncrement, withKey: "perSecIncrement")
-    }
-    
-    func stopIncrement() {
-        removeAction(forKey: "perSecIncrement")
-    }
     
     /**
      Create and displays top hud of the game.
