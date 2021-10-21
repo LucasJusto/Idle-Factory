@@ -31,13 +31,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationDidEnterBackground(_ application: UIApplication) {
         // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
         self.identifier = application.beginBackgroundTask {
-            application.endBackgroundTask(self.identifier)
+            
         }
-        
-        CKRepository.storeUserData(id: GameScene.user!.id , name:  GameScene.user?.name ?? "", mainCurrency:  GameScene.user!.mainCurrency , premiumCurrency:  GameScene.user!.premiumCurrency , completion: {_,_ in })
         self.gameSave.saveTimeLeftApp()
-        
-        
+        CKRepository.storeUserData(id: GameScene.user!.id , name:  GameScene.user?.name ?? "", mainCurrency:  GameScene.user!.mainCurrency , premiumCurrency:  GameScene.user!.premiumCurrency , completion: {_,_ in
+            print(#function)
+            application.endBackgroundTask(self.identifier)
+        })
     }
     
     func applicationWillEnterForeground(_ application: UIApplication) {
