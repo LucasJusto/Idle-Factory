@@ -27,7 +27,19 @@ class GameSave{
         }
         
         func saveTimeLeftApp() {
-            userDefaults.setValue(Date(), forKey: TypeStore.timeLeft.rawValue)
+            getTime { time in
+                var date = Date()
+                if let time = time {
+                    let isoDate = time.datetime
+                    print(isoDate)
+                    let dateFormatter = DateFormatter()
+                    dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
+                    date = dateFormatter.date(from:isoDate)!
+                    print(date)
+                }
+                self.userDefaults.setValue(date, forKey: TypeStore.timeLeft.rawValue)
+            }
+           
         }
         
         func getTimeLeftApp() -> Any {

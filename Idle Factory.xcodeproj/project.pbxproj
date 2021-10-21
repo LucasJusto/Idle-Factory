@@ -20,10 +20,11 @@
 		487A1A072715516900723065 /* Camera.swift in Sources */ = {isa = PBXBuildFile; fileRef = 487A1A062715516900723065 /* Camera.swift */; };
 		487A1A09271551BA00723065 /* Generator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 487A1A08271551BA00723065 /* Generator.swift */; };
 		487A1A0B2715520D00723065 /* Upgradable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 487A1A0A2715520D00723065 /* Upgradable.swift */; };
-		553E7F74272099DB00165C8E /* GameSave.swift in Sources */ = {isa = PBXBuildFile; fileRef = 553E7F73272099DB00165C8E /* GameSave.swift */; };
 		48A6596B271E07A70021CD52 /* Resource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48A6596A271E07A70021CD52 /* Resource.swift */; };
 		48A6596E271F5F470021CD52 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 48A65970271F5F470021CD52 /* Localizable.strings */; };
+		553E7F74272099DB00165C8E /* GameSave.swift in Sources */ = {isa = PBXBuildFile; fileRef = 553E7F73272099DB00165C8E /* GameSave.swift */; };
 		55439BC52721E87400F69461 /* functions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55439BC42721E87400F69461 /* functions.swift */; };
+		55439BC72721F23D00F69461 /* DateApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55439BC62721F23D00F69461 /* DateApi.swift */; };
 		5567745C271A09A7006BA5C0 /* Factory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5567745B271A09A7006BA5C0 /* Factory.swift */; };
 		55BBAC15271F404A00A86A47 /* UIImageExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55BBAC12271F404A00A86A47 /* UIImageExtension.swift */; };
 		55BBAC16271F404A00A86A47 /* GIFPlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55BBAC13271F404A00A86A47 /* GIFPlayerView.swift */; };
@@ -48,13 +49,14 @@
 		487A1A062715516900723065 /* Camera.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Camera.swift; sourceTree = "<group>"; };
 		487A1A08271551BA00723065 /* Generator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Generator.swift; sourceTree = "<group>"; };
 		487A1A0A2715520D00723065 /* Upgradable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Upgradable.swift; sourceTree = "<group>"; };
-		553E7F73272099DB00165C8E /* GameSave.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameSave.swift; sourceTree = "<group>"; };
 		48A6596A271E07A70021CD52 /* Resource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Resource.swift; sourceTree = "<group>"; };
 		48A6596F271F5F470021CD52 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		48A65971271F5F5E0021CD52 /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "pt-BR.lproj/Main.strings"; sourceTree = "<group>"; };
 		48A65972271F5F5E0021CD52 /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "pt-BR.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
 		48A65973271F5F5E0021CD52 /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "pt-BR.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		553E7F73272099DB00165C8E /* GameSave.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameSave.swift; sourceTree = "<group>"; };
 		55439BC42721E87400F69461 /* functions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = functions.swift; sourceTree = "<group>"; };
+		55439BC62721F23D00F69461 /* DateApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateApi.swift; sourceTree = "<group>"; };
 		5567745B271A09A7006BA5C0 /* Factory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Factory.swift; sourceTree = "<group>"; };
 		55BBAC12271F404A00A86A47 /* UIImageExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIImageExtension.swift; sourceTree = "<group>"; };
 		55BBAC13271F404A00A86A47 /* GIFPlayerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GIFPlayerView.swift; sourceTree = "<group>"; };
@@ -117,6 +119,7 @@
 				487A1A0E271552C700723065 /* Base */,
 				553E7F73272099DB00165C8E /* GameSave.swift */,
 				48A65970271F5F470021CD52 /* Localizable.strings */,
+				55439BC62721F23D00F69461 /* DateApi.swift */,
 			);
 			path = "Idle Factory";
 			sourceTree = "<group>";
@@ -226,6 +229,7 @@
 				487A1A0B2715520D00723065 /* Upgradable.swift in Sources */,
 				48A6596B271E07A70021CD52 /* Resource.swift in Sources */,
 				55BBAC16271F404A00A86A47 /* GIFPlayerView.swift in Sources */,
+				55439BC72721F23D00F69461 /* DateApi.swift in Sources */,
 				55BBAC15271F404A00A86A47 /* UIImageExtension.swift in Sources */,
 				487A1A072715516900723065 /* Camera.swift in Sources */,
 				487A19F62715504000723065 /* GameScene.swift in Sources */,
