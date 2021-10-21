@@ -19,27 +19,28 @@ class GameViewController: UIViewController {
     func reload(gameSave: GameSave){
         gifView.isHidden = false
         backgroundLoadingView.isHidden = false
-        CKRepository.getUserId { id in
-            if let idNotNull = id {
-                CKRepository.getUserById(id: idNotNull) { [self] user in
-                    if let userNotnull = user {
-                        GameScene.user = userNotnull
-                        if let timeAway = gameSave.getTimeAway() {
-                            print(timeAway)
-                            DispatchQueue.main.async {
-                                self.gifView.isHidden = true
-                                self.backgroundLoadingView.isHidden = true
-                                self.didLoadUser()
-                            }
-                            //GameScene.user?.addMainCurrency(value: 2 * timeAway)
-                        }
         
         DispatchQueue.global().async {
             CKRepository.refreshCurrentUser { user in
                 if let userNotnull = user {
                     GameScene.user = userNotnull
-                    DispatchQueue.main.async {
-                        self.didLoadUser()
+                    if let timeAway = gameSave.getTimeAway() {
+                        print(timeAway)
+                        if var generators = GameScene.user?.generators {
+                            var perSecTotal: Double = 0.0
+                            for n in 0..<generators.count {
+                                if(generators[n].isActive == IsActive.yes){
+                                    let perSec : Double = generators[n].getCurrencyPerSec()
+                                    GameScene.user?.addMainCurrency(value: perSec * timeAway * 0.05)
+                                    perSecTotal += perSec
+                                }
+                            }
+                        }
+                        DispatchQueue.main.async {
+                            self.gifView.isHidden = true
+                            self.backgroundLoadingView.isHidden = true
+                            self.didLoadUser()
+                        }
                     }
                 }
             }
