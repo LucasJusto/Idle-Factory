@@ -23,19 +23,6 @@ class GameViewController: UIViewController {
             }
 
         }
-        
-//        CKRepository.getUserId { id in
-//            if let idNotNull = id {
-//                CKRepository.getUserById(id: idNotNull) { user in
-//                    if let userNotnull = user {
-//                        GameScene.user = userNotnull
-//                        DispatchQueue.main.async {
-//                            self.didLoadUser()
-//                        }
-//                    }
-//                }
-//            }
-//        }
     }
     
     
