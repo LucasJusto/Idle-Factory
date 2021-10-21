@@ -30,10 +30,16 @@ class GameScene: SKScene {
     lazy var perSecIncrement: SKAction = {
         let incrementAction = SKAction.run {
             if var generators = GameScene.user?.generators {
+                var perSecTotal: Double = 0.0
                 for n in 0..<generators.count {
-                    GameScene.user?.addMainCurrency(value: generators[n].getCurrencyPerSec())
+                    if(generators[n].isActive == IsActive.yes){
+                        let perSec : Double = generators[n].getCurrencyPerSec()
+                        GameScene.user?.addMainCurrency(value: perSec)
+                        perSecTotal += perSec
+                    }
                 }
-                self.gameHud.mainCurrencyValue.text = "\(GameScene.user?.mainCurrency ?? 0.0)M"
+                self.gameHud.mainCurrencyValue.text = "\(doubleToString(value:GameScene.user?.mainCurrency ?? 0.0))"
+                self.gameHud.generatingResourceValue.text = "+ \(doubleToString(value: perSecTotal))/s"
             }
         }
         let delay = SKAction.wait(forDuration: 1)
@@ -77,6 +83,9 @@ class GameScene: SKScene {
         
         camera = cameraNode
         addChild(cameraNode)
+        
+        
+//        CKRepository.storeNewGenerator(userID: GameScene.user?.id ?? "", generator: Factory(resourcesArray: [Resource( basePrice: 2, baseQtt: 2, currentLevel: 1, qttPLevel: 2, type: ResourceType.computador, pricePLevelIncreaseTax: 1)], energy: 3, type: FactoryType.Basic, texture: "", position: GeneratorPositions.first, isActive: IsActive.yes), completion: {_,_ in })
         
         startIncrement()
         

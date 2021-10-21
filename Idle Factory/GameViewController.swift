@@ -11,18 +11,31 @@ class GameViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         backgroundLoadingView.loadGif(asset: "fundo-faster")
-        CKRepository.getUserId { id in
-            if let idNotNull = id {
-                CKRepository.getUserById(id: idNotNull) { user in
-                    if let userNotnull = user {
-                        GameScene.user = userNotnull
-                        DispatchQueue.main.async {
-                            self.didLoadUser()
-                        }
+        
+        DispatchQueue.global().async {
+            CKRepository.refreshCurrentUser { user in
+                if let userNotnull = user {
+                    GameScene.user = userNotnull
+                    DispatchQueue.main.async {
+                        self.didLoadUser()
                     }
                 }
             }
+
         }
+        
+//        CKRepository.getUserId { id in
+//            if let idNotNull = id {
+//                CKRepository.getUserById(id: idNotNull) { user in
+//                    if let userNotnull = user {
+//                        GameScene.user = userNotnull
+//                        DispatchQueue.main.async {
+//                            self.didLoadUser()
+//                        }
+//                    }
+//                }
+//            }
+//        }
     }
     
     
@@ -40,12 +53,12 @@ class GameViewController: UIViewController {
             let scene = GameScene(size: screenSize)
             // Set the scale mode to scale to fit the window
             scene.scaleMode = .aspectFill
-
+            
             // Present the scene
             view.presentScene(scene)
-
+            
             view.ignoresSiblingOrder = true
-
+            
             view.showsFPS = true
             view.showsNodeCount = true
             gifView.isHidden = true
