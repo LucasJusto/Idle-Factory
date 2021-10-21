@@ -99,7 +99,7 @@ class GameHud: SKScene {
     func createPremiumCurrency() -> SKLabelNode{
         premiumCurrencyValue.name = "PremiumCurrency"
         premiumCurrencyValue.fontName = "AustralSlabBlur-Regular"
-        premiumCurrencyValue.text = "\(GameScene.user?.premiumCurrency ?? 0.0)M"
+        premiumCurrencyValue.text = "\(GameScene.user?.premiumCurrency ?? 0.0)"
         premiumCurrencyValue.fontColor = .black
         premiumCurrencyValue.fontSize = 14
         premiumCurrencyValue.zPosition = 3
@@ -113,7 +113,7 @@ class GameHud: SKScene {
     func createGenerateResource() -> SKLabelNode{
         generatingResourceValue.name = "GeneratingResource"
         generatingResourceValue.fontName = "AustralSlabBlur-Regular"
-        generatingResourceValue.text = "+ 999.999 M/s"
+        generatingResourceValue.text = ""
         generatingResourceValue.fontColor = .white
         generatingResourceValue.fontSize = 11
         generatingResourceValue.zPosition = 3

@@ -11,7 +11,7 @@ import SpriteKit
 class Factory: Generator  {
     
     var id: String?
-    var perSec: Double?
+    var perSec: Double
     var type: FactoryType
     var isActive: IsActive
     var energy: Int
@@ -29,6 +29,7 @@ class Factory: Generator  {
         self.position = position
         self.isActive = isActive
         self.textureName = texture
+        self.perSec = 0
     }
 }
 

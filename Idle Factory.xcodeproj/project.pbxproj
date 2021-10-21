@@ -22,6 +22,7 @@
 		487A1A0B2715520D00723065 /* Upgradable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 487A1A0A2715520D00723065 /* Upgradable.swift */; };
 		48A6596B271E07A70021CD52 /* Resource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48A6596A271E07A70021CD52 /* Resource.swift */; };
 		48A6596E271F5F470021CD52 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 48A65970271F5F470021CD52 /* Localizable.strings */; };
+		55439BC52721E87400F69461 /* functions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55439BC42721E87400F69461 /* functions.swift */; };
 		5567745C271A09A7006BA5C0 /* Factory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5567745B271A09A7006BA5C0 /* Factory.swift */; };
 		55BBAC15271F404A00A86A47 /* UIImageExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55BBAC12271F404A00A86A47 /* UIImageExtension.swift */; };
 		55BBAC16271F404A00A86A47 /* GIFPlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55BBAC13271F404A00A86A47 /* GIFPlayerView.swift */; };
@@ -51,6 +52,7 @@
 		48A65971271F5F5E0021CD52 /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "pt-BR.lproj/Main.strings"; sourceTree = "<group>"; };
 		48A65972271F5F5E0021CD52 /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "pt-BR.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
 		48A65973271F5F5E0021CD52 /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "pt-BR.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		55439BC42721E87400F69461 /* functions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = functions.swift; sourceTree = "<group>"; };
 		5567745B271A09A7006BA5C0 /* Factory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Factory.swift; sourceTree = "<group>"; };
 		55BBAC12271F404A00A86A47 /* UIImageExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIImageExtension.swift; sourceTree = "<group>"; };
 		55BBAC13271F404A00A86A47 /* GIFPlayerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GIFPlayerView.swift; sourceTree = "<group>"; };
@@ -125,6 +127,7 @@
 				5567745B271A09A7006BA5C0 /* Factory.swift */,
 				48096D2D271A144C00AB22AD /* CKRepository.swift */,
 				48A6596A271E07A70021CD52 /* Resource.swift */,
+				55439BC42721E87400F69461 /* functions.swift */,
 			);
 			path = Base;
 			sourceTree = "<group>";
@@ -224,6 +227,7 @@
 				487A19F62715504000723065 /* GameScene.swift in Sources */,
 				487A19F82715504000723065 /* GameViewController.swift in Sources */,
 				55BD52A92718BC2C0057C7C0 /* User.swift in Sources */,
+				55439BC52721E87400F69461 /* functions.swift in Sources */,
 				2B9C3146271F4BC3008A7676 /* GameHud.swift in Sources */,
 				487A19F02715504000723065 /* AppDelegate.swift in Sources */,
 				487A1A09271551BA00723065 /* Generator.swift in Sources */,
