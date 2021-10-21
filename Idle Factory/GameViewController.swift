@@ -33,9 +33,17 @@ class GameViewController: UIViewController {
                             }
                             //GameScene.user?.addMainCurrency(value: 2 * timeAway)
                         }
+        
+        DispatchQueue.global().async {
+            CKRepository.refreshCurrentUser { user in
+                if let userNotnull = user {
+                    GameScene.user = userNotnull
+                    DispatchQueue.main.async {
+                        self.didLoadUser()
                     }
                 }
             }
+
         }
     }
     
@@ -60,12 +68,12 @@ class GameViewController: UIViewController {
             let scene = GameScene(size: screenSize)
             // Set the scale mode to scale to fit the window
             scene.scaleMode = .aspectFill
-
+            
             // Present the scene
             view.presentScene(scene)
-
+            
             view.ignoresSiblingOrder = true
-
+            
             view.showsFPS = true
             view.showsNodeCount = true
             gifView.isHidden = true
