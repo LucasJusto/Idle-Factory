@@ -31,13 +31,14 @@ class GameSave{
             getTime { time in
                 print("getTime: \(#function)")
                 var date = Date()
-                if let time = time {
-                    let isoDate = time.datetime
+                if let time2 = time {
+                    let isoDate = time2.datetime
                     print(isoDate)
-                    let dateFormatter =  DateFormatter()
+                    let dateFormatter =  ISO8601DateFormatter()
                     //print(dateFormatter.dateFormat)
-                    dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
-                    date = dateFormatter.date(from:isoDate)!
+                    //dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
+                    print(isoDate)
+                    date = dateFormatter.date(from:isoDate) ?? Date()
                     print(date)
                 }
                 self.userDefaults.setValue(date, forKey: TypeStore.timeLeft.rawValue)
