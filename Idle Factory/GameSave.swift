@@ -27,12 +27,15 @@ class GameSave{
         }
         
         func saveTimeLeftApp() {
+            print(#function)
             getTime { time in
+                print("getTime: \(#function)")
                 var date = Date()
                 if let time = time {
                     let isoDate = time.datetime
                     print(isoDate)
-                    let dateFormatter = DateFormatter()
+                    let dateFormatter =  DateFormatter()
+                    //print(dateFormatter.dateFormat)
                     dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
                     date = dateFormatter.date(from:isoDate)!
                     print(date)
