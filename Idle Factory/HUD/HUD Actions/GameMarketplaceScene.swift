@@ -10,8 +10,8 @@ import SpriteKit
 class GameMarketplaceScene: SKScene {
     
     // MARK: - Device Width and Height variables
-    private var deviceWidth = UIScreen.main.bounds.width
-    private var deviceHeight = UIScreen.main.bounds.height
+    private var deviceWidth = GameScene.deviceScreenWidth
+    private var deviceHeight = GameScene.deviceScreenHeight
     
     // MARK: - Marketplace Scene display components
     private(set) var sceneBackground: SKShapeNode = SKShapeNode()

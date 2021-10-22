@@ -12,7 +12,12 @@ import CoreMotion
 class GameScene: SKScene {
     
     
-    // MARK: - Factory positions
+    // MARK: - Device Width and Height variables
+    private(set) static var deviceScreenWidth = UIScreen.main.bounds.width
+    private(set) static var deviceScreenHeight = UIScreen.main.bounds.height
+    
+    
+    // MARK: - FACTORY POSITIONS
     private(set) var factoriesPositions: [(x: CGFloat, y: CGFloat)] =
     [
         (x: -417.78, y: -68.25),
@@ -56,16 +61,6 @@ class GameScene: SKScene {
         
         return actionForever
     }()
-  
-    
-    // MARK: - Incrementation Control
-    func startIncrement() {
-        run(perSecIncrement, withKey: "perSecIncrement")
-    }
-    
-    func stopIncrement() {
-        removeAction(forKey: "perSecIncrement")
-    }
 
     
     // MARK: - Nodes
@@ -74,15 +69,14 @@ class GameScene: SKScene {
     static var user: User? = nil
     public lazy var cameraNode: Camera = {
         let cameraNode = Camera(sceneView: self.view!, scenario: background)
-        cameraNode.position = CGPoint(x:UIScreen.main.bounds.width / 50, y: UIScreen.main.bounds.height / 4)
+        cameraNode.position = CGPoint(x: GameScene.deviceScreenWidth / 50, y: GameScene.deviceScreenHeight / 4)
         cameraNode.applyZoomScale(scale: 0.43)
         
         return cameraNode
     }()
     
     
-    // MARK: - Init
-    
+    // MARK: - INIT
     override func didMove(to view: SKView) {
         
         self.anchorPoint = CGPoint(x: 0.5, y: 0.5)
@@ -136,6 +130,17 @@ class GameScene: SKScene {
     }
     
     
+    // MARK: - INCREMENTAL CONTROL
+    func startIncrement() {
+        run(perSecIncrement, withKey: "perSecIncrement")
+    }
+    
+    func stopIncrement() {
+        removeAction(forKey: "perSecIncrement")
+    }
+    
+    
+    
     // MARK: - BACKGROUND & HUD Creation
     /**
      Create scene background.
@@ -166,11 +171,11 @@ class GameScene: SKScene {
         let generatorResource = gameHud.createGenerateResource()
         
         // Positioning all info datas on the device
-        mainCurrencyIcon.position = CGPoint(x: -((UIScreen.main.bounds.width) / 2) + 80, y: ((UIScreen.main.bounds.height) / 3) + 25)
-        mainCurrencyData.position = CGPoint(x: mainCurrencyIcon.position.x + 50, y: ((UIScreen.main.bounds.height) / 3) + 18)
-        premiumCurrencyIcon.position = CGPoint(x: -((UIScreen.main.bounds.width) / 2) + 215, y: ((UIScreen.main.bounds.height) / 3) + 25)
-        premiumCurrencyData.position = CGPoint(x: premiumCurrencyIcon.position.x + 50, y: ((UIScreen.main.bounds.height) / 3) + 18)
-        generatorResource.position = CGPoint(x: -((UIScreen.main.bounds.width) / 2) + 90, y: ((UIScreen.main.bounds.height) / 3) - 7)
+        mainCurrencyIcon.position = CGPoint(x: -((GameScene.deviceScreenWidth) / 2) + 80, y: ((GameScene.deviceScreenHeight) / 3) + 25)
+        mainCurrencyData.position = CGPoint(x: mainCurrencyIcon.position.x + 50, y: ((GameScene.deviceScreenHeight) / 3) + 18)
+        premiumCurrencyIcon.position = CGPoint(x: -((GameScene.deviceScreenWidth) / 2) + 215, y: ((GameScene.deviceScreenHeight) / 3) + 25)
+        premiumCurrencyData.position = CGPoint(x: premiumCurrencyIcon.position.x + 50, y: ((GameScene.deviceScreenHeight) / 3) + 18)
+        generatorResource.position = CGPoint(x: -((GameScene.deviceScreenWidth) / 2) + 90, y: ((GameScene.deviceScreenHeight) / 3) - 7)
         
         
         // Adds all Hud components as a child of the camera to keep Hud always on the camera
@@ -201,9 +206,9 @@ class GameScene: SKScene {
         let challengeButton = gameHud.createChallengeButton()
         
         // Positioning buttons on the device
-        inventoryButton.position = CGPoint(x: ((UIScreen.main.bounds.width) / 2.31), y: 50)
-        marketPlaceButton.position = CGPoint(x: ((UIScreen.main.bounds.width) / 2.31), y: -30)
-        challengeButton.position = CGPoint(x: ((UIScreen.main.bounds.width) / 2.31), y: -123)
+        inventoryButton.position = CGPoint(x: ((GameScene.deviceScreenWidth) / 2.31), y: 50)
+        marketPlaceButton.position = CGPoint(x: ((GameScene.deviceScreenWidth) / 2.31), y: -30)
+        challengeButton.position = CGPoint(x: ((GameScene.deviceScreenWidth) / 2.31), y: -123)
         
         // Add to scene
         cameraNode.addChild(sidebarBackground)
@@ -259,7 +264,7 @@ class GameScene: SKScene {
     }
     
     
-    // MARK: - Rightbar Interactions
+    // MARK: - RIGHTBAR INTERACTIONS
     /**
      Display player inventory.
      */
@@ -269,8 +274,8 @@ class GameScene: SKScene {
         let closeAction = gameInventoryScene.createCloseButton()
         actionShapeNode = inventoryScene
         
-        inventoryScene.position = CGPoint(x: -(UIScreen.main.bounds.width) / 2, y: -(UIScreen.main.bounds.height) / 2)
-        closeAction.position = CGPoint(x: (UIScreen.main.bounds.width) / 2, y: (UIScreen.main.bounds.height) / 2)
+        inventoryScene.position = CGPoint(x: -(GameScene.deviceScreenWidth) / 2, y: -(GameScene.deviceScreenHeight) / 2)
+        closeAction.position = CGPoint(x: (GameScene.deviceScreenWidth) / 2, y: (GameScene.deviceScreenHeight) / 2)
 
         cameraNode.addChild(actionShapeNode)
         inventoryScene.addChild(closeAction)
@@ -286,8 +291,8 @@ class GameScene: SKScene {
         let closeAction = gameMarketplaceScene.createCloseButton()
         actionShapeNode = marketplaceScene
         
-        marketplaceScene.position = CGPoint(x: -(UIScreen.main.bounds.width) / 2, y: -(UIScreen.main.bounds.height) / 2)
-        closeAction.position = CGPoint(x: (UIScreen.main.bounds.width) / 2, y: (UIScreen.main.bounds.height) / 2)
+        marketplaceScene.position = CGPoint(x: -(GameScene.deviceScreenWidth) / 2, y: -(GameScene.deviceScreenHeight) / 2)
+        closeAction.position = CGPoint(x: (GameScene.deviceScreenWidth) / 2, y: (GameScene.deviceScreenHeight) / 2)
 
         cameraNode.addChild(actionShapeNode)
         marketplaceScene.addChild(closeAction)
@@ -303,8 +308,8 @@ class GameScene: SKScene {
         let closeAction = gameChallengeScene.createCloseButton()
         
         actionShapeNode = challengeScene
-        challengeScene.position = CGPoint(x: -(UIScreen.main.bounds.width) / 2, y: -(UIScreen.main.bounds.height) / 2)
-        closeAction.position = CGPoint(x: (UIScreen.main.bounds.width) / 2, y: (UIScreen.main.bounds.height) / 2)
+        challengeScene.position = CGPoint(x: -(GameScene.deviceScreenWidth) / 2, y: -(GameScene.deviceScreenHeight) / 2)
+        closeAction.position = CGPoint(x: (GameScene.deviceScreenWidth) / 2, y: (GameScene.deviceScreenHeight) / 2)
 
         cameraNode.addChild(actionShapeNode)
         challengeScene.addChild(closeAction)

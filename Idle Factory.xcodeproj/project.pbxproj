@@ -78,6 +78,25 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2B0D6D5027231F4100F7390E /* HUD Actions */ = {
+			isa = PBXGroup;
+			children = (
+				2BFF82B52721D96100F16F84 /* GameInventoryScene.swift */,
+				2BFF82B72721D98400F16F84 /* GameChallengeScene.swift */,
+				2BFF82B92721D9A500F16F84 /* GameMarketplaceScene.swift */,
+			);
+			path = "HUD Actions";
+			sourceTree = "<group>";
+		};
+		2B0D6D5127231F6500F7390E /* HUD */ = {
+			isa = PBXGroup;
+			children = (
+				2B9C3145271F4BC3008A7676 /* GameHud.swift */,
+				2B0D6D5027231F4100F7390E /* HUD Actions */,
+			);
+			path = HUD;
+			sourceTree = "<group>";
+		};
 		4850FF522718CB3B00C8CE97 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -116,12 +135,9 @@
 				487A19FC2715504300723065 /* Assets.xcassets */,
 				487A19FE2715504300723065 /* LaunchScreen.storyboard */,
 				487A1A062715516900723065 /* Camera.swift */,
-				2B9C3145271F4BC3008A7676 /* GameHud.swift */,
+				2B0D6D5127231F6500F7390E /* HUD */,
 				2B9C314A271F50DD008A7676 /* Austral-Slab_Blur-Regular.otf */,
 				487A1A0E271552C700723065 /* Base */,
-				2BFF82B52721D96100F16F84 /* GameInventoryScene.swift */,
-				2BFF82B72721D98400F16F84 /* GameChallengeScene.swift */,
-				2BFF82B92721D9A500F16F84 /* GameMarketplaceScene.swift */,
 				48A65970271F5F470021CD52 /* Localizable.strings */,
 			);
 			path = "Idle Factory";
