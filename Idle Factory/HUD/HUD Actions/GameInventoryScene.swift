@@ -9,10 +9,6 @@ import SpriteKit
 
 class GameInventoryScene: SKScene {
     
-    // MARK: - Device Width and Height variables
-    private var deviceWidth = UIScreen.main.bounds.width
-    private var deviceHeight = UIScreen.main.bounds.height
-    
     // MARK: - Player Inventory Scene display components
     private(set) var sceneBackground: SKShapeNode = SKShapeNode()
     
@@ -21,7 +17,7 @@ class GameInventoryScene: SKScene {
      Create the scene background.
      */
     func createBackground() -> SKShapeNode {
-        sceneBackground = SKShapeNode(rect: CGRect(x: 0, y: 0, width: (deviceWidth), height: (deviceHeight)))
+        sceneBackground = SKShapeNode(rect: CGRect(x: 0, y: 0, width: (GameScene.deviceScreenWidth), height: (GameScene.deviceScreenHeight)))
         sceneBackground.fillColor = UIColor(named: "HudActions-background")!
         sceneBackground.zPosition = 10
         return sceneBackground

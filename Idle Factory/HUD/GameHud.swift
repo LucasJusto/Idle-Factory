@@ -11,13 +11,7 @@ import SpriteKit
 /**
  Class responsible to create all the components which compounds the game hud.
  */
-class GameHud: SKScene {
-    
-    
-    // MARK: - Device Width and Height variables
-    private var deviceWidth = GameScene.deviceScreenWidth
-    private var deviceHeight = GameScene.deviceScreenHeight
-    
+class GameHud {
     
     // MARK: - Top HUD display components
     private(set) var mainCurrencyIcon: SKSpriteNode = SKSpriteNode()
@@ -38,7 +32,7 @@ class GameHud: SKScene {
      Create a white rounded Rect ShapeNode used to display currency info on the HUD.
      */
     func createTopHudBackground(xPos: CGFloat) -> SKShapeNode {
-        let HudInfoBackground = SKShapeNode(rect: CGRect(x: -((deviceWidth) / 2) + xPos, y: ((deviceHeight) / 3) + 7.5, width: (UIScreen.main.bounds.height) * 0.32, height: (deviceHeight) * 0.09), cornerRadius: 7)
+        let HudInfoBackground = SKShapeNode(rect: CGRect(x: -((GameScene.deviceScreenWidth) / 2) + xPos, y: ((GameScene.deviceScreenHeight) / 3) + 7.5, width: (GameScene.deviceScreenHeight) * 0.32, height: (GameScene.deviceScreenHeight) * 0.09), cornerRadius: 7)
         HudInfoBackground.fillColor = .white
         HudInfoBackground.zPosition = 4
         return HudInfoBackground
@@ -49,7 +43,7 @@ class GameHud: SKScene {
      Create a black rounded Rect ShapeNode used to display the actual generating resource value info on the HUD.
      */
     func createTopHudGenerationBackground() -> SKShapeNode {
-        let generationHudBackground = SKShapeNode(rect: CGRect(x: -((deviceWidth) / 2) + 50, y: ((deviceHeight) / 3) - 9, width: (UIScreen.main.bounds.height) * 0.19, height: (deviceHeight) * 0.10), cornerRadius: 7)
+        let generationHudBackground = SKShapeNode(rect: CGRect(x: -((GameScene.deviceScreenWidth) / 2) + 50, y: ((GameScene.deviceScreenHeight) / 3) - 9, width: (GameScene.deviceScreenHeight) * 0.20, height: (GameScene.deviceScreenHeight) * 0.10), cornerRadius: 7)
         generationHudBackground.fillColor = UIColor(named: "Rightbar_background")!
         generationHudBackground.strokeColor = UIColor(named: "Rightbar_background")!
         generationHudBackground.zPosition = 3
@@ -126,7 +120,7 @@ class GameHud: SKScene {
      Create a large right side Rect ShapeNode to display HUD actions.
      */
     func createSidebarBackground() -> SKShapeNode {
-        let sidebarBackground = SKShapeNode(rect: CGRect(x: (deviceWidth) / 2.3, y: -(deviceHeight) / 2, width: (deviceWidth) * 0.08, height: deviceHeight))
+        let sidebarBackground = SKShapeNode(rect: CGRect(x: (GameScene.deviceScreenWidth) / 2.3, y: -(GameScene.deviceScreenHeight) / 2, width: (GameScene.deviceScreenWidth) * 0.08, height: GameScene.deviceScreenHeight))
         sidebarBackground.fillColor = UIColor(named: "Rightbar_background")!
         sidebarBackground.strokeColor = UIColor(named: "Rightbar_background")!
         sidebarBackground.zPosition = 3

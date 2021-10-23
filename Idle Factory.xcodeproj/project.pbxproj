@@ -97,6 +97,14 @@
 			path = HUD;
 			sourceTree = "<group>";
 		};
+		2B0F084127249BF2009F024C /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				2B9C314A271F50DD008A7676 /* Austral-Slab_Blur-Regular.otf */,
+			);
+			path = Fonts;
+			sourceTree = "<group>";
+		};
 		4850FF522718CB3B00C8CE97 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -136,7 +144,7 @@
 				487A19FE2715504300723065 /* LaunchScreen.storyboard */,
 				487A1A062715516900723065 /* Camera.swift */,
 				2B0D6D5127231F6500F7390E /* HUD */,
-				2B9C314A271F50DD008A7676 /* Austral-Slab_Blur-Regular.otf */,
+				2B0F084127249BF2009F024C /* Fonts */,
 				487A1A0E271552C700723065 /* Base */,
 				48A65970271F5F470021CD52 /* Localizable.strings */,
 			);

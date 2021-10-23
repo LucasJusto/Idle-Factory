@@ -170,11 +170,14 @@ class GameScene: SKScene {
         let premiumCurrencyData = gameHud.createPremiumCurrency()
         let generatorResource = gameHud.createGenerateResource()
         
+        // Check if device height (it turns the width when device is on horizontal) is equals to 926 to fix position (iPhone 12 and 13 Pro MAX versions). This condition only exists to fix the premium currency component position on PRO MAX devices.
+        let positionX = GameScene.deviceScreenWidth == 926 ? (-((GameScene.deviceScreenWidth) / 2) + 230) : (-((GameScene.deviceScreenWidth) / 2) + 215)
+        
         // Positioning all info datas on the device
         mainCurrencyIcon.position = CGPoint(x: -((GameScene.deviceScreenWidth) / 2) + 80, y: ((GameScene.deviceScreenHeight) / 3) + 25)
         mainCurrencyData.position = CGPoint(x: mainCurrencyIcon.position.x + 50, y: ((GameScene.deviceScreenHeight) / 3) + 18)
-        premiumCurrencyIcon.position = CGPoint(x: -((GameScene.deviceScreenWidth) / 2) + 215, y: ((GameScene.deviceScreenHeight) / 3) + 25)
-        premiumCurrencyData.position = CGPoint(x: premiumCurrencyIcon.position.x + 50, y: ((GameScene.deviceScreenHeight) / 3) + 18)
+        premiumCurrencyIcon.position = CGPoint(x: positionX, y: ((GameScene.deviceScreenHeight) / 3) + 25)
+        premiumCurrencyData.position = CGPoint(x: premiumCurrencyIcon.position.x + 45, y: ((GameScene.deviceScreenHeight) / 3) + 18)
         generatorResource.position = CGPoint(x: -((GameScene.deviceScreenWidth) / 2) + 90, y: ((GameScene.deviceScreenHeight) / 3) - 7)
         
         

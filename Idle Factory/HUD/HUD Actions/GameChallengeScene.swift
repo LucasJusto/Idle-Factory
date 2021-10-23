@@ -9,10 +9,6 @@ import SpriteKit
 
 class GameChallengeScene: SKScene {
     
-    // MARK: - Device Width and Height variables
-    private var deviceWidth = GameScene.deviceScreenWidth
-    private var deviceHeight = GameScene.deviceScreenHeight
-    
     // MARK: - Challenge Scene display components
     private(set) var sceneBackground: SKShapeNode = SKShapeNode()
     
@@ -21,7 +17,8 @@ class GameChallengeScene: SKScene {
      Create the scene background.
      */
     func createBackground() -> SKShapeNode {
-        sceneBackground = SKShapeNode(rect: CGRect(x: 0, y: 0, width: (deviceWidth), height: (deviceHeight)))
+        sceneBackground = SKShapeNode(rect: CGRect(x: 0, y: 0, width: (GameScene.deviceScreenWidth
+), height: (GameScene.deviceScreenHeight)))
         sceneBackground.fillColor = UIColor(named: "HudActions-background")!
         sceneBackground.zPosition = 10
         return sceneBackground
