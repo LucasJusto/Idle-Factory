@@ -62,3 +62,43 @@ func doubleToString(value: Double) -> String {
         }
         return "\(nInteger).\(nDecimal)\(str)"
     }
+
+
+func getTime( completionHandler: @escaping (DateApi?) -> Void){
+    let urlString = "https://worldtimeapi.org/api/timezone/Europe/London"
+    let url = URL(string: urlString)!
+    
+    //var movies:[Movie] = []
+    URLSession.shared.dataTask(with: url) { (data, response, error) in
+        //typealias AuxMovies = [String: Any]
+        guard let data = data,
+              let json = try? JSONSerialization.jsonObject(with: data, options: .fragmentsAllowed),
+              let dictionary = json as? [String: Any]
+        else {
+            completionHandler(nil)
+            return
+        }
+        //var movie = Movie()
+            guard let abbreviation = dictionary["abbreviation"] as? String,
+                  let datetime = dictionary["datetime"] as? String,
+                  let dayOfWeek = dictionary["day_of_week"] as? Int,
+                  let dayOfYear = dictionary["day_of_year"] as? Int,
+                  let dst = dictionary["dst"] as? Bool,
+                  let dst_from = dictionary["dst_from"] as? String,
+                  let dst_offset = dictionary["dst_offset"] as? Int,
+                  let dst_until = dictionary["dst_until"] as? String,
+                  let raw_offset = dictionary["raw_offset"] as? Int,
+                  let timezone = dictionary["timezone"] as? String,
+                  let unixtime = dictionary["unixtime"] as? Int,
+                  let utc_datetime = dictionary["utc_datetime"] as? String,
+                  let utc_offset = dictionary["utc_offset"] as? String,
+                  let week_number = dictionary["week_number"] as? Int
+            else {
+                completionHandler(nil)
+                return
+            }
+        print(datetime)
+        completionHandler(DateApi(abbreviation: abbreviation, datetime: datetime, dayOfWeek: dayOfWeek, dayOfYear: dayOfYear, dst: dst, dst_from: dst_from, dst_offset: dst_offset, dst_until: dst_until, raw_offset: raw_offset, timezone: timezone, unixtime:unixtime, utc_datetime: utc_datetime, utc_offset: utc_offset, week_number: week_number))
+        }
+    .resume()
+}
