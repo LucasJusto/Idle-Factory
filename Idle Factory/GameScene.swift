@@ -12,7 +12,12 @@ import CoreMotion
 class GameScene: SKScene {
     
     
-    // MARK: - Factory positions
+    // MARK: - Device Width and Height variables
+    private(set) static var deviceScreenWidth = UIScreen.main.bounds.width
+    private(set) static var deviceScreenHeight = UIScreen.main.bounds.height
+    
+    
+    // MARK: - FACTORY POSITIONS
     private(set) var factoriesPositions: [(x: CGFloat, y: CGFloat)] =
     [
         (x: -417.78, y: -68.25),
@@ -23,8 +28,14 @@ class GameScene: SKScene {
         (x: 480.70, y: -235)
     ]
     
-    // MARK: - GAME HUD
+    // MARK: - GAME HUD & HUD SCENE ACTIONS
     private var gameHud: GameHud = GameHud()
+    private var actionShapeNode: SKShapeNode = SKShapeNode()
+    
+    private(set) var gameInventoryScene: GameInventoryScene = GameInventoryScene()
+    private(set) var gameMarketplaceScene: GameMarketplaceScene = GameMarketplaceScene()
+    private(set) var gameChallengeScene: GameChallengeScene = GameChallengeScene()
+    
     
     // MARK: - perSecIncrement
     lazy var perSecIncrement: SKAction = {
@@ -50,6 +61,7 @@ class GameScene: SKScene {
         
         return actionForever
     }()
+
     
     // MARK: - Nodes
     private var background: SKSpriteNode = SKSpriteNode()
@@ -57,16 +69,14 @@ class GameScene: SKScene {
     static var user: User? = nil
     public lazy var cameraNode: Camera = {
         let cameraNode = Camera(sceneView: self.view!, scenario: background)
-        cameraNode.position = CGPoint(x:UIScreen.main.bounds.width / 50, y: UIScreen.main.bounds.height / 4)
+        cameraNode.position = CGPoint(x: GameScene.deviceScreenWidth / 50, y: GameScene.deviceScreenHeight / 4)
         cameraNode.applyZoomScale(scale: 0.43)
         
         return cameraNode
     }()
     
     
-    
-    // MARK: - Init
-    
+    // MARK: - INIT
     override func didMove(to view: SKView) {
         
         self.anchorPoint = CGPoint(x: 0.5, y: 0.5)
@@ -92,6 +102,45 @@ class GameScene: SKScene {
     }
     
     
+    // MARK: - TOUCH SCREEN EVENTS
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        for touch in touches {
+            let location = touch.location(in: self)
+            let touchedNode = atPoint(location)
+            if(touchedNode.name == "PlayerInventoryButton"){
+                displayInventory()
+                //self.removeAllChildren()
+            }
+            if(touchedNode.name == "MarketplaceButton") {
+                displayMarketplace()
+                //self.removeAllChildren()
+            }
+            if touchedNode.name == "ChallengeButton" {
+                displayChallenge()
+            }
+            
+            if (
+                touchedNode.name == "CloseInventoryScene" ||
+                touchedNode.name == "CloseMarketplaceScene" ||
+                touchedNode.name == "CloseChallengeScene"
+               ) {
+                actionShapeNode.removeFromParent()
+            }
+        }
+    }
+    
+    
+    // MARK: - INCREMENTAL CONTROL
+    func startIncrement() {
+        run(perSecIncrement, withKey: "perSecIncrement")
+    }
+    
+    func stopIncrement() {
+        removeAction(forKey: "perSecIncrement")
+    }
+    
+    
+    
     // MARK: - BACKGROUND & HUD Creation
     /**
      Create scene background.
@@ -103,13 +152,6 @@ class GameScene: SKScene {
         addChild(background)
     }
     
-    func startIncrement() {
-        run(perSecIncrement, withKey: "perSecIncrement")
-    }
-    
-    func stopIncrement() {
-        removeAction(forKey: "perSecIncrement")
-    }
     
     /**
      Create and displays top hud of the game.
@@ -125,15 +167,18 @@ class GameScene: SKScene {
         let mainCurrencyIcon = gameHud.createMainCurrencyIcon()
         let mainCurrencyData = gameHud.createMainCurrencyLabel()
         let premiumCurrencyIcon = gameHud.createPremiumCurrencyIcon()
-        let premiumCurrencyData = gameHud.createPremiumCurrency()
-        let generatorResource = gameHud.createGenerateResource()
+        let premiumCurrencyData = gameHud.createPremiumCurrencyLabel()
+        let generatorResource = gameHud.createGenerateResourceLabel()
+        
+        // Check if device height (it turns the width when device is on horizontal) is equals to 926 to fix position (iPhone 12 and 13 Pro MAX versions). This condition only exists to fix the premium currency component position on PRO MAX devices.
+        let positionX = GameScene.deviceScreenWidth == 926 ? (-((GameScene.deviceScreenWidth) / 2) + 230) : (-((GameScene.deviceScreenWidth) / 2) + 215)
         
         // Positioning all info datas on the device
-        mainCurrencyIcon.position = CGPoint(x: -((UIScreen.main.bounds.width) / 2) + 80, y: ((UIScreen.main.bounds.height) / 3) + 25)
-        mainCurrencyData.position = CGPoint(x: mainCurrencyIcon.position.x + 50, y: ((UIScreen.main.bounds.height) / 3) + 18)
-        premiumCurrencyIcon.position = CGPoint(x: -((UIScreen.main.bounds.width) / 2) + 215, y: ((UIScreen.main.bounds.height) / 3) + 25)
-        premiumCurrencyData.position = CGPoint(x: premiumCurrencyIcon.position.x + 50, y: ((UIScreen.main.bounds.height) / 3) + 18)
-        generatorResource.position = CGPoint(x: -((UIScreen.main.bounds.width) / 2) + 90, y: ((UIScreen.main.bounds.height) / 3) - 7)
+        mainCurrencyIcon.position = CGPoint(x: -((GameScene.deviceScreenWidth) / 2) + 80, y: ((GameScene.deviceScreenHeight) / 3) + 25)
+        mainCurrencyData.position = CGPoint(x: mainCurrencyIcon.position.x + 50, y: ((GameScene.deviceScreenHeight) / 3) + 18)
+        premiumCurrencyIcon.position = CGPoint(x: positionX, y: ((GameScene.deviceScreenHeight) / 3) + 25)
+        premiumCurrencyData.position = CGPoint(x: premiumCurrencyIcon.position.x + 45, y: ((GameScene.deviceScreenHeight) / 3) + 18)
+        generatorResource.position = CGPoint(x: -((GameScene.deviceScreenWidth) / 2) + 90, y: ((GameScene.deviceScreenHeight) / 3) - 7)
         
         
         // Adds all Hud components as a child of the camera to keep Hud always on the camera
@@ -164,9 +209,9 @@ class GameScene: SKScene {
         let challengeButton = gameHud.createChallengeButton()
         
         // Positioning buttons on the device
-        inventoryButton.position = CGPoint(x: ((UIScreen.main.bounds.width) / 2.31), y: 50)
-        marketPlaceButton.position = CGPoint(x: ((UIScreen.main.bounds.width) / 2.31), y: -30)
-        challengeButton.position = CGPoint(x: ((UIScreen.main.bounds.width) / 2.31), y: -123)
+        inventoryButton.position = CGPoint(x: ((GameScene.deviceScreenWidth) / 2.31), y: 50)
+        marketPlaceButton.position = CGPoint(x: ((GameScene.deviceScreenWidth) / 2.31), y: -30)
+        challengeButton.position = CGPoint(x: ((GameScene.deviceScreenWidth) / 2.31), y: -123)
         
         // Add to scene
         cameraNode.addChild(sidebarBackground)
@@ -219,6 +264,58 @@ class GameScene: SKScene {
         factory.name = "factory"
         
         return factory
+    }
+    
+    
+    // MARK: - RIGHTBAR INTERACTIONS
+    /**
+     Display player inventory.
+     */
+    func displayInventory() {
+        
+        let inventoryScene = gameInventoryScene.createBackground()
+        let closeAction = gameInventoryScene.createCloseButton()
+        actionShapeNode = inventoryScene
+        
+        inventoryScene.position = CGPoint(x: -(GameScene.deviceScreenWidth) / 2, y: -(GameScene.deviceScreenHeight) / 2)
+        closeAction.position = CGPoint(x: (GameScene.deviceScreenWidth) / 2, y: (GameScene.deviceScreenHeight) / 2)
+
+        cameraNode.addChild(actionShapeNode)
+        inventoryScene.addChild(closeAction)
+    }
+    
+    
+    /**
+     Display marketplace.
+     */
+    func displayMarketplace() {
+        
+        let marketplaceScene = gameMarketplaceScene.createBackground()
+        let closeAction = gameMarketplaceScene.createCloseButton()
+        actionShapeNode = marketplaceScene
+        
+        marketplaceScene.position = CGPoint(x: -(GameScene.deviceScreenWidth) / 2, y: -(GameScene.deviceScreenHeight) / 2)
+        closeAction.position = CGPoint(x: (GameScene.deviceScreenWidth) / 2, y: (GameScene.deviceScreenHeight) / 2)
+
+        cameraNode.addChild(actionShapeNode)
+        marketplaceScene.addChild(closeAction)
+    }
+    
+    
+    /**
+     Display challenge.
+     */
+    func displayChallenge() {
+        
+        let challengeScene = gameChallengeScene.createBackground()
+        let closeAction = gameChallengeScene.createCloseButton()
+        
+        actionShapeNode = challengeScene
+        challengeScene.position = CGPoint(x: -(GameScene.deviceScreenWidth) / 2, y: -(GameScene.deviceScreenHeight) / 2)
+        closeAction.position = CGPoint(x: (GameScene.deviceScreenWidth) / 2, y: (GameScene.deviceScreenHeight) / 2)
+
+        cameraNode.addChild(actionShapeNode)
+        challengeScene.addChild(closeAction)
     }
     
     

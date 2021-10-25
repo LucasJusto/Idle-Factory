@@ -9,6 +9,9 @@
 /* Begin PBXBuildFile section */
 		2B9C3146271F4BC3008A7676 /* GameHud.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B9C3145271F4BC3008A7676 /* GameHud.swift */; };
 		2B9C314B271F50DD008A7676 /* Austral-Slab_Blur-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 2B9C314A271F50DD008A7676 /* Austral-Slab_Blur-Regular.otf */; };
+		2BFF82B62721D96100F16F84 /* GameInventoryScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BFF82B52721D96100F16F84 /* GameInventoryScene.swift */; };
+		2BFF82B82721D98400F16F84 /* GameChallengeScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BFF82B72721D98400F16F84 /* GameChallengeScene.swift */; };
+		2BFF82BA2721D9A500F16F84 /* GameMarketplaceScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BFF82B92721D9A500F16F84 /* GameMarketplaceScene.swift */; };
 		48096D2E271A144C00AB22AD /* CKRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48096D2D271A144C00AB22AD /* CKRepository.swift */; };
 		4850FF542718CB3B00C8CE97 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4850FF532718CB3B00C8CE97 /* CloudKit.framework */; };
 		487A19F02715504000723065 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 487A19EF2715504000723065 /* AppDelegate.swift */; };
@@ -36,6 +39,9 @@
 		2B9C3145271F4BC3008A7676 /* GameHud.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameHud.swift; sourceTree = "<group>"; };
 		2B9C3147271F4C1B008A7676 /* Idle-Factory-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "Idle-Factory-Info.plist"; sourceTree = SOURCE_ROOT; };
 		2B9C314A271F50DD008A7676 /* Austral-Slab_Blur-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Austral-Slab_Blur-Regular.otf"; sourceTree = "<group>"; };
+		2BFF82B52721D96100F16F84 /* GameInventoryScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameInventoryScene.swift; sourceTree = "<group>"; };
+		2BFF82B72721D98400F16F84 /* GameChallengeScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameChallengeScene.swift; sourceTree = "<group>"; };
+		2BFF82B92721D9A500F16F84 /* GameMarketplaceScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameMarketplaceScene.swift; sourceTree = "<group>"; };
 		48096D2D271A144C00AB22AD /* CKRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CKRepository.swift; sourceTree = "<group>"; };
 		4850FF512718CB3800C8CE97 /* Idle Factory.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Idle Factory.entitlements"; sourceTree = "<group>"; };
 		4850FF532718CB3B00C8CE97 /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
@@ -76,6 +82,33 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2B0D6D5027231F4100F7390E /* HUD Actions */ = {
+			isa = PBXGroup;
+			children = (
+				2BFF82B52721D96100F16F84 /* GameInventoryScene.swift */,
+				2BFF82B72721D98400F16F84 /* GameChallengeScene.swift */,
+				2BFF82B92721D9A500F16F84 /* GameMarketplaceScene.swift */,
+			);
+			path = "HUD Actions";
+			sourceTree = "<group>";
+		};
+		2B0D6D5127231F6500F7390E /* HUD */ = {
+			isa = PBXGroup;
+			children = (
+				2B9C3145271F4BC3008A7676 /* GameHud.swift */,
+				2B0D6D5027231F4100F7390E /* HUD Actions */,
+			);
+			path = HUD;
+			sourceTree = "<group>";
+		};
+		2B0F084127249BF2009F024C /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				2B9C314A271F50DD008A7676 /* Austral-Slab_Blur-Regular.otf */,
+			);
+			path = Fonts;
+			sourceTree = "<group>";
+		};
 		4850FF522718CB3B00C8CE97 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -114,8 +147,8 @@
 				487A19FC2715504300723065 /* Assets.xcassets */,
 				487A19FE2715504300723065 /* LaunchScreen.storyboard */,
 				487A1A062715516900723065 /* Camera.swift */,
-				2B9C3145271F4BC3008A7676 /* GameHud.swift */,
-				2B9C314A271F50DD008A7676 /* Austral-Slab_Blur-Regular.otf */,
+				2B0D6D5127231F6500F7390E /* HUD */,
+				2B0F084127249BF2009F024C /* Fonts */,
 				487A1A0E271552C700723065 /* Base */,
 				553E7F73272099DB00165C8E /* GameSave.swift */,
 				48A65970271F5F470021CD52 /* Localizable.strings */,
@@ -222,11 +255,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2BFF82B62721D96100F16F84 /* GameInventoryScene.swift in Sources */,
 				5567745C271A09A7006BA5C0 /* Factory.swift in Sources */,
 				48096D2E271A144C00AB22AD /* CKRepository.swift in Sources */,
 				553E7F74272099DB00165C8E /* GameSave.swift in Sources */,
 				55BBAC17271F404A00A86A47 /* UIImageViewExtension.swift in Sources */,
+				2BFF82B82721D98400F16F84 /* GameChallengeScene.swift in Sources */,
 				487A1A0B2715520D00723065 /* Upgradable.swift in Sources */,
+				2BFF82BA2721D9A500F16F84 /* GameMarketplaceScene.swift in Sources */,
 				48A6596B271E07A70021CD52 /* Resource.swift in Sources */,
 				55BBAC16271F404A00A86A47 /* GIFPlayerView.swift in Sources */,
 				55439BC72721F23D00F69461 /* DateApi.swift in Sources */,
