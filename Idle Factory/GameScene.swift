@@ -167,8 +167,8 @@ class GameScene: SKScene {
         let mainCurrencyIcon = gameHud.createMainCurrencyIcon()
         let mainCurrencyData = gameHud.createMainCurrencyLabel()
         let premiumCurrencyIcon = gameHud.createPremiumCurrencyIcon()
-        let premiumCurrencyData = gameHud.createPremiumCurrency()
-        let generatorResource = gameHud.createGenerateResource()
+        let premiumCurrencyData = gameHud.createPremiumCurrencyLabel()
+        let generatorResource = gameHud.createGenerateResourceLabel()
         
         // Check if device height (it turns the width when device is on horizontal) is equals to 926 to fix position (iPhone 12 and 13 Pro MAX versions). This condition only exists to fix the premium currency component position on PRO MAX devices.
         let positionX = GameScene.deviceScreenWidth == 926 ? (-((GameScene.deviceScreenWidth) / 2) + 230) : (-((GameScene.deviceScreenWidth) / 2) + 215)

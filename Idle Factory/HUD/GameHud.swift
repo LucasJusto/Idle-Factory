@@ -90,7 +90,7 @@ class GameHud {
     /**
      Create premium currency label to display on the scene.
      */
-    func createPremiumCurrency() -> SKLabelNode{
+    func createPremiumCurrencyLabel() -> SKLabelNode{
         premiumCurrencyValue.name = "PremiumCurrency"
         premiumCurrencyValue.fontName = "AustralSlabBlur-Regular"
         premiumCurrencyValue.text = "\(doubleToString(value:GameScene.user?.premiumCurrency ?? 0.0))"
@@ -104,7 +104,7 @@ class GameHud {
     /**
      Create generator resource label to display on the scene.
      */
-    func createGenerateResource() -> SKLabelNode{
+    func createGenerateResourceLabel() -> SKLabelNode{
         generatingResourceValue.name = "GeneratingResource"
         generatingResourceValue.fontName = "AustralSlabBlur-Regular"
         generatingResourceValue.text = ""
