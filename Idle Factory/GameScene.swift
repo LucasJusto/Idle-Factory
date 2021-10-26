@@ -74,7 +74,7 @@ class GameScene: SKScene {
         createTopHud()
         createSidebarHud()
         for n in 0..<(GameScene.user?.generators.count ?? 0){
-            addFactory(factory: (GameScene.user?.generators[n])!)
+            addFactory(factory: (GameScene.user?.generators[n])!, id: n)
         }
         
         camera = cameraNode
@@ -94,19 +94,39 @@ class GameScene: SKScene {
                 displayInventory()
                 //self.removeAllChildren()
             }
-            if(touchedNode.name == "MarketplaceButton") {
+            else if(touchedNode.name == "MarketplaceButton") {
                 displayMarketplace()
                 //self.removeAllChildren()
             }
-            if touchedNode.name == "ChallengeButton" {
+            else if touchedNode.name == "ChallengeButton" {
                 displayChallenge()
             }
             
-            if touchedNode.name == "factory" {
+            else if touchedNode.name == "factory0" {
                 displayUpgradeFactory()
             }
             
-            if (
+            else if touchedNode.name == "factory1" {
+                displayUpgradeFactory()
+            }
+            
+            else if touchedNode.name == "factory2" {
+                displayUpgradeFactory()
+            }
+            
+            else if touchedNode.name == "factory3" {
+                displayUpgradeFactory()
+            }
+            
+            else if touchedNode.name == "factory4" {
+                displayUpgradeFactory()
+            }
+            
+            else if touchedNode.name == "factory5" {
+                displayUpgradeFactory()
+            }
+            
+            else if (
                 touchedNode.name == "CloseInventoryScene" ||
                 touchedNode.name == "CloseMarketplaceScene" ||
                 touchedNode.name == "CloseChallengeScene"
@@ -222,10 +242,10 @@ class GameScene: SKScene {
     /**
      Add a factory on the scene. Receives a position which represents what slot player wants to add the new factory.
      */
-    func addFactory(factory: Factory) {
+    func addFactory(factory: Factory, id: Int) {
         
         factory.node.anchorPoint = CGPoint(x: 0.5, y: 0)
-        factory.node.name = "factory"
+        factory.node.name = "factory\(id)"
         
         switch factory.position {
         case .first:
