@@ -1,16 +1,22 @@
 //
-//  GameChallengeScene.swift
+//  GameChallengeSceneController.swift
 //  Idle Factory
 //
 //  Created by Rodrigo Yukio Okido on 21/10/21.
 //
 
+import UIKit
 import SpriteKit
 
-class GameChallengeScene: SKScene {
+class GameChallengeSceneController: UIViewController {
     
     // MARK: - Challenge Scene display components
     private(set) var sceneBackground: SKShapeNode = SKShapeNode()
+    
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+    }
     
     
     /**

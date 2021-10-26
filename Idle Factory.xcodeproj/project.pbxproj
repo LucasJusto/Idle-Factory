@@ -10,9 +10,13 @@
 		2B9C3146271F4BC3008A7676 /* GameHud.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B9C3145271F4BC3008A7676 /* GameHud.swift */; };
 		2B9C314B271F50DD008A7676 /* Austral-Slab_Blur-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 2B9C314A271F50DD008A7676 /* Austral-Slab_Blur-Regular.otf */; };
 		2BD3FBEF27285ED200B4B4E6 /* GameInventoryScene.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2BD3FBEE27285ED200B4B4E6 /* GameInventoryScene.storyboard */; };
-		2BFF82B62721D96100F16F84 /* GameInventoryScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BFF82B52721D96100F16F84 /* GameInventoryScene.swift */; };
-		2BFF82B82721D98400F16F84 /* GameChallengeScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BFF82B72721D98400F16F84 /* GameChallengeScene.swift */; };
-		2BFF82BA2721D9A500F16F84 /* GameMarketplaceScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BFF82B92721D9A500F16F84 /* GameMarketplaceScene.swift */; };
+		2BD3FBF32728777400B4B4E6 /* GameChallengeScene.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2BD3FBF22728777400B4B4E6 /* GameChallengeScene.storyboard */; };
+		2BD3FBF52728778500B4B4E6 /* GameMarketplaceScene.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2BD3FBF42728778500B4B4E6 /* GameMarketplaceScene.storyboard */; };
+		2BD3FBF727287CBE00B4B4E6 /* UpgradeFactoryScene.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2BD3FBF627287CBE00B4B4E6 /* UpgradeFactoryScene.storyboard */; };
+		2BD3FBF927287D1300B4B4E6 /* UpgradeFactorySceneController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BD3FBF827287D1300B4B4E6 /* UpgradeFactorySceneController.swift */; };
+		2BFF82B62721D96100F16F84 /* GameInventorySceneController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BFF82B52721D96100F16F84 /* GameInventorySceneController.swift */; };
+		2BFF82B82721D98400F16F84 /* GameChallengeSceneController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BFF82B72721D98400F16F84 /* GameChallengeSceneController.swift */; };
+		2BFF82BA2721D9A500F16F84 /* GameMarketplaceSceneController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BFF82B92721D9A500F16F84 /* GameMarketplaceSceneController.swift */; };
 		48096D2E271A144C00AB22AD /* CKRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48096D2D271A144C00AB22AD /* CKRepository.swift */; };
 		4850FF542718CB3B00C8CE97 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4850FF532718CB3B00C8CE97 /* CloudKit.framework */; };
 		487A19F02715504000723065 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 487A19EF2715504000723065 /* AppDelegate.swift */; };
@@ -41,9 +45,13 @@
 		2B9C3147271F4C1B008A7676 /* Idle-Factory-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "Idle-Factory-Info.plist"; sourceTree = SOURCE_ROOT; };
 		2B9C314A271F50DD008A7676 /* Austral-Slab_Blur-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Austral-Slab_Blur-Regular.otf"; sourceTree = "<group>"; };
 		2BD3FBEE27285ED200B4B4E6 /* GameInventoryScene.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = GameInventoryScene.storyboard; sourceTree = "<group>"; };
-		2BFF82B52721D96100F16F84 /* GameInventoryScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameInventoryScene.swift; sourceTree = "<group>"; };
-		2BFF82B72721D98400F16F84 /* GameChallengeScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameChallengeScene.swift; sourceTree = "<group>"; };
-		2BFF82B92721D9A500F16F84 /* GameMarketplaceScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameMarketplaceScene.swift; sourceTree = "<group>"; };
+		2BD3FBF22728777400B4B4E6 /* GameChallengeScene.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = GameChallengeScene.storyboard; sourceTree = "<group>"; };
+		2BD3FBF42728778500B4B4E6 /* GameMarketplaceScene.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = GameMarketplaceScene.storyboard; sourceTree = "<group>"; };
+		2BD3FBF627287CBE00B4B4E6 /* UpgradeFactoryScene.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = UpgradeFactoryScene.storyboard; sourceTree = "<group>"; };
+		2BD3FBF827287D1300B4B4E6 /* UpgradeFactorySceneController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpgradeFactorySceneController.swift; sourceTree = "<group>"; };
+		2BFF82B52721D96100F16F84 /* GameInventorySceneController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameInventorySceneController.swift; sourceTree = "<group>"; };
+		2BFF82B72721D98400F16F84 /* GameChallengeSceneController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameChallengeSceneController.swift; sourceTree = "<group>"; };
+		2BFF82B92721D9A500F16F84 /* GameMarketplaceSceneController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameMarketplaceSceneController.swift; sourceTree = "<group>"; };
 		48096D2D271A144C00AB22AD /* CKRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CKRepository.swift; sourceTree = "<group>"; };
 		4850FF512718CB3800C8CE97 /* Idle Factory.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Idle Factory.entitlements"; sourceTree = "<group>"; };
 		4850FF532718CB3B00C8CE97 /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
@@ -88,8 +96,8 @@
 			isa = PBXGroup;
 			children = (
 				2BD3FBED27285EB200B4B4E6 /* GameInventoryScene */,
-				2BFF82B72721D98400F16F84 /* GameChallengeScene.swift */,
-				2BFF82B92721D9A500F16F84 /* GameMarketplaceScene.swift */,
+				2BD3FBF02728770000B4B4E6 /* GameChallengeScene */,
+				2BD3FBF12728770B00B4B4E6 /* GameMarketplaceScene */,
 			);
 			path = "HUD Actions";
 			sourceTree = "<group>";
@@ -114,10 +122,28 @@
 		2BD3FBED27285EB200B4B4E6 /* GameInventoryScene */ = {
 			isa = PBXGroup;
 			children = (
-				2BFF82B52721D96100F16F84 /* GameInventoryScene.swift */,
+				2BFF82B52721D96100F16F84 /* GameInventorySceneController.swift */,
 				2BD3FBEE27285ED200B4B4E6 /* GameInventoryScene.storyboard */,
 			);
 			path = GameInventoryScene;
+			sourceTree = "<group>";
+		};
+		2BD3FBF02728770000B4B4E6 /* GameChallengeScene */ = {
+			isa = PBXGroup;
+			children = (
+				2BFF82B72721D98400F16F84 /* GameChallengeSceneController.swift */,
+				2BD3FBF22728777400B4B4E6 /* GameChallengeScene.storyboard */,
+			);
+			path = GameChallengeScene;
+			sourceTree = "<group>";
+		};
+		2BD3FBF12728770B00B4B4E6 /* GameMarketplaceScene */ = {
+			isa = PBXGroup;
+			children = (
+				2BFF82B92721D9A500F16F84 /* GameMarketplaceSceneController.swift */,
+				2BD3FBF42728778500B4B4E6 /* GameMarketplaceScene.storyboard */,
+			);
+			path = GameMarketplaceScene;
 			sourceTree = "<group>";
 		};
 		4850FF522718CB3B00C8CE97 /* Frameworks */ = {
@@ -164,6 +190,8 @@
 				553E7F73272099DB00165C8E /* GameSave.swift */,
 				48A65970271F5F470021CD52 /* Localizable.strings */,
 				55439BC62721F23D00F69461 /* DateApi.swift */,
+				2BD3FBF627287CBE00B4B4E6 /* UpgradeFactoryScene.storyboard */,
+				2BD3FBF827287D1300B4B4E6 /* UpgradeFactorySceneController.swift */,
 			);
 			path = "Idle Factory";
 			sourceTree = "<group>";
@@ -252,11 +280,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				487A19FB2715504000723065 /* Main.storyboard in Resources */,
+				2BD3FBF32728777400B4B4E6 /* GameChallengeScene.storyboard in Resources */,
 				48A6596E271F5F470021CD52 /* Localizable.strings in Resources */,
 				487A19FD2715504300723065 /* Assets.xcassets in Resources */,
 				487A1A002715504300723065 /* LaunchScreen.storyboard in Resources */,
 				2BD3FBEF27285ED200B4B4E6 /* GameInventoryScene.storyboard in Resources */,
 				2B9C314B271F50DD008A7676 /* Austral-Slab_Blur-Regular.otf in Resources */,
+				2BD3FBF727287CBE00B4B4E6 /* UpgradeFactoryScene.storyboard in Resources */,
+				2BD3FBF52728778500B4B4E6 /* GameMarketplaceScene.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -267,17 +298,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2BFF82B62721D96100F16F84 /* GameInventoryScene.swift in Sources */,
+				2BFF82B62721D96100F16F84 /* GameInventorySceneController.swift in Sources */,
 				5567745C271A09A7006BA5C0 /* Factory.swift in Sources */,
 				48096D2E271A144C00AB22AD /* CKRepository.swift in Sources */,
 				553E7F74272099DB00165C8E /* GameSave.swift in Sources */,
 				55BBAC17271F404A00A86A47 /* UIImageViewExtension.swift in Sources */,
-				2BFF82B82721D98400F16F84 /* GameChallengeScene.swift in Sources */,
+				2BFF82B82721D98400F16F84 /* GameChallengeSceneController.swift in Sources */,
 				487A1A0B2715520D00723065 /* Upgradable.swift in Sources */,
-				2BFF82BA2721D9A500F16F84 /* GameMarketplaceScene.swift in Sources */,
+				2BFF82BA2721D9A500F16F84 /* GameMarketplaceSceneController.swift in Sources */,
 				48A6596B271E07A70021CD52 /* Resource.swift in Sources */,
 				55BBAC16271F404A00A86A47 /* GIFPlayerView.swift in Sources */,
 				55439BC72721F23D00F69461 /* DateApi.swift in Sources */,
+				2BD3FBF927287D1300B4B4E6 /* UpgradeFactorySceneController.swift in Sources */,
 				55BBAC15271F404A00A86A47 /* UIImageExtension.swift in Sources */,
 				487A1A072715516900723065 /* Camera.swift in Sources */,
 				487A19F62715504000723065 /* GameScene.swift in Sources */,

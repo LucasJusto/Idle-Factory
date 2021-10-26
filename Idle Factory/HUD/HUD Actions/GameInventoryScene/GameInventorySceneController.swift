@@ -1,16 +1,22 @@
 //
-//  GameMarketplaceScene.swift
+//  GameInventorySceneController.swift
 //  Idle Factory
 //
 //  Created by Rodrigo Yukio Okido on 21/10/21.
 //
 
+import UIKit
 import SpriteKit
 
-class GameMarketplaceScene: SKScene {
+class GameInventorySceneController: UIViewController {
     
-    // MARK: - Marketplace Scene display components
+    // MARK: - Player Inventory Scene display components
     private(set) var sceneBackground: SKShapeNode = SKShapeNode()
+    
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+    }
     
     
     /**
@@ -29,8 +35,10 @@ class GameMarketplaceScene: SKScene {
      */
     func createCloseButton() -> SKSpriteNode {
         let closeAction = SKSpriteNode(color: .white, size: CGSize(width: 90, height: 90))
-        closeAction.name = "CloseMarketplaceScene"
+        closeAction.name = "CloseInventoryScene"
         closeAction.zPosition = 11
         return closeAction
     }
+    
+    
 }

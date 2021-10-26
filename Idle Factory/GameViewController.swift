@@ -5,7 +5,6 @@ import GameplayKit
 class GameViewController: UIViewController {
     
     @IBOutlet weak var gifView: UIImageView!
-    
     @IBOutlet weak var backgroundLoadingView: UIImageView!
     
     static var notFirstTime: Bool = false
@@ -93,21 +92,49 @@ class GameViewController: UIViewController {
         return true
     }
     
+    
+    func displayUpgradeFactory() {
+        var mainView: UIStoryboard!
+        mainView = UIStoryboard(name: "UpgradeFactoryScene", bundle: nil)
+        let viewcontroller : UIViewController = mainView.instantiateViewController(withIdentifier: "UpgradeFactoryStoryboard") as UIViewController
+            self.view.window!.rootViewController = viewcontroller
+    }
+    
+    
+    // MARK: - HUD ACTION SCENES
+    /**
+     Calls GameInventory storyboard to display the actual players inventory.
+     */
     func displayInventory() {
         
-//        var mainView: UIStoryboard!
-//        mainView = UIStoryboard(name: "Main", bundle: nil)
-//        let viewcontroller : UIViewController = mainView.instantiateViewController(withIdentifier: "Inventory") as UIViewController
-//            self.view.window!.rootViewController = viewcontroller
-//        }
-        
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-                let secondVC = storyboard.instantiateViewController(identifier: "SecondViewController")
-
-                show(secondVC, sender: self)
-//        let viewController:UIViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "Inventory") as UIViewController
-//        // .instantiatViewControllerWithIdentifier() returns AnyObject! this must be downcast to utilize it
-//
-//        self.present(viewController, animated: false, completion: nil)
+        var mainView: UIStoryboard!
+        mainView = UIStoryboard(name: "GameInventoryScene", bundle: nil)
+        let viewcontroller : UIViewController = mainView.instantiateViewController(withIdentifier: "InventoryStoryboard") as UIViewController
+            self.view.window!.rootViewController = viewcontroller
     }
+    
+    
+    /**
+     Calls GameMarkeplace storyboard to display the game Marketplace.
+     */
+    func displayMarketplace() {
+        
+        var mainView: UIStoryboard!
+        mainView = UIStoryboard(name: "GameMarketplaceScene", bundle: nil)
+        let viewcontroller : UIViewController = mainView.instantiateViewController(withIdentifier: "MarketplaceStoryboard") as UIViewController
+            self.view.window!.rootViewController = viewcontroller
+    }
+    
+    
+    /**
+     Calls GameChallenge storyboard to display the Challenges.
+     */
+    func displayChallenge() {
+        
+        var mainView: UIStoryboard!
+        mainView = UIStoryboard(name: "GameChallengeScene", bundle: nil)
+        let viewcontroller : UIViewController = mainView.instantiateViewController(withIdentifier: "ChallengeStoryboard") as UIViewController
+            self.view.window!.rootViewController = viewcontroller
+    }
+    
 }
