@@ -17,16 +17,7 @@ class GameScene: SKScene {
     private(set) static var deviceScreenHeight = UIScreen.main.bounds.height
     
     
-    // MARK: - FACTORY POSITIONS
-    private(set) var factoriesPositions: [(x: CGFloat, y: CGFloat)] =
-    [
-        (x: -417.78, y: -68.25),
-        (x: -114.40, y: 110),
-        (x: -117.40, y: -235),
-        (x: 184.78, y: -68.25),
-        (x: 181.78, y: -410),
-        (x: 480.70, y: -235)
-    ]
+
     
     // MARK: - GAME HUD & HUD SCENE ACTIONS
     private var gameHud: GameHud = GameHud()
@@ -74,8 +65,6 @@ class GameScene: SKScene {
         
         return cameraNode
     }()
-    
-    
     // MARK: - INIT
     override func didMove(to view: SKView) {
         
@@ -84,18 +73,12 @@ class GameScene: SKScene {
         createBackground()
         createTopHud()
         createSidebarHud()
-        addFactory(position: .first)
-        addFactory(position: .second)
-        addFactory(position: .third)
-        addFactory(position: .fourth)
-        addFactory(position: .fifth)
-        addFactory(position: .sixth)
+        for n in 0..<(GameScene.user?.generators.count ?? 0){
+            addFactory(factory: (GameScene.user?.generators[n])!)
+        }
         
         camera = cameraNode
         addChild(cameraNode)
-        
-        
-//        CKRepository.storeNewGenerator(userID: GameScene.user?.id ?? "", generator: Factory(resourcesArray: [Resource( basePrice: 2, baseQtt: 2, currentLevel: 1, qttPLevel: 2, type: ResourceType.computador, pricePLevelIncreaseTax: 1)], energy: 3, type: FactoryType.Basic, texture: "", position: GeneratorPositions.first, isActive: IsActive.yes), completion: {_,_ in })
         
         startIncrement()
         
@@ -221,37 +204,49 @@ class GameScene: SKScene {
     }
     
     
+    // MARK: - FACTORY POSITIONS
+    private(set) var factoriesPositions: [(x: CGFloat, y: CGFloat)] =
+    [
+        (x: -417.78, y: -68.25),
+        (x: -114.40, y: 110),
+        (x: -117.40, y: -235),
+        (x: 184.78, y: -68.25),
+        (x: 181.78, y: -410),
+        (x: 480.70, y: -235)
+    ]
     // MARK: - GENERATORS FUNCTIONS
     /**
      Add a factory on the scene. Receives a position which represents what slot player wants to add the new factory.
      */
-    func addFactory(position: GeneratorPositions) {
-        let factory = createFactory()
+    func addFactory(factory: Factory) {
         
-        switch position {
+        factory.node.anchorPoint = CGPoint(x: 0.5, y: 0)
+        factory.node.name = "factory"
+        
+        switch factory.position {
         case .first:
-            factory.position = CGPoint(x: factoriesPositions[0].x, y: factoriesPositions[0].y)
-            factory.zPosition = 2
+            factory.node.position = CGPoint(x: factoriesPositions[0].x, y: factoriesPositions[0].y)
+            factory.node.zPosition = 2
         case .second:
-            factory.position = CGPoint(x: factoriesPositions[1].x, y: factoriesPositions[1].y)
-            factory.zPosition = 1
+            factory.node.position = CGPoint(x: factoriesPositions[1].x, y: factoriesPositions[1].y)
+            factory.node.zPosition = 2
         case .third:
-            factory.position = CGPoint(x: factoriesPositions[2].x, y: factoriesPositions[2].y)
-            factory.zPosition = 2
+            factory.node.position = CGPoint(x: factoriesPositions[2].x, y: factoriesPositions[2].y)
+            factory.node.zPosition = 2
         case .fourth:
-            factory.position = CGPoint(x: factoriesPositions[3].x, y: factoriesPositions[3].y)
-            factory.zPosition = 1
+            factory.node.position = CGPoint(x: factoriesPositions[3].x, y: factoriesPositions[3].y)
+            factory.node.zPosition = 1
         case .fifth:
-            factory.position = CGPoint(x: factoriesPositions[4].x, y: factoriesPositions[4].y)
-            factory.zPosition = 2
+            factory.node.position = CGPoint(x: factoriesPositions[4].x, y: factoriesPositions[4].y)
+            factory.node.zPosition = 2
         case .sixth:
-            factory.position = CGPoint(x: factoriesPositions[5].x, y: factoriesPositions[5].y)
-            factory.zPosition = 1
+            factory.node.position = CGPoint(x: factoriesPositions[5].x, y: factoriesPositions[5].y)
+            factory.node.zPosition = 1
         case .none:
             let _ = 0
         }
         
-        background.addChild(factory)
+        background.addChild(factory.node)
     }
     
     
