@@ -23,9 +23,9 @@ class GameScene: SKScene {
     private var gameHud: GameHud = GameHud()
     private var actionShapeNode: SKShapeNode = SKShapeNode()
     
-    private(set) var gameInventoryScene: GameInventoryScene = GameInventoryScene()
-    private(set) var gameMarketplaceScene: GameMarketplaceScene = GameMarketplaceScene()
-    private(set) var gameChallengeScene: GameChallengeScene = GameChallengeScene()
+    private(set) var gameInventoryScene: GameInventorySceneController = GameInventorySceneController()
+    private(set) var gameMarketplaceScene: GameMarketplaceSceneController = GameMarketplaceSceneController()
+    private(set) var gameChallengeScene: GameChallengeSceneController = GameChallengeSceneController()
     
     
     // MARK: - perSecIncrement
@@ -74,7 +74,7 @@ class GameScene: SKScene {
         createTopHud()
         createSidebarHud()
         for n in 0..<(GameScene.user?.generators.count ?? 0){
-            addFactory(factory: (GameScene.user?.generators[n])!)
+            addFactory(factory: (GameScene.user?.generators[n])!, id: n)
         }
         
         camera = cameraNode
@@ -94,15 +94,39 @@ class GameScene: SKScene {
                 displayInventory()
                 //self.removeAllChildren()
             }
-            if(touchedNode.name == "MarketplaceButton") {
+            else if(touchedNode.name == "MarketplaceButton") {
                 displayMarketplace()
                 //self.removeAllChildren()
             }
-            if touchedNode.name == "ChallengeButton" {
+            else if touchedNode.name == "ChallengeButton" {
                 displayChallenge()
             }
             
-            if (
+            else if touchedNode.name == "factory0" {
+                displayUpgradeFactory()
+            }
+            
+            else if touchedNode.name == "factory1" {
+                displayUpgradeFactory()
+            }
+            
+            else if touchedNode.name == "factory2" {
+                displayUpgradeFactory()
+            }
+            
+            else if touchedNode.name == "factory3" {
+                displayUpgradeFactory()
+            }
+            
+            else if touchedNode.name == "factory4" {
+                displayUpgradeFactory()
+            }
+            
+            else if touchedNode.name == "factory5" {
+                displayUpgradeFactory()
+            }
+            
+            else if (
                 touchedNode.name == "CloseInventoryScene" ||
                 touchedNode.name == "CloseMarketplaceScene" ||
                 touchedNode.name == "CloseChallengeScene"
@@ -218,10 +242,10 @@ class GameScene: SKScene {
     /**
      Add a factory on the scene. Receives a position which represents what slot player wants to add the new factory.
      */
-    func addFactory(factory: Factory) {
+    func addFactory(factory: Factory, id: Int) {
         
         factory.node.anchorPoint = CGPoint(x: 0.5, y: 0)
-        factory.node.name = "factory"
+        factory.node.name = "factory\(id)"
         
         switch factory.position {
         case .first:
@@ -250,6 +274,12 @@ class GameScene: SKScene {
     }
     
     
+    func displayUpgradeFactory() {
+        let viewController = UIApplication.shared.windows.first!.rootViewController as! GameViewController
+        viewController.displayUpgradeFactory()
+    }
+    
+    
     /**
      Create factory.
      */
@@ -268,15 +298,17 @@ class GameScene: SKScene {
      */
     func displayInventory() {
         
-        let inventoryScene = gameInventoryScene.createBackground()
-        let closeAction = gameInventoryScene.createCloseButton()
-        actionShapeNode = inventoryScene
-        
-        inventoryScene.position = CGPoint(x: -(GameScene.deviceScreenWidth) / 2, y: -(GameScene.deviceScreenHeight) / 2)
-        closeAction.position = CGPoint(x: (GameScene.deviceScreenWidth) / 2, y: (GameScene.deviceScreenHeight) / 2)
-
-        cameraNode.addChild(actionShapeNode)
-        inventoryScene.addChild(closeAction)
+        let viewController = UIApplication.shared.windows.first!.rootViewController as! GameViewController
+        viewController.displayInventory()
+//        let inventoryScene = gameInventoryScene.createBackground()
+//        let closeAction = gameInventoryScene.createCloseButton()
+//        actionShapeNode = inventoryScene
+//
+//        inventoryScene.position = CGPoint(x: -(GameScene.deviceScreenWidth) / 2, y: -(GameScene.deviceScreenHeight) / 2)
+//        closeAction.position = CGPoint(x: (GameScene.deviceScreenWidth) / 2, y: (GameScene.deviceScreenHeight) / 2)
+//
+//        cameraNode.addChild(actionShapeNode)
+//        inventoryScene.addChild(closeAction)
     }
     
     
@@ -285,15 +317,18 @@ class GameScene: SKScene {
      */
     func displayMarketplace() {
         
-        let marketplaceScene = gameMarketplaceScene.createBackground()
-        let closeAction = gameMarketplaceScene.createCloseButton()
-        actionShapeNode = marketplaceScene
+        let viewController = UIApplication.shared.windows.first!.rootViewController as! GameViewController
+        viewController.displayMarketplace()
         
-        marketplaceScene.position = CGPoint(x: -(GameScene.deviceScreenWidth) / 2, y: -(GameScene.deviceScreenHeight) / 2)
-        closeAction.position = CGPoint(x: (GameScene.deviceScreenWidth) / 2, y: (GameScene.deviceScreenHeight) / 2)
-
-        cameraNode.addChild(actionShapeNode)
-        marketplaceScene.addChild(closeAction)
+//        let marketplaceScene = gameMarketplaceScene.createBackground()
+//        let closeAction = gameMarketplaceScene.createCloseButton()
+//        actionShapeNode = marketplaceScene
+//
+//        marketplaceScene.position = CGPoint(x: -(GameScene.deviceScreenWidth) / 2, y: -(GameScene.deviceScreenHeight) / 2)
+//        closeAction.position = CGPoint(x: (GameScene.deviceScreenWidth) / 2, y: (GameScene.deviceScreenHeight) / 2)
+//
+//        cameraNode.addChild(actionShapeNode)
+//        marketplaceScene.addChild(closeAction)
     }
     
     
@@ -301,16 +336,19 @@ class GameScene: SKScene {
      Display challenge.
      */
     func displayChallenge() {
+       
+        let viewController = UIApplication.shared.windows.first!.rootViewController as! GameViewController
+        viewController.displayChallenge()
         
-        let challengeScene = gameChallengeScene.createBackground()
-        let closeAction = gameChallengeScene.createCloseButton()
-        
-        actionShapeNode = challengeScene
-        challengeScene.position = CGPoint(x: -(GameScene.deviceScreenWidth) / 2, y: -(GameScene.deviceScreenHeight) / 2)
-        closeAction.position = CGPoint(x: (GameScene.deviceScreenWidth) / 2, y: (GameScene.deviceScreenHeight) / 2)
-
-        cameraNode.addChild(actionShapeNode)
-        challengeScene.addChild(closeAction)
+//        let challengeScene = gameChallengeScene.createBackground()
+//        let closeAction = gameChallengeScene.createCloseButton()
+//
+//        actionShapeNode = challengeScene
+//        challengeScene.position = CGPoint(x: -(GameScene.deviceScreenWidth) / 2, y: -(GameScene.deviceScreenHeight) / 2)
+//        closeAction.position = CGPoint(x: (GameScene.deviceScreenWidth) / 2, y: (GameScene.deviceScreenHeight) / 2)
+//
+//        cameraNode.addChild(actionShapeNode)
+//        challengeScene.addChild(closeAction)
     }
     
     

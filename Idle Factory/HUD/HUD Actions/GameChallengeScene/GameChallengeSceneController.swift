@@ -1,23 +1,30 @@
 //
-//  GameInventory.swift
+//  GameChallengeSceneController.swift
 //  Idle Factory
 //
 //  Created by Rodrigo Yukio Okido on 21/10/21.
 //
 
+import UIKit
 import SpriteKit
 
-class GameInventoryScene: SKScene {
+class GameChallengeSceneController: UIViewController {
     
-    // MARK: - Player Inventory Scene display components
+    // MARK: - Challenge Scene display components
     private(set) var sceneBackground: SKShapeNode = SKShapeNode()
+    
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+    }
     
     
     /**
      Create the scene background.
      */
     func createBackground() -> SKShapeNode {
-        sceneBackground = SKShapeNode(rect: CGRect(x: 0, y: 0, width: (GameScene.deviceScreenWidth), height: (GameScene.deviceScreenHeight)))
+        sceneBackground = SKShapeNode(rect: CGRect(x: 0, y: 0, width: (GameScene.deviceScreenWidth
+), height: (GameScene.deviceScreenHeight)))
         sceneBackground.fillColor = UIColor(named: "HudActions-background")!
         sceneBackground.zPosition = 10
         return sceneBackground
@@ -29,10 +36,8 @@ class GameInventoryScene: SKScene {
      */
     func createCloseButton() -> SKSpriteNode {
         let closeAction = SKSpriteNode(color: .white, size: CGSize(width: 90, height: 90))
-        closeAction.name = "CloseInventoryScene"
+        closeAction.name = "CloseChallengeScene"
         closeAction.zPosition = 11
         return closeAction
     }
-    
-    
 }
