@@ -5,12 +5,18 @@
 //  Created by Rodrigo Yukio Okido on 21/10/21.
 //
 
+import UIKit
 import SpriteKit
 
-class GameInventoryScene: SKScene {
+class GameInventoryScene: UIViewController {
     
     // MARK: - Player Inventory Scene display components
     private(set) var sceneBackground: SKShapeNode = SKShapeNode()
+    
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+    }
     
     
     /**

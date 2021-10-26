@@ -48,6 +48,14 @@
             </objects>
             <point key="canvasLocation" x="131.91964285714286" y="82.608695652173921"/>
         </scene>
+        <!--GameInventoryScene-->
+        <scene sceneID="oSJ-eL-GUs">
+            <objects>
+                <viewControllerPlaceholder storyboardName="GameInventoryScene" id="1bq-SB-caV" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="B7e-aP-WhA" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="682" y="-197"/>
+        </scene>
     </scenes>
     <resources>
         <image name="fundo00" width="1920" height="1080"/>

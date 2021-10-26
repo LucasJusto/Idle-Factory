@@ -92,4 +92,22 @@ class GameViewController: UIViewController {
     override var prefersStatusBarHidden: Bool {
         return true
     }
+    
+    func displayInventory() {
+        
+//        var mainView: UIStoryboard!
+//        mainView = UIStoryboard(name: "Main", bundle: nil)
+//        let viewcontroller : UIViewController = mainView.instantiateViewController(withIdentifier: "Inventory") as UIViewController
+//            self.view.window!.rootViewController = viewcontroller
+//        }
+        
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                let secondVC = storyboard.instantiateViewController(identifier: "SecondViewController")
+
+                show(secondVC, sender: self)
+//        let viewController:UIViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "Inventory") as UIViewController
+//        // .instantiatViewControllerWithIdentifier() returns AnyObject! this must be downcast to utilize it
+//
+//        self.present(viewController, animated: false, completion: nil)
+    }
 }

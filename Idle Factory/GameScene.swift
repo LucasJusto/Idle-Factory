@@ -273,15 +273,18 @@ class GameScene: SKScene {
      */
     func displayInventory() {
         
-        let inventoryScene = gameInventoryScene.createBackground()
-        let closeAction = gameInventoryScene.createCloseButton()
-        actionShapeNode = inventoryScene
         
-        inventoryScene.position = CGPoint(x: -(GameScene.deviceScreenWidth) / 2, y: -(GameScene.deviceScreenHeight) / 2)
-        closeAction.position = CGPoint(x: (GameScene.deviceScreenWidth) / 2, y: (GameScene.deviceScreenHeight) / 2)
-
-        cameraNode.addChild(actionShapeNode)
-        inventoryScene.addChild(closeAction)
+        let viewController = UIApplication.shared.windows.first!.rootViewController as! GameViewController
+        viewController.displayInventory()
+//        let inventoryScene = gameInventoryScene.createBackground()
+//        let closeAction = gameInventoryScene.createCloseButton()
+//        actionShapeNode = inventoryScene
+//
+//        inventoryScene.position = CGPoint(x: -(GameScene.deviceScreenWidth) / 2, y: -(GameScene.deviceScreenHeight) / 2)
+//        closeAction.position = CGPoint(x: (GameScene.deviceScreenWidth) / 2, y: (GameScene.deviceScreenHeight) / 2)
+//
+//        cameraNode.addChild(actionShapeNode)
+//        inventoryScene.addChild(closeAction)
     }
     
     
