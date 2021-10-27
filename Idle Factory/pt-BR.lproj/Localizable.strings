@@ -16,3 +16,11 @@
 
 //MARK: - ResourceTypes
 "ResourceTypeComputador" = "Computador";
+
+
+// MARK: - INVENTORY
+"InventoryHeader" = "Inventário";
+"PurchaseMoreFactoryButton" = "Comprar mais fábricas";
+"TotalProductionLabel" = "Producão Total:";
+"SellFactoryButton" = "Vender Fábrica";
+"InsertFactoryButton" = "Colocar no Parque";

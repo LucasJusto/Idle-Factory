@@ -110,7 +110,8 @@ class GameViewController: UIViewController {
         var mainView: UIStoryboard!
         mainView = UIStoryboard(name: "GameInventoryScene", bundle: nil)
         let viewcontroller : UIViewController = mainView.instantiateViewController(withIdentifier: "InventoryStoryboard") as UIViewController
-            self.view.window!.rootViewController = viewcontroller
+        self.present(viewcontroller, animated: true)
+//            self.view.window!.rootViewController = viewcontroller
     }
     
     
