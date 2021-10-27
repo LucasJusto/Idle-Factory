@@ -194,6 +194,7 @@
                     </view>
                     <connections>
                         <outlet property="changeFactoryButton" destination="ydD-NB-Z0x" id="2dr-pa-X1g"/>
+                        <outlet property="factoryImage" destination="xZr-9J-9Kx" id="XrB-9C-c1v"/>
                         <outlet property="moveToInventoryButton" destination="6GT-bA-Mgt" id="SyH-d3-eZR"/>
                         <outlet property="tableView" destination="GyE-cM-Qju" id="hM5-Xb-4Ky"/>
                     </connections>

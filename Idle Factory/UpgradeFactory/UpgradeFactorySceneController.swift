@@ -8,6 +8,7 @@
 import UIKit
 
 class UpgradeFactorySceneController: UIViewController,  UITableViewDataSource, UITableViewDelegate {
+    @IBOutlet weak var factoryImage: UIImageView!
     
     @IBOutlet weak var changeFactoryButton: UIButton!
     @IBOutlet weak var moveToInventoryButton: UIButton!
@@ -21,13 +22,14 @@ class UpgradeFactorySceneController: UIViewController,  UITableViewDataSource, U
         tableView.delegate = self
         changeFactoryButton.setTitle(NSLocalizedString("ChangeFactory", comment: ""), for: UIControl.State.normal)
         moveToInventoryButton.setTitle(NSLocalizedString("MoveToInventory", comment: ""), for: UIControl.State.normal)
+        factoryImage.image = UIImage(named: "Coin") // GameScene.user?.generators[generatorID].textureName ??
         
         // Do any additional setup after loading the view.
     }
     
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1;
+        return GameScene.user?.generators[generatorID].resourcesArray.count ?? 1;
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
