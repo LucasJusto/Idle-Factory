@@ -64,6 +64,27 @@ func doubleToString(value: Double) -> String {
     }
 
 
+func createNFTFactory(resourceTypeArray: [ResourceType]) -> Factory? {
+    
+    var resourceArray: [Resource] = []
+   
+    var shuffledArray: [ResourceType] = []
+    
+    for n in 0..<resourceTypeArray.count {
+        shuffledArray.append(resourceTypeArray[n])
+    }
+    shuffledArray.shuffle()
+    
+    
+    let maxInt = min(resourceTypeArray.count+1,4)
+    for n in 0..<Int.random(in: 1..<maxInt) {
+        resourceArray.append(Resource(basePrice: 0, baseQtt: Double.random(in: 1..<15), currentLevel: 1, qttPLevel: Double.random(in: 10..<1500), type: shuffledArray[n], pricePLevelIncreaseTax: Double.random(in: 10..<1500)))
+    }
+    
+    let factory = Factory(id: <#T##String?#>, resourcesArray: <#T##[Resource]#>, energy: <#T##Int#>, type: <#T##FactoryType#>, texture: <#T##String#>, position: <#T##GeneratorPositions#>, isActive: <#T##IsActive#>)
+    return nil
+}
+
 func getTime( completionHandler: @escaping (DateApi?) -> Void){
     let urlString = "https://worldtimeapi.org/api/timezone/Europe/London"
     let url = URL(string: urlString)!
