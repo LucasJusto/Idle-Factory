@@ -21,9 +21,13 @@ class UpgradeFactorySceneController: UIViewController,  UITableViewDataSource, U
         tableView.dataSource = self
         tableView.delegate = self
         changeFactoryButton.setTitle(NSLocalizedString("ChangeFactory", comment: ""), for: UIControl.State.normal)
-        moveToInventoryButton.setTitle(NSLocalizedString("MoveToInventory", comment: ""), for: UIControl.State.normal)
+        //moveToInventoryButton.setTitle(NSLocalizedString("MoveToInventory", comment: ""), for: UIControl.State.normal)
+        changeFactoryButton.titleLabel?.font = UIFont(name: "AustralSlabBlur-Regular", size: 10)
+        moveToInventoryButton.titleLabel?.font = UIFont(name: "AustralSlabBlur-Regular", size: 10)
+        moveToInventoryButton.backgroundColor = UIColor.blue
+        changeFactoryButton.layer.cornerRadius = 10
         factoryImage.image = UIImage(named: "Coin") // GameScene.user?.generators[generatorID].textureName ??
-        
+        self.view.layoutIfNeeded()
         // Do any additional setup after loading the view.
     }
     

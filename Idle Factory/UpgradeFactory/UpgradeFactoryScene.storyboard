@@ -30,16 +30,14 @@
                                     <constraint firstAttribute="height" constant="128" id="s30-09-RUk"/>
                                 </constraints>
                             </imageView>
-                            <stackView opaque="NO" contentMode="scaleToFill" spacing="9" translatesAutoresizingMaskIntoConstraints="NO" id="Tft-Z6-61q">
+                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="9" translatesAutoresizingMaskIntoConstraints="NO" id="Tft-Z6-61q">
                                 <rect key="frame" x="191" y="260" width="160" height="24"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6GT-bA-Mgt">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bOr-wD-CJg">
                                         <rect key="frame" x="0.0" y="0.0" width="75.5" height="24"/>
-                                        <color key="tintColor" name="Inventory_background"/>
                                         <state key="normal" title="Button"/>
-                                        <buttonConfiguration key="configuration" style="filled" title="Button">
+                                        <buttonConfiguration key="configuration" style="plain" title="Button">
                                             <fontDescription key="titleFontDescription" name="AustralSlabBlur-Regular" family="Austral Slab" pointSize="10"/>
-                                            <color key="baseForegroundColor" systemColor="labelColor"/>
                                         </buttonConfiguration>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ydD-NB-Z0x">
@@ -54,6 +52,7 @@
                                 </subviews>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="160" id="FTy-MV-2DS"/>
+                                    <constraint firstAttribute="height" constant="24" id="UPK-1c-nqR"/>
                                 </constraints>
                             </stackView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nHu-41-Guf">
@@ -195,7 +194,7 @@
                     <connections>
                         <outlet property="changeFactoryButton" destination="ydD-NB-Z0x" id="2dr-pa-X1g"/>
                         <outlet property="factoryImage" destination="xZr-9J-9Kx" id="XrB-9C-c1v"/>
-                        <outlet property="moveToInventoryButton" destination="6GT-bA-Mgt" id="SyH-d3-eZR"/>
+                        <outlet property="moveToInventoryButton" destination="bOr-wD-CJg" id="QIh-2X-Qb9"/>
                         <outlet property="tableView" destination="GyE-cM-Qju" id="hM5-Xb-4Ky"/>
                     </connections>
                 </viewController>
