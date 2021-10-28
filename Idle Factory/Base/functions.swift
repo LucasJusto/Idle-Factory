@@ -64,7 +64,7 @@ func doubleToString(value: Double) -> String {
     }
 
 
-func createNFTFactory(resourceTypeArray: [ResourceType]) -> Factory? {
+func createNFTFactory(resourceTypeArray: [ResourceType]) -> Factory {
     
     var resourceArray: [Resource] = []
    
@@ -78,11 +78,11 @@ func createNFTFactory(resourceTypeArray: [ResourceType]) -> Factory? {
     
     let maxInt = min(resourceTypeArray.count+1,4)
     for n in 0..<Int.random(in: 1..<maxInt) {
-        resourceArray.append(Resource(basePrice: 0, baseQtt: Double.random(in: 1..<15), currentLevel: 1, qttPLevel: Double.random(in: 10..<1500), type: shuffledArray[n], pricePLevelIncreaseTax: Double.random(in: 10..<1500)))
+        resourceArray.append(Resource(basePrice: 0, baseQtt: Double.random(in: 5..<15), currentLevel: 1, qttPLevel: Double.random(in: 5..<15), type: shuffledArray[n], pricePLevelIncreaseTax: Double.random(in: 10..<1500)))
     }
     
-    let factory = Factory(id: <#T##String?#>, resourcesArray: <#T##[Resource]#>, energy: <#T##Int#>, type: <#T##FactoryType#>, texture: <#T##String#>, position: <#T##GeneratorPositions#>, isActive: <#T##IsActive#>)
-    return nil
+    let factory = Factory(resourcesArray: resourceArray, energy: Int.random(in: 1..<15), type: FactoryType.NFT, texture: "", position: GeneratorPositions.none, isActive: IsActive.no)
+    return factory
 }
 
 func getTime( completionHandler: @escaping (DateApi?) -> Void){
