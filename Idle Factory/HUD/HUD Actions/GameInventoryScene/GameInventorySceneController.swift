@@ -18,25 +18,29 @@ class GameInventorySceneController: UIViewController {
     
     // MARK: - FACTORY DETAILS OUTLETS
     @IBOutlet weak var factoryInfoView: UIView!
-    @IBOutlet weak var factoryId: UILabel!
+    @IBOutlet weak var factoryImage: UIImageView!
     
     // First Product Generation
     @IBOutlet weak var typeImage1: UIImageView!
     @IBOutlet weak var quantityType1: UILabel!
+    @IBOutlet weak var coinImage1: UIImageView!
     @IBOutlet weak var generatePerSecType1: UILabel!
     
     // Second Product Generation
     @IBOutlet weak var typeImage2: UIImageView!
     @IBOutlet weak var quantityType2: UILabel!
+    @IBOutlet weak var coinImage2: UIImageView!
     @IBOutlet weak var generatePerSecType2: UILabel!
     
     // Third Product Generation
     @IBOutlet weak var typeImage3: UIImageView!
     @IBOutlet weak var quantityType3: UILabel!
+    @IBOutlet weak var coinImage3: UIImageView!
     @IBOutlet weak var generatePerSecType3: UILabel!
     
     // Total Production Info
     @IBOutlet weak var totalProductionLabel: UILabel!
+    @IBOutlet weak var coinImage4: UIImageView!
     @IBOutlet weak var totalProductionPerSec: UILabel!
     @IBOutlet weak var factorySerial_ID: UILabel!
     
@@ -57,6 +61,9 @@ class GameInventorySceneController: UIViewController {
         
         collectionView.dataSource = self
         collectionView.delegate = self
+        collectionView.allowsMultipleSelection = false
+        
+        hideDisplayFactoryInfo(status: true)
         
         // Inventory Header
         inventoryHeader.text = NSLocalizedString("InventoryHeader", comment: "")
@@ -70,11 +77,34 @@ class GameInventorySceneController: UIViewController {
         // Buttons
         sellFactoryButton.layer.cornerRadius = 10
         sellFactoryButton.titleLabel?.text = NSLocalizedString("SellFactoryButton", comment: "")
-        sellFactoryButton.isHidden = true
         insertFactoryButton.layer.cornerRadius = 10
         insertFactoryButton.titleLabel?.text = NSLocalizedString("InsertFactoryButton", comment: "")
-        insertFactoryButton.isHidden = true
+    }
+    
+    func hideDisplayFactoryInfo(status: Bool) {
+        factoryImage.isHidden = status
+        typeImage1.isHidden = status
+        coinImage1.isHidden = status
+        quantityType1.isHidden = status
+        generatePerSecType1.isHidden = status
         
+        typeImage2.isHidden = status
+        quantityType2.isHidden = status
+        coinImage2.isHidden = status
+        generatePerSecType2.isHidden = status
+        
+        typeImage3.isHidden = status
+        quantityType3.isHidden = status
+        coinImage3.isHidden = status
+        generatePerSecType3.isHidden = status
+        factorySerial_ID.isHidden = status
+        
+        totalProductionLabel.isHidden = status
+        coinImage4.isHidden = status
+        totalProductionPerSec.isHidden = status
+        
+        sellFactoryButton.isHidden = status
+        insertFactoryButton.isHidden = status
     }
 
 }
@@ -93,7 +123,7 @@ extension GameInventorySceneController: UICollectionViewDataSource {
         
         if indexPath.row >= generatorsSize {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Self.factoryID, for: indexPath) as! GameInventoryViewCell
-            cell.pullFactoryData(texture: "Basic_Factory_level_1", resources: [])
+            cell.pullFactoryData(texture: "", resources: [])
             cell.configureCell()
 
             return cell
@@ -110,10 +140,25 @@ extension GameInventorySceneController: UICollectionViewDataSource {
     }
 }
 
+
 extension GameInventorySceneController: UICollectionViewDelegateFlowLayout {
+    
+    
+    func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
+        guard let cell = collectionView.cellForItem(at: indexPath) as? GameInventoryViewCell else { return }
+                cell.layer.borderWidth = 0
+                cell.layer.borderColor = UIColor.black.cgColor
+                cell.layer.cornerRadius = 10
+    }
+    
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         print(indexPath.row)
+        
+        guard let cell = collectionView.cellForItem(at: indexPath) as? GameInventoryViewCell else { return }
+                cell.layer.borderWidth = 2
+                cell.layer.borderColor = UIColor.black.cgColor
+                cell.layer.cornerRadius = 10
         
         guard let myFactories = GameScene.user?.generators else {
             return
@@ -122,51 +167,72 @@ extension GameInventorySceneController: UICollectionViewDelegateFlowLayout {
         var resources: [Resource] = []
         if indexPath.row < myFactories.count {
             resources = myFactories[indexPath.row].resourcesArray
-            sellFactoryButton.isHidden = false
-            insertFactoryButton.isHidden = false
-        } else {
-            sellFactoryButton.isHidden = true
-            insertFactoryButton.isHidden = true
         }
         
         switch resources.count {
         case 1:
+            hideDisplayFactoryInfo(status: false)
+            factoryImage.image = UIImage(named: "")
+            typeImage1.image = UIImage(named: "")
+            coinImage1.image = UIImage(named: "Coin")
             quantityType1.text = "\(resources[0].baseQtt) \(resources[0].type)"
-            generatePerSecType1.text = "\(resources[0].perSec)"
-            quantityType2.text = "-"
-            generatePerSecType2.text = "0"
-            quantityType3.text = "-"
-            generatePerSecType3.text = "0"
+            generatePerSecType1.text = doubleToString(value: resources[0].perSec)
+            
+            typeImage2.isHidden = true
+            coinImage2.isHidden = true
+            quantityType2.text = ""
+            generatePerSecType2.text = ""
+            
+            typeImage3.isHidden = true
+            coinImage3.isHidden = true
+            quantityType3.text = ""
+            generatePerSecType3.text = ""
+            
             factorySerial_ID.text = "ID: "
             factorySerial_ID.text!.append(myFactories[indexPath.row].id!)
         case 2:
+            hideDisplayFactoryInfo(status: false)
+            factoryImage.image = UIImage(named: "")
+            typeImage1.image = UIImage(named: "")
+            coinImage1.image = UIImage(named: "Coin")
             quantityType1.text = "\(resources[0].baseQtt) \(resources[0].type)"
-            generatePerSecType1.text = "\(resources[0].perSec)"
+            generatePerSecType1.text = doubleToString(value: resources[0].perSec)
+            
+            typeImage2.image = UIImage(named: "")
+            coinImage2.image = UIImage(named: "Coin")
             quantityType2.text = "\(resources[1].baseQtt) \(resources[1].type)"
-            generatePerSecType2.text = "\(resources[1].perSec)"
-            quantityType3.text = "-"
+            generatePerSecType2.text = doubleToString(value: resources[1].perSec)
+            
+            typeImage3.isHidden = true
+            coinImage3.isHidden = true
+            quantityType3.text = ""
             generatePerSecType3.text = "0"
+            
             factorySerial_ID.text = "ID: "
             factorySerial_ID.text!.append(myFactories[indexPath.row].id!)
 
         case 3:
+            hideDisplayFactoryInfo(status: false)
+            factoryImage.image = UIImage(named: "")
+            typeImage1.image = UIImage(named: "")
+            coinImage1.image = UIImage(named: "Coin")
             quantityType1.text = "\(resources[0].baseQtt) \(resources[0].type)"
-            generatePerSecType1.text = "\(resources[0].perSec)"
+            generatePerSecType1.text = doubleToString(value: resources[0].perSec)
+            
+            typeImage2.image = UIImage(named: "")
+            coinImage2.image = UIImage(named: "Coin")
             quantityType2.text = "\(resources[1].baseQtt) \(resources[1].type)"
-            generatePerSecType2.text = "\(resources[1].perSec)"
+            generatePerSecType2.text = doubleToString(value: resources[1].perSec)
+            
+            typeImage3.image = UIImage(named: "")
+            coinImage3.image = UIImage(named: "Coin")
             quantityType3.text = "\(resources[2].baseQtt) \(resources[2].type)"
-            generatePerSecType3.text = "\(resources[2].perSec)"
+            generatePerSecType3.text = doubleToString(value: resources[2].perSec)
             factorySerial_ID.text = "ID: "
             factorySerial_ID.text!.append(myFactories[indexPath.row].id!)
 
         default:
-            quantityType1.text =  "-"
-            generatePerSecType1.text =  "0"
-            quantityType2.text = "-"
-            generatePerSecType2.text = "0"
-            quantityType3.text = "-"
-            generatePerSecType3.text = "0"
-            factorySerial_ID.text = ""
+            hideDisplayFactoryInfo(status: true)
         }
     }
     
