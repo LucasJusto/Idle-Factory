@@ -15,7 +15,7 @@
 
 
 //MARK: - ResourceTypes
-"ResourceTypeComputador" = "Computador";
+"ResourceTypeComputador" = "Computer";
 
 
 // MARK: - INVENTORY

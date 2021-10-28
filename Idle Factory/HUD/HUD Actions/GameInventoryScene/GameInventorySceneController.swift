@@ -58,16 +58,22 @@ class GameInventorySceneController: UIViewController {
         collectionView.dataSource = self
         collectionView.delegate = self
         
+        // Inventory Header
         inventoryHeader.text = NSLocalizedString("InventoryHeader", comment: "")
         purchaseFactoryButton.titleLabel?.text = NSLocalizedString("PurchaseMoreFactoryButton", comment: "")
         purchaseFactoryButton.layer.cornerRadius = 10
+        
+        // Info Factories
         factoryInfoView.layer.cornerRadius = 10
         totalProductionLabel.text = NSLocalizedString("TotalProductionLabel", comment: "")
+        
+        // Buttons
         sellFactoryButton.layer.cornerRadius = 10
         sellFactoryButton.titleLabel?.text = NSLocalizedString("SellFactoryButton", comment: "")
-        
+        sellFactoryButton.isHidden = true
         insertFactoryButton.layer.cornerRadius = 10
         insertFactoryButton.titleLabel?.text = NSLocalizedString("InsertFactoryButton", comment: "")
+        insertFactoryButton.isHidden = true
         
     }
 
@@ -87,7 +93,7 @@ extension GameInventorySceneController: UICollectionViewDataSource {
         
         if indexPath.row >= generatorsSize {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Self.factoryID, for: indexPath) as! GameInventoryViewCell
-            cell.pullFactoryData(texture: "Basic_Factory_level_1", id:"abcde", resources: [])
+            cell.pullFactoryData(texture: "Basic_Factory_level_1", resources: [])
             return cell
         } else {
             let generator = GameScene.user?.generators[indexPath.row]
@@ -95,7 +101,7 @@ extension GameInventorySceneController: UICollectionViewDataSource {
             let generatorResources = (generator?.resourcesArray)!
             
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Self.factoryID, for: indexPath) as! GameInventoryViewCell
-            cell.pullFactoryData(texture: generator!.textureName, id: generator!.id!, resources: generatorResources)
+            cell.pullFactoryData(texture: generator!.textureName, resources: generatorResources)
         
             return cell
         }
@@ -103,6 +109,64 @@ extension GameInventorySceneController: UICollectionViewDataSource {
 }
 
 extension GameInventorySceneController: UICollectionViewDelegateFlowLayout {
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        print(indexPath.row)
+        
+        guard let myFactories = GameScene.user?.generators else {
+            return
+        }
+        
+        var resources: [Resource] = []
+        if indexPath.row < myFactories.count {
+            resources = myFactories[indexPath.row].resourcesArray
+            sellFactoryButton.isHidden = false
+            insertFactoryButton.isHidden = false
+        } else {
+            sellFactoryButton.isHidden = true
+            insertFactoryButton.isHidden = true
+        }
+        
+        switch resources.count {
+        case 1:
+            quantityType1.text = "\(resources[0].baseQtt) \(resources[0].type)"
+            generatePerSecType1.text = "\(resources[0].perSec)"
+            quantityType2.text = "-"
+            generatePerSecType2.text = "0"
+            quantityType3.text = "-"
+            generatePerSecType3.text = "0"
+            factorySerial_ID.text = "ID: "
+            factorySerial_ID.text!.append(myFactories[indexPath.row].id!)
+        case 2:
+            quantityType1.text = "\(resources[0].baseQtt) \(resources[0].type)"
+            generatePerSecType1.text = "\(resources[0].perSec)"
+            quantityType2.text = "\(resources[1].baseQtt) \(resources[1].type)"
+            generatePerSecType2.text = "\(resources[1].perSec)"
+            quantityType3.text = "-"
+            generatePerSecType3.text = "0"
+            factorySerial_ID.text = "ID: "
+            factorySerial_ID.text!.append(myFactories[indexPath.row].id!)
+
+        case 3:
+            quantityType1.text = "\(resources[0].baseQtt) \(resources[0].type)"
+            generatePerSecType1.text = "\(resources[0].perSec)"
+            quantityType2.text = "\(resources[1].baseQtt) \(resources[1].type)"
+            generatePerSecType2.text = "\(resources[1].perSec)"
+            quantityType3.text = "\(resources[2].baseQtt) \(resources[2].type)"
+            generatePerSecType3.text = "\(resources[2].perSec)"
+            factorySerial_ID.text = "ID: "
+            factorySerial_ID.text!.append(myFactories[indexPath.row].id!)
+
+        default:
+            quantityType1.text =  "-"
+            generatePerSecType1.text =  "0"
+            quantityType2.text = "-"
+            generatePerSecType2.text = "0"
+            quantityType3.text = "-"
+            generatePerSecType3.text = "0"
+            factorySerial_ID.text = ""
+        }
+    }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let cellSize = CGSize(width: 93, height: 90)
