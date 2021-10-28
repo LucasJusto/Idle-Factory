@@ -10,6 +10,9 @@ import UIKit
 import SpriteKit
 
 class FactoryVisualGenerator {
+    var bigBaseComponentsArray: BaseBigRelatedPositions?
+    var smallBaseComponentsArray: BaseSmallRelatedPositions?
+    
     static func getRandomColor() -> UIColor {
         let r = CGFloat.random(in: 0...1)
         let g = CGFloat.random(in: 0...1)
@@ -86,6 +89,55 @@ enum BaseBigRelatedPositions: CustomStringConvertible {
     doorSmallLeft1, doorSmallLeft2, doorSmallLeft3, doorSmallRight1, doorSmallRight2, doorSmalRight3
     
     var description: String {
+        switch self {
+            case .windowLeft1:
+                return "window1_left"
+            case .windowLeft2:
+                return "window2_left"
+            case .windowLeft3:
+                return "window3_left"
+            case .windowRight1:
+                return "window1_right"
+            case .windowRight2:
+                return "window2_right"
+            case .windowRight3:
+                return "window3_right"
+            case .windowBigLeft1:
+                return "window1_big_left"
+            case .windowBigLeft2:
+                return "window2_big_left"
+            case .windowBigLeft3:
+                return "window3_big_left"
+            case .windowBigRight1:
+                return "window1_big_right"
+            case .windowBigRight2:
+                return "window2_big_right"
+            case .windowBigRight3:
+                return "window3_big_right"
+            case .doorBigLeft:
+                return "door_big_left"
+            case .doorBigRight:
+                return "door_big_right"
+            case .doorGarageLeft:
+                return "door_garage_left"
+            case .doorGarageRight:
+                return "door_garage_right"
+            case .doorSmallLeft1:
+                return "door1_small_left"
+            case .doorSmallLeft2:
+                return "door2_small_left"
+            case .doorSmallLeft3:
+                return "door3_small_left"
+            case .doorSmallRight1:
+                return "door1_small_right"
+            case .doorSmallRight2:
+                return "door2_small_right"
+            case .doorSmalRight3:
+                return "door3_small_right"
+        }
+    }
+    
+    var image: String {
         switch self {
             case .windowLeft1:
                 return "window_left"
@@ -194,6 +246,55 @@ enum BaseSmallRelatedPositions: CustomStringConvertible {
     doorSmallLeft1, doorSmallLeft2, doorSmallLeft3, doorSmallRight1, doorSmallRight2, doorSmalRight3
     
     var description: String {
+        switch self {
+            case .windowLeft1:
+                return "window1_left"
+            case .windowLeft2:
+                return "window2_left"
+            case .windowLeft3:
+                return "window3_left"
+            case .windowRight1:
+                return "window1_right"
+            case .windowRight2:
+                return "window2_right"
+            case .windowRight3:
+                return "window3_right"
+            case .windowBigLeft1:
+                return "window1_big_left"
+            case .windowBigLeft2:
+                return "window2_big_left"
+            case .windowBigLeft3:
+                return "window3_big_left"
+            case .windowBigRight1:
+                return "window1_big_right"
+            case .windowBigRight2:
+                return "window2_big_right"
+            case .windowBigRight3:
+                return "window3_big_right"
+            case .doorBigLeft:
+                return "door_big_left"
+            case .doorBigRight:
+                return "door_big_right"
+            case .doorGarageLeft:
+                return "door_garage_left"
+            case .doorGarageRight:
+                return "door_garage_right"
+            case .doorSmallLeft1:
+                return "door1_small_left"
+            case .doorSmallLeft2:
+                return "door2_small_left"
+            case .doorSmallLeft3:
+                return "door3_small_left"
+            case .doorSmallRight1:
+                return "door1_small_right"
+            case .doorSmallRight2:
+                return "door2_small_right"
+            case .doorSmalRight3:
+                return "door3_small_right"
+        }
+    }
+    
+    var image: String {
         switch self {
             case .windowLeft1:
                 return "window_left"
