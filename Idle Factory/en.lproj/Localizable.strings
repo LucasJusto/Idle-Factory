@@ -16,3 +16,9 @@
 
 //MARK: - ResourceTypes
 "ResourceTypeComputador" = "Computador";
+
+
+//MARK: - Upgrade Screen
+
+"MoveToInventory" = "Move to inventory";
+"ChangeFactory" = "Change factory";
