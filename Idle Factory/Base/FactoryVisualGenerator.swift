@@ -40,7 +40,6 @@ class FactoryVisualGenerator {
             baseName = "base_small"
             selectedBase = SelectedBase.small
         }
-        
         let base = SKSpriteNode(imageNamed: baseName)
         base.anchorPoint = CGPoint(x: 0.5, y: 0)
         base.zPosition = 2
@@ -49,20 +48,17 @@ class FactoryVisualGenerator {
         base.color = getRandomColor()
         visual.addChild(base)
         
-        let window = SKSpriteNode(imageNamed: "door_small_left")
-        window.zPosition = 3
-        window.position = CGPoint(x: base.size.width * -0.4, y: base.size.height * 0.35)
-        base.addChild(window)
+        //randomly build left wall
+        let randomOnly1Object = Bool.random()
+        if randomOnly1Object {
+            let randomGarageOrBigDoor = Bool.random()
+            if randomGarageOrBigDoor {
+                let garage = SKSpriteNode(imageNamed: "")
+            }
+        }
+        //randomly build right wall
         
-        let window2 = SKSpriteNode(imageNamed: "door_small_left")
-        window2.zPosition = 3
-        window2.position = CGPoint(x: base.size.width * -0.25, y: base.size.height * 0.25)
-        base.addChild(window2)
-        
-        let window3 = SKSpriteNode(imageNamed: "door_small_left")
-        window3.zPosition = 3
-        window3.position = CGPoint(x: base.size.width * -0.1, y: base.size.height * 0.155)
-        base.addChild(window3)
+        //randomly build roof
         
         return visual
     }
@@ -82,12 +78,61 @@ enum SelectedBase {
     }
 }
 
-enum BaseBigRelatedPositions {
+enum BaseBigRelatedPositions: CustomStringConvertible {
     case windowLeft1, windowLeft2, windowLeft3, windowRight1, windowRight2, windowRight3,
     windowBigLeft1, windowBigLeft2, windowBigLeft3, windowBigRight1, windowBigRight2, windowBigRight3,
     doorBigLeft, doorBigRight,
     doorGarageLeft, doorGarageRight,
     doorSmallLeft1, doorSmallLeft2, doorSmallLeft3, doorSmallRight1, doorSmallRight2, doorSmalRight3
+    
+    var description: String {
+        switch self {
+            case .windowLeft1:
+                return "window_left"
+            case .windowLeft2:
+                return "window_left"
+            case .windowLeft3:
+                return "window_left"
+            case .windowRight1:
+                return "window_right"
+            case .windowRight2:
+                return "window_right"
+            case .windowRight3:
+                return "window_right"
+            case .windowBigLeft1:
+                return "window_big_left"
+            case .windowBigLeft2:
+                return "window_big_left"
+            case .windowBigLeft3:
+                return "window_big_left"
+            case .windowBigRight1:
+                return "window_big_right"
+            case .windowBigRight2:
+                return "window_big_right"
+            case .windowBigRight3:
+                return "window_big_right"
+            case .doorBigLeft:
+                return "door_big_left"
+            case .doorBigRight:
+                return "door_big_right"
+            case .doorGarageLeft:
+                return "door_garage_left"
+            case .doorGarageRight:
+                return "door_garage_right"
+            case .doorSmallLeft1:
+                return "door_small_left"
+            case .doorSmallLeft2:
+                return "door_small_left"
+            case .doorSmallLeft3:
+                return "door_small_left"
+            case .doorSmallRight1:
+                return "door_small_right"
+            case .doorSmallRight2:
+                return "door_small_right"
+            case .doorSmalRight3:
+                return "door_small_right"
+        }
+    }
     
     var multipliersForPosition: CGPoint {
         //3 = closer to center corner , 2 = mid, 1 = far to center corner (talking about the number in the end of names)
@@ -141,12 +186,61 @@ enum BaseBigRelatedPositions {
     }
 }
 
-enum BaseSmallRelatedPositions {
+enum BaseSmallRelatedPositions: CustomStringConvertible {
     case windowLeft1, windowLeft2, windowLeft3, windowRight1, windowRight2, windowRight3,
     windowBigLeft1, windowBigLeft2, windowBigLeft3, windowBigRight1, windowBigRight2, windowBigRight3,
     doorBigLeft, doorBigRight,
     doorGarageLeft, doorGarageRight,
     doorSmallLeft1, doorSmallLeft2, doorSmallLeft3, doorSmallRight1, doorSmallRight2, doorSmalRight3
+    
+    var description: String {
+        switch self {
+            case .windowLeft1:
+                return "window_left"
+            case .windowLeft2:
+                return "window_left"
+            case .windowLeft3:
+                return "window_left"
+            case .windowRight1:
+                return "window_right"
+            case .windowRight2:
+                return "window_right"
+            case .windowRight3:
+                return "window_right"
+            case .windowBigLeft1:
+                return "window_big_left"
+            case .windowBigLeft2:
+                return "window_big_left"
+            case .windowBigLeft3:
+                return "window_big_left"
+            case .windowBigRight1:
+                return "window_big_right"
+            case .windowBigRight2:
+                return "window_big_right"
+            case .windowBigRight3:
+                return "window_big_right"
+            case .doorBigLeft:
+                return "door_big_left"
+            case .doorBigRight:
+                return "door_big_right"
+            case .doorGarageLeft:
+                return "door_garage_left"
+            case .doorGarageRight:
+                return "door_garage_right"
+            case .doorSmallLeft1:
+                return "door_small_left"
+            case .doorSmallLeft2:
+                return "door_small_left"
+            case .doorSmallLeft3:
+                return "door_small_left"
+            case .doorSmallRight1:
+                return "door_small_right"
+            case .doorSmallRight2:
+                return "door_small_right"
+            case .doorSmalRight3:
+                return "door_small_right"
+        }
+    }
     
     var multipliersForPosition: CGPoint {
         //3 = closer to center corner , 2 = mid, 1 = far to center corner (talking about the number in the end of names)
