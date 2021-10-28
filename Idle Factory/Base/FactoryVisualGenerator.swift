@@ -38,7 +38,7 @@ class FactoryVisualGenerator {
         let randomBase = Bool.random()
         var baseName = "base_big"
         var selectedBase = SelectedBase.big
-        if true {
+        if randomBase {
             baseName = "base_small"
             selectedBase = SelectedBase.small
         }
@@ -47,21 +47,6 @@ class FactoryVisualGenerator {
         base.zPosition = 2
         base.position = CGPoint(x: visual.size.width * selectedBase.multipliersForPosition.x, y: visual.size.height * selectedBase.multipliersForPosition.y)
         visual.addChild(base)
-        
-        let window1 = SKSpriteNode(imageNamed: "door_small_right")
-        window1.zPosition = 3
-        window1.position = CGPoint(x: base.size.width * 0.4, y: base.size.height * 0.37)
-        base.addChild(window1)
-        
-        let window2 = SKSpriteNode(imageNamed: "door_small_right")
-        window2.zPosition = 3
-        window2.position = CGPoint(x: base.size.width * 0.25, y: base.size.height * 0.28)
-        base.addChild(window2)
-        
-        let window3 = SKSpriteNode(imageNamed: "door_small_right")
-        window3.zPosition = 3
-        window3.position = CGPoint(x: base.size.width * 0.1, y: base.size.height * 0.19)
-        base.addChild(window3)
         
         return visual
     }
