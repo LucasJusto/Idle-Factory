@@ -10,6 +10,9 @@ import UIKit
 class UpgradeFactorySceneController: UIViewController,  UITableViewDataSource, UITableViewDelegate {
     @IBOutlet weak var factoryImage: UIImageView!
     
+    @IBAction func close(_ sender: Any) {
+        self.dismiss(animated: false, completion: nil)
+    }
     @IBOutlet weak var changeFactoryButton: UIButton!
     @IBOutlet weak var moveToInventoryButton: UIButton!
     @IBOutlet weak var tableView: UITableView!
@@ -20,12 +23,16 @@ class UpgradeFactorySceneController: UIViewController,  UITableViewDataSource, U
         super.viewDidLoad()
         tableView.dataSource = self
         tableView.delegate = self
-        changeFactoryButton.setTitle(NSLocalizedString("ChangeFactory", comment: ""), for: UIControl.State.normal)
+        //changeFactoryButton.setTitle(NSLocalizedString("ChangeFactory", comment: ""), for: UIControl.State.normal)
         //moveToInventoryButton.setTitle(NSLocalizedString("MoveToInventory", comment: ""), for: UIControl.State.normal)
         changeFactoryButton.titleLabel?.font = UIFont(name: "AustralSlabBlur-Regular", size: 10)
         moveToInventoryButton.titleLabel?.font = UIFont(name: "AustralSlabBlur-Regular", size: 10)
-        moveToInventoryButton.backgroundColor = UIColor.blue
+        changeFactoryButton.backgroundColor = UIColor(named: "Inventory_background")
         changeFactoryButton.layer.cornerRadius = 10
+        moveToInventoryButton.backgroundColor = UIColor(named: "HudActions-background")
+        moveToInventoryButton.layer.cornerRadius = 10
+        moveToInventoryButton.titleLabel?.textColor = UIColor.black
+        changeFactoryButton.titleLabel?.textColor = UIColor.black
         factoryImage.image = UIImage(named: "Coin") // GameScene.user?.generators[generatorID].textureName ??
         self.view.layoutIfNeeded()
         // Do any additional setup after loading the view.

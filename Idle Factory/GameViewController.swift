@@ -97,7 +97,7 @@ class GameViewController: UIViewController {
         var mainView: UIStoryboard!
         mainView = UIStoryboard(name: "UpgradeFactoryScene", bundle: nil)
         let viewcontroller : UIViewController = mainView.instantiateViewController(withIdentifier: "UpgradeFactoryStoryboard") as UIViewController
-            self.view.window!.rootViewController = viewcontroller
+        self.present(viewcontroller, animated: false)
     }
     
     
