@@ -19,61 +19,37 @@
                         <rect key="frame" x="0.0" y="0.0" width="896" height="414"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="mQs-6T-NbH">
-                                <rect key="frame" x="54" y="60" width="788" height="81"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="bWn-IA-vOF">
+                                <rect key="frame" x="325" y="59" width="246" height="82"/>
                                 <subviews>
-                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="bWn-IA-vOF">
-                                        <rect key="frame" x="0.0" y="27" width="732.5" height="27"/>
-                                        <subviews>
-                                            <view contentMode="scaleToFill" horizontalHuggingPriority="249" verticalHuggingPriority="249" horizontalCompressionResistancePriority="749" verticalCompressionResistancePriority="749" translatesAutoresizingMaskIntoConstraints="NO" id="pn8-5v-zvM">
-                                                <rect key="frame" x="0.0" y="0.0" width="239" height="27"/>
-                                                <color key="backgroundColor" name="Inventory_background"/>
-                                            </view>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" verticalCompressionResistancePriority="751" text="Inventory" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mcm-ao-HBP">
-                                                <rect key="frame" x="249" y="0.0" width="124" height="27"/>
-                                                <fontDescription key="fontDescription" type="boldSystem" pointSize="28"/>
-                                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                            <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="252" horizontalCompressionResistancePriority="752" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RHl-r3-2NJ">
-                                                <rect key="frame" x="383" y="0.0" width="90.5" height="27"/>
-                                                <color key="backgroundColor" name="HudActions-background"/>
-                                                <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="8"/>
-                                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                                <state key="normal" title="Comprar mais fabricas">
-                                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                </state>
-                                            </button>
-                                            <view contentMode="scaleToFill" horizontalHuggingPriority="249" verticalHuggingPriority="249" horizontalCompressionResistancePriority="749" verticalCompressionResistancePriority="749" translatesAutoresizingMaskIntoConstraints="NO" id="vtt-1e-Azm">
-                                                <rect key="frame" x="483.5" y="0.0" width="249" height="27"/>
-                                                <color key="backgroundColor" name="Inventory_background"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="height" constant="27" id="yYQ-Kk-hxQ"/>
-                                                </constraints>
-                                            </view>
-                                        </subviews>
-                                    </stackView>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="55m-EB-zmS">
-                                        <rect key="frame" x="732.5" y="18" width="55.5" height="45"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" verticalCompressionResistancePriority="751" text="Inventory" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mcm-ao-HBP">
+                                        <rect key="frame" x="0.0" y="24.5" width="124" height="33.5"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="28"/>
+                                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="252" horizontalCompressionResistancePriority="752" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RHl-r3-2NJ">
+                                        <rect key="frame" x="134" y="28" width="112" height="26"/>
+                                        <color key="backgroundColor" name="HudActions-background"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="8"/>
+                                        <inset key="contentEdgeInsets" minX="8" minY="8" maxX="8" maxY="8"/>
                                         <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                        <state key="normal" image="close"/>
-                                        <buttonConfiguration key="configuration" style="plain" image="close"/>
-                                        <connections>
-                                            <action selector="closeInventory:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="HGb-96-77m"/>
-                                        </connections>
+                                        <state key="normal" title="Comprar mais fabricas">
+                                            <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
                                     </button>
                                 </subviews>
                             </stackView>
                             <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="87Q-MC-7hz">
                                 <rect key="frame" x="66" y="181" width="746" height="192"/>
                                 <subviews>
-                                    <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="rF0-R9-7mq">
+                                    <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="rF0-R9-7mq">
                                         <rect key="frame" x="0.0" y="0.0" width="479" height="192"/>
                                         <color key="backgroundColor" name="Inventory_background"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="192" id="eWv-ah-4hf"/>
                                         </constraints>
-                                        <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="wbC-aU-7ec">
+                                        <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="wbC-aU-7ec">
                                             <size key="itemSize" width="100" height="100"/>
                                             <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                             <size key="footerReferenceSize" width="0.0" height="0.0"/>
@@ -193,8 +169,8 @@
                                                                 <rect key="frame" x="18" y="0.0" width="107" height="23"/>
                                                                 <subviews>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Type" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TaB-AL-YM1">
-                                                                        <rect key="frame" x="0.0" y="0.0" width="23.5" height="12"/>
-                                                                        <fontDescription key="fontDescription" type="system" pointSize="10"/>
+                                                                        <rect key="frame" x="0.0" y="0.0" width="25" height="12"/>
+                                                                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="10"/>
                                                                         <nil key="textColor"/>
                                                                         <nil key="highlightedColor"/>
                                                                     </label>
@@ -235,8 +211,8 @@
                                                                 <rect key="frame" x="18" y="0.0" width="107" height="23"/>
                                                                 <subviews>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Type" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OxU-Fh-Jos">
-                                                                        <rect key="frame" x="0.0" y="0.0" width="23.5" height="12"/>
-                                                                        <fontDescription key="fontDescription" type="system" pointSize="10"/>
+                                                                        <rect key="frame" x="0.0" y="0.0" width="25" height="12"/>
+                                                                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="10"/>
                                                                         <nil key="textColor"/>
                                                                         <nil key="highlightedColor"/>
                                                                     </label>
@@ -277,8 +253,8 @@
                                                                 <rect key="frame" x="18" y="0.0" width="107" height="23"/>
                                                                 <subviews>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Type" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Gyz-Kf-LMT">
-                                                                        <rect key="frame" x="0.0" y="0.0" width="23.5" height="12"/>
-                                                                        <fontDescription key="fontDescription" type="system" pointSize="10"/>
+                                                                        <rect key="frame" x="0.0" y="0.0" width="25" height="12"/>
+                                                                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="10"/>
                                                                         <nil key="textColor"/>
                                                                         <nil key="highlightedColor"/>
                                                                     </label>
@@ -348,29 +324,29 @@
                                                         </subviews>
                                                     </stackView>
                                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="equalCentering" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="Kj2-qb-5ia">
-                                                        <rect key="frame" x="13.5" y="37" width="190" height="22"/>
+                                                        <rect key="frame" x="3.5" y="37" width="210" height="22"/>
                                                         <subviews>
                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RQv-O2-zY4">
-                                                                <rect key="frame" x="0.0" y="0.0" width="90" height="22"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="100" height="22"/>
                                                                 <color key="backgroundColor" name="HudActions-background"/>
                                                                 <constraints>
-                                                                    <constraint firstAttribute="width" constant="90" id="Yc0-q7-BVl"/>
+                                                                    <constraint firstAttribute="width" constant="100" id="Yc0-q7-BVl"/>
                                                                     <constraint firstAttribute="height" constant="22" id="ynQ-MS-7B4"/>
                                                                 </constraints>
-                                                                <fontDescription key="fontDescription" type="system" pointSize="10"/>
+                                                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="10"/>
                                                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                                                 <state key="normal" title="Vender Fabrica">
                                                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 </state>
                                                             </button>
                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rFW-M6-DaA">
-                                                                <rect key="frame" x="100" y="0.0" width="90" height="22"/>
+                                                                <rect key="frame" x="110" y="0.0" width="100" height="22"/>
                                                                 <color key="backgroundColor" name="Inventory_background"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="height" constant="22" id="YWD-Jt-bL4"/>
-                                                                    <constraint firstAttribute="width" constant="90" id="gwA-Kd-tHe"/>
+                                                                    <constraint firstAttribute="width" constant="100" id="gwA-Kd-tHe"/>
                                                                 </constraints>
-                                                                <fontDescription key="fontDescription" type="system" pointSize="10"/>
+                                                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="10"/>
                                                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                                                 <state key="normal" title="Colocar no Parque">
                                                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -403,16 +379,26 @@
                                     <constraint firstItem="rF0-R9-7mq" firstAttribute="top" secondItem="87Q-MC-7hz" secondAttribute="top" id="obY-So-gqY"/>
                                 </constraints>
                             </stackView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="55m-EB-zmS">
+                                <rect key="frame" x="780.5" y="77.5" width="55.5" height="45"/>
+                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                <state key="normal" image="close"/>
+                                <buttonConfiguration key="configuration" style="plain" image="close"/>
+                                <connections>
+                                    <action selector="closeInventory:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="HGb-96-77m"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
                         <color key="backgroundColor" name="Inventory_background"/>
                         <constraints>
-                            <constraint firstItem="mQs-6T-NbH" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="10" id="29H-U9-nAl"/>
-                            <constraint firstItem="87Q-MC-7hz" firstAttribute="top" secondItem="mQs-6T-NbH" secondAttribute="bottom" constant="40" id="7I0-Ok-j66"/>
-                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="mQs-6T-NbH" secondAttribute="trailing" constant="10" id="Ow4-3R-q2Q"/>
+                            <constraint firstItem="55m-EB-zmS" firstAttribute="centerY" secondItem="bWn-IA-vOF" secondAttribute="centerY" id="ECu-RP-kUk"/>
+                            <constraint firstItem="87Q-MC-7hz" firstAttribute="top" secondItem="bWn-IA-vOF" secondAttribute="bottom" constant="40" id="MiI-fZ-aqe"/>
                             <constraint firstItem="87Q-MC-7hz" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="22" id="SMR-rc-3JJ"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="87Q-MC-7hz" secondAttribute="trailing" constant="40" id="TEd-3M-iie"/>
-                            <constraint firstItem="mQs-6T-NbH" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" constant="60" id="Uw5-4i-yZP"/>
+                            <constraint firstItem="bWn-IA-vOF" firstAttribute="centerX" secondItem="5EZ-qb-Rvc" secondAttribute="centerX" id="hfm-wL-o0x"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="55m-EB-zmS" secondAttribute="trailing" constant="16" id="ipZ-gW-7ov"/>
+                            <constraint firstItem="bWn-IA-vOF" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" constant="59" id="v6A-Zv-BGy"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="87Q-MC-7hz" secondAttribute="bottom" constant="20" id="yrc-Bj-6aN"/>
                         </constraints>
                     </view>

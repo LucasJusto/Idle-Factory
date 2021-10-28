@@ -94,6 +94,8 @@ extension GameInventorySceneController: UICollectionViewDataSource {
         if indexPath.row >= generatorsSize {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Self.factoryID, for: indexPath) as! GameInventoryViewCell
             cell.pullFactoryData(texture: "Basic_Factory_level_1", resources: [])
+            cell.configureCell()
+
             return cell
         } else {
             let generator = GameScene.user?.generators[indexPath.row]
@@ -102,7 +104,7 @@ extension GameInventorySceneController: UICollectionViewDataSource {
             
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Self.factoryID, for: indexPath) as! GameInventoryViewCell
             cell.pullFactoryData(texture: generator!.textureName, resources: generatorResources)
-        
+            cell.configureCell()
             return cell
         }
     }

@@ -14,6 +14,14 @@ class GameInventoryViewCell: UICollectionViewCell {
     
     
     /**
+     Configure cell design.
+     */
+    func configureCell() {
+        self.contentView.layer.cornerRadius = 10
+    }
+    
+    
+    /**
      Pull factory data for each cell. Receives a texture of the Factory.
      */
     func pullFactoryData(texture: String, resources: [Resource]) {
