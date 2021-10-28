@@ -18,7 +18,14 @@
 "ResourceTypeComputador" = "Computador";
 
 
-//MARK: - Upgrade Screen
+// MARK: - INVENTORY
+"InventoryHeader" = "Inventário";
+"PurchaseMoreFactoryButton" = "Comprar mais fábricas";
+"TotalProductionLabel" = "Producão Total:";
+"SellFactoryButton" = "Vender Fábrica";
+"InsertFactoryButton" = "Colocar no Parque";
 
+
+//MARK: - Upgrade Screen
 "MoveToInventory" = "Mover para o inventário";
 "ChangeFactory" = "Trocar fábrica";

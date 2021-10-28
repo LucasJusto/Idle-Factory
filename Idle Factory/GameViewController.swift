@@ -110,7 +110,7 @@ class GameViewController: UIViewController {
         var mainView: UIStoryboard!
         mainView = UIStoryboard(name: "GameInventoryScene", bundle: nil)
         let viewcontroller : UIViewController = mainView.instantiateViewController(withIdentifier: "InventoryStoryboard") as UIViewController
-            self.view.window!.rootViewController = viewcontroller
+        self.present(viewcontroller, animated: false)
     }
     
     
@@ -122,7 +122,7 @@ class GameViewController: UIViewController {
         var mainView: UIStoryboard!
         mainView = UIStoryboard(name: "GameMarketplaceScene", bundle: nil)
         let viewcontroller : UIViewController = mainView.instantiateViewController(withIdentifier: "MarketplaceStoryboard") as UIViewController
-            self.view.window!.rootViewController = viewcontroller
+        self.present(viewcontroller, animated: false)
     }
     
     
@@ -134,7 +134,7 @@ class GameViewController: UIViewController {
         var mainView: UIStoryboard!
         mainView = UIStoryboard(name: "GameChallengeScene", bundle: nil)
         let viewcontroller : UIViewController = mainView.instantiateViewController(withIdentifier: "ChallengeStoryboard") as UIViewController
-            self.view.window!.rootViewController = viewcontroller
+        self.present(viewcontroller, animated: false)
     }
     
 }

@@ -15,10 +15,17 @@
 
 
 //MARK: - ResourceTypes
-"ResourceTypeComputador" = "Computador";
+"ResourceTypeComputador" = "Computer";
+
+
+// MARK: - INVENTORY
+"InventoryHeader" = "Inventory";
+"PurchaseMoreFactoryButton" = "Buy more factories";
+"TotalProductionLabel" = "Total Production:";
+"SellFactoryButton" = "Sell Factory";
+"InsertFactoryButton" = "Insert on the Park";
 
 
 //MARK: - Upgrade Screen
-
 "MoveToInventory" = "Move to inventory";
 "ChangeFactory" = "Change factory";
