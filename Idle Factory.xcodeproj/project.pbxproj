@@ -13,6 +13,7 @@
 		2BFF82B82721D98400F16F84 /* GameChallengeScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BFF82B72721D98400F16F84 /* GameChallengeScene.swift */; };
 		2BFF82BA2721D9A500F16F84 /* GameMarketplaceScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BFF82B92721D9A500F16F84 /* GameMarketplaceScene.swift */; };
 		48096D2E271A144C00AB22AD /* CKRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48096D2D271A144C00AB22AD /* CKRepository.swift */; };
+		480A2043272A7AB000F5BC49 /* FactoryVisualGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 480A2042272A7AB000F5BC49 /* FactoryVisualGenerator.swift */; };
 		4850FF542718CB3B00C8CE97 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4850FF532718CB3B00C8CE97 /* CloudKit.framework */; };
 		487A19F02715504000723065 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 487A19EF2715504000723065 /* AppDelegate.swift */; };
 		487A19F62715504000723065 /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 487A19F52715504000723065 /* GameScene.swift */; };
@@ -43,6 +44,7 @@
 		2BFF82B72721D98400F16F84 /* GameChallengeScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameChallengeScene.swift; sourceTree = "<group>"; };
 		2BFF82B92721D9A500F16F84 /* GameMarketplaceScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameMarketplaceScene.swift; sourceTree = "<group>"; };
 		48096D2D271A144C00AB22AD /* CKRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CKRepository.swift; sourceTree = "<group>"; };
+		480A2042272A7AB000F5BC49 /* FactoryVisualGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FactoryVisualGenerator.swift; sourceTree = "<group>"; };
 		4850FF512718CB3800C8CE97 /* Idle Factory.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Idle Factory.entitlements"; sourceTree = "<group>"; };
 		4850FF532718CB3B00C8CE97 /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
 		487A19EC2715504000723065 /* Idle Factory.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Idle Factory.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -167,6 +169,7 @@
 				48096D2D271A144C00AB22AD /* CKRepository.swift */,
 				48A6596A271E07A70021CD52 /* Resource.swift */,
 				55439BC42721E87400F69461 /* functions.swift */,
+				480A2042272A7AB000F5BC49 /* FactoryVisualGenerator.swift */,
 			);
 			path = Base;
 			sourceTree = "<group>";
@@ -273,6 +276,7 @@
 				55BD52A92718BC2C0057C7C0 /* User.swift in Sources */,
 				55439BC52721E87400F69461 /* functions.swift in Sources */,
 				2B9C3146271F4BC3008A7676 /* GameHud.swift in Sources */,
+				480A2043272A7AB000F5BC49 /* FactoryVisualGenerator.swift in Sources */,
 				487A19F02715504000723065 /* AppDelegate.swift in Sources */,
 				487A1A09271551BA00723065 /* Generator.swift in Sources */,
 			);
