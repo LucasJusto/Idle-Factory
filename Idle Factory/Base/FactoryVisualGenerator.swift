@@ -19,7 +19,7 @@ class FactoryVisualGenerator {
     }
     
     static func adjustComponent(node: SKSpriteNode) -> SKSpriteNode {
-        node.zPosition = 3
+        node.zPosition = (node.parent?.zPosition ?? 2) + 1
         node.colorBlendFactor = 1
         node.color = getRandomColor()
         
@@ -38,7 +38,7 @@ class FactoryVisualGenerator {
         let randomBase = Bool.random()
         var baseName = "base_big"
         var selectedBase = SelectedBase.big
-        if false {
+        if true {
             baseName = "base_small"
             selectedBase = SelectedBase.small
         }
@@ -48,15 +48,20 @@ class FactoryVisualGenerator {
         base.position = CGPoint(x: visual.size.width * selectedBase.multipliersForPosition.x, y: visual.size.height * selectedBase.multipliersForPosition.y)
         visual.addChild(base)
         
-        let window2 = SKSpriteNode(imageNamed: "door_big_left")
+        let window1 = SKSpriteNode(imageNamed: "door_small_right")
+        window1.zPosition = 3
+        window1.position = CGPoint(x: base.size.width * 0.4, y: base.size.height * 0.37)
+        base.addChild(window1)
+        
+        let window2 = SKSpriteNode(imageNamed: "door_small_right")
         window2.zPosition = 3
-        window2.position = CGPoint(x: base.size.width * -0.25, y: base.size.height * 0.255)
+        window2.position = CGPoint(x: base.size.width * 0.25, y: base.size.height * 0.28)
         base.addChild(window2)
         
-//        let window3 = SKSpriteNode(imageNamed: "door_small_left")
-//        window3.zPosition = 3
-//        window3.position = CGPoint(x: base.size.width * -0.1, y: base.size.height * 0.18)
-//        base.addChild(window3)
+        let window3 = SKSpriteNode(imageNamed: "door_small_right")
+        window3.zPosition = 3
+        window3.position = CGPoint(x: base.size.width * 0.1, y: base.size.height * 0.19)
+        base.addChild(window3)
         
         return visual
     }
@@ -147,49 +152,49 @@ enum BaseSmallRelatedPositions {
         //positions relative to base
         switch self {
             case .windowLeft1:
-                return CGPoint(x: -0.4, y: 0.43)
+                return CGPoint(x: -0.4, y: 0.42)
             case .windowLeft2:
-                return CGPoint(x: -0.25, y: 0.36)
+                return CGPoint(x: -0.25, y: 0.33)
             case .windowLeft3:
-                return CGPoint(x: -0.1, y: 0.29)
+                return CGPoint(x: -0.1, y: 0.24)
             case .windowRight1:
-                return CGPoint(x: 0.4, y: 0.43)
+                return CGPoint(x: 0.4, y: 0.42)
             case .windowRight2:
-                return CGPoint(x: 0.25, y: 0.36)
+                return CGPoint(x: 0.25, y: 0.33)
             case .windowRight3:
-                return CGPoint(x: 0.1, y: 0.29)
+                return CGPoint(x: 0.1, y: 0.24)
             case .windowBigLeft1:
-                return CGPoint(x: -0.4, y: 0.43)
+                return CGPoint(x: -0.4, y: 0.42)
             case .windowBigLeft2:
-                return CGPoint(x: -0.25, y: 0.36)
+                return CGPoint(x: -0.25, y: 0.33)
             case .windowBigLeft3:
-                return CGPoint(x: -0.1, y: 0.29)
+                return CGPoint(x: -0.1, y: 0.24)
             case .windowBigRight1:
-                return CGPoint(x: 0.4, y: 0.43)
+                return CGPoint(x: 0.4, y: 0.42)
             case .windowBigRight2:
-                return CGPoint(x: 0.25, y: 0.36)
+                return CGPoint(x: 0.25, y: 0.33)
             case .windowBigRight3:
-                return CGPoint(x: 0.1, y: 0.29)
+                return CGPoint(x: 0.1, y: 0.24)
             case .doorBigLeft:
-                return CGPoint(x: -0.25, y: 0.255)
+                return CGPoint(x: -0.25, y: 0.281)
             case .doorBigRight:
-                return CGPoint(x: 0.25, y: 0.255)
+                return CGPoint(x: 0.25, y: 0.281)
             case .doorGarageLeft:
-                return CGPoint(x: -0.25, y: 0.26)
+                return CGPoint(x: -0.25, y: 0.285)
             case .doorGarageRight:
-                return CGPoint(x: 0.25, y: 0.26)
+                return CGPoint(x: 0.25, y: 0.285)
             case .doorSmallLeft1:
-                return CGPoint(x: -0.4, y: 0.33)
+                return CGPoint(x: -0.4, y: 0.37)
             case .doorSmallLeft2:
-                return CGPoint(x: -0.25, y: 0.255)
+                return CGPoint(x: -0.25, y: 0.28)
             case .doorSmallLeft3:
-                return CGPoint(x: -0.1, y: 0.18)
+                return CGPoint(x: -0.1, y: 0.19)
             case .doorSmallRight1:
-                return CGPoint(x: 0.4, y: 0.33)
+                return CGPoint(x: 0.4, y: 0.37)
             case .doorSmallRight2:
-                return CGPoint(x: 0.25, y: 0.255)
+                return CGPoint(x: 0.25, y: 0.28)
             case .doorSmalRight3:
-                return CGPoint(x: 0.1, y: 0.18)
+                return CGPoint(x: 0.1, y: 0.19)
         }
     }
 }
