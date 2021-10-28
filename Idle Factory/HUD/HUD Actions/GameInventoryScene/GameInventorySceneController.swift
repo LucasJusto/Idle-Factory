@@ -50,7 +50,7 @@ class GameInventorySceneController: UIViewController {
     
     // MARK: - CLOSE INVENTORY
     @IBAction func closeInventory(_ sender: Any) {
-        self.dismiss(animated: true, completion: nil)
+        self.dismiss(animated: false, completion: nil)
     }
     
     static let factoryID: String = "factory_cell"
@@ -81,6 +81,10 @@ class GameInventorySceneController: UIViewController {
         insertFactoryButton.titleLabel?.text = NSLocalizedString("InsertFactoryButton", comment: "")
     }
     
+    
+    /**
+     Hide all factory detail info if player selects a empty box on inventory. Receives a status of type Bool.
+     */
     func hideDisplayFactoryInfo(status: Bool) {
         factoryImage.isHidden = status
         typeImage1.isHidden = status
@@ -172,33 +176,35 @@ extension GameInventorySceneController: UICollectionViewDelegateFlowLayout {
         switch resources.count {
         case 1:
             hideDisplayFactoryInfo(status: false)
-            factoryImage.image = UIImage(named: "")
-            typeImage1.image = UIImage(named: "")
-            coinImage1.image = UIImage(named: "Coin")
-            quantityType1.text = "\(resources[0].baseQtt) \(resources[0].type)"
-            generatePerSecType1.text = doubleToString(value: resources[0].perSec)
+            factoryImage.image = UIImage(named: myFactories[indexPath.row].textureName)
+            typeImage1.isHidden = true
+            coinImage1.isHidden = true
+            quantityType1.text = ""
+            generatePerSecType1.text = ""
             
-            typeImage2.isHidden = true
-            coinImage2.isHidden = true
-            quantityType2.text = ""
-            generatePerSecType2.text = ""
+            typeImage2.image = UIImage(systemName: getResourceImageName(resource: resources[0].type))
+            coinImage2.image = UIImage(named: "Coin")
+            quantityType2.text = "\(resources[0].baseQtt) \(resources[0].type)"
+            generatePerSecType2.text = doubleToString(value: resources[0].perSec)
             
             typeImage3.isHidden = true
             coinImage3.isHidden = true
             quantityType3.text = ""
             generatePerSecType3.text = ""
             
+            totalProductionPerSec.text = doubleToString(value: resources[0].perSec)
+            
             factorySerial_ID.text = "ID: "
             factorySerial_ID.text!.append(myFactories[indexPath.row].id!)
         case 2:
             hideDisplayFactoryInfo(status: false)
-            factoryImage.image = UIImage(named: "")
-            typeImage1.image = UIImage(named: "")
+            factoryImage.image = UIImage(named: myFactories[indexPath.row].textureName)
+            typeImage1.image = UIImage(systemName: getResourceImageName(resource: resources[0].type))
             coinImage1.image = UIImage(named: "Coin")
             quantityType1.text = "\(resources[0].baseQtt) \(resources[0].type)"
             generatePerSecType1.text = doubleToString(value: resources[0].perSec)
             
-            typeImage2.image = UIImage(named: "")
+            typeImage2.image = UIImage(systemName: getResourceImageName(resource: resources[1].type))
             coinImage2.image = UIImage(named: "Coin")
             quantityType2.text = "\(resources[1].baseQtt) \(resources[1].type)"
             generatePerSecType2.text = doubleToString(value: resources[1].perSec)
@@ -208,26 +214,33 @@ extension GameInventorySceneController: UICollectionViewDelegateFlowLayout {
             quantityType3.text = ""
             generatePerSecType3.text = "0"
             
+            let total = resources[0].perSec + resources[1].perSec
+            totalProductionPerSec.text = doubleToString(value:total)
+            
             factorySerial_ID.text = "ID: "
             factorySerial_ID.text!.append(myFactories[indexPath.row].id!)
 
         case 3:
             hideDisplayFactoryInfo(status: false)
-            factoryImage.image = UIImage(named: "")
-            typeImage1.image = UIImage(named: "")
+            factoryImage.image = UIImage(named: myFactories[indexPath.row].textureName)
+            typeImage1.image = UIImage(systemName: getResourceImageName(resource: resources[0].type))
             coinImage1.image = UIImage(named: "Coin")
             quantityType1.text = "\(resources[0].baseQtt) \(resources[0].type)"
             generatePerSecType1.text = doubleToString(value: resources[0].perSec)
             
-            typeImage2.image = UIImage(named: "")
+            typeImage2.image = UIImage(systemName: getResourceImageName(resource: resources[1].type))
             coinImage2.image = UIImage(named: "Coin")
             quantityType2.text = "\(resources[1].baseQtt) \(resources[1].type)"
             generatePerSecType2.text = doubleToString(value: resources[1].perSec)
             
-            typeImage3.image = UIImage(named: "")
+            typeImage3.image = UIImage(systemName: getResourceImageName(resource: resources[2].type))
             coinImage3.image = UIImage(named: "Coin")
             quantityType3.text = "\(resources[2].baseQtt) \(resources[2].type)"
             generatePerSecType3.text = doubleToString(value: resources[2].perSec)
+            
+            let total = resources[0].perSec + resources[1].perSec + resources[2].perSec
+            totalProductionPerSec.text = doubleToString(value:total)
+            
             factorySerial_ID.text = "ID: "
             factorySerial_ID.text!.append(myFactories[indexPath.row].id!)
 

@@ -34,6 +34,7 @@
 		553E7F74272099DB00165C8E /* GameSave.swift in Sources */ = {isa = PBXBuildFile; fileRef = 553E7F73272099DB00165C8E /* GameSave.swift */; };
 		55439BC52721E87400F69461 /* functions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55439BC42721E87400F69461 /* functions.swift */; };
 		55439BC72721F23D00F69461 /* DateApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55439BC62721F23D00F69461 /* DateApi.swift */; };
+		555DFCB72729BE0D006C60D9 /* UpgradeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 555DFCB62729BE0D006C60D9 /* UpgradeCell.swift */; };
 		5567745C271A09A7006BA5C0 /* Factory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5567745B271A09A7006BA5C0 /* Factory.swift */; };
 		55BBAC15271F404A00A86A47 /* UIImageExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55BBAC12271F404A00A86A47 /* UIImageExtension.swift */; };
 		55BBAC16271F404A00A86A47 /* GIFPlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55BBAC13271F404A00A86A47 /* GIFPlayerView.swift */; };
@@ -75,6 +76,7 @@
 		553E7F73272099DB00165C8E /* GameSave.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameSave.swift; sourceTree = "<group>"; };
 		55439BC42721E87400F69461 /* functions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = functions.swift; sourceTree = "<group>"; };
 		55439BC62721F23D00F69461 /* DateApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateApi.swift; sourceTree = "<group>"; };
+		555DFCB62729BE0D006C60D9 /* UpgradeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpgradeCell.swift; sourceTree = "<group>"; };
 		5567745B271A09A7006BA5C0 /* Factory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Factory.swift; sourceTree = "<group>"; };
 		55BBAC12271F404A00A86A47 /* UIImageExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIImageExtension.swift; sourceTree = "<group>"; };
 		55BBAC13271F404A00A86A47 /* GIFPlayerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GIFPlayerView.swift; sourceTree = "<group>"; };
@@ -177,6 +179,7 @@
 		487A19EE2715504000723065 /* Idle Factory */ = {
 			isa = PBXGroup;
 			children = (
+				555DFCB52729BDC5006C60D9 /* UpgradeFactory */,
 				2B9C3147271F4C1B008A7676 /* Idle-Factory-Info.plist */,
 				55BBAC11271F3FE500A86A47 /* GIF Extension */,
 				4850FF512718CB3800C8CE97 /* Idle Factory.entitlements */,
@@ -193,8 +196,6 @@
 				553E7F73272099DB00165C8E /* GameSave.swift */,
 				48A65970271F5F470021CD52 /* Localizable.strings */,
 				55439BC62721F23D00F69461 /* DateApi.swift */,
-				2BD3FBF627287CBE00B4B4E6 /* UpgradeFactoryScene.storyboard */,
-				2BD3FBF827287D1300B4B4E6 /* UpgradeFactorySceneController.swift */,
 			);
 			path = "Idle Factory";
 			sourceTree = "<group>";
@@ -211,6 +212,16 @@
 				55439BC42721E87400F69461 /* functions.swift */,
 			);
 			path = Base;
+			sourceTree = "<group>";
+		};
+		555DFCB52729BDC5006C60D9 /* UpgradeFactory */ = {
+			isa = PBXGroup;
+			children = (
+				2BD3FBF627287CBE00B4B4E6 /* UpgradeFactoryScene.storyboard */,
+				2BD3FBF827287D1300B4B4E6 /* UpgradeFactorySceneController.swift */,
+				555DFCB62729BE0D006C60D9 /* UpgradeCell.swift */,
+			);
+			path = UpgradeFactory;
 			sourceTree = "<group>";
 		};
 		55BBAC11271F3FE500A86A47 /* GIF Extension */ = {
@@ -312,6 +323,7 @@
 				48A6596B271E07A70021CD52 /* Resource.swift in Sources */,
 				2BD3FBFB2728866E00B4B4E6 /* GameInventoryViewCell.swift in Sources */,
 				55BBAC16271F404A00A86A47 /* GIFPlayerView.swift in Sources */,
+				555DFCB72729BE0D006C60D9 /* UpgradeCell.swift in Sources */,
 				55439BC72721F23D00F69461 /* DateApi.swift in Sources */,
 				2BD3FBF927287D1300B4B4E6 /* UpgradeFactorySceneController.swift in Sources */,
 				55BBAC15271F404A00A86A47 /* UIImageExtension.swift in Sources */,

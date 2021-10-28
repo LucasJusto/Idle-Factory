@@ -24,3 +24,8 @@
 "TotalProductionLabel" = "Producão Total:";
 "SellFactoryButton" = "Vender Fábrica";
 "InsertFactoryButton" = "Colocar no Parque";
+
+
+//MARK: - Upgrade Screen
+"MoveToInventory" = "Mover para o inventário";
+"ChangeFactory" = "Trocar fábrica";
