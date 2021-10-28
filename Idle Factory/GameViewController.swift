@@ -24,9 +24,7 @@ class GameViewController: UIViewController {
                 if let userNotnull = user {
                     GameScene.user = userNotnull
                     if let timeAway = gameSave.getTimeAway() {
-                        let teste = gameSave.getCurrentTime()
-                        print(teste)
-                        //print(timeAway)
+                        print(timeAway)
                         if var generators = GameScene.user?.generators {
                             var perSecTotal: Double = 0.0
                             for n in 0..<generators.count {

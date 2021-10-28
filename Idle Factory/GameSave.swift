@@ -54,13 +54,32 @@ class GameSave{
         
         return Time.init(hour: hour, minute: minute, second: second, year: year, month: month, day: day)
     }
-    func saveTimeLeftApp() {
-        userDefaults.setValue(getCurrentTime, forKey: TypeStore.timeLeft.rawValue)
-        let t = userDefaults.value(forKey: TypeStore.timeLeft.rawValue) as? Time
+    func transformToSeconds(time: Time) -> Double{
+        let year = ((time.year) * 31536000)
+        let month = (Double(time.month) * (2628002.88))
+        let day = ((time.year) * 86400)
+        let hour = ((time.hour) * 3600)
+        let minute = ((time.minute) * 60)
+        let sec = (time.second)
+        
+        let initialTotal: Double = Double(year + Int(month) + day + hour + minute + sec)
+        
+        return initialTotal
     }
-    func getTimeLeftApp() -> Any {
-        return unwrap(any: userDefaults.value(forKey: TypeStore.timeLeft.rawValue) ?? 0)
-    }
+    
+//    func saveTimeLeftApp() {
+//        let total = transformToSeconds(time: getCurrentTime())
+//        CKRepository.getUserId { id in
+//            if let id = id {
+//                CKRepository.storeUserData(id: id, name: GameScene.user?.name, mainCurrency: GameScene.user?.mainCurrency, premiumCurrency: GameScene.user?.premiumCurrency, timeLeftApp: total)
+//            }
+//        }
+////        userDefaults.setValue(getCurrentTime, forKey: TypeStore.timeLeft.rawValue)
+////        let t = userDefaults.value(forKey: TypeStore.timeLeft.rawValue) as? Time
+//    }
+//    func getTimeLeftApp() -> Any {
+//        return unwrap(any: userDefaults.value(forKey: TypeStore.timeLeft.rawValue) ?? 0)
+//    }
     
     func getTimeAway() -> Double? {
 //        let dateFormatter = DateFormatter()
@@ -71,34 +90,32 @@ class GameSave{
 //        }
 //        let result: Double = Double((Calendar.current.dateComponents([.second], from: convertedTimeAway, to: Date()).second ?? 0)) - Double((Calendar.current.dateComponents([.second], from: Date(), to: Date()).second ?? 0))
 //        return result
-        let i = userDefaults.value(forKey: TypeStore.timeLeft.rawValue) as? Time
-        let f = getCurrentTime()
-
-        //MARK: Initial time do sec
-        let year = ((i!.year) * 31536000)
-        let month = (Double(i!.month) * (2628002.88))
-        let day = ((i!.year) * 86400)
-        let hour = ((i!.hour) * 3600)
-        let minute = ((i!.minute) * 60)
-        let sec = (i!.second)
-        let initialTotal = Double(year + month + day + hour + minute + sec)
-
-        //MARK: Final time do sec
-        let finalYear = ((f.year) * 31536000)
-        let FinalMonth = (Double(f.month) * (2628002.88))
-        let finalDay = ((f.year) * 86400)
-        let finalHour = ((f.hour) * 3600)
-        let finalMinute = ((f.minute) * 60)
-        let finalSec = (f.second)
-        let finalTotal = Double(finalYear + FinalMonth + finalDay + finalHour + finalMinute + finalSec)
+        let semaphore = DispatchSemaphore(value: 0)
+        var i: Double = 0.0
+        let f = transformToSeconds(time: getCurrentTime())
+        CKRepository.getUserId { id in
+            if let id = id{
+                CKRepository.getUserById(id: id) { user in
+                    i = user?.timeLeftApp ?? 0
+                    semaphore.signal()
+                }
+            }
+        }
+        semaphore.wait()
         
-        let diference = finalTotal - initialTotal
+        print(i)
+        print(f)
         
-        var result = 0
-        if diference > 604800{
-            result = 604800
+        let diference = f - i
+        
+        var result = 0.0
+        if diference > 86400{
+            result = Double(86400)
         }else{
-            result = diference
+            result = Double(diference)
+        }
+        if result < 0 {
+            result = 1
         }
         return result
     }
