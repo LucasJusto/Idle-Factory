@@ -232,22 +232,22 @@ class GameScene: SKScene {
         switch position {
         case .first:
             factory.position = CGPoint(x: factoriesPositions[0].x, y: factoriesPositions[0].y)
-            factory.zPosition = 2
+            factory.zPosition = 5
         case .second:
             factory.position = CGPoint(x: factoriesPositions[1].x, y: factoriesPositions[1].y)
             factory.zPosition = 1
         case .third:
             factory.position = CGPoint(x: factoriesPositions[2].x, y: factoriesPositions[2].y)
-            factory.zPosition = 3
+            factory.zPosition = 20
         case .fourth:
             factory.position = CGPoint(x: factoriesPositions[3].x, y: factoriesPositions[3].y)
-            factory.zPosition = 2
+            factory.zPosition = 15
         case .fifth:
             factory.position = CGPoint(x: factoriesPositions[4].x, y: factoriesPositions[4].y)
-            factory.zPosition = 5
+            factory.zPosition = 25
         case .sixth:
             factory.position = CGPoint(x: factoriesPositions[5].x, y: factoriesPositions[5].y)
-            factory.zPosition = 4
+            factory.zPosition = 20
         case .none:
             let _ = 0
         }
