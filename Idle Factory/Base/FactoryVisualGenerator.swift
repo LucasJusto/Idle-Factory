@@ -361,6 +361,24 @@ class FactoryVisualGenerator {
 
         visual.addChild(baseTop)
         
+        //randomly generates roof
+        var chimneyComponent = BaseBigRelatedPositions.chimney1
+        let rand = Int.random(in: 1...4)
+        if rand == 1 {
+            chimneyComponent = BaseBigRelatedPositions.chimney2
+        }
+        else if rand == 2 {
+            chimneyComponent = BaseBigRelatedPositions.chimney3
+        }
+        else if rand == 3 {
+            chimneyComponent = BaseBigRelatedPositions.chimney4
+        }
+        var chimney = SKSpriteNode(imageNamed: chimneyComponent.image)
+        chimney = adjustComponent(node: chimney)
+        chimney.position = CGPoint(x: baseTop.size.width * chimneyComponent.multipliersForPosition.x, y: baseTop.size.height * chimneyComponent.multipliersForPosition.y)
+        baseTop.addChild(chimney)
+
+        
         return visual
     }
 }
@@ -384,7 +402,8 @@ enum BaseBigRelatedPositions: CustomStringConvertible {
     windowBigLeft1, windowBigLeft2, windowBigLeft3, windowBigRight1, windowBigRight2, windowBigRight3,
     doorBigLeft, doorBigRight,
     doorGarageLeft, doorGarageRight,
-    doorSmallLeft1, doorSmallLeft2, doorSmallLeft3, doorSmallRight1, doorSmallRight2, doorSmallRight3
+    doorSmallLeft1, doorSmallLeft2, doorSmallLeft3, doorSmallRight1, doorSmallRight2, doorSmallRight3,
+    chimney1, chimney2, chimney3, chimney4
     
     var description: String {
         switch self {
@@ -432,6 +451,15 @@ enum BaseBigRelatedPositions: CustomStringConvertible {
                 return "door2_small_right"
             case .doorSmallRight3:
                 return "door3_small_right"
+            case .chimney1:
+                return "chimney"
+            case .chimney2:
+                return "chimney"
+            case .chimney3:
+                return "chimney"
+            case .chimney4:
+                return "chimney"
+                
         }
     }
     
@@ -481,6 +509,14 @@ enum BaseBigRelatedPositions: CustomStringConvertible {
                 return "door_small_right"
             case .doorSmallRight3:
                 return "door_small_right"
+            case .chimney1:
+                return "chimney"
+            case .chimney2:
+                return "chimney"
+            case .chimney3:
+                return "chimney"
+            case .chimney4:
+                return "chimney"
         }
     }
     
@@ -532,6 +568,14 @@ enum BaseBigRelatedPositions: CustomStringConvertible {
                 return CGPoint(x: 0.25, y: 0.23)
             case .doorSmallRight3:
                 return CGPoint(x: 0.1, y: 0.155)
+            case .chimney1:
+                return CGPoint(x: 0, y: 0.75)
+            case .chimney2:
+                return CGPoint(x: 0, y: 1)
+            case .chimney3:
+                return CGPoint(x: 0.25, y: 0.88)
+            case .chimney4:
+                return CGPoint(x: -0.25, y: 0.88)
         }
     }
 }
