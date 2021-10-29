@@ -20,15 +20,21 @@ class Factory: Generator  {
     var node: SKSpriteNode
     var textureName: String
     
-    init(id: String? = nil, resourcesArray:[Resource] , energy: Int, type: FactoryType, texture: String, position: GeneratorPositions, isActive: IsActive){
+    init(id: String? = nil, resourcesArray:[Resource] , energy: Int, type: FactoryType, texture: String? = nil, position: GeneratorPositions, isActive: IsActive){
         self.id = id
         self.resourcesArray = resourcesArray
         self.energy = energy
         self.type = type
-        self.node = SKSpriteNode(texture: SKTexture(imageNamed: texture))
+        if(type == .NFT){
+            #warning("Change SKSpriteNode() to generateVisual()")  
+            self.node = SKSpriteNode(texture: SKTexture(imageNamed: texture ?? "Basic_Factory_level_1"))
+        }
+        else {
+            self.node = SKSpriteNode(texture: SKTexture(imageNamed: texture ?? "Basic_Factory_level_1"))
+        }
         self.position = position
         self.isActive = isActive
-        self.textureName = texture
+        self.textureName = texture ?? "Basic_Factory_level_1"
         self.perSec = 0
     }
 }
