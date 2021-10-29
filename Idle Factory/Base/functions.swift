@@ -74,6 +74,48 @@ func getResourceImageName(resource: ResourceType) -> String{
 }
 
 
+func createBasicFactory(resourceTypeArray: [ResourceType]) -> Factory {
+    
+    var resourceArray: [Resource] = []
+   
+    var shuffledArray: [ResourceType] = []
+    
+    for n in 0..<resourceTypeArray.count {
+        shuffledArray.append(resourceTypeArray[n])
+    }
+    shuffledArray.shuffle()
+    
+    
+    let maxInt = min(resourceTypeArray.count+1,4)
+    for n in 0..<Int.random(in: 1..<maxInt) {
+        resourceArray.append(Resource(basePrice: 0, baseQtt: Double.random(in: 1..<15), currentLevel: 1, qttPLevel: Double.random(in: 5..<15), type: shuffledArray[n], pricePLevelIncreaseTax: Double.random(in: 100..<1500)))
+    }
+    
+    let factory = Factory(resourcesArray: resourceArray, energy: Int.random(in: 1..<10), type: FactoryType.Basic, texture: "Basic_Factory_level_1", position: GeneratorPositions.none, isActive: IsActive.no)
+    return factory
+}
+
+func createNFTFactory(resourceTypeArray: [ResourceType]) -> Factory {
+    
+    var resourceArray: [Resource] = []
+   
+    var shuffledArray: [ResourceType] = []
+    
+    for n in 0..<resourceTypeArray.count {
+        shuffledArray.append(resourceTypeArray[n])
+    }
+    shuffledArray.shuffle()
+    
+    
+    let maxInt = min(resourceTypeArray.count+1,4)
+    for n in 0..<Int.random(in: 1..<maxInt) {
+        resourceArray.append(Resource(basePrice: 0, baseQtt: Double.random(in: 15..<25), currentLevel: 1, qttPLevel: Double.random(in: 15..<25), type: shuffledArray[n], pricePLevelIncreaseTax: Double.random(in: 1500..<15000)))
+    }
+    
+    let factory = Factory(resourcesArray: resourceArray, energy: Int.random(in: 5..<15), type: FactoryType.NFT, position: GeneratorPositions.none, isActive: IsActive.no)
+    return factory
+}
+
 func getTime( completionHandler: @escaping (DateApi?) -> Void){
     let urlString = "https://worldtimeapi.org/api/timezone/Europe/London"
     let url = URL(string: urlString)!
