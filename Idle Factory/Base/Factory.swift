@@ -28,13 +28,14 @@ class Factory: Generator  {
         if(type == .NFT){
             #warning("Change SKSpriteNode() to generateVisual()")  
             self.node = SKSpriteNode(texture: SKTexture(imageNamed: texture ?? "Basic_Factory_level_1"))
+            self.textureName = ""
         }
         else {
             self.node = SKSpriteNode(texture: SKTexture(imageNamed: texture ?? "Basic_Factory_level_1"))
+            self.textureName = texture ?? "Basic_Factory_level_1"
         }
         self.position = position
         self.isActive = isActive
-        self.textureName = texture ?? "Basic_Factory_level_1"
         self.perSec = 0
     }
 }
