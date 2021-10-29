@@ -10,23 +10,99 @@ import UIKit
 import SpriteKit
 
 class FactoryVisualGenerator {
-    var bigBaseComponentsArray: BaseBigRelatedPositions?
-    var smallBaseComponentsArray: BaseSmallRelatedPositions?
+    static var smallBaseColors = [UIColor(red: 227/255, green: 36/255, blue: 37/255, alpha: 1),
+                           UIColor(red: 9/255, green: 128/255, blue: 255/255, alpha: 1),
+                           UIColor(red: 252/255, green: 203/255, blue: 9/255, alpha: 1),
+                           UIColor(red: 9/255, green: 128/255, blue: 255/255, alpha: 1),
+                           UIColor(red: 252/255, green: 203/255, blue: 9/255, alpha: 1),
+                           UIColor(red: 227/255, green: 36/255, blue: 37/255, alpha: 1),
+                           UIColor(red: 252/255, green: 203/255, blue: 9/255, alpha: 1),
+                           UIColor(red: 34/255, green: 200/255, blue: 26/255, alpha: 1),
+                           UIColor(red: 136/255, green: 9/255, blue: 255/255, alpha: 1),
+                           UIColor(red: 252/255, green: 203/255, blue: 9/255, alpha: 1),
+                           UIColor(red: 34/255, green: 200/255, blue: 26/255, alpha: 1),
+                           UIColor(red: 252/255, green: 203/255, blue: 9/255, alpha: 1),
+                           UIColor(red: 227/255, green: 36/255, blue: 37/255, alpha: 1),
+                           UIColor(red: 6/255, green: 52/255, blue: 168/255, alpha: 1),
+                           UIColor(red: 6/255, green: 52/255, blue: 168/255, alpha: 1),
+                           UIColor(red: 6/255, green: 52/255, blue: 168/255, alpha: 1),
+                           UIColor(red: 34/255, green: 200/255, blue: 26/255, alpha: 1),
+                           UIColor(red: 252/255, green: 203/255, blue: 9/255, alpha: 1),
+                           UIColor(red: 9/255, green: 128/255, blue: 255/255, alpha: 1),
+                           UIColor(red: 227/255, green: 36/255, blue: 225/255, alpha: 1),
+                           UIColor(red: 227/255, green: 36/255, blue: 225/255, alpha: 1),
+                           UIColor(red: 227/255, green: 36/255, blue: 225/255, alpha: 1)]
+    static var bigBaseColors = [UIColor(red: 252/255, green: 203/255, blue: 9/255, alpha: 1),
+                         UIColor(red: 252/255, green: 203/255, blue: 9/255, alpha: 1),
+                         UIColor(red: 227/255, green: 36/255, blue: 37/255, alpha: 1),
+                         UIColor(red: 227/255, green: 36/255, blue: 37/255, alpha: 1),
+                         UIColor(red: 9/255, green: 128/255, blue: 255/255, alpha: 1),
+                         UIColor(red: 9/255, green: 128/255, blue: 255/255, alpha: 1),
+                         UIColor(red: 136/255, green: 9/255, blue: 255/255, alpha: 1),
+                         UIColor(red: 136/255, green: 9/255, blue: 255/255, alpha: 1),
+                         UIColor(red: 34/255, green: 200/255, blue: 26/255, alpha: 1),
+                         UIColor(red: 34/255, green: 200/255, blue: 26/255, alpha: 1),
+                         UIColor(red: 6/255, green: 52/255, blue: 168/255, alpha: 1),
+                         UIColor(red: 6/255, green: 52/255, blue: 168/255, alpha: 1),
+                         UIColor(red: 6/255, green: 52/255, blue: 168/255, alpha: 1),
+                         UIColor(red: 34/255, green: 200/255, blue: 26/255, alpha: 1),
+                         UIColor(red: 252/255, green: 203/255, blue: 9/255, alpha: 1),
+                         UIColor(red: 227/255, green: 36/255, blue: 37/255, alpha: 1),
+                         UIColor(red: 227/255, green: 36/255, blue: 225/255, alpha: 1),
+                         UIColor(red: 227/255, green: 36/255, blue: 225/255, alpha: 1),
+                         UIColor(red: 227/255, green: 36/255, blue: 225/255, alpha: 1),
+                         UIColor(red: 34/255, green: 200/255, blue: 26/255, alpha: 1),
+                         UIColor(red: 252/255, green: 203/255, blue: 9/255, alpha: 1),
+                         UIColor(red: 9/255, green: 128/255, blue: 255/255, alpha: 1)]
     
-    static func getRandomColor() -> UIColor {
-        let r = CGFloat.random(in: 0...1)
-        let g = CGFloat.random(in: 0...1)
-        let b = CGFloat.random(in: 0...1)
-        
-        return UIColor(red: r, green: g, blue: b, alpha: 1)
+    static func getRandomColors() -> [UIColor] {
+        let randomIndex = Int.random(in: 0...bigBaseColors.count-1)
+        var colors = [UIColor]()
+        colors.append(smallBaseColors[randomIndex])
+        colors.append(bigBaseColors[randomIndex])
+        return colors
     }
     
     static func adjustComponent(node: SKSpriteNode) -> SKSpriteNode {
         node.zPosition = (node.parent?.zPosition ?? 2) + 1
-        node.colorBlendFactor = 1
-        node.color = getRandomColor()
         
         return node
+    }
+    
+    static func getNodePosition(base: SKSpriteNode, nodeType: BaseBigRelatedPositions) -> CGPoint {
+        return CGPoint(x: base.size.width * nodeType.multipliersForPosition.x, y: base.size.height * nodeType.multipliersForPosition.y)
+    }
+    
+    static func getNodePosition(base: SKSpriteNode, nodeType: BaseSmallRelatedPositions) -> CGPoint {
+        return CGPoint(x: base.size.width * nodeType.multipliersForPosition.x, y: base.size.height * nodeType.multipliersForPosition.y)
+    }
+    
+    static func getRandomAvailablePosition(positions: [Bool]) -> Int {
+        //identifies if there is at least one available position in the array parameter
+        var existsAvailablePosition = false
+        for b in positions {
+            if b {
+                existsAvailablePosition = true
+            }
+        }
+        
+        if existsAvailablePosition {
+            //if exists at least one available position choose a random available position.
+            var position = Int.random(in: 0...positions.count-1)
+            
+            while !positions[position] {
+                if position == positions.count-1 {
+                    position = 0
+                }
+                else {
+                    position += 1
+                }
+                
+            }
+            return position
+        }
+        //else returns 0
+        return 0
     }
     
     static func generateVisual() -> SKSpriteNode {
@@ -34,34 +110,256 @@ class FactoryVisualGenerator {
         let visual = SKSpriteNode(imageNamed: "ground")
         visual.anchorPoint = CGPoint(x: 0.5, y: 0)
         visual.zPosition = 1
+        let colors = getRandomColors()
         
-        //base: choose, create and add as child to ground
-        let randomBase = Bool.random()
-        var baseName = "base_big"
-        var selectedBase = SelectedBase.big
-        if randomBase {
-            baseName = "base_small"
-            selectedBase = SelectedBase.small
-        }
-        let base = SKSpriteNode(imageNamed: baseName)
-        base.anchorPoint = CGPoint(x: 0.5, y: 0)
-        base.zPosition = 2
-        base.position = CGPoint(x: visual.size.width * selectedBase.multipliersForPosition.x, y: visual.size.height * selectedBase.multipliersForPosition.y)
-        base.colorBlendFactor = 1
-        base.color = getRandomColor()
-        visual.addChild(base)
-        
-        //randomly build left wall
+        //build baseBottom
+        let baseBottom = SKSpriteNode(imageNamed: "base_small")
+        baseBottom.anchorPoint = CGPoint(x: 0.5, y: 0)
+        baseBottom.zPosition = 2
+        baseBottom.position = CGPoint(x: visual.size.width * SelectedBase.small.multipliersForPosition.x, y: visual.size.height * SelectedBase.small.multipliersForPosition.y)
+        baseBottom.colorBlendFactor = 1
+        baseBottom.color = colors[0]
+        //randomly build left wall for baseBottom
         let randomOnly1Object = Bool.random()
         if randomOnly1Object {
             let randomGarageOrBigDoor = Bool.random()
             if randomGarageOrBigDoor {
-                let garage = SKSpriteNode(imageNamed: "")
+                var garage = SKSpriteNode(imageNamed: BaseSmallRelatedPositions.doorGarageLeft.image)
+                garage = adjustComponent(node: garage)
+                garage.position = getNodePosition(base: baseBottom, nodeType: BaseSmallRelatedPositions.doorGarageLeft)
+                baseBottom.addChild(garage)
+            }
+            else {
+                var bigDoor = SKSpriteNode(imageNamed: BaseSmallRelatedPositions.doorBigLeft.image)
+                bigDoor = adjustComponent(node: bigDoor)
+                bigDoor.position = getNodePosition(base: baseBottom, nodeType: BaseSmallRelatedPositions.doorBigLeft)
+                baseBottom.addChild(bigDoor)
             }
         }
-        //randomly build right wall
+        else {
+            let qttComponents = Int.random(in: 1...2)//how many objects will we insert
+            var arrayOfAvailablePositions = [Bool]()//which position is available? (starts with all true)
+            for _ in 0...2 {
+                arrayOfAvailablePositions.append(true)
+            }
+            var doorComponent = BaseSmallRelatedPositions.doorSmallLeft1
+            let posi = getRandomAvailablePosition(positions: arrayOfAvailablePositions)
+            arrayOfAvailablePositions[posi] = false
+            if posi == 0 {
+                doorComponent = BaseSmallRelatedPositions.doorSmallLeft1
+            }
+            else if posi == 1 {
+                doorComponent = BaseSmallRelatedPositions.doorSmallLeft2
+            }
+            else {
+                doorComponent = BaseSmallRelatedPositions.doorSmallLeft3
+            }
+            var d = SKSpriteNode(imageNamed: doorComponent.image)
+            d = adjustComponent(node: d)
+            d.position = getNodePosition(base: baseBottom, nodeType: doorComponent)
+            baseBottom.addChild(d)
+            //create and add to base the components
+            for _ in 0...qttComponents-1 {
+                let pos = getRandomAvailablePosition(positions: arrayOfAvailablePositions)
+                arrayOfAvailablePositions[pos] = false
+                var component: BaseSmallRelatedPositions = BaseSmallRelatedPositions.windowLeft1
+                let r = Int.random(in: 1...2)
+                if r == 1 {
+                    if pos == 0 {
+                        component = BaseSmallRelatedPositions.windowBigLeft1
+                    }
+                    else if pos == 1 {
+                        component = BaseSmallRelatedPositions.windowBigLeft2
+                    }
+                    else {
+                        component = BaseSmallRelatedPositions.windowBigLeft3
+                    }
+                }
+                else if r == 2 {
+                    if pos == 0 {
+                        component = BaseSmallRelatedPositions.windowLeft1
+                    }
+                    else if pos == 1 {
+                        component = BaseSmallRelatedPositions.windowLeft2
+                    }
+                    else {
+                        component = BaseSmallRelatedPositions.windowLeft3
+                    }
+                }
+                var n = SKSpriteNode(imageNamed: component.image)
+                n = adjustComponent(node: n)
+                n.position = getNodePosition(base: baseBottom, nodeType: component)
+                baseBottom.addChild(n)
+            }
+
+        }
+        //randomly build right wall for baseBottom
+        let randomOnly1ObjectR = Bool.random()
+        if randomOnly1ObjectR {
+            let randomGarageOrBigDoor = Bool.random()
+            if randomGarageOrBigDoor {
+                var garage = SKSpriteNode(imageNamed: BaseSmallRelatedPositions.doorGarageRight.image)
+                garage = adjustComponent(node: garage)
+                garage.position = getNodePosition(base: baseBottom, nodeType: BaseSmallRelatedPositions.doorGarageRight)
+                baseBottom.addChild(garage)
+            }
+            else {
+                var bigDoor = SKSpriteNode(imageNamed: BaseSmallRelatedPositions.doorBigRight.image)
+                bigDoor = adjustComponent(node: bigDoor)
+                bigDoor.position = getNodePosition(base: baseBottom, nodeType: BaseSmallRelatedPositions.doorBigRight)
+                baseBottom.addChild(bigDoor)
+            }
+        }
+        else {
+            let qttComponents = Int.random(in: 1...2)//how many objects will we insert
+            var arrayOfAvailablePositions = [Bool]()//which position is available? (starts with all true)
+            for _ in 0...2 {
+                arrayOfAvailablePositions.append(true)
+            }
+            var doorComponent = BaseSmallRelatedPositions.doorSmallRight1
+            let posi = getRandomAvailablePosition(positions: arrayOfAvailablePositions)
+            arrayOfAvailablePositions[posi] = false
+            if posi == 0 {
+                doorComponent = BaseSmallRelatedPositions.doorSmallRight1
+            }
+            else if posi == 1 {
+                doorComponent = BaseSmallRelatedPositions.doorSmallRight2
+            }
+            else {
+                doorComponent = BaseSmallRelatedPositions.doorSmallRight3
+            }
+            var d = SKSpriteNode(imageNamed: doorComponent.image)
+            d = adjustComponent(node: d)
+            d.position = getNodePosition(base: baseBottom, nodeType: doorComponent)
+            baseBottom.addChild(d)
+            //create and add to base the components
+            for _ in 0...qttComponents-1 {
+                let pos = getRandomAvailablePosition(positions: arrayOfAvailablePositions)
+                arrayOfAvailablePositions[pos] = false
+                var component: BaseSmallRelatedPositions = BaseSmallRelatedPositions.windowRight1
+                let r = Int.random(in: 1...2)
+                if r == 1 {
+                    if pos == 0 {
+                        component = BaseSmallRelatedPositions.windowBigRight1
+                    }
+                    else if pos == 1 {
+                        component = BaseSmallRelatedPositions.windowBigRight2
+                    }
+                    else {
+                        component = BaseSmallRelatedPositions.windowBigRight3
+                    }
+                }
+                else if r == 2 {
+                    if pos == 0 {
+                        component = BaseSmallRelatedPositions.windowRight1
+                    }
+                    else if pos == 1 {
+                        component = BaseSmallRelatedPositions.windowRight2
+                    }
+                    else {
+                        component = BaseSmallRelatedPositions.windowRight3
+                    }
+                }
+                var n = SKSpriteNode(imageNamed: component.image)
+                n = adjustComponent(node: n)
+                n.position = getNodePosition(base: baseBottom, nodeType: component)
+                baseBottom.addChild(n)
+            }
+
+        }
+        visual.addChild(baseBottom)
         
-        //randomly build roof
+        //build baseTop
+        let baseTop = SKSpriteNode(imageNamed: "base_big")
+        baseTop.anchorPoint = CGPoint(x: 0.5, y: 0)
+        baseTop.zPosition = 3
+        baseTop.position = CGPoint(x: visual.size.width * SelectedBase.big.multipliersForPosition.x, y: visual.size.height * SelectedBase.big.multipliersForPosition.y)
+        baseTop.colorBlendFactor = 1
+        baseTop.color = colors[1]
+        
+        let qttComponents = Int.random(in: 2...3)//how many objects will we insert
+        var arrayOfAvailablePositions = [Bool]()//which position is available? (starts with all true)
+        for _ in 0...2 {
+            arrayOfAvailablePositions.append(true)
+        }
+        
+        //randomly creates left wall for baseTop
+        //create and add to base the components
+        for _ in 0...qttComponents-1 {
+            let pos = getRandomAvailablePosition(positions: arrayOfAvailablePositions)
+            arrayOfAvailablePositions[pos] = false
+            var component: BaseBigRelatedPositions = BaseBigRelatedPositions.windowLeft1
+            let r = Int.random(in: 1...2)
+            if r == 1 {
+                if pos == 0 {
+                    component = BaseBigRelatedPositions.windowBigLeft1
+                }
+                else if pos == 1 {
+                    component = BaseBigRelatedPositions.windowBigLeft2
+                }
+                else {
+                    component = BaseBigRelatedPositions.windowBigLeft3
+                }
+            }
+            else if r == 2 {
+                if pos == 0 {
+                    component = BaseBigRelatedPositions.windowLeft1
+                }
+                else if pos == 1 {
+                    component = BaseBigRelatedPositions.windowLeft2
+                }
+                else {
+                    component = BaseBigRelatedPositions.windowLeft3
+                }
+            }
+            var n = SKSpriteNode(imageNamed: component.image)
+            n = adjustComponent(node: n)
+            n.position = getNodePosition(base: baseTop, nodeType: component)
+            baseTop.addChild(n)
+        }
+
+        //randomly build right wall for baseBottom
+        let qttComponents2 = Int.random(in: 2...3)//how many objects will we insert
+        var arrayOfAvailablePositions2 = [Bool]()//which position is available? (starts with all true)
+        for _ in 0...2 {
+            arrayOfAvailablePositions2.append(true)
+        }
+        
+        //create and add to base the components
+        for _ in 0...qttComponents2-1 {
+            let pos = getRandomAvailablePosition(positions: arrayOfAvailablePositions2)
+            arrayOfAvailablePositions2[pos] = false
+            var component: BaseBigRelatedPositions = BaseBigRelatedPositions.windowRight1
+            let r = Int.random(in: 1...2)
+            if r == 1 {
+                if pos == 0 {
+                    component = BaseBigRelatedPositions.windowBigRight1
+                }
+                else if pos == 1 {
+                    component = BaseBigRelatedPositions.windowBigRight2
+                }
+                else {
+                    component = BaseBigRelatedPositions.windowBigRight3
+                }
+            }
+            else if r == 2 {
+                if pos == 0 {
+                    component = BaseBigRelatedPositions.windowRight1
+                }
+                else if pos == 1 {
+                    component = BaseBigRelatedPositions.windowRight2
+                }
+                else {
+                    component = BaseBigRelatedPositions.windowRight3
+                }
+            }
+            var n = SKSpriteNode(imageNamed: component.image)
+            n = adjustComponent(node: n)
+            n.position = getNodePosition(base: baseTop, nodeType: component)
+            baseTop.addChild(n)
+        }
+
+        visual.addChild(baseTop)
         
         return visual
     }
@@ -74,7 +372,7 @@ enum SelectedBase {
         //positions relative to ground
         switch self {
             case .big:
-                return CGPoint(x: 0, y: 0.2)
+                return CGPoint(x: 0, y: 0.6)
             case .small:
                 return CGPoint(x: 0, y: 0.15)
         }
@@ -86,7 +384,7 @@ enum BaseBigRelatedPositions: CustomStringConvertible {
     windowBigLeft1, windowBigLeft2, windowBigLeft3, windowBigRight1, windowBigRight2, windowBigRight3,
     doorBigLeft, doorBigRight,
     doorGarageLeft, doorGarageRight,
-    doorSmallLeft1, doorSmallLeft2, doorSmallLeft3, doorSmallRight1, doorSmallRight2, doorSmalRight3
+    doorSmallLeft1, doorSmallLeft2, doorSmallLeft3, doorSmallRight1, doorSmallRight2, doorSmallRight3
     
     var description: String {
         switch self {
@@ -132,7 +430,7 @@ enum BaseBigRelatedPositions: CustomStringConvertible {
                 return "door1_small_right"
             case .doorSmallRight2:
                 return "door2_small_right"
-            case .doorSmalRight3:
+            case .doorSmallRight3:
                 return "door3_small_right"
         }
     }
@@ -181,7 +479,7 @@ enum BaseBigRelatedPositions: CustomStringConvertible {
                 return "door_small_right"
             case .doorSmallRight2:
                 return "door_small_right"
-            case .doorSmalRight3:
+            case .doorSmallRight3:
                 return "door_small_right"
         }
     }
@@ -232,7 +530,7 @@ enum BaseBigRelatedPositions: CustomStringConvertible {
                 return CGPoint(x: 0.4, y: 0.3)
             case .doorSmallRight2:
                 return CGPoint(x: 0.25, y: 0.23)
-            case .doorSmalRight3:
+            case .doorSmallRight3:
                 return CGPoint(x: 0.1, y: 0.155)
         }
     }
@@ -243,7 +541,7 @@ enum BaseSmallRelatedPositions: CustomStringConvertible {
     windowBigLeft1, windowBigLeft2, windowBigLeft3, windowBigRight1, windowBigRight2, windowBigRight3,
     doorBigLeft, doorBigRight,
     doorGarageLeft, doorGarageRight,
-    doorSmallLeft1, doorSmallLeft2, doorSmallLeft3, doorSmallRight1, doorSmallRight2, doorSmalRight3
+    doorSmallLeft1, doorSmallLeft2, doorSmallLeft3, doorSmallRight1, doorSmallRight2, doorSmallRight3
     
     var description: String {
         switch self {
@@ -289,7 +587,7 @@ enum BaseSmallRelatedPositions: CustomStringConvertible {
                 return "door1_small_right"
             case .doorSmallRight2:
                 return "door2_small_right"
-            case .doorSmalRight3:
+            case .doorSmallRight3:
                 return "door3_small_right"
         }
     }
@@ -338,7 +636,7 @@ enum BaseSmallRelatedPositions: CustomStringConvertible {
                 return "door_small_right"
             case .doorSmallRight2:
                 return "door_small_right"
-            case .doorSmalRight3:
+            case .doorSmallRight3:
                 return "door_small_right"
         }
     }
@@ -389,7 +687,7 @@ enum BaseSmallRelatedPositions: CustomStringConvertible {
                 return CGPoint(x: 0.4, y: 0.35)
             case .doorSmallRight2:
                 return CGPoint(x: 0.25, y: 0.25)
-            case .doorSmalRight3:
+            case .doorSmallRight3:
                 return CGPoint(x: 0.1, y: 0.155)
         }
     }
