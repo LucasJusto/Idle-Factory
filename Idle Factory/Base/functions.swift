@@ -63,6 +63,16 @@ func doubleToString(value: Double) -> String {
         return "\(nInteger).\(nDecimal)\(str)"
     }
 
+func getResourceImageName(resource: ResourceType) -> String{
+    switch resource {
+    case .computador:
+        return "laptopcomputer"
+    default:
+        return "questionmark"
+    }
+    
+}
+
 
 func createBasicFactory(resourceTypeArray: [ResourceType]) -> Factory {
     
