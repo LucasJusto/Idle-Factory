@@ -22,9 +22,9 @@
 "InventoryHeader" = "Inventory";
 "PurchaseMoreFactoryButton" = "Buy more factories";
 "TotalProductionLabel" = "Total Production:";
-"SellFactoryButton" = "Sell Factory";
+"SellFactoryButton" = "Quick sell";
 "InsertFactoryButton" = "Insert on the Park";
-
+"AnnounceFactoryButton" = "Announce";
 
 //MARK: - Upgrade Screen
 "MoveToInventory" = "Move to inventory";

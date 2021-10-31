@@ -103,13 +103,13 @@ class GameViewController: UIViewController {
     
     // MARK: - HUD ACTION SCENES
     /**
-     Calls GameInventory storyboard to display the actual players inventory.
+     Calls GameInventory storyboard to display the actual players inventory. It receives a clickedSource to identify from where the player clicked to enter in this scene.
      */
-    func displayInventory() {
+    func displayInventory(clickedSource: String) {
         
-        var mainView: UIStoryboard!
-        mainView = UIStoryboard(name: "GameInventoryScene", bundle: nil)
-        let viewcontroller : UIViewController = mainView.instantiateViewController(withIdentifier: "InventoryStoryboard") as UIViewController
+        let mainView = UIStoryboard(name: "GameInventoryScene", bundle: nil)
+        let viewcontroller : GameInventorySceneController = mainView.instantiateViewController(withIdentifier: "InventoryStoryboard") as! GameInventorySceneController
+        viewcontroller.clickedSource = clickedSource
         self.present(viewcontroller, animated: false)
     }
     
@@ -119,9 +119,8 @@ class GameViewController: UIViewController {
      */
     func displayMarketplace() {
         
-        var mainView: UIStoryboard!
-        mainView = UIStoryboard(name: "GameMarketplaceScene", bundle: nil)
-        let viewcontroller : UIViewController = mainView.instantiateViewController(withIdentifier: "MarketplaceStoryboard") as UIViewController
+        let mainView = UIStoryboard(name: "GameMarketplaceScene", bundle: nil)
+        let viewcontroller : GameMarketplaceSceneController = mainView.instantiateViewController(withIdentifier: "MarketplaceStoryboard") as! GameMarketplaceSceneController
         self.present(viewcontroller, animated: false)
     }
     
@@ -131,9 +130,8 @@ class GameViewController: UIViewController {
      */
     func displayChallenge() {
         
-        var mainView: UIStoryboard!
-        mainView = UIStoryboard(name: "GameChallengeScene", bundle: nil)
-        let viewcontroller : UIViewController = mainView.instantiateViewController(withIdentifier: "ChallengeStoryboard") as UIViewController
+        let mainView = UIStoryboard(name: "GameChallengeScene", bundle: nil)
+        let viewcontroller : GameChallengeSceneController = mainView.instantiateViewController(withIdentifier: "ChallengeStoryboard") as! GameChallengeSceneController
         self.present(viewcontroller, animated: false)
     }
     

@@ -22,8 +22,9 @@
 "InventoryHeader" = "Inventário";
 "PurchaseMoreFactoryButton" = "Comprar mais fábricas";
 "TotalProductionLabel" = "Producão Total:";
-"SellFactoryButton" = "Vender Fábrica";
+"SellFactoryButton" = "Venda rápida";
 "InsertFactoryButton" = "Colocar no Parque";
+"AnnounceFactoryButton" = "Anunciar";
 
 
 //MARK: - Upgrade Screen

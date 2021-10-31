@@ -44,18 +44,44 @@ class GameInventorySceneController: UIViewController {
     @IBOutlet weak var totalProductionPerSec: UILabel!
     @IBOutlet weak var factorySerial_ID: UILabel!
     
-    // MARK: - FACTORY DETAILS ACTIONS
+    // MARK: - FACTORY DETAILS BUTTONS
     @IBOutlet weak var sellFactoryButton: UIButton!
     @IBOutlet weak var insertFactoryButton: UIButton!
     
-    // MARK: - CLOSE INVENTORY
+    static let factoryID: String = "factory_cell"
+    var clickedSource: String = ""
+    
+    
+    // MARK: - ACTIONS
+    /**
+     Close Inventory scene.
+     */
     @IBAction func closeInventory(_ sender: Any) {
         self.dismiss(animated: false, completion: nil)
     }
     
-    static let factoryID: String = "factory_cell"
+    
+    /**
+     Quick sell a generator for main currency. The gaining is calculated by 60% of the price paid for the generator.
+     */
+    @IBAction func quickSell(_ sender: Any) {
+        print("Quick Sell")
+    }
+    
+    /**
+     Action to insert ou announce a factory. This function depends from where user clicked to enter on this scene. This is controlled by the 'clickedSource' variable. If player comes by 'add factory', this action will place a factory from the Inventory to the scene. If player clicks by Inventory button, this action will make announce a factory possible to be announced on marketplace.
+     */
+    @IBAction func insertOrAnnounceFactory(_ sender: Any) {
+        
+        if clickedSource == "InsertFactoryButton" {
+            insertOnPark()
+        } else {
+            
+        }
+    }
 
     
+    // MARK: - INIT
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -67,7 +93,7 @@ class GameInventorySceneController: UIViewController {
         
         // Inventory Header
         inventoryHeader.text = NSLocalizedString("InventoryHeader", comment: "")
-        purchaseFactoryButton.titleLabel?.text = NSLocalizedString("PurchaseMoreFactoryButton", comment: "")
+        purchaseFactoryButton.setTitle(NSLocalizedString("PurchaseMoreFactoryButton", comment: ""), for: .normal)
         purchaseFactoryButton.layer.cornerRadius = 10
         
         // Info Factories
@@ -76,9 +102,17 @@ class GameInventorySceneController: UIViewController {
         
         // Buttons
         sellFactoryButton.layer.cornerRadius = 10
-        sellFactoryButton.titleLabel?.text = NSLocalizedString("SellFactoryButton", comment: "")
+        sellFactoryButton.setTitle(NSLocalizedString("SellFactoryButton", comment: ""), for: .normal)
         insertFactoryButton.layer.cornerRadius = 10
-        insertFactoryButton.titleLabel?.text = NSLocalizedString("InsertFactoryButton", comment: "")
+        insertFactoryButton.setTitle(clickedSource == "InsertFactoryButton" ? NSLocalizedString("InsertFactoryButton", comment: "") : NSLocalizedString("AnnounceFactoryButton", comment: ""), for: .normal)
+    }
+    
+    
+    /**
+     Insert a factory from the Inventory to park. Turn the factory as active to generate resource to the Idle game.
+     */
+    func insertOnPark() {
+        print("Moving to park")
     }
     
     
@@ -86,27 +120,34 @@ class GameInventorySceneController: UIViewController {
      Hide / Unhide all factory detail info if player selects a empty box on inventory. Receives a status of type Bool.
      */
     func hideDisplayFactoryInfo(status: Bool) {
+        // Factory Image
         factoryImage.isHidden = status
+        
+        // Factory Resource 1
         typeImage1.isHidden = status
         coinImage1.isHidden = status
         quantityType1.isHidden = status
         generatePerSecType1.isHidden = status
         
+        // Factory Resource 2
         typeImage2.isHidden = status
         quantityType2.isHidden = status
         coinImage2.isHidden = status
         generatePerSecType2.isHidden = status
         
+        // Factory Resource 3
         typeImage3.isHidden = status
         quantityType3.isHidden = status
         coinImage3.isHidden = status
         generatePerSecType3.isHidden = status
-        factorySerial_ID.isHidden = status
         
+        // Factory totals
         totalProductionLabel.isHidden = status
         coinImage4.isHidden = status
         totalProductionPerSec.isHidden = status
-        
+        factorySerial_ID.isHidden = status
+
+        // Actions
         sellFactoryButton.isHidden = status
         insertFactoryButton.isHidden = status
     }

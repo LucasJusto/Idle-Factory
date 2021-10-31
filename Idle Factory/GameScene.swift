@@ -55,9 +55,7 @@ class GameScene: SKScene {
             }
         }
         let delay = SKAction.wait(forDuration: 1)
-        
         let sequence = SKAction.sequence([delay, incrementAction])
-        
         let actionForever = SKAction.repeatForever(sequence)
         
         return actionForever
@@ -102,38 +100,38 @@ class GameScene: SKScene {
         for touch in touches {
             let location = touch.location(in: self)
             let touchedNode = atPoint(location)
-            if(touchedNode.name == "PlayerInventoryButton"){
-                displayInventory()
-            }
-            else if(touchedNode.name == "MarketplaceButton") {
+            switch touchedNode.name {
+            case "PlayerInventoryButton":
+                displayInventory(clickedSource: "AnnounceFactoryButton")
+            case "MarketplaceButton":
                 displayMarketplace()
-            }
-            else if touchedNode.name == "ChallengeButton" {
+            case "ChallengeButton":
                 displayChallenge()
-            }
-            
-            else if touchedNode.name == "factory0" {
+            case "factory_slot_0_empty":
+                displayInventory(clickedSource: "InsertFactoryButton")
+            case "factory_slot_1_empty":
+                displayInventory(clickedSource: "InsertFactoryButton")
+            case "factory_slot_2_empty":
+                displayInventory(clickedSource: "InsertFactoryButton")
+            case "factory_slot_3_empty":
+                displayInventory(clickedSource: "InsertFactoryButton")
+            case "factory_slot_4_empty":
+                displayInventory(clickedSource: "InsertFactoryButton")
+            case "factory_slot_5_empty":
+                displayInventory(clickedSource: "InsertFactoryButton")
+            case "factory_slot_0_occupied":
                 displayUpgradeFactory()
-            }
-            
-            else if touchedNode.name == "factory1" {
+            case "factory_slot_1_occupied":
                 displayUpgradeFactory()
-            }
-            
-            else if touchedNode.name == "factory2" {
+            case "factory_slot_2_occupied":
                 displayUpgradeFactory()
-            }
-            
-            else if touchedNode.name == "factory3" {
+            case "factory_slot_3_occupied":
                 displayUpgradeFactory()
-            }
-            
-            else if touchedNode.name == "factory4" {
+            case "factory_slot_4_occupied":
                 displayUpgradeFactory()
-            }
-            
-            else if touchedNode.name == "factory5" {
+            case "factory_slot_5_occupied":
                 displayUpgradeFactory()
+            default: return
             }
         }
     }
@@ -170,7 +168,8 @@ class GameScene: SKScene {
             let slot = factoriesPositions[n].slot
             slot.anchorPoint = CGPoint(x: 0.5, y: 0)
             slot.position = CGPoint(x: factoriesPositions[n].x, y: factoriesPositions[n].y)
-            slot.name = "factory\(n)"
+            slot.zPosition = 1
+            slot.name = "factory_slot_\(n)_empty"
             background.addChild(slot)
         }
     }
@@ -245,6 +244,9 @@ class GameScene: SKScene {
     
     
     // MARK: - GENERATORS FUNCTIONS
+    /**
+     Load player active factories on the scene.
+     */
     func loadPlayerFactories() {
         for n in 0..<(GameScene.user?.generators.count ?? 0){
             if GameScene.user?.generators[n].isActive == .yes {
@@ -253,29 +255,36 @@ class GameScene: SKScene {
         }
     }
     
+    
     /**
-     Add a factory on the scene. Receives a position which represents what slot player wants to add the new factory.
+     Add a factory on the scene. Receives a Factory which checks what slot this factory is located.
      */
     func addFactory(factory: Factory) {
                 
         switch factory.position {
         case .first:
             factoriesPositions[0].slot.texture = SKTexture(imageNamed: factory.textureName)
+            factoriesPositions[0].slot.name = "factory_slot_0_occupied"
             factory.node.zPosition = 2
         case .second:
             factoriesPositions[1].slot.texture = SKTexture(imageNamed: factory.textureName)
+            factoriesPositions[1].slot.name = "factory_slot_1_occupied"
             factory.node.zPosition = 2
         case .third:
             factoriesPositions[2].slot.texture = SKTexture(imageNamed: factory.textureName)
+            factoriesPositions[2].slot.name = "factory_slot_2_occupied"
             factory.node.zPosition = 2
         case .fourth:
             factoriesPositions[3].slot.texture = SKTexture(imageNamed: factory.textureName)
+            factoriesPositions[3].slot.name = "factory_slot_3_occupied"
             factory.node.zPosition = 1
         case .fifth:
             factoriesPositions[4].slot.texture = SKTexture(imageNamed: factory.textureName)
+            factoriesPositions[4].slot.name = "factory_slot_4_occupied"
             factory.node.zPosition = 2
         case .sixth:
             factoriesPositions[5].slot.texture = SKTexture(imageNamed: factory.textureName)
+            factoriesPositions[5].slot.name = "factory_slot_5_occupied"
             factory.node.zPosition = 1
         case .none:
             let _ = 0
@@ -292,13 +301,11 @@ class GameScene: SKScene {
     
     // MARK: - RIGHTBAR INTERACTIONS
     /**
-     Display player inventory.
+     Display player inventory. Receives from where the player clicked to enter in the scene. Depending on where clicked, different options is displayed inside inventory.
      */
-    func displayInventory() {
-        
+    func displayInventory(clickedSource: String) {
         let viewController = UIApplication.shared.windows.first!.rootViewController as! GameViewController
-        viewController.displayInventory()
-
+        viewController.displayInventory(clickedSource: clickedSource)
     }
     
     
@@ -306,10 +313,8 @@ class GameScene: SKScene {
      Display marketplace.
      */
     func displayMarketplace() {
-        
         let viewController = UIApplication.shared.windows.first!.rootViewController as! GameViewController
         viewController.displayMarketplace()
-        
     }
     
     
@@ -317,10 +322,8 @@ class GameScene: SKScene {
      Display challenge.
      */
     func displayChallenge() {
-       
         let viewController = UIApplication.shared.windows.first!.rootViewController as! GameViewController
         viewController.displayChallenge()
-        
     }
     
     
