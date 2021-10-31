@@ -7,10 +7,13 @@
 
 import UIKit
 
+/**
+ Display each generator which is not active in player inventory.
+ */
 class GameInventoryViewCell: UICollectionViewCell {
     
+    // Factory Texture.
     @IBOutlet weak var factoryTexture: UIImageView!
-    @IBOutlet weak var factoryId: UILabel!
     
     // Resources types cell.
     @IBOutlet weak var resourceType1: UIImageView!
@@ -37,36 +40,36 @@ class GameInventoryViewCell: UICollectionViewCell {
         factoryTexture.image = UIImage(named: texture)
         switch resources.count {
         case 1:
-            resourceType1.image = UIImage(named: "")
+            resourceType1.isHidden = true
             quantityType1.text = ""
-            resourceType2.image = UIImage(named: "")
+            resourceType2.image = UIImage(systemName: getResourceImageName(resource: resources[0].type))
             quantityType2.text = "\(resources[0].baseQtt)"
-            resourceType3.image = UIImage(named: "")
+            resourceType3.isHidden = true
             quantityType3.text = ""
             
         case 2:
-            resourceType1.image = UIImage(named: "")
+            resourceType1.image = UIImage(systemName: getResourceImageName(resource: resources[0].type))
             quantityType1.text = "\(resources[0].baseQtt)"
-            resourceType2.image = UIImage(named: "")
+            resourceType2.image = UIImage(systemName: getResourceImageName(resource: resources[1].type))
             quantityType2.text = "\(resources[1].baseQtt)"
-            resourceType3.image = UIImage(named: "")
+            resourceType3.isHidden = true
             quantityType3.text = ""
 
         case 3:
-            resourceType1.image = UIImage(named: "")
+            resourceType1.image = UIImage(systemName: getResourceImageName(resource: resources[0].type))
             quantityType1.text = "\(resources[0].baseQtt)"
-            resourceType2.image = UIImage(named: "")
+            resourceType2.image = UIImage(systemName: getResourceImageName(resource: resources[1].type))
             quantityType2.text = "\(resources[1].baseQtt)"
-            resourceType3.image = UIImage(named: "")
+            resourceType3.image = UIImage(systemName: getResourceImageName(resource: resources[2].type))
             quantityType3.text = "\(resources[2].baseQtt)"
 
             
         default:
-            resourceType1.image = UIImage(named: "")
+            resourceType1.isHidden = true
             quantityType1.text = ""
-            resourceType2.image = UIImage(named: "")
+            resourceType2.isHidden = true
             quantityType2.text = ""
-            resourceType3.image = UIImage(named: "")
+            resourceType3.isHidden = true
             quantityType3.text = ""
         }
         

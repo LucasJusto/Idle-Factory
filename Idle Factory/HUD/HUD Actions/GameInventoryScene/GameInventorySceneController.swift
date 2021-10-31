@@ -83,7 +83,7 @@ class GameInventorySceneController: UIViewController {
     
     
     /**
-     Hide all factory detail info if player selects a empty box on inventory. Receives a status of type Bool.
+     Hide / Unhide all factory detail info if player selects a empty box on inventory. Receives a status of type Bool.
      */
     func hideDisplayFactoryInfo(status: Bool) {
         factoryImage.isHidden = status
@@ -114,6 +114,7 @@ class GameInventorySceneController: UIViewController {
 }
 
 
+// MARK: - COLLECTIONVIEW DATASOURCE
 extension GameInventorySceneController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -133,18 +134,23 @@ extension GameInventorySceneController: UICollectionViewDataSource {
             return cell
         } else {
             let generator = GameScene.user?.generators[indexPath.row]
-            
             let generatorResources = (generator?.resourcesArray)!
-            
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Self.factoryID, for: indexPath) as! GameInventoryViewCell
-            cell.pullFactoryData(texture: generator!.textureName, resources: generatorResources)
-            cell.configureCell()
+
+            if generator?.isActive == .no {
+                cell.pullFactoryData(texture: generator!.textureName, resources: generatorResources)
+                cell.configureCell()
+            } else {
+                cell.pullFactoryData(texture: "", resources: [])
+                cell.configureCell()
+            }
             return cell
         }
     }
 }
 
 
+// MARK: - COLLECTIONVIEW DELEGATE
 extension GameInventorySceneController: UICollectionViewDelegateFlowLayout {
     
     
@@ -170,7 +176,9 @@ extension GameInventorySceneController: UICollectionViewDelegateFlowLayout {
         
         var resources: [Resource] = []
         if indexPath.row < myFactories.count {
-            resources = myFactories[indexPath.row].resourcesArray
+            if myFactories[indexPath.row].isActive == .no {
+                resources = myFactories[indexPath.row].resourcesArray
+            }
         }
         
         switch resources.count {
@@ -250,7 +258,7 @@ extension GameInventorySceneController: UICollectionViewDelegateFlowLayout {
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let cellSize = CGSize(width: 93, height: 90)
+        let cellSize = CGSize(width: 94, height: 90)
         return cellSize
     }
     
@@ -262,7 +270,7 @@ extension GameInventorySceneController: UICollectionViewDelegateFlowLayout {
     
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        return 10
+        return 9.63
     }
     
 }

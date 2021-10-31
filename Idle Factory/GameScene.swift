@@ -17,6 +17,16 @@ class GameScene: SKScene {
     private(set) static var deviceScreenHeight = UIScreen.main.bounds.height
     
     
+    // MARK: - FACTORY POSITIONS
+    private(set) var factoriesPositions: [(slot: SKSpriteNode, x: CGFloat, y: CGFloat)] =
+    [
+        (slot: SKSpriteNode(imageNamed: "Factory_add_new"), x: -417.78, y: -68.25),
+        (slot: SKSpriteNode(imageNamed: "Factory_add_new"), x: -114.40, y: 110),
+        (slot: SKSpriteNode(imageNamed: "Factory_add_new"), x: -117.40, y: -235),
+        (slot: SKSpriteNode(imageNamed: "Factory_add_new"), x: 184.78, y: -68.25),
+        (slot: SKSpriteNode(imageNamed: "Factory_add_new"), x: 181.78, y: -410),
+        (slot: SKSpriteNode(imageNamed: "Factory_add_new"), x: 480.70, y: -235)
+    ]
 
     
     // MARK: - GAME HUD & HUD SCENE ACTIONS
@@ -28,7 +38,7 @@ class GameScene: SKScene {
     private(set) var gameChallengeScene: GameChallengeSceneController = GameChallengeSceneController()
     
     
-    // MARK: - perSecIncrement
+    // MARK: - PERSECINCREMENT
     lazy var perSecIncrement: SKAction = {
         let incrementAction = SKAction.run {
             if var generators = GameScene.user?.generators {
@@ -65,6 +75,8 @@ class GameScene: SKScene {
         
         return cameraNode
     }()
+    
+    
     // MARK: - INIT
     override func didMove(to view: SKView) {
         
@@ -73,9 +85,9 @@ class GameScene: SKScene {
         createBackground()
         createTopHud()
         createSidebarHud()
-        for n in 0..<(GameScene.user?.generators.count ?? 0){
-            addFactory(factory: (GameScene.user?.generators[n])!, id: n)
-        }
+        createSceneSlots()
+        
+        loadPlayerFactories()
         
         camera = cameraNode
         addChild(cameraNode)
@@ -92,11 +104,9 @@ class GameScene: SKScene {
             let touchedNode = atPoint(location)
             if(touchedNode.name == "PlayerInventoryButton"){
                 displayInventory()
-                //self.removeAllChildren()
             }
             else if(touchedNode.name == "MarketplaceButton") {
                 displayMarketplace()
-                //self.removeAllChildren()
             }
             else if touchedNode.name == "ChallengeButton" {
                 displayChallenge()
@@ -125,14 +135,6 @@ class GameScene: SKScene {
             else if touchedNode.name == "factory5" {
                 displayUpgradeFactory()
             }
-            
-            else if (
-                touchedNode.name == "CloseInventoryScene" ||
-                touchedNode.name == "CloseMarketplaceScene" ||
-                touchedNode.name == "CloseChallengeScene"
-               ) {
-                actionShapeNode.removeFromParent()
-            }
         }
     }
     
@@ -148,7 +150,7 @@ class GameScene: SKScene {
     
     
     
-    // MARK: - BACKGROUND & HUD Creation
+    // MARK: - BACKGROUND & HUD CREATION
     /**
      Create scene background.
      */
@@ -157,6 +159,20 @@ class GameScene: SKScene {
         background.name = "Background"
         
         addChild(background)
+    }
+    
+    
+    /**
+     Create all slots on the scene where can be replaced by a generator.
+     */
+    func createSceneSlots() {
+        for n in 0..<factoriesPositions.count {
+            let slot = factoriesPositions[n].slot
+            slot.anchorPoint = CGPoint(x: 0.5, y: 0)
+            slot.position = CGPoint(x: factoriesPositions[n].x, y: factoriesPositions[n].y)
+            slot.name = "factory\(n)"
+            background.addChild(slot)
+        }
     }
     
     
@@ -228,67 +244,49 @@ class GameScene: SKScene {
     }
     
     
-    // MARK: - FACTORY POSITIONS
-    private(set) var factoriesPositions: [(x: CGFloat, y: CGFloat)] =
-    [
-        (x: -417.78, y: -68.25),
-        (x: -114.40, y: 110),
-        (x: -117.40, y: -235),
-        (x: 184.78, y: -68.25),
-        (x: 181.78, y: -410),
-        (x: 480.70, y: -235)
-    ]
     // MARK: - GENERATORS FUNCTIONS
+    func loadPlayerFactories() {
+        for n in 0..<(GameScene.user?.generators.count ?? 0){
+            if GameScene.user?.generators[n].isActive == .yes {
+                addFactory(factory: (GameScene.user?.generators[n])!)
+            }
+        }
+    }
+    
     /**
      Add a factory on the scene. Receives a position which represents what slot player wants to add the new factory.
      */
-    func addFactory(factory: Factory, id: Int) {
-        
-        factory.node.anchorPoint = CGPoint(x: 0.5, y: 0)
-        factory.node.name = "factory\(id)"
-        
+    func addFactory(factory: Factory) {
+                
         switch factory.position {
         case .first:
-            factory.node.position = CGPoint(x: factoriesPositions[0].x, y: factoriesPositions[0].y)
+            factoriesPositions[0].slot.texture = SKTexture(imageNamed: factory.textureName)
             factory.node.zPosition = 2
         case .second:
-            factory.node.position = CGPoint(x: factoriesPositions[1].x, y: factoriesPositions[1].y)
+            factoriesPositions[1].slot.texture = SKTexture(imageNamed: factory.textureName)
             factory.node.zPosition = 2
         case .third:
-            factory.node.position = CGPoint(x: factoriesPositions[2].x, y: factoriesPositions[2].y)
+            factoriesPositions[2].slot.texture = SKTexture(imageNamed: factory.textureName)
             factory.node.zPosition = 2
         case .fourth:
-            factory.node.position = CGPoint(x: factoriesPositions[3].x, y: factoriesPositions[3].y)
+            factoriesPositions[3].slot.texture = SKTexture(imageNamed: factory.textureName)
             factory.node.zPosition = 1
         case .fifth:
-            factory.node.position = CGPoint(x: factoriesPositions[4].x, y: factoriesPositions[4].y)
+            factoriesPositions[4].slot.texture = SKTexture(imageNamed: factory.textureName)
             factory.node.zPosition = 2
         case .sixth:
-            factory.node.position = CGPoint(x: factoriesPositions[5].x, y: factoriesPositions[5].y)
+            factoriesPositions[5].slot.texture = SKTexture(imageNamed: factory.textureName)
             factory.node.zPosition = 1
         case .none:
             let _ = 0
         }
         
-        background.addChild(factory.node)
     }
     
     
     func displayUpgradeFactory() {
         let viewController = UIApplication.shared.windows.first!.rootViewController as! GameViewController
         viewController.displayUpgradeFactory()
-    }
-    
-    
-    /**
-     Create factory.
-     */
-    func createFactory() -> SKSpriteNode  {
-        let factory = SKSpriteNode(imageNamed:"Factory_NFT_grande")
-        factory.anchorPoint = CGPoint(x: 0.5, y: 0)
-        factory.name = "factory"
-        
-        return factory
     }
     
     
@@ -300,15 +298,7 @@ class GameScene: SKScene {
         
         let viewController = UIApplication.shared.windows.first!.rootViewController as! GameViewController
         viewController.displayInventory()
-//        let inventoryScene = gameInventoryScene.createBackground()
-//        let closeAction = gameInventoryScene.createCloseButton()
-//        actionShapeNode = inventoryScene
-//
-//        inventoryScene.position = CGPoint(x: -(GameScene.deviceScreenWidth) / 2, y: -(GameScene.deviceScreenHeight) / 2)
-//        closeAction.position = CGPoint(x: (GameScene.deviceScreenWidth) / 2, y: (GameScene.deviceScreenHeight) / 2)
-//
-//        cameraNode.addChild(actionShapeNode)
-//        inventoryScene.addChild(closeAction)
+
     }
     
     
@@ -320,15 +310,6 @@ class GameScene: SKScene {
         let viewController = UIApplication.shared.windows.first!.rootViewController as! GameViewController
         viewController.displayMarketplace()
         
-//        let marketplaceScene = gameMarketplaceScene.createBackground()
-//        let closeAction = gameMarketplaceScene.createCloseButton()
-//        actionShapeNode = marketplaceScene
-//
-//        marketplaceScene.position = CGPoint(x: -(GameScene.deviceScreenWidth) / 2, y: -(GameScene.deviceScreenHeight) / 2)
-//        closeAction.position = CGPoint(x: (GameScene.deviceScreenWidth) / 2, y: (GameScene.deviceScreenHeight) / 2)
-//
-//        cameraNode.addChild(actionShapeNode)
-//        marketplaceScene.addChild(closeAction)
     }
     
     
@@ -340,15 +321,6 @@ class GameScene: SKScene {
         let viewController = UIApplication.shared.windows.first!.rootViewController as! GameViewController
         viewController.displayChallenge()
         
-//        let challengeScene = gameChallengeScene.createBackground()
-//        let closeAction = gameChallengeScene.createCloseButton()
-//
-//        actionShapeNode = challengeScene
-//        challengeScene.position = CGPoint(x: -(GameScene.deviceScreenWidth) / 2, y: -(GameScene.deviceScreenHeight) / 2)
-//        closeAction.position = CGPoint(x: (GameScene.deviceScreenWidth) / 2, y: (GameScene.deviceScreenHeight) / 2)
-//
-//        cameraNode.addChild(actionShapeNode)
-//        challengeScene.addChild(closeAction)
     }
     
     
