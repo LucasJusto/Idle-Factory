@@ -12,7 +12,7 @@ class GameInventorySceneController: UIViewController {
     
     @IBOutlet weak var collectionView: UICollectionView!
     
-    // MARK: - VIEW & HEADER OUTLETS
+    // MARK: - HEADER OUTLETS
     @IBOutlet weak var inventoryHeader: UILabel!
     @IBOutlet weak var purchaseFactoryButton: UIButton!
     @IBOutlet weak var closeButton: UIButton!
@@ -290,10 +290,10 @@ extension GameInventorySceneController: UICollectionViewDelegateFlowLayout {
         
         var resources: [Resource] = []
         if indexPath.row < myFactories.count {
-//            if myFactories[indexPath.row].isActive == .no {
+            if myFactories[indexPath.row].isActive == .no {
                 selectedFactory = myFactories[indexPath.row]
                 resources = myFactories[indexPath.row].resourcesArray
-//            }
+            }
         }
         
         switch resources.count {
