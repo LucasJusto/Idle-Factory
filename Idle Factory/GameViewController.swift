@@ -43,7 +43,6 @@ class GameViewController: UIViewController {
                     }
                 }
             }
-
         }
     }
     
@@ -101,15 +100,25 @@ class GameViewController: UIViewController {
     }
     
     
+    /**
+     Calls GameInventory storyboard to select what generator player wants to insert on the scene (if contains).
+     */
+    func selectGeneratorToInsert(position: GeneratorPositions) {
+        let mainView = UIStoryboard(name: "GameInventoryScene", bundle: nil)
+        let viewcontroller : GameInventorySceneController = mainView.instantiateViewController(withIdentifier: "InventoryStoryboard") as! GameInventorySceneController
+        viewcontroller.clickedSlotPosition = position
+        self.present(viewcontroller, animated: false)
+    }
+    
+    
     // MARK: - HUD ACTION SCENES
     /**
-     Calls GameInventory storyboard to display the actual players inventory. It receives a clickedSource to identify from where the player clicked to enter in this scene.
+     Calls GameInventory storyboard to display the actual players inventory.
      */
-    func displayInventory(clickedSource: String) {
+    func displayInventory() {
         
         let mainView = UIStoryboard(name: "GameInventoryScene", bundle: nil)
         let viewcontroller : GameInventorySceneController = mainView.instantiateViewController(withIdentifier: "InventoryStoryboard") as! GameInventorySceneController
-        viewcontroller.clickedSource = clickedSource
         self.present(viewcontroller, animated: false)
     }
     

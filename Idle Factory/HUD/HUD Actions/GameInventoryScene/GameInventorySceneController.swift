@@ -6,15 +6,17 @@
 //
 
 import UIKit
+import SpriteKit
 
 class GameInventorySceneController: UIViewController {
     
     @IBOutlet weak var collectionView: UICollectionView!
     
-    // MARK: - HEADER OUTLETS
+    // MARK: - VIEW & HEADER OUTLETS
     @IBOutlet weak var inventoryHeader: UILabel!
     @IBOutlet weak var purchaseFactoryButton: UIButton!
     @IBOutlet weak var closeButton: UIButton!
+    
     
     // MARK: - FACTORY DETAILS OUTLETS
     @IBOutlet weak var factoryInfoView: UIView!
@@ -48,8 +50,22 @@ class GameInventorySceneController: UIViewController {
     @IBOutlet weak var sellFactoryButton: UIButton!
     @IBOutlet weak var insertFactoryButton: UIButton!
     
+    
+    // MARK: - QUICK SELL OUTLETS
+    @IBOutlet weak var quickSellBackground: UIView!
+    @IBOutlet weak var quickSellView: UIView!
+    @IBOutlet weak var quickSellQuestionLabel: UILabel!
+    @IBOutlet weak var quickSellEarnLabel: UILabel!
+    
+    @IBOutlet weak var quickSellCoinImage: UIImageView!
+    @IBOutlet weak var quickSellEarningLabel: UILabel!
+    @IBOutlet weak var cancelQuickSell: UIButton!
+    @IBOutlet weak var confirmQuickSell: UIButton!
+    
+    // MARK: - CONTROLLERS
     static let factoryID: String = "factory_cell"
-    var clickedSource: String = ""
+    private(set) var selectedFactory: Factory? = nil
+    var clickedSlotPosition: GeneratorPositions = .none
     
     
     // MARK: - ACTIONS
@@ -62,24 +78,62 @@ class GameInventorySceneController: UIViewController {
     
     
     /**
-     Quick sell a generator for main currency. The gaining is calculated by 60% of the price paid for the generator.
+     Confirm modal message of Quick sell is displayed. Quick Sell is a way to earn main currency quickly. The gaining is calculated by 60% of the price paid for the generator.
      */
     @IBAction func quickSell(_ sender: Any) {
+        hideQuickSellModal(status: false)
         print("Quick Sell")
     }
+    
+    
+    /**
+     Cancel the quick sell action.
+     */
+    @IBAction func cancelQuickSell(_ sender: Any) {
+        hideQuickSellModal(status: true)
+    }
+    
+    
+    /**
+     Confirm the quick sell action. Player lose the generator and cannot be recovered.
+     */
+    @IBAction func confirmQuickSell(_ sender: Any) {
+        print("Quick Sell made!!")
+    }
+    
     
     /**
      Action to insert ou announce a factory. This function depends from where user clicked to enter on this scene. This is controlled by the 'clickedSource' variable. If player comes by 'add factory', this action will place a factory from the Inventory to the scene. If player clicks by Inventory button, this action will make announce a factory possible to be announced on marketplace.
      */
     @IBAction func insertOrAnnounceFactory(_ sender: Any) {
         
-        if clickedSource == "InsertFactoryButton" {
-            insertOnPark()
+        if clickedSlotPosition == .none {
+            announceFactory()
         } else {
-            
+            insertOnPark()
         }
     }
 
+    
+    /**
+     Announce a factory on the marketplace to other players.
+     */
+    func announceFactory() {
+        print("Announce park")
+    }
+    
+    
+    /**
+     Insert a factory from the Inventory to park. Turn the factory as active to generate resource to the Idle game.
+     */
+    func insertOnPark() {
+        selectedFactory?.position = clickedSlotPosition
+        selectedFactory?.isActive = .yes
+        GameScene.addFactory(factory: selectedFactory!)
+    
+        print("Moved to park!")
+    }
+    
     
     // MARK: - INIT
     override func viewDidLoad() {
@@ -90,6 +144,7 @@ class GameInventorySceneController: UIViewController {
         collectionView.allowsMultipleSelection = false
         
         hideDisplayFactoryInfo(status: true)
+        hideQuickSellModal(status: true)
         
         // Inventory Header
         inventoryHeader.text = NSLocalizedString("InventoryHeader", comment: "")
@@ -104,18 +159,21 @@ class GameInventorySceneController: UIViewController {
         sellFactoryButton.layer.cornerRadius = 10
         sellFactoryButton.setTitle(NSLocalizedString("SellFactoryButton", comment: ""), for: .normal)
         insertFactoryButton.layer.cornerRadius = 10
-        insertFactoryButton.setTitle(clickedSource == "InsertFactoryButton" ? NSLocalizedString("InsertFactoryButton", comment: "") : NSLocalizedString("AnnounceFactoryButton", comment: ""), for: .normal)
+        insertFactoryButton.setTitle(clickedSlotPosition == .none ? NSLocalizedString("AnnounceFactoryButton", comment: "") : NSLocalizedString("InsertFactoryButton", comment: ""), for: .normal)
+        
+        // Quick Sell Modal
+        quickSellView.layer.cornerRadius = 10
+        cancelQuickSell.layer.cornerRadius = 10
+        confirmQuickSell.layer.cornerRadius = 10
+        quickSellQuestionLabel.text = NSLocalizedString("QuickSellQuestionConfirmationLabel", comment: "")
+        quickSellEarnLabel.text = NSLocalizedString("QuickSellEarnLabel", comment: "")
+        cancelQuickSell.setTitle(NSLocalizedString("QuickSellCancelButton", comment: ""), for: .normal)
+        confirmQuickSell.setTitle(NSLocalizedString("QuickSellConfirmButton", comment: ""), for: .normal)
+        
     }
     
     
-    /**
-     Insert a factory from the Inventory to park. Turn the factory as active to generate resource to the Idle game.
-     */
-    func insertOnPark() {
-        print("Moving to park")
-    }
-    
-    
+    // MARK: - HIDE / UNHIDE DATA
     /**
      Hide / Unhide all factory detail info if player selects a empty box on inventory. Receives a status of type Bool.
      */
@@ -150,6 +208,21 @@ class GameInventorySceneController: UIViewController {
         // Actions
         sellFactoryButton.isHidden = status
         insertFactoryButton.isHidden = status
+    }
+    
+    
+    /**
+     Hide / Unhide quick sell modal. Is only displayed when user clicks to quick sell a factory.
+     */
+    func hideQuickSellModal(status: Bool) {
+        quickSellBackground.isHidden = status
+        quickSellView.isHidden = status
+        quickSellQuestionLabel.isHidden = status
+        quickSellEarnLabel.isHidden = status
+        quickSellCoinImage.isHidden = status
+        quickSellEarningLabel.isHidden = status
+        cancelQuickSell.isHidden = status
+        confirmQuickSell.isHidden = status
     }
 
 }
@@ -217,9 +290,10 @@ extension GameInventorySceneController: UICollectionViewDelegateFlowLayout {
         
         var resources: [Resource] = []
         if indexPath.row < myFactories.count {
-            if myFactories[indexPath.row].isActive == .no {
+//            if myFactories[indexPath.row].isActive == .no {
+                selectedFactory = myFactories[indexPath.row]
                 resources = myFactories[indexPath.row].resourcesArray
-            }
+//            }
         }
         
         switch resources.count {

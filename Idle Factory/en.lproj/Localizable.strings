@@ -25,6 +25,11 @@
 "SellFactoryButton" = "Quick sell";
 "InsertFactoryButton" = "Insert on the Park";
 "AnnounceFactoryButton" = "Announce";
+"QuickSellQuestionConfirmationLabel" = "Do you want to confirm this Quick Sell?";
+"QuickSellEarnLabel" = "You will receive:";
+"QuickSellCancelButton" = "Cancel";
+"QuickSellConfirmButton" = "Confirm";
+
 
 //MARK: - Upgrade Screen
 "MoveToInventory" = "Move to inventory";

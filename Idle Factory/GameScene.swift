@@ -18,7 +18,7 @@ class GameScene: SKScene {
     
     
     // MARK: - FACTORY POSITIONS
-    private(set) var factoriesPositions: [(slot: SKSpriteNode, x: CGFloat, y: CGFloat)] =
+    static private(set) var factoriesPositions: [(slot: SKSpriteNode, x: CGFloat, y: CGFloat)] =
     [
         (slot: SKSpriteNode(imageNamed: "Factory_add_new"), x: -417.78, y: -68.25),
         (slot: SKSpriteNode(imageNamed: "Factory_add_new"), x: -114.40, y: 110),
@@ -81,9 +81,9 @@ class GameScene: SKScene {
         self.anchorPoint = CGPoint(x: 0.5, y: 0.5)
         
         createBackground()
+        createSceneSlots()
         createTopHud()
         createSidebarHud()
-        createSceneSlots()
         
         loadPlayerFactories()
         
@@ -102,23 +102,23 @@ class GameScene: SKScene {
             let touchedNode = atPoint(location)
             switch touchedNode.name {
             case "PlayerInventoryButton":
-                displayInventory(clickedSource: "AnnounceFactoryButton")
+                displayInventory()
             case "MarketplaceButton":
                 displayMarketplace()
             case "ChallengeButton":
                 displayChallenge()
             case "factory_slot_0_empty":
-                displayInventory(clickedSource: "InsertFactoryButton")
+                selectGeneratorToInsert(position: .first)
             case "factory_slot_1_empty":
-                displayInventory(clickedSource: "InsertFactoryButton")
+                selectGeneratorToInsert(position: .second)
             case "factory_slot_2_empty":
-                displayInventory(clickedSource: "InsertFactoryButton")
+                selectGeneratorToInsert(position: .third)
             case "factory_slot_3_empty":
-                displayInventory(clickedSource: "InsertFactoryButton")
+                selectGeneratorToInsert(position: .fourth)
             case "factory_slot_4_empty":
-                displayInventory(clickedSource: "InsertFactoryButton")
+                selectGeneratorToInsert(position: .fifth)
             case "factory_slot_5_empty":
-                displayInventory(clickedSource: "InsertFactoryButton")
+                selectGeneratorToInsert(position: .sixth)
             case "factory_slot_0_occupied":
                 displayUpgradeFactory()
             case "factory_slot_1_occupied":
@@ -164,10 +164,10 @@ class GameScene: SKScene {
      Create all slots on the scene where can be replaced by a generator.
      */
     func createSceneSlots() {
-        for n in 0..<factoriesPositions.count {
-            let slot = factoriesPositions[n].slot
+        for n in 0..<GameScene.factoriesPositions.count {
+            let slot = GameScene.factoriesPositions[n].slot
             slot.anchorPoint = CGPoint(x: 0.5, y: 0)
-            slot.position = CGPoint(x: factoriesPositions[n].x, y: factoriesPositions[n].y)
+            slot.position = CGPoint(x: GameScene.factoriesPositions[n].x, y: GameScene.factoriesPositions[n].y)
             slot.zPosition = 1
             slot.name = "factory_slot_\(n)_empty"
             background.addChild(slot)
@@ -250,7 +250,7 @@ class GameScene: SKScene {
     func loadPlayerFactories() {
         for n in 0..<(GameScene.user?.generators.count ?? 0){
             if GameScene.user?.generators[n].isActive == .yes {
-                addFactory(factory: (GameScene.user?.generators[n])!)
+                GameScene.addFactory(factory: (GameScene.user?.generators[n])!)
             }
         }
     }
@@ -259,38 +259,47 @@ class GameScene: SKScene {
     /**
      Add a factory on the scene. Receives a Factory which checks what slot this factory is located.
      */
-    func addFactory(factory: Factory) {
+    static func addFactory(factory: Factory) {
                 
         switch factory.position {
         case .first:
-            factoriesPositions[0].slot.texture = SKTexture(imageNamed: factory.textureName)
-            factoriesPositions[0].slot.name = "factory_slot_0_occupied"
+            GameScene.factoriesPositions[0].slot.texture = SKTexture(imageNamed: factory.textureName)
+            GameScene.factoriesPositions[0].slot.name = "factory_slot_0_occupied"
             factory.node.zPosition = 2
         case .second:
-            factoriesPositions[1].slot.texture = SKTexture(imageNamed: factory.textureName)
-            factoriesPositions[1].slot.name = "factory_slot_1_occupied"
+            GameScene.factoriesPositions[1].slot.texture = SKTexture(imageNamed: factory.textureName)
+            GameScene.factoriesPositions[1].slot.name = "factory_slot_1_occupied"
             factory.node.zPosition = 2
         case .third:
-            factoriesPositions[2].slot.texture = SKTexture(imageNamed: factory.textureName)
-            factoriesPositions[2].slot.name = "factory_slot_2_occupied"
+            GameScene.factoriesPositions[2].slot.texture = SKTexture(imageNamed: factory.textureName)
+            GameScene.factoriesPositions[2].slot.name = "factory_slot_2_occupied"
             factory.node.zPosition = 2
         case .fourth:
-            factoriesPositions[3].slot.texture = SKTexture(imageNamed: factory.textureName)
-            factoriesPositions[3].slot.name = "factory_slot_3_occupied"
+            GameScene.factoriesPositions[3].slot.texture = SKTexture(imageNamed: factory.textureName)
+            GameScene.factoriesPositions[3].slot.name = "factory_slot_3_occupied"
             factory.node.zPosition = 1
         case .fifth:
-            factoriesPositions[4].slot.texture = SKTexture(imageNamed: factory.textureName)
-            factoriesPositions[4].slot.name = "factory_slot_4_occupied"
+            GameScene.factoriesPositions[4].slot.texture = SKTexture(imageNamed: factory.textureName)
+            GameScene.factoriesPositions[4].slot.name = "factory_slot_4_occupied"
             factory.node.zPosition = 2
         case .sixth:
-            factoriesPositions[5].slot.texture = SKTexture(imageNamed: factory.textureName)
-            factoriesPositions[5].slot.name = "factory_slot_5_occupied"
+            GameScene.factoriesPositions[5].slot.texture = SKTexture(imageNamed: factory.textureName)
+            GameScene.factoriesPositions[5].slot.name = "factory_slot_5_occupied"
             factory.node.zPosition = 1
         case .none:
             let _ = 0
         }
-        
     }
+    
+    
+    /**
+     Calls inventory to make player select an generator to place on the slot clicked. Receives the slot position player clicked. 
+     */
+    func selectGeneratorToInsert (position: GeneratorPositions) {
+        let viewController = UIApplication.shared.windows.first!.rootViewController as! GameViewController
+        viewController.selectGeneratorToInsert(position: position)
+    }
+
     
     
     func displayUpgradeFactory() {
@@ -301,11 +310,11 @@ class GameScene: SKScene {
     
     // MARK: - RIGHTBAR INTERACTIONS
     /**
-     Display player inventory. Receives from where the player clicked to enter in the scene. Depending on where clicked, different options is displayed inside inventory.
+     Display player inventory.
      */
-    func displayInventory(clickedSource: String) {
+    func displayInventory() {
         let viewController = UIApplication.shared.windows.first!.rootViewController as! GameViewController
-        viewController.displayInventory(clickedSource: clickedSource)
+        viewController.displayInventory()
     }
     
     

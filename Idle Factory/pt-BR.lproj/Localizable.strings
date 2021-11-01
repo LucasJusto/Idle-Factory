@@ -25,6 +25,10 @@
 "SellFactoryButton" = "Venda rápida";
 "InsertFactoryButton" = "Colocar no Parque";
 "AnnounceFactoryButton" = "Anunciar";
+"QuickSellQuestionConfirmationLabel" = "Você confirma a Venda Rápida?";
+"QuickSellEarnLabel" = "Você receberá:";
+"QuickSellCancelButton" = "Cancelar";
+"QuickSellConfirmButton" = "Confirmar";
 
 
 //MARK: - Upgrade Screen

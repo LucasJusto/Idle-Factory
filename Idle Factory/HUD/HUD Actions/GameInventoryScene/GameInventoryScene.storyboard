@@ -395,7 +395,11 @@
                                 </constraints>
                             </stackView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="55m-EB-zmS">
-                                <rect key="frame" x="786.5" y="50" width="55.5" height="45"/>
+                                <rect key="frame" x="797" y="50" width="45" height="45"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="55m-EB-zmS" secondAttribute="height" multiplier="1:1" id="99y-bU-jmI"/>
+                                    <constraint firstAttribute="height" constant="45" id="VHb-dY-2In"/>
+                                </constraints>
                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                 <state key="normal" image="close"/>
                                 <buttonConfiguration key="configuration" style="plain" image="close"/>
@@ -403,26 +407,127 @@
                                     <action selector="closeInventory:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="HGb-96-77m"/>
                                 </connections>
                             </button>
+                            <view alpha="0.5" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8WR-EG-h3O">
+                                <rect key="frame" x="0.0" y="0.0" width="896" height="414"/>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uRu-Hh-p1H">
+                                <rect key="frame" x="282.5" y="91" width="331" height="232"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="2HT-sG-DCO">
+                                        <rect key="frame" x="72" y="175" width="187" height="21"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QwR-RT-Xlb">
+                                                <rect key="frame" x="0.0" y="0.0" width="87" height="21"/>
+                                                <color key="backgroundColor" name="HudActions-background"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="87" id="x2F-Bc-7h4"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" type="system" pointSize="10"/>
+                                                <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                                <state key="normal" title="Cancelar"/>
+                                                <connections>
+                                                    <action selector="cancelQuickSell:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="7a4-bp-aTd"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KLB-tN-RLn">
+                                                <rect key="frame" x="100" y="0.0" width="87" height="21"/>
+                                                <color key="backgroundColor" name="Inventory_background"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="21" id="3s8-q6-DcD"/>
+                                                    <constraint firstAttribute="width" constant="87" id="6nT-Lx-qoh"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" type="system" pointSize="10"/>
+                                                <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                                <state key="normal" title="Confirmar"/>
+                                                <connections>
+                                                    <action selector="confirmQuickSell:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="1Rc-U7-qRs"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="21" id="O0k-f9-gkl"/>
+                                        </constraints>
+                                    </stackView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="Fcp-bP-ga8">
+                                        <rect key="frame" x="57" y="33" width="217" height="115"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Voce confirma a venda rápida?" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qXO-Fy-Xao">
+                                                <rect key="frame" x="45" y="0.0" width="127.5" height="41"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Você receberá:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="z51-TK-t8g">
+                                                <rect key="frame" x="72" y="60.5" width="73" height="12"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="10"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="3" translatesAutoresizingMaskIntoConstraints="NO" id="4uc-zf-f2j">
+                                                <rect key="frame" x="57.5" y="92" width="102" height="23"/>
+                                                <subviews>
+                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Coin" translatesAutoresizingMaskIntoConstraints="NO" id="kI8-jm-B4n">
+                                                        <rect key="frame" x="0.0" y="0.0" width="33" height="23"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" constant="23" id="DqH-nl-gNz"/>
+                                                            <constraint firstAttribute="width" constant="33" id="mX5-yY-JAO"/>
+                                                        </constraints>
+                                                    </imageView>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="999.999" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GI3-dh-QUK">
+                                                        <rect key="frame" x="36" y="1.5" width="66" height="20.5"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                        <nil key="textColor"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                </subviews>
+                                            </stackView>
+                                        </subviews>
+                                    </stackView>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstItem="2HT-sG-DCO" firstAttribute="top" secondItem="Fcp-bP-ga8" secondAttribute="bottom" constant="27" id="3pR-vt-rlt"/>
+                                    <constraint firstItem="Fcp-bP-ga8" firstAttribute="leading" secondItem="uRu-Hh-p1H" secondAttribute="leading" constant="57" id="90o-wD-YwX"/>
+                                    <constraint firstAttribute="height" constant="232" id="GQZ-oq-939"/>
+                                    <constraint firstAttribute="trailing" secondItem="Fcp-bP-ga8" secondAttribute="trailing" constant="57" id="PLm-Cs-RWI"/>
+                                    <constraint firstItem="2HT-sG-DCO" firstAttribute="leading" secondItem="uRu-Hh-p1H" secondAttribute="leading" constant="72" id="PQ3-se-kHL"/>
+                                    <constraint firstAttribute="trailing" secondItem="2HT-sG-DCO" secondAttribute="trailing" constant="72" id="Q8O-L6-CFH"/>
+                                    <constraint firstAttribute="bottom" secondItem="2HT-sG-DCO" secondAttribute="bottom" constant="36" id="R6E-OG-ZGG"/>
+                                    <constraint firstAttribute="width" constant="331" id="X45-0q-fYe"/>
+                                    <constraint firstItem="Fcp-bP-ga8" firstAttribute="top" secondItem="uRu-Hh-p1H" secondAttribute="top" constant="33" id="YdS-Ii-wah"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
                         <color key="backgroundColor" name="Inventory_background"/>
                         <constraints>
                             <constraint firstItem="55m-EB-zmS" firstAttribute="centerY" secondItem="bWn-IA-vOF" secondAttribute="centerY" id="ECu-RP-kUk"/>
                             <constraint firstItem="87Q-MC-7hz" firstAttribute="top" secondItem="bWn-IA-vOF" secondAttribute="bottom" constant="39" id="MiI-fZ-aqe"/>
+                            <constraint firstItem="8WR-EG-h3O" firstAttribute="top" secondItem="5EZ-qb-Rvc" secondAttribute="top" id="RLz-I6-FZX"/>
                             <constraint firstItem="87Q-MC-7hz" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="22" id="SMR-rc-3JJ"/>
+                            <constraint firstItem="uRu-Hh-p1H" firstAttribute="centerY" secondItem="5EZ-qb-Rvc" secondAttribute="centerY" id="SY9-Dw-Ojc"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="87Q-MC-7hz" secondAttribute="trailing" constant="35" id="TEd-3M-iie"/>
+                            <constraint firstAttribute="trailing" secondItem="8WR-EG-h3O" secondAttribute="trailing" id="VVP-vh-JT5"/>
+                            <constraint firstItem="8WR-EG-h3O" firstAttribute="leading" secondItem="5EZ-qb-Rvc" secondAttribute="leading" id="aGW-6o-nyZ"/>
+                            <constraint firstItem="uRu-Hh-p1H" firstAttribute="centerX" secondItem="5EZ-qb-Rvc" secondAttribute="centerX" id="awV-0P-eYa"/>
                             <constraint firstItem="bWn-IA-vOF" firstAttribute="centerX" secondItem="5EZ-qb-Rvc" secondAttribute="centerX" id="hfm-wL-o0x"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="55m-EB-zmS" secondAttribute="trailing" constant="10" id="ipZ-gW-7ov"/>
+                            <constraint firstItem="8WR-EG-h3O" firstAttribute="bottom" secondItem="5EZ-qb-Rvc" secondAttribute="bottom" id="rvi-TV-iVQ"/>
                             <constraint firstItem="bWn-IA-vOF" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" constant="59" id="v6A-Zv-BGy"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="cancelQuickSell" destination="QwR-RT-Xlb" id="adr-mH-TZy"/>
                         <outlet property="closeButton" destination="55m-EB-zmS" id="rwy-6M-CVe"/>
                         <outlet property="coinImage1" destination="HHk-da-NFA" id="uqN-r3-UGF"/>
                         <outlet property="coinImage2" destination="LHz-jr-mSN" id="GxV-Kw-lBY"/>
                         <outlet property="coinImage3" destination="Du2-28-n8r" id="Dvw-lM-RsZ"/>
                         <outlet property="coinImage4" destination="HcR-gl-KZx" id="kLX-TU-Qku"/>
                         <outlet property="collectionView" destination="rF0-R9-7mq" id="Dzt-8S-5be"/>
+                        <outlet property="confirmQuickSell" destination="KLB-tN-RLn" id="Gng-60-ljB"/>
                         <outlet property="factoryImage" destination="BVk-6t-fCk" id="vqV-Vi-WEa"/>
                         <outlet property="factoryInfoView" destination="YPY-6k-DAS" id="Uj0-nd-jI7"/>
                         <outlet property="factorySerial_ID" destination="sYK-Jo-vSg" id="Vf3-HN-9p1"/>
@@ -435,6 +540,12 @@
                         <outlet property="quantityType1" destination="TaB-AL-YM1" id="WEF-cR-Td2"/>
                         <outlet property="quantityType2" destination="OxU-Fh-Jos" id="6m3-4z-wSU"/>
                         <outlet property="quantityType3" destination="Gyz-Kf-LMT" id="utF-Yt-7Mu"/>
+                        <outlet property="quickSellBackground" destination="8WR-EG-h3O" id="0By-gX-EN1"/>
+                        <outlet property="quickSellCoinImage" destination="kI8-jm-B4n" id="cOa-N8-kKD"/>
+                        <outlet property="quickSellEarnLabel" destination="z51-TK-t8g" id="K0n-0T-uSG"/>
+                        <outlet property="quickSellEarningLabel" destination="GI3-dh-QUK" id="Mk8-98-SKp"/>
+                        <outlet property="quickSellQuestionLabel" destination="qXO-Fy-Xao" id="45Q-JF-6wf"/>
+                        <outlet property="quickSellView" destination="uRu-Hh-p1H" id="JUJ-FT-3wk"/>
                         <outlet property="sellFactoryButton" destination="RQv-O2-zY4" id="E87-NK-YVe"/>
                         <outlet property="totalProductionLabel" destination="EdR-1w-H8x" id="nLG-kc-C3K"/>
                         <outlet property="totalProductionPerSec" destination="79H-ya-A6X" id="RDL-EH-adK"/>
