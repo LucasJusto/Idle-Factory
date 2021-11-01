@@ -40,7 +40,7 @@ class GameInventorySceneController: UIViewController {
     @IBOutlet weak var coinImage3: UIImageView!
     @IBOutlet weak var generatePerSecType3: UILabel!
     
-    // Total Production Info
+    // Total Production & ID Info
     @IBOutlet weak var totalProductionLabel: UILabel!
     @IBOutlet weak var coinImage4: UIImageView!
     @IBOutlet weak var totalProductionPerSec: UILabel!
@@ -56,83 +56,22 @@ class GameInventorySceneController: UIViewController {
     @IBOutlet weak var quickSellView: UIView!
     @IBOutlet weak var quickSellQuestionLabel: UILabel!
     @IBOutlet weak var quickSellEarnLabel: UILabel!
-    
     @IBOutlet weak var quickSellCoinImage: UIImageView!
     @IBOutlet weak var quickSellEarningLabel: UILabel!
+    
+    // Quick Sell Buttons
     @IBOutlet weak var cancelQuickSell: UIButton!
     @IBOutlet weak var confirmQuickSell: UIButton!
     
     // MARK: - CONTROLLERS
     static let factoryID: String = "factory_cell"
+    
+    // Selected Factory control
     private(set) var selectedFactory: Factory? = nil
+    private(set) var selectedFactoryIndex: Int = -1 // Index of the cell
+    
+    // Slot clicked from the GameScene (Default is .none)
     var clickedSlotPosition: GeneratorPositions = .none
-    
-    
-    // MARK: - ACTIONS
-    /**
-     Close Inventory scene.
-     */
-    @IBAction func closeInventory(_ sender: Any) {
-        self.dismiss(animated: false, completion: nil)
-    }
-    
-    
-    /**
-     Confirm modal message of Quick sell is displayed. Quick Sell is a way to earn main currency quickly. The gaining is calculated by 60% of the price paid for the generator.
-     */
-    @IBAction func quickSell(_ sender: Any) {
-        hideQuickSellModal(status: false)
-        print("Quick Sell")
-    }
-    
-    
-    /**
-     Cancel the quick sell action.
-     */
-    @IBAction func cancelQuickSell(_ sender: Any) {
-        hideQuickSellModal(status: true)
-    }
-    
-    
-    /**
-     Confirm the quick sell action. Player lose the generator and cannot be recovered.
-     */
-    @IBAction func confirmQuickSell(_ sender: Any) {
-        print("Quick Sell made!!")
-    }
-    
-    
-    /**
-     Action to insert ou announce a factory. This function depends from where user clicked to enter on this scene. This is controlled by the 'clickedSource' variable. If player comes by 'add factory', this action will place a factory from the Inventory to the scene. If player clicks by Inventory button, this action will make announce a factory possible to be announced on marketplace.
-     */
-    @IBAction func insertOrAnnounceFactory(_ sender: Any) {
-        
-        if clickedSlotPosition == .none {
-            announceFactory()
-        } else {
-            insertOnPark()
-        }
-    }
-
-    
-    /**
-     Announce a factory on the marketplace to other players.
-     */
-    func announceFactory() {
-        print("Announce park")
-    }
-    
-    
-    /**
-     Insert a factory from the Inventory to park. Turn the factory as active to generate resource to the Idle game.
-     */
-    func insertOnPark() {
-        selectedFactory?.position = clickedSlotPosition
-        selectedFactory?.isActive = .yes
-        GameScene.addFactory(factory: selectedFactory!)
-    
-        print("Moved to park!")
-    }
     
     
     // MARK: - INIT
@@ -170,6 +109,76 @@ class GameInventorySceneController: UIViewController {
         cancelQuickSell.setTitle(NSLocalizedString("QuickSellCancelButton", comment: ""), for: .normal)
         confirmQuickSell.setTitle(NSLocalizedString("QuickSellConfirmButton", comment: ""), for: .normal)
         
+    }
+    
+    
+    // MARK: - ACTIONS
+    /**
+     Close Inventory scene.
+     */
+    @IBAction func closeInventory(_ sender: Any) {
+        self.dismiss(animated: false, completion: nil)
+    }
+    
+    
+    /**
+     Modal message of Quick sell is displayed. Quick Sell is a way to earn main currency quickly. The gaining is calculated by 60% of the price paid for the generator.
+     */
+    @IBAction func quickSell(_ sender: Any) {
+        hideQuickSellModal(status: false)
+    }
+    
+    
+    /**
+     Cancel the quick sell action.
+     */
+    @IBAction func cancelQuickSell(_ sender: Any) {
+        hideQuickSellModal(status: true)
+    }
+    
+    
+    /**
+     Confirm the quick sell action. Player lose the generator and cannot be recovered.
+     */
+    @IBAction func confirmQuickSell(_ sender: Any) {
+        #warning("Give the correct formula to earn main currency")
+        let earnings_sell: Double = 0
+        GameScene.user?.addMainCurrency(value: earnings_sell)
+        GameScene.user?.generators.remove(at: selectedFactoryIndex)
+        print("Quick Sell made!!")
+    }
+    
+    
+    /**
+     Action to insert ou announce a factory. This function depends from where user clicked to enter on this scene. This is controlled by the 'clickedSource' variable. If player comes by 'add factory', this action will place a factory from the Inventory to the scene. If player clicks by Inventory button, this action will make announce a factory possible to be announced on marketplace.
+     */
+    @IBAction func insertOrAnnounceFactory(_ sender: Any) {
+        
+        if clickedSlotPosition == .none {
+            announceFactory()
+        } else {
+            insertOnPark()
+        }
+    }
+
+    
+    /**
+     Announce a factory on the marketplace to other players.
+     */
+    func announceFactory() {
+        print("Announce park")
+    }
+    
+    
+    /**
+     Insert a factory from the Inventory to park. Turn the factory as active to generate resource to the Idle game.
+     */
+    func insertOnPark() {
+        selectedFactory?.position = clickedSlotPosition
+        selectedFactory?.isActive = .yes
+        GameScene.addFactory(factory: selectedFactory!)
+    
+        print("Moved to park!")
     }
     
     
@@ -292,6 +301,7 @@ extension GameInventorySceneController: UICollectionViewDelegateFlowLayout {
         if indexPath.row < myFactories.count {
             if myFactories[indexPath.row].isActive == .no {
                 selectedFactory = myFactories[indexPath.row]
+                selectedFactoryIndex = indexPath.row
                 resources = myFactories[indexPath.row].resourcesArray
             }
         }
