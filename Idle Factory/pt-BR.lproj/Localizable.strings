@@ -26,6 +26,14 @@
 "InsertFactoryButton" = "Colocar no Parque";
 
 
+// MARK: - MARKETPLACE
+"MarketplaceHeaderLabel" = "Loja";
+"BasicSelectorItem" = "Básico";
+"PremiumSelectorItem" = "Premium";
+"SellAItemButton" = "Vender um item";
+"MyAnnouncesButton" = "Meus anúncios";
+"AboutNewFactoryButton" = "Ver mais";
+
 //MARK: - Upgrade Screen
 "MoveToInventory" = "Mover para o inventário";
 "ChangeFactory" = "Trocar fábrica";
