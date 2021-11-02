@@ -10,6 +10,8 @@
 		2B5B37512730A9A800277739 /* GameMarketplaceViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B5B37502730A9A800277739 /* GameMarketplaceViewCell.swift */; };
 		2B9C3146271F4BC3008A7676 /* GameHud.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B9C3145271F4BC3008A7676 /* GameHud.swift */; };
 		2B9C314B271F50DD008A7676 /* Austral-Slab_Blur-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 2B9C314A271F50DD008A7676 /* Austral-Slab_Blur-Regular.otf */; };
+		2BA6773227319A6C00D6F9EB /* GameAnnounceSceneViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BA6773127319A6C00D6F9EB /* GameAnnounceSceneViewController.swift */; };
+		2BA6773427319A8C00D6F9EB /* GameAnnounceViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BA6773327319A8C00D6F9EB /* GameAnnounceViewCell.swift */; };
 		2BD3FBEF27285ED200B4B4E6 /* GameInventoryScene.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2BD3FBEE27285ED200B4B4E6 /* GameInventoryScene.storyboard */; };
 		2BD3FBF32728777400B4B4E6 /* GameChallengeScene.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2BD3FBF22728777400B4B4E6 /* GameChallengeScene.storyboard */; };
 		2BD3FBF52728778500B4B4E6 /* GameMarketplaceScene.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2BD3FBF42728778500B4B4E6 /* GameMarketplaceScene.storyboard */; };
@@ -48,6 +50,8 @@
 		2B9C3145271F4BC3008A7676 /* GameHud.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameHud.swift; sourceTree = "<group>"; };
 		2B9C3147271F4C1B008A7676 /* Idle-Factory-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "Idle-Factory-Info.plist"; sourceTree = SOURCE_ROOT; };
 		2B9C314A271F50DD008A7676 /* Austral-Slab_Blur-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Austral-Slab_Blur-Regular.otf"; sourceTree = "<group>"; };
+		2BA6773127319A6C00D6F9EB /* GameAnnounceSceneViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameAnnounceSceneViewController.swift; sourceTree = "<group>"; };
+		2BA6773327319A8C00D6F9EB /* GameAnnounceViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameAnnounceViewCell.swift; sourceTree = "<group>"; };
 		2BD3FBEE27285ED200B4B4E6 /* GameInventoryScene.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = GameInventoryScene.storyboard; sourceTree = "<group>"; };
 		2BD3FBF22728777400B4B4E6 /* GameChallengeScene.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = GameChallengeScene.storyboard; sourceTree = "<group>"; };
 		2BD3FBF42728778500B4B4E6 /* GameMarketplaceScene.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = GameMarketplaceScene.storyboard; sourceTree = "<group>"; };
@@ -125,6 +129,15 @@
 			path = Fonts;
 			sourceTree = "<group>";
 		};
+		2BA6773527319A9200D6F9EB /* Announces */ = {
+			isa = PBXGroup;
+			children = (
+				2BA6773127319A6C00D6F9EB /* GameAnnounceSceneViewController.swift */,
+				2BA6773327319A8C00D6F9EB /* GameAnnounceViewCell.swift */,
+			);
+			path = Announces;
+			sourceTree = "<group>";
+		};
 		2BD3FBED27285EB200B4B4E6 /* GameInventoryScene */ = {
 			isa = PBXGroup;
 			children = (
@@ -150,6 +163,7 @@
 				2BFF82B92721D9A500F16F84 /* GameMarketplaceSceneController.swift */,
 				2BD3FBF42728778500B4B4E6 /* GameMarketplaceScene.storyboard */,
 				2B5B37502730A9A800277739 /* GameMarketplaceViewCell.swift */,
+				2BA6773527319A9200D6F9EB /* Announces */,
 			);
 			path = GameMarketplaceScene;
 			sourceTree = "<group>";
@@ -321,6 +335,7 @@
 				553E7F74272099DB00165C8E /* GameSave.swift in Sources */,
 				55BBAC17271F404A00A86A47 /* UIImageViewExtension.swift in Sources */,
 				2BFF82B82721D98400F16F84 /* GameChallengeSceneController.swift in Sources */,
+				2BA6773227319A6C00D6F9EB /* GameAnnounceSceneViewController.swift in Sources */,
 				487A1A0B2715520D00723065 /* Upgradable.swift in Sources */,
 				2BFF82BA2721D9A500F16F84 /* GameMarketplaceSceneController.swift in Sources */,
 				48A6596B271E07A70021CD52 /* Resource.swift in Sources */,
@@ -339,6 +354,7 @@
 				2B9C3146271F4BC3008A7676 /* GameHud.swift in Sources */,
 				487A19F02715504000723065 /* AppDelegate.swift in Sources */,
 				487A1A09271551BA00723065 /* Generator.swift in Sources */,
+				2BA6773427319A8C00D6F9EB /* GameAnnounceViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

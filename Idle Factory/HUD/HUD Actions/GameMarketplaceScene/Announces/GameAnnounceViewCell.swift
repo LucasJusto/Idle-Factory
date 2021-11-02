@@ -1,13 +1,13 @@
 //
-//  GameMarketplaceViewCell.swift
+//  GameAnnounceViewCell.swift
 //  Idle Factory
 //
-//  Created by Rodrigo Yukio Okido on 01/11/21.
+//  Created by Rodrigo Yukio Okido on 02/11/21.
 //
 
 import UIKit
 
-class GameMarketplaceViewCell: UICollectionViewCell {
+class GameAnnounceViewCell: UICollectionViewCell {
     
     // MARK: - GENERATOR OUTLETS
     @IBOutlet weak var cardView: UIView!
@@ -25,7 +25,7 @@ class GameMarketplaceViewCell: UICollectionViewCell {
     @IBOutlet weak var priceLabel: UILabel!
     
     // Button
-    @IBOutlet weak var seeMoreButton: UIButton!
+    @IBOutlet weak var seeAnnounceButton: UIButton!
     
     
     /**
@@ -33,8 +33,8 @@ class GameMarketplaceViewCell: UICollectionViewCell {
      */
     func configureCell() {
         cardView.layer.cornerRadius = 20
-        seeMoreButton.layer.cornerRadius = 10
-        seeMoreButton.setTitle(NSLocalizedString("AboutNewFactoryButton", comment: ""), for: .normal)
+        seeAnnounceButton.layer.cornerRadius = 10
+        seeAnnounceButton.setTitle(NSLocalizedString("AboutAnnounceButton", comment: ""), for: .normal)
     }
     
     
@@ -76,7 +76,6 @@ class GameMarketplaceViewCell: UICollectionViewCell {
             resourceType3.isHidden = true
             resourceQuantityType3.text = ""
         }
-//        coinImage.image =
         priceLabel.text = "999.999 M"
     }
 }

@@ -61,6 +61,28 @@ class GameMarketplaceSceneController: UIViewController {
     
     
     /**
+     Call player inventory scene if clicks to sell a item.
+     */
+    @IBAction func displayInventory(_ sender: Any) {
+        var mainView: UIStoryboard!
+        mainView = UIStoryboard(name: "GameInventoryScene", bundle: nil)
+        let viewcontroller : UIViewController = mainView.instantiateViewController(withIdentifier: "InventoryStoryboard") as UIViewController
+        self.present(viewcontroller, animated: false)
+    }
+    
+    
+    /**
+     Call player announce scene.
+     */
+    @IBAction func displayMyAnnounces(_ sender: Any) {
+        var mainView: UIStoryboard!
+        mainView = UIStoryboard(name: "GameMarketplaceScene", bundle: nil)
+        let viewcontroller : UIViewController = mainView.instantiateViewController(withIdentifier: "AnnounceStoryboard") as UIViewController
+        self.present(viewcontroller, animated: false)
+    }
+
+
+    /**
      Load player actual currencies value.
      */
     func loadPlayerCurrencies() {
@@ -95,14 +117,19 @@ extension GameMarketplaceSceneController: UICollectionViewDataSource {
             let generatorResources = (generator?.resourcesArray)!
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Self.factoryID, for: indexPath) as! GameMarketplaceViewCell
 
-            if generator?.isActive == .no {
+            // Check the item selector if Basic or Premium
+            if itemTypeSelector.selectedSegmentIndex == 0 {
+                self.collectionView.reloadData()
                 cell.pullMarketplaceFactories(texture: generator!.textureName, resources: generatorResources)
                 cell.configureCell()
+                return cell
             } else {
-                cell.pullMarketplaceFactories(texture: generator!.textureName, resources: generatorResources)
+                self.collectionView.reloadData()
+                cell.pullMarketplaceFactories(texture: "", resources: [])
                 cell.configureCell()
+                return cell
             }
-            return cell
+
         }
     }
 }

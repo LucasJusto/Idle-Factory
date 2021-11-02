@@ -34,6 +34,10 @@
 "MyAnnouncesButton" = "Announces";
 "AboutNewFactoryButton" = "See more";
 
+// Announces
+"AnnounceHeaderLabel" = "My announces";
+"AboutAnnounceButton" = "See announce";
+
 
 //MARK: - Upgrade Screen
 "MoveToInventory" = "Move to inventory";
