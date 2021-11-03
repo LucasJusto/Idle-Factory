@@ -28,6 +28,13 @@ class GameMarketplaceSceneController: UIViewController {
     // Selected Factory control
     private(set) var selectedFactory: Factory? = nil
     private(set) var selectedFactoryIndex: Int = -1 // Index of the cell
+    var factoryArray: [Factory] = [] {
+        didSet {
+            DispatchQueue.main.async {
+                self.collectionView.reloadData()
+            }
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -48,6 +55,7 @@ class GameMarketplaceSceneController: UIViewController {
         sellAItemButton.setTitle(NSLocalizedString("SellAItemButton", comment: ""), for: .normal)
         myAnnouncesButton.setTitle(NSLocalizedString("MyAnnouncesButton", comment: ""), for: .normal)
         loadPlayerCurrencies()
+        factoryArray = GameScene.user?.generators ?? []
     }
     
     
@@ -81,7 +89,17 @@ class GameMarketplaceSceneController: UIViewController {
         self.present(viewcontroller, animated: false)
     }
 
-
+    @IBAction func indexChanged(_ sender: Any) {
+        switch itemTypeSelector.selectedSegmentIndex {
+        case 0:
+            factoryArray = GameScene.user?.generators ?? []
+        case 1:
+            factoryArray = []
+        default: break
+        }
+        
+    }
+    
     /**
      Load player actual currencies value.
      */
@@ -97,7 +115,7 @@ class GameMarketplaceSceneController: UIViewController {
 extension GameMarketplaceSceneController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 50
+        return factoryArray.count
     }
     
     
@@ -113,18 +131,18 @@ extension GameMarketplaceSceneController: UICollectionViewDataSource {
             return cell
         } else {
             #warning("CHANGE FROM WHERE IT PULLS")
-            let generator = GameScene.user?.generators[indexPath.row]
-            let generatorResources = (generator?.resourcesArray)!
+            let generator = factoryArray[indexPath.row]
+            let generatorResources = (generator.resourcesArray)
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Self.factoryID, for: indexPath) as! GameMarketplaceViewCell
 
             // Check the item selector if Basic or Premium
             if itemTypeSelector.selectedSegmentIndex == 0 {
-                self.collectionView.reloadData()
-                cell.pullMarketplaceFactories(texture: generator!.textureName, resources: generatorResources)
+//                self.collectionView.reloadData()
+                cell.pullMarketplaceFactories(texture: generator.textureName, resources: generatorResources)
                 cell.configureCell()
                 return cell
             } else {
-                self.collectionView.reloadData()
+//                self.collectionView.reloadData()
                 cell.pullMarketplaceFactories(texture: "", resources: [])
                 cell.configureCell()
                 return cell

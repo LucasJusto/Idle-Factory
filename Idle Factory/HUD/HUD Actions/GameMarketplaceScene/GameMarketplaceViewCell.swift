@@ -27,7 +27,6 @@ class GameMarketplaceViewCell: UICollectionViewCell {
     // Button
     @IBOutlet weak var seeMoreButton: UIButton!
     
-    
     /**
      Configure cell design.
      */
