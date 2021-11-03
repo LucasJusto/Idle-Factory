@@ -300,15 +300,6 @@ class GameScene: SKScene {
         
         let viewController = UIApplication.shared.windows.first!.rootViewController as! GameViewController
         viewController.displayInventory()
-        //        let inventoryScene = gameInventoryScene.createBackground()
-        //        let closeAction = gameInventoryScene.createCloseButton()
-        //        actionShapeNode = inventoryScene
-        //
-        //        inventoryScene.position = CGPoint(x: -(GameScene.deviceScreenWidth) / 2, y: -(GameScene.deviceScreenHeight) / 2)
-        //        closeAction.position = CGPoint(x: (GameScene.deviceScreenWidth) / 2, y: (GameScene.deviceScreenHeight) / 2)
-        //
-        //        cameraNode.addChild(actionShapeNode)
-        //        inventoryScene.addChild(closeAction)
     }
     
     
@@ -319,16 +310,6 @@ class GameScene: SKScene {
         
         let viewController = UIApplication.shared.windows.first!.rootViewController as! GameViewController
         viewController.displayMarketplace()
-        
-        //        let marketplaceScene = gameMarketplaceScene.createBackground()
-        //        let closeAction = gameMarketplaceScene.createCloseButton()
-        //        actionShapeNode = marketplaceScene
-        //
-        //        marketplaceScene.position = CGPoint(x: -(GameScene.deviceScreenWidth) / 2, y: -(GameScene.deviceScreenHeight) / 2)
-        //        closeAction.position = CGPoint(x: (GameScene.deviceScreenWidth) / 2, y: (GameScene.deviceScreenHeight) / 2)
-        //
-        //        cameraNode.addChild(actionShapeNode)
-        //        marketplaceScene.addChild(closeAction)
     }
     
     
@@ -339,16 +320,6 @@ class GameScene: SKScene {
         
         let viewController = UIApplication.shared.windows.first!.rootViewController as! GameViewController
         viewController.displayChallenge()
-        
-        //        let challengeScene = gameChallengeScene.createBackground()
-        //        let closeAction = gameChallengeScene.createCloseButton()
-        //
-        //        actionShapeNode = challengeScene
-        //        challengeScene.position = CGPoint(x: -(GameScene.deviceScreenWidth) / 2, y: -(GameScene.deviceScreenHeight) / 2)
-        //        closeAction.position = CGPoint(x: (GameScene.deviceScreenWidth) / 2, y: (GameScene.deviceScreenHeight) / 2)
-        //
-        //        cameraNode.addChild(actionShapeNode)
-        //        challengeScene.addChild(closeAction)
     }
     
     
