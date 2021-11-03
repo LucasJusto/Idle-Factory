@@ -29,3 +29,6 @@
 //MARK: - Upgrade Screen
 "MoveToInventory" = "Mover para o inventário";
 "ChangeFactory" = "Trocar fábrica";
+"Price" = "Preço";
+"Cancel" = "Cancelar";
+"Purchase" = "Comprar";

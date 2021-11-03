@@ -36,6 +36,9 @@
 		55439BC72721F23D00F69461 /* DateApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55439BC62721F23D00F69461 /* DateApi.swift */; };
 		555DFCB72729BE0D006C60D9 /* UpgradeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 555DFCB62729BE0D006C60D9 /* UpgradeCell.swift */; };
 		5567745C271A09A7006BA5C0 /* Factory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5567745B271A09A7006BA5C0 /* Factory.swift */; };
+		55A0B4AE2732F6C900161FE8 /* FactoryDetailScene.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 55A0B4AD2732F6C900161FE8 /* FactoryDetailScene.storyboard */; };
+		55A0B4B027330B2000161FE8 /* FactoryDetailSceneController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55A0B4AF27330B2000161FE8 /* FactoryDetailSceneController.swift */; };
+		55A0B4B227330EA500161FE8 /* FactoryDetailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55A0B4B127330EA500161FE8 /* FactoryDetailCell.swift */; };
 		55BBAC15271F404A00A86A47 /* UIImageExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55BBAC12271F404A00A86A47 /* UIImageExtension.swift */; };
 		55BBAC16271F404A00A86A47 /* GIFPlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55BBAC13271F404A00A86A47 /* GIFPlayerView.swift */; };
 		55BBAC17271F404A00A86A47 /* UIImageViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55BBAC14271F404A00A86A47 /* UIImageViewExtension.swift */; };
@@ -78,6 +81,9 @@
 		55439BC62721F23D00F69461 /* DateApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateApi.swift; sourceTree = "<group>"; };
 		555DFCB62729BE0D006C60D9 /* UpgradeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpgradeCell.swift; sourceTree = "<group>"; };
 		5567745B271A09A7006BA5C0 /* Factory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Factory.swift; sourceTree = "<group>"; };
+		55A0B4AD2732F6C900161FE8 /* FactoryDetailScene.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = FactoryDetailScene.storyboard; sourceTree = "<group>"; };
+		55A0B4AF27330B2000161FE8 /* FactoryDetailSceneController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FactoryDetailSceneController.swift; sourceTree = "<group>"; };
+		55A0B4B127330EA500161FE8 /* FactoryDetailCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FactoryDetailCell.swift; sourceTree = "<group>"; };
 		55BBAC12271F404A00A86A47 /* UIImageExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIImageExtension.swift; sourceTree = "<group>"; };
 		55BBAC13271F404A00A86A47 /* GIFPlayerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GIFPlayerView.swift; sourceTree = "<group>"; };
 		55BBAC14271F404A00A86A47 /* UIImageViewExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIImageViewExtension.swift; sourceTree = "<group>"; };
@@ -179,6 +185,7 @@
 		487A19EE2715504000723065 /* Idle Factory */ = {
 			isa = PBXGroup;
 			children = (
+				55A0B4AC2732F66700161FE8 /* FactoryDetails */,
 				555DFCB52729BDC5006C60D9 /* UpgradeFactory */,
 				2B9C3147271F4C1B008A7676 /* Idle-Factory-Info.plist */,
 				55BBAC11271F3FE500A86A47 /* GIF Extension */,
@@ -222,6 +229,16 @@
 				555DFCB62729BE0D006C60D9 /* UpgradeCell.swift */,
 			);
 			path = UpgradeFactory;
+			sourceTree = "<group>";
+		};
+		55A0B4AC2732F66700161FE8 /* FactoryDetails */ = {
+			isa = PBXGroup;
+			children = (
+				55A0B4AD2732F6C900161FE8 /* FactoryDetailScene.storyboard */,
+				55A0B4AF27330B2000161FE8 /* FactoryDetailSceneController.swift */,
+				55A0B4B127330EA500161FE8 /* FactoryDetailCell.swift */,
+			);
+			path = FactoryDetails;
 			sourceTree = "<group>";
 		};
 		55BBAC11271F3FE500A86A47 /* GIF Extension */ = {
@@ -302,6 +319,7 @@
 				2B9C314B271F50DD008A7676 /* Austral-Slab_Blur-Regular.otf in Resources */,
 				2BD3FBF727287CBE00B4B4E6 /* UpgradeFactoryScene.storyboard in Resources */,
 				2BD3FBF52728778500B4B4E6 /* GameMarketplaceScene.storyboard in Resources */,
+				55A0B4AE2732F6C900161FE8 /* FactoryDetailScene.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -330,8 +348,10 @@
 				487A1A072715516900723065 /* Camera.swift in Sources */,
 				487A19F62715504000723065 /* GameScene.swift in Sources */,
 				487A19F82715504000723065 /* GameViewController.swift in Sources */,
+				55A0B4B027330B2000161FE8 /* FactoryDetailSceneController.swift in Sources */,
 				55BD52A92718BC2C0057C7C0 /* User.swift in Sources */,
 				55439BC52721E87400F69461 /* functions.swift in Sources */,
+				55A0B4B227330EA500161FE8 /* FactoryDetailCell.swift in Sources */,
 				2B9C3146271F4BC3008A7676 /* GameHud.swift in Sources */,
 				487A19F02715504000723065 /* AppDelegate.swift in Sources */,
 				487A1A09271551BA00723065 /* Generator.swift in Sources */,
