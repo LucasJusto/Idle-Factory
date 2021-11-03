@@ -357,6 +357,67 @@ public class CKRepository {
         }
     }
     
+    static func getGeneratorsByIDs(generatorsIDs: [String], completion: @escaping ([Factory]) -> Void){
+        let publicDB = container.publicCloudDatabase
+        var generators: [Factory] = [Factory]()
+        
+        let predicate = NSPredicate(value: true)
+        let query = CKQuery(recordType: GeneratorTable.recordType.description, predicate: predicate)
+        
+        publicDB.perform(query, inZoneWith: nil) { results, error in
+            if let ckError = error as? CKError {
+                CKRepository.errorAlertHandler(CKErrorCode: ckError.code)
+            }
+            
+            if let results = results {
+                let generators2 = results.filter { record in
+                    generatorsIDs.contains(record.recordID.recordName)
+                }
+                let semaphore = DispatchSemaphore(value: 0)
+                
+                for generator in generators2 {
+                    let id: String = generator.recordID.recordName
+                    var resources: [Resource] = []
+                    let energy: Int = generator.value(forKey: GeneratorTable.energy.description) as? Int ?? 0
+                    let typeString: String = generator.value(forKey: GeneratorTable.type.description) as? String ?? ""
+                    let type: FactoryType = FactoryType.getFactoryType(factoryType: typeString)
+                    let positionString: String = generator.value(forKey: GeneratorTable.position.description) as? String ?? ""
+                    let position: GeneratorPositions = GeneratorPositions.getGeneratorPositions(position: positionString)
+                    let isActiveString: String = generator.value(forKey: GeneratorTable.isActive.description) as? String ?? ""
+                    let isActive: IsActive = IsActive.getKey(isActive: isActiveString)
+                    let texture: String = generator.value(forKey: GeneratorTable.texture.description) as? String ?? ""
+                    
+                    let resourcesPredicate = NSPredicate(format: "\(ResourceTable.generatorID.description) == %@", id)
+                    let resourcesQuery = CKQuery(recordType: ResourceTable.recordType.description, predicate: resourcesPredicate)
+                    
+                    publicDB.perform(resourcesQuery, inZoneWith: nil) { results2, error in
+                        if let resourcesNotNull = results2 {
+                            for resource in resourcesNotNull {
+                                let rID: String = resource.recordID.recordName
+                                let basePrice: Double = resource.value(forKey: ResourceTable.basePrice.description) as? Double ?? 0
+                                let baseQtt: Double = resource.value(forKey: ResourceTable.baseQtt.description) as? Double ?? 0
+                                let currentLevel: Int = resource.value(forKey: ResourceTable.level.description) as? Int ?? 0
+                                let qttPLevel: Double = resource.value(forKey: ResourceTable.qttPLevel.description) as? Double ?? 0
+                                let typeString2: String = resource.value(forKey: ResourceTable.type.description) as? String ?? ""
+                                let type: ResourceType = ResourceType.getKey(key: typeString2)
+                                let pricePLevelIncreaseTax: Double = resource.value(forKey: ResourceTable.pricePLevelIncreaseTax.description) as? Double ?? 0
+                                
+                                let r = Resource(id: rID, basePrice: basePrice, baseQtt: baseQtt, currentLevel: currentLevel, qttPLevel: qttPLevel, type: type, pricePLevelIncreaseTax: pricePLevelIncreaseTax)
+                                resources.append(r)
+                                semaphore.signal()
+                            }
+                        }
+                    }
+                    
+                    semaphore.wait()
+                    let factory = Factory(id: id, resourcesArray: resources, energy: energy, type: type, texture: texture, position: position, isActive: isActive)
+                    generators.append(factory)
+                }
+            }
+            completion(generators)
+        }
+    }
+    
     static func errorAlertHandler(CKErrorCode: CKError.Code){
         
         let notLoggedInTitle = NSLocalizedString("CKErrorNotLoggedInTitle", comment: "Not logged in iCloud")
