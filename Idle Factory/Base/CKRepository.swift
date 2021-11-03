@@ -312,6 +312,10 @@ public class CKRepository {
         let query = CKQuery(recordType: MarketTable.recordType.description, predicate: predicate)
                 
         publicDB.perform(query, inZoneWith: nil) { results, error in
+            if let ckError = error as? CKError {
+                CKRepository.errorAlertHandler(CKErrorCode: ckError.code)
+            }
+            
             if let results = results {
                 for result in results {
                     let id: String = result.recordID.recordName
@@ -325,6 +329,30 @@ public class CKRepository {
                 }
             }
             completion(offers)
+        }
+    }
+    
+    static func buyOfferFromMarket(sellerID: String, generatorID: String, buyerID: String) {
+        let publicDB = container.publicCloudDatabase
+        
+        let predicate = NSPredicate(format: "\(MarketTable.sellerID.description) == \(sellerID) AND \(MarketTable.generatorID.description) == \(generatorID)")
+        let query = CKQuery(recordType: MarketTable.recordType.description, predicate: predicate)
+        
+        publicDB.perform(query, inZoneWith: nil) { result, error in
+            if let ckError = error as? CKError {
+                CKRepository.errorAlertHandler(CKErrorCode: ckError.code)
+            }
+            
+            if let result = result {
+                let offer = result[0]
+                offer.setObject(buyerID as CKRecordValue?, forKey: MarketTable.buyerID.description)
+                
+                publicDB.save(offer) { _, error in
+                    if let ckError = error as? CKError {
+                        CKRepository.errorAlertHandler(CKErrorCode: ckError.code)
+                    }
+                }
+            }
         }
     }
     
