@@ -32,7 +32,7 @@ public class CKRepository {
         }
     }
     
-    public static func storeUserData(id: String, name: String, mainCurrency: Double, premiumCurrency: Double, completion: ((CKRecord?, Error?) -> Void)? = nil){
+    static func storeUserData(id: String, name: String?, mainCurrency: Double?, premiumCurrency: Double?, timeLeftApp: Double?, completion: ((CKRecord?, Error?) -> Void)? = nil){
         
         let recordID = CKRecord.ID(recordName: id)
         let publicDB = container.publicCloudDatabase
@@ -46,6 +46,7 @@ public class CKRepository {
                 userNotNull.setObject(name as CKRecordValue?, forKey: UsersTable.name.description)
                 userNotNull.setObject(mainCurrency as CKRecordValue?, forKey: UsersTable.mainCurrency.description)
                 userNotNull.setObject(premiumCurrency as CKRecordValue?, forKey: UsersTable.premiumCurrency.description)
+                userNotNull.setObject(timeLeftApp as CKRecordValue?, forKey: UsersTable.timeLeftApp.description)
                 
                 publicDB.save(userNotNull) { savedRecord, error in
                     if let ckError = error as? CKError {
@@ -62,14 +63,16 @@ public class CKRepository {
     static func getUserById(id: String, completion: @escaping (User?) -> Void) {
         let recordID = CKRecord.ID(recordName: id)
         let publicDB = container.publicCloudDatabase
+        let gameSave = GameSave()
         
         publicDB.fetch(withRecordID: recordID) { userOptional, error in
             if let userNotNull = userOptional {
                 let name = userNotNull.value(forKey: UsersTable.name.description) as? String
                 let mainCurrency = userNotNull.value(forKey: UsersTable.mainCurrency.description) as? Double
                 let premiumCurrency = userNotNull.value(forKey: UsersTable.premiumCurrency.description) as? Double
+                let timeLeftApp = userNotNull.value(forKey: UsersTable.timeLeftApp.description) as? Double
                 
-                let user = User(id: id, name: name ?? "", mainCurrency: mainCurrency ?? 0, premiumCurrency: premiumCurrency ?? 0)
+                let user = User(id: id, name: name ?? "", mainCurrency: mainCurrency ?? 0, premiumCurrency: premiumCurrency ?? 0, timeLeftApp: timeLeftApp ?? gameSave.transformToSeconds(time: gameSave.getCurrentTime()))
                 completion(user)
             }
         }
@@ -334,7 +337,7 @@ public class CKRepository {
 }
 
 enum UsersTable: CustomStringConvertible {
-    case recordType, name, mainCurrency, premiumCurrency
+    case recordType, name, mainCurrency, premiumCurrency, timeLeftApp
     
     var description: String {
         switch self {
@@ -346,6 +349,8 @@ enum UsersTable: CustomStringConvertible {
                 return "mainCurrency"
             case .premiumCurrency:
                 return "premiumCurrency"
+            case .timeLeftApp:
+                return "timeLeftApp"
         }
     }
 }

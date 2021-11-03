@@ -23,7 +23,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationWillResignActive(_ application: UIApplication) {
         // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
         // Use this method to pause ongoing tasks, disable timers, and invalidate graphics rendering callbacks. Games should use this method to pause the game.
-        //gameSave.saveTimeLeftApp()
+//        gameSave.saveTimeLeftApp()
     }
     
     var identifier: UIBackgroundTaskIdentifier = UIBackgroundTaskIdentifier(rawValue: 0)
@@ -33,8 +33,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         self.identifier = application.beginBackgroundTask {
             
         }
-        self.gameSave.saveTimeLeftApp()
-        CKRepository.storeUserData(id: GameScene.user!.id , name:  GameScene.user?.name ?? "", mainCurrency:  GameScene.user!.mainCurrency , premiumCurrency:  GameScene.user!.premiumCurrency , completion: {_,_ in
+        CKRepository.storeUserData(id: GameScene.user!.id , name:  GameScene.user?.name ?? "", mainCurrency:  GameScene.user!.mainCurrency , premiumCurrency:  GameScene.user!.premiumCurrency, timeLeftApp: gameSave.transformToSeconds(time: gameSave.getCurrentTime()) , completion: {_,_ in
             print(#function)
             application.endBackgroundTask(self.identifier)
         })

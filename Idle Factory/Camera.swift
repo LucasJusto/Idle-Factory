@@ -76,7 +76,7 @@ class Camera: SKCameraNode, UIGestureRecognizerDelegate {
         // determines initial zoom sacle for 1
         zoomScale = 1
         // determines zoom interval
-        zoomInterval = (0.43, 0.8)
+        zoomInterval = (0.43, 0.43)
         //enavles zoom
         enableZoom = true
         enableCamera = true

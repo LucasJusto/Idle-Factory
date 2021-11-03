@@ -1,16 +1,22 @@
 //
-//  GameMarketplaceScene.swift
+//  GameMarketplaceSceneController.swift
 //  Idle Factory
 //
 //  Created by Rodrigo Yukio Okido on 21/10/21.
 //
 
+import UIKit
 import SpriteKit
 
-class GameMarketplaceScene: SKScene {
+class GameMarketplaceSceneController: UIViewController {
     
     // MARK: - Marketplace Scene display components
     private(set) var sceneBackground: SKShapeNode = SKShapeNode()
+    
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+    }
     
     
     /**
