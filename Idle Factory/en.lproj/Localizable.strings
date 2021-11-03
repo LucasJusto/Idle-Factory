@@ -16,6 +16,11 @@
 
 //MARK: - ResourceTypes
 "ResourceTypeComputador" = "Computer";
+"ResourceTypeTablet" = "Tablet";
+"ResourceTypeSmartphone" = "Smartphone";
+"ResourceTypeSmarttv" = "Smart TV";
+"ResourceTypeHeadphone" = "HeadPhone";
+
 
 
 // MARK: - INVENTORY
@@ -29,6 +34,25 @@
 "QuickSellEarnLabel" = "You will receive:";
 "QuickSellCancelButton" = "Cancel";
 "QuickSellConfirmButton" = "Confirm";
+
+
+// MARK: - IN-GAME SHOP
+"ShopHeaderLabel" = "Shop";
+"GenerateNFTButton" = "Generate NFT";
+"OpenMarketplaceButton" = "Open Marketplace";
+
+
+// MARK: - MARKETPLACE
+"MarketplaceHeaderLabel" = "Marketplace";
+"BasicSelectorItem" = "Basic";
+"PremiumSelectorItem" = "Premium";
+"SellAItemButton" = "Sell item";
+"MyAnnouncesButton" = "Announces";
+"AboutNewFactoryButton" = "See more";
+
+// Announces
+"AnnounceHeaderLabel" = "My announces";
+"AboutAnnounceButton" = "See announce";
 
 
 //MARK: - Upgrade Screen

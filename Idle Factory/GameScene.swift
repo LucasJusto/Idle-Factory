@@ -60,7 +60,7 @@ class GameScene: SKScene {
         
         return actionForever
     }()
-
+    
     
     // MARK: - Nodes
     private var background: SKSpriteNode = SKSpriteNode()
@@ -103,9 +103,16 @@ class GameScene: SKScene {
             switch touchedNode.name {
             case "PlayerInventoryButton":
                 displayInventory()
-            case "MarketplaceButton":
+            }
+            else if(touchedNode.name == "ShopButton") {
+                displayShop()
+            }
+            
+            else if(touchedNode.name == "MarketplaceButton") {
                 displayMarketplace()
-            case "ChallengeButton":
+            }
+            
+            else if touchedNode.name == "ChallengeButton" {
                 displayChallenge()
             case "factory_slot_0_empty":
                 selectGeneratorToInsert(position: .first)
@@ -227,17 +234,20 @@ class GameScene: SKScene {
         
         // HUD action buttons creation
         let inventoryButton = gameHud.createInventoryButton()
+        let shopButton = gameHud.createShopButton()
         let marketPlaceButton = gameHud.createMarketplaceButton()
         let challengeButton = gameHud.createChallengeButton()
         
         // Positioning buttons on the device
-        inventoryButton.position = CGPoint(x: ((GameScene.deviceScreenWidth) / 2.31), y: 50)
+        inventoryButton.position = CGPoint(x: ((GameScene.deviceScreenWidth) / 2.31), y: 130)
+        shopButton.position = CGPoint(x: ((GameScene.deviceScreenWidth) / 2.31), y: 50)
         marketPlaceButton.position = CGPoint(x: ((GameScene.deviceScreenWidth) / 2.31), y: -30)
         challengeButton.position = CGPoint(x: ((GameScene.deviceScreenWidth) / 2.31), y: -123)
         
         // Add to scene
         cameraNode.addChild(sidebarBackground)
         sidebarBackground.addChild(inventoryButton)
+        sidebarBackground.addChild(shopButton)
         sidebarBackground.addChild(marketPlaceButton)
         sidebarBackground.addChild(challengeButton)
     }
@@ -319,6 +329,16 @@ class GameScene: SKScene {
     
     
     /**
+     Display in-game shop.
+     */
+    func displayShop() {
+        
+        let viewController = UIApplication.shared.windows.first!.rootViewController as! GameViewController
+        viewController.displayShop()
+    }
+    
+    
+    /**
      Display marketplace.
      */
     func displayMarketplace() {
@@ -331,6 +351,7 @@ class GameScene: SKScene {
      Display challenge.
      */
     func displayChallenge() {
+        
         let viewController = UIApplication.shared.windows.first!.rootViewController as! GameViewController
         viewController.displayChallenge()
     }

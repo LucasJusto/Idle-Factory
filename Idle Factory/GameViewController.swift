@@ -24,7 +24,6 @@ class GameViewController: UIViewController {
                 if let userNotnull = user {
                     GameScene.user = userNotnull
                     if let timeAway = gameSave.getTimeAway() {
-                        print(timeAway)
                         if var generators = GameScene.user?.generators {
                             var perSecTotal: Double = 0.0
                             for n in 0..<generators.count {
@@ -120,6 +119,18 @@ class GameViewController: UIViewController {
         
         let mainView = UIStoryboard(name: "GameInventoryScene", bundle: nil)
         let viewcontroller : GameInventorySceneController = mainView.instantiateViewController(withIdentifier: "InventoryStoryboard") as! GameInventorySceneController
+        self.present(viewcontroller, animated: false)
+    }
+    
+    
+    /**
+     Calls GameShop storyboard to display the game shop.
+     */
+    func displayShop() {
+        
+        var mainView: UIStoryboard!
+        mainView = UIStoryboard(name: "GameShopScene", bundle: nil)
+        let viewcontroller : UIViewController = mainView.instantiateViewController(withIdentifier: "ShopStoryboard") as UIViewController
         self.present(viewcontroller, animated: false)
     }
     

@@ -16,7 +16,6 @@ class UpgradeCell: UITableViewCell {
     @IBOutlet weak var qtdPerSec: UILabel!
     @IBOutlet weak var resourceNameAndQtdPerSec: UILabel!
     @IBAction func UpgradeAction(_ sender: Any) {
-        print(#function)
     }
     
     

@@ -286,7 +286,6 @@ extension GameInventorySceneController: UICollectionViewDelegateFlowLayout {
     
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        print(indexPath.row)
         
         guard let cell = collectionView.cellForItem(at: indexPath) as? GameInventoryViewCell else { return }
                 cell.layer.borderWidth = 2

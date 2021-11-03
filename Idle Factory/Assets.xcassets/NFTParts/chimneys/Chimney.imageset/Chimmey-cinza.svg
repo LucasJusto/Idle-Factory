@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 25.4.1, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1" id="Camada_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 50.8 101" style="enable-background:new 0 0 50.8 101;" xml:space="preserve">
+<style type="text/css">
+	.st0{fill-rule:evenodd;clip-rule:evenodd;fill:#444444;}
+	.st1{fill:#444444;}
+	.st2{fill:#AE363D;}
+	.st3{clip-path:url(#SVGID_00000101820157403174972980000002938027145549473968_);}
+	.st4{fill-rule:evenodd;clip-rule:evenodd;fill:#212121;}
+</style>
+<polygon class="st0" points="0.1,87.7 9,7.2 40.9,7.2 50.7,87.7 "/>
+<ellipse class="st1" cx="25.4" cy="87.7" rx="25.3" ry="13.1"/>
+<ellipse class="st2" cx="25" cy="8.2" rx="15.9" ry="8"/>
+<ellipse class="st1" cx="25" cy="8.2" rx="15.9" ry="8"/>
+<g>
+	<defs>
+		<ellipse id="SVGID_1_" cx="25" cy="8.2" rx="15.9" ry="8"/>
+	</defs>
+	<clipPath id="SVGID_00000137842495711494285470000018102684341267189178_">
+		<use xlink:href="#SVGID_1_"  style="overflow:visible;"/>
+	</clipPath>
+	<g style="clip-path:url(#SVGID_00000137842495711494285470000018102684341267189178_);">
+		<path class="st4" d="M40.8,9.3c0,3.8,0.1,12.2-15.8,12.2C9.7,21.5,9,13.1,9,9.4S17.4,2.2,25,2.2S40.8,5.5,40.8,9.3z"/>
+	</g>
+</g>
+</svg>

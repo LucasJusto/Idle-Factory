@@ -34,7 +34,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             
         }
         CKRepository.storeUserData(id: GameScene.user!.id , name:  GameScene.user?.name ?? "", mainCurrency:  GameScene.user!.mainCurrency , premiumCurrency:  GameScene.user!.premiumCurrency, timeLeftApp: gameSave.transformToSeconds(time: gameSave.getCurrentTime()) , completion: {_,_ in
-            print(#function)
             application.endBackgroundTask(self.identifier)
         })
     }

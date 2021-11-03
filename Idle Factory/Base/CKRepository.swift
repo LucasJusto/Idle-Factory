@@ -288,6 +288,136 @@ public class CKRepository {
         publicDB.add(operation)
     }
     
+    static func storeMarketPlaceOffer(sellerID: String, generatorID: String, currencyType: CurrencyType, price: Double){
+        let publicDB = container.publicCloudDatabase
+        let record = CKRecord(recordType: MarketTable.recordType.description)
+        
+        record.setObject(sellerID as CKRecordValue?, forKey: MarketTable.sellerID.description)
+        record.setObject(price as CKRecordValue?, forKey: MarketTable.price.description)
+        record.setObject(currencyType.key as CKRecordValue?, forKey: MarketTable.currencyType.description)
+        record.setObject(generatorID as CKRecordValue?, forKey: MarketTable.generatorID.description)
+        record.setObject("none" as CKRecordValue?, forKey: MarketTable.buyerID.description)
+        
+        publicDB.save(record) { _, error in
+            if let ckError = error as? CKError {
+                CKRepository.errorAlertHandler(CKErrorCode: ckError.code)
+            }
+        }
+    }
+    
+    static func getMarketPlaceOffers(completion: @escaping ([Offer]) -> Void) {
+        let publicDB = container.publicCloudDatabase
+        var offers: [Offer] = [Offer]()
+        
+        let predicate = NSPredicate(format: "\(MarketTable.buyerID.description) == %@", "none")
+        let query = CKQuery(recordType: MarketTable.recordType.description, predicate: predicate)
+                
+        publicDB.perform(query, inZoneWith: nil) { results, error in
+            if let ckError = error as? CKError {
+                CKRepository.errorAlertHandler(CKErrorCode: ckError.code)
+            }
+            
+            if let results = results {
+                for result in results {
+                    let id: String = result.recordID.recordName
+                    let sellerID: String = result.value(forKey: MarketTable.sellerID.description) as! String
+                    let generatorID: String = result.value(forKey: MarketTable.generatorID.description) as! String
+                    let price: Double = result.value(forKey: MarketTable.price.description) as! Double
+                    let currencyTypeString: String = result.value(forKey: MarketTable.currencyType.description) as! String
+                    let currencyType: CurrencyType = CurrencyType.getType(key: currencyTypeString)
+                    
+                    offers.append(Offer(id: id, sellerID: sellerID, generatorID: generatorID, buyerID: nil, price: price, currencyType: currencyType))
+                }
+            }
+            completion(offers)
+        }
+    }
+    
+    static func buyOfferFromMarket(sellerID: String, generatorID: String, buyerID: String) {
+        let publicDB = container.publicCloudDatabase
+        
+        let predicate = NSPredicate(format: "\(MarketTable.sellerID.description) == '\(sellerID)' AND \(MarketTable.generatorID.description) == '\(generatorID)'")
+        let query = CKQuery(recordType: MarketTable.recordType.description, predicate: predicate)
+        
+        publicDB.perform(query, inZoneWith: nil) { result, error in
+            if let ckError = error as? CKError {
+                CKRepository.errorAlertHandler(CKErrorCode: ckError.code)
+            }
+            
+            if let result = result {
+                let offer = result[0]
+                offer.setObject(buyerID as CKRecordValue?, forKey: MarketTable.buyerID.description)
+                
+                publicDB.save(offer) { _, error in
+                    if let ckError = error as? CKError {
+                        CKRepository.errorAlertHandler(CKErrorCode: ckError.code)
+                    }
+                }
+            }
+        }
+    }
+    
+    static func getGeneratorsByIDs(generatorsIDs: [String], completion: @escaping ([Factory]) -> Void){
+        let publicDB = container.publicCloudDatabase
+        var generators: [Factory] = [Factory]()
+        
+        let predicate = NSPredicate(value: true)
+        let query = CKQuery(recordType: GeneratorTable.recordType.description, predicate: predicate)
+        
+        publicDB.perform(query, inZoneWith: nil) { results, error in
+            if let ckError = error as? CKError {
+                CKRepository.errorAlertHandler(CKErrorCode: ckError.code)
+            }
+            
+            if let results = results {
+                let generators2 = results.filter { record in
+                    generatorsIDs.contains(record.recordID.recordName)
+                }
+                let semaphore = DispatchSemaphore(value: 0)
+                
+                for generator in generators2 {
+                    let id: String = generator.recordID.recordName
+                    var resources: [Resource] = []
+                    let energy: Int = generator.value(forKey: GeneratorTable.energy.description) as? Int ?? 0
+                    let typeString: String = generator.value(forKey: GeneratorTable.type.description) as? String ?? ""
+                    let type: FactoryType = FactoryType.getFactoryType(factoryType: typeString)
+                    let positionString: String = generator.value(forKey: GeneratorTable.position.description) as? String ?? ""
+                    let position: GeneratorPositions = GeneratorPositions.getGeneratorPositions(position: positionString)
+                    let isActiveString: String = generator.value(forKey: GeneratorTable.isActive.description) as? String ?? ""
+                    let isActive: IsActive = IsActive.getKey(isActive: isActiveString)
+                    let texture: String = generator.value(forKey: GeneratorTable.texture.description) as? String ?? ""
+                    
+                    let resourcesPredicate = NSPredicate(format: "\(ResourceTable.generatorID.description) == %@", id)
+                    let resourcesQuery = CKQuery(recordType: ResourceTable.recordType.description, predicate: resourcesPredicate)
+                    
+                    publicDB.perform(resourcesQuery, inZoneWith: nil) { results2, error in
+                        if let resourcesNotNull = results2 {
+                            for resource in resourcesNotNull {
+                                let rID: String = resource.recordID.recordName
+                                let basePrice: Double = resource.value(forKey: ResourceTable.basePrice.description) as? Double ?? 0
+                                let baseQtt: Double = resource.value(forKey: ResourceTable.baseQtt.description) as? Double ?? 0
+                                let currentLevel: Int = resource.value(forKey: ResourceTable.level.description) as? Int ?? 0
+                                let qttPLevel: Double = resource.value(forKey: ResourceTable.qttPLevel.description) as? Double ?? 0
+                                let typeString2: String = resource.value(forKey: ResourceTable.type.description) as? String ?? ""
+                                let type: ResourceType = ResourceType.getKey(key: typeString2)
+                                let pricePLevelIncreaseTax: Double = resource.value(forKey: ResourceTable.pricePLevelIncreaseTax.description) as? Double ?? 0
+                                
+                                let r = Resource(id: rID, basePrice: basePrice, baseQtt: baseQtt, currentLevel: currentLevel, qttPLevel: qttPLevel, type: type, pricePLevelIncreaseTax: pricePLevelIncreaseTax)
+                                resources.append(r)
+                                semaphore.signal()
+                            }
+                        }
+                    }
+                    
+                    semaphore.wait()
+                    let factory = Factory(id: id, resourcesArray: resources, energy: energy, type: type, texture: texture, position: position, isActive: isActive)
+                    generators.append(factory)
+                }
+            }
+            completion(generators)
+        }
+    }
+    
     static func errorAlertHandler(CKErrorCode: CKError.Code){
         
         let notLoggedInTitle = NSLocalizedString("CKErrorNotLoggedInTitle", comment: "Not logged in iCloud")
@@ -336,6 +466,30 @@ public class CKRepository {
     
 }
 
+enum CurrencyType {
+    case premium, basic
+    
+    var key: String {
+        switch self {
+            case .premium:
+                return "premium"
+            case .basic:
+                return "basic"
+        }
+    }
+    
+    static func getType(key: String) -> CurrencyType{
+        switch key {
+            case "premium":
+                return CurrencyType.premium
+            case "basic":
+                return CurrencyType.basic
+            default:
+                return CurrencyType.basic
+        }
+    }
+}
+
 enum UsersTable: CustomStringConvertible {
     case recordType, name, mainCurrency, premiumCurrency, timeLeftApp
     
@@ -381,22 +535,22 @@ enum ResourceTable: CustomStringConvertible {
 }
 
 enum MarketTable: CustomStringConvertible {
-    case recordType, buyerRef, currencyType, generatorRef, price, sellerRef
+    case recordType, buyerID, currencyType, generatorID, price, sellerID
     
     var description: String {
         switch self {
             case .recordType:
                 return "Market"
-            case .buyerRef:
-                return "buyerRef"
+            case .buyerID:
+                return "buyerID"
             case . currencyType:
                 return "currencyType"
-            case .generatorRef:
-                return "generatorRef"
+            case .generatorID:
+                return "generatorID"
             case .price:
                 return "price"
-            case .sellerRef:
-                return "sellerRef"
+            case .sellerID:
+                return "sellerID"
         }
     }
 }

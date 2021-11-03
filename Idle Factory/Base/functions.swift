@@ -65,8 +65,16 @@ func doubleToString(value: Double) -> String {
 
 func getResourceImageName(resource: ResourceType) -> String{
     switch resource {
-    case .computador:
+    case .computer:
         return "laptopcomputer"
+    case .tablet:
+        return "apps.ipad.landscape"
+    case .smartphone:
+        return "apps.iphone"
+    case .smartTV:
+        return "4k.tv"
+    case .headphone:
+        return "airpods"
     default:
         return "questionmark"
     }
@@ -88,7 +96,7 @@ func createBasicFactory(resourceTypeArray: [ResourceType]) -> Factory {
     
     let maxInt = min(resourceTypeArray.count+1,4)
     for n in 0..<Int.random(in: 1..<maxInt) {
-        resourceArray.append(Resource(basePrice: 0, baseQtt: Double.random(in: 1..<15), currentLevel: 1, qttPLevel: Double.random(in: 5..<15), type: shuffledArray[n], pricePLevelIncreaseTax: Double.random(in: 100..<1500)))
+        resourceArray.append(Resource(basePrice: 100, baseQtt: Double.random(in: 1..<15), currentLevel: 1, qttPLevel: Double.random(in: 5..<15), type: shuffledArray[n], pricePLevelIncreaseTax: Double.random(in: 100..<1500)))
     }
     
     let factory = Factory(resourcesArray: resourceArray, energy: Int.random(in: 1..<10), type: FactoryType.Basic, texture: "Basic_Factory_level_1", position: GeneratorPositions.none, isActive: IsActive.no)
@@ -149,7 +157,6 @@ func getTime( completionHandler: @escaping (DateApi?) -> Void){
                 completionHandler(nil)
                 return
             }
-        print(datetime)
         completionHandler(DateApi(abbreviation: abbreviation, datetime: datetime, dayOfWeek: dayOfWeek, dayOfYear: dayOfYear, dst: dst, dst_from: dst_from, dst_offset: dst_offset, dst_until: dst_until, raw_offset: raw_offset, timezone: timezone, unixtime:unixtime, utc_datetime: utc_datetime, utc_offset: utc_offset, week_number: week_number))
         }
     .resume()
