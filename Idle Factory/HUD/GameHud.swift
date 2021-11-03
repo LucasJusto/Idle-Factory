@@ -23,6 +23,7 @@ class GameHud {
     
     // MARK: - Right Sidebar HUD display components
     private(set) var inventoryButton: SKSpriteNode = SKSpriteNode()
+    private(set) var shopButton: SKSpriteNode = SKSpriteNode()
     private(set) var marketplaceButton: SKSpriteNode = SKSpriteNode()
     private(set) var challengeButton: SKSpriteNode = SKSpriteNode()
     
@@ -34,7 +35,7 @@ class GameHud {
     func createTopHudBackground(xPos: CGFloat) -> SKShapeNode {
         let HudInfoBackground = SKShapeNode(rect: CGRect(x: -((GameScene.deviceScreenWidth) / 2) + xPos, y: ((GameScene.deviceScreenHeight) / 3) + 7.5, width: (GameScene.deviceScreenHeight) * 0.32, height: (GameScene.deviceScreenHeight) * 0.09), cornerRadius: 7)
         HudInfoBackground.fillColor = .white
-        HudInfoBackground.zPosition = 4
+        HudInfoBackground.zPosition = 50
         return HudInfoBackground
     }
     
@@ -46,7 +47,7 @@ class GameHud {
         let generationHudBackground = SKShapeNode(rect: CGRect(x: -((GameScene.deviceScreenWidth) / 2) + 50, y: ((GameScene.deviceScreenHeight) / 3) - 9, width: (GameScene.deviceScreenHeight) * 0.20, height: (GameScene.deviceScreenHeight) * 0.10), cornerRadius: 7)
         generationHudBackground.fillColor = UIColor(named: "Rightbar_background")!
         generationHudBackground.strokeColor = UIColor(named: "Rightbar_background")!
-        generationHudBackground.zPosition = 3
+        generationHudBackground.zPosition = 45
         return generationHudBackground
     }
     
@@ -57,7 +58,7 @@ class GameHud {
     func createMainCurrencyIcon() -> SKSpriteNode {
         mainCurrencyIcon = SKSpriteNode(imageNamed: "Coin")
         mainCurrencyIcon.setScale(0.8)
-        mainCurrencyIcon.zPosition = 3
+        mainCurrencyIcon.zPosition = 50
         return mainCurrencyIcon
     }
    
@@ -68,7 +69,7 @@ class GameHud {
     func createPremiumCurrencyIcon() -> SKSpriteNode {
         premiumCurrencyIcon = SKSpriteNode(imageNamed: "Money_premium")
         premiumCurrencyIcon.setScale(0.8)
-        premiumCurrencyIcon.zPosition = 3
+        premiumCurrencyIcon.zPosition = 50
         return premiumCurrencyIcon
     }
     
@@ -82,7 +83,7 @@ class GameHud {
         mainCurrencyValue.text = "\(doubleToString(value:GameScene.user?.mainCurrency ?? 0.0))"
         mainCurrencyValue.fontColor = .black
         mainCurrencyValue.fontSize = 14
-        mainCurrencyValue.zPosition = 3
+        mainCurrencyValue.zPosition = 50
         return mainCurrencyValue
     }
     
@@ -96,7 +97,7 @@ class GameHud {
         premiumCurrencyValue.text = "\(doubleToString(value:GameScene.user?.premiumCurrency ?? 0.0))"
         premiumCurrencyValue.fontColor = .black
         premiumCurrencyValue.fontSize = 14
-        premiumCurrencyValue.zPosition = 3
+        premiumCurrencyValue.zPosition = 50
         return premiumCurrencyValue
     }
     
@@ -110,7 +111,7 @@ class GameHud {
         generatingResourceValue.text = ""
         generatingResourceValue.fontColor = .white
         generatingResourceValue.fontSize = 11
-        generatingResourceValue.zPosition = 3
+        generatingResourceValue.zPosition = 50
         return generatingResourceValue
     }
     
@@ -123,7 +124,7 @@ class GameHud {
         let sidebarBackground = SKShapeNode(rect: CGRect(x: (GameScene.deviceScreenWidth) / 2.3, y: -(GameScene.deviceScreenHeight) / 2, width: (GameScene.deviceScreenWidth) * 0.08, height: GameScene.deviceScreenHeight))
         sidebarBackground.fillColor = UIColor(named: "Rightbar_background")!
         sidebarBackground.strokeColor = UIColor(named: "Rightbar_background")!
-        sidebarBackground.zPosition = 3
+        sidebarBackground.zPosition = 50
         return sidebarBackground
     }
     
@@ -135,8 +136,20 @@ class GameHud {
         inventoryButton = SKSpriteNode(imageNamed: "Button-inventory")
         inventoryButton.name = "PlayerInventoryButton"
         inventoryButton.setScale(0.8)
-        inventoryButton.zPosition = 4
+        inventoryButton.zPosition = 50
         return inventoryButton
+    }
+    
+    
+    /**
+     Create shop button for the sidebar hud.
+     */
+    func createShopButton() -> SKSpriteNode {
+        shopButton = SKSpriteNode(imageNamed: "Button-shop")
+        shopButton.name = "ShopButton"
+        shopButton.setScale(0.8)
+        shopButton.zPosition = 50
+        return shopButton
     }
     
     
@@ -147,7 +160,7 @@ class GameHud {
         marketplaceButton = SKSpriteNode(imageNamed: "Button-marketplace")
         marketplaceButton.name = "MarketplaceButton"
         marketplaceButton.setScale(0.8)
-        marketplaceButton.zPosition = 4
+        marketplaceButton.zPosition = 50
         return marketplaceButton
     }
     
@@ -159,7 +172,7 @@ class GameHud {
         challengeButton = SKSpriteNode(imageNamed: "Button-challenges")
         challengeButton.name = "ChallengeButton"
         challengeButton.setScale(0.8)
-        challengeButton.zPosition = 4
+        challengeButton.zPosition = 50
         return challengeButton
     }
 }
