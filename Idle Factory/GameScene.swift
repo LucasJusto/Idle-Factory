@@ -103,16 +103,11 @@ class GameScene: SKScene {
             switch touchedNode.name {
             case "PlayerInventoryButton":
                 displayInventory()
-            }
-            else if(touchedNode.name == "ShopButton") {
+            case "ShopButton":
                 displayShop()
-            }
-            
-            else if(touchedNode.name == "MarketplaceButton") {
+            case "MarketplaceButton":
                 displayMarketplace()
-            }
-            
-            else if touchedNode.name == "ChallengeButton" {
+            case"ChallengeButton":
                 displayChallenge()
             case "factory_slot_0_empty":
                 selectGeneratorToInsert(position: .first)
