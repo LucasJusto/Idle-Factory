@@ -17,8 +17,6 @@ class GameScene: SKScene {
     private(set) static var deviceScreenHeight = UIScreen.main.bounds.height
     
     
-    
-    
     // MARK: - GAME HUD & HUD SCENE ACTIONS
     private var gameHud: GameHud = GameHud()
     private var actionShapeNode: SKShapeNode = SKShapeNode()
@@ -92,12 +90,15 @@ class GameScene: SKScene {
             let touchedNode = atPoint(location)
             if(touchedNode.name == "PlayerInventoryButton"){
                 displayInventory()
-                //self.removeAllChildren()
             }
+            else if(touchedNode.name == "ShopButton") {
+                displayShop()
+            }
+            
             else if(touchedNode.name == "MarketplaceButton") {
                 displayMarketplace()
-                //self.removeAllChildren()
             }
+            
             else if touchedNode.name == "ChallengeButton" {
                 displayChallenge()
             }
@@ -212,17 +213,20 @@ class GameScene: SKScene {
         
         // HUD action buttons creation
         let inventoryButton = gameHud.createInventoryButton()
+        let shopButton = gameHud.createShopButton()
         let marketPlaceButton = gameHud.createMarketplaceButton()
         let challengeButton = gameHud.createChallengeButton()
         
         // Positioning buttons on the device
-        inventoryButton.position = CGPoint(x: ((GameScene.deviceScreenWidth) / 2.31), y: 50)
+        inventoryButton.position = CGPoint(x: ((GameScene.deviceScreenWidth) / 2.31), y: 130)
+        shopButton.position = CGPoint(x: ((GameScene.deviceScreenWidth) / 2.31), y: 50)
         marketPlaceButton.position = CGPoint(x: ((GameScene.deviceScreenWidth) / 2.31), y: -30)
         challengeButton.position = CGPoint(x: ((GameScene.deviceScreenWidth) / 2.31), y: -123)
         
         // Add to scene
         cameraNode.addChild(sidebarBackground)
         sidebarBackground.addChild(inventoryButton)
+        sidebarBackground.addChild(shopButton)
         sidebarBackground.addChild(marketPlaceButton)
         sidebarBackground.addChild(challengeButton)
     }
@@ -238,6 +242,8 @@ class GameScene: SKScene {
         (x: 181.78, y: -410),
         (x: 480.70, y: -235)
     ]
+    
+    
     // MARK: - GENERATORS FUNCTIONS
     /**
      Add a factory on the scene. Receives a position which represents what slot player wants to add the new factory.
@@ -300,6 +306,16 @@ class GameScene: SKScene {
         
         let viewController = UIApplication.shared.windows.first!.rootViewController as! GameViewController
         viewController.displayInventory()
+    }
+    
+    
+    /**
+     Display in-game shop.
+     */
+    func displayShop() {
+        
+        let viewController = UIApplication.shared.windows.first!.rootViewController as! GameViewController
+        viewController.displayShop()
     }
     
     

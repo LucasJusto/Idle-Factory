@@ -23,6 +23,7 @@ class GameHud {
     
     // MARK: - Right Sidebar HUD display components
     private(set) var inventoryButton: SKSpriteNode = SKSpriteNode()
+    private(set) var shopButton: SKSpriteNode = SKSpriteNode()
     private(set) var marketplaceButton: SKSpriteNode = SKSpriteNode()
     private(set) var challengeButton: SKSpriteNode = SKSpriteNode()
     
@@ -137,6 +138,18 @@ class GameHud {
         inventoryButton.setScale(0.8)
         inventoryButton.zPosition = 50
         return inventoryButton
+    }
+    
+    
+    /**
+     Create shop button for the sidebar hud.
+     */
+    func createShopButton() -> SKSpriteNode {
+        shopButton = SKSpriteNode(imageNamed: "Button-shop")
+        shopButton.name = "ShopButton"
+        shopButton.setScale(0.8)
+        shopButton.zPosition = 50
+        return shopButton
     }
     
     
