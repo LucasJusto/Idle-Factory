@@ -149,7 +149,6 @@ func getTime( completionHandler: @escaping (DateApi?) -> Void){
                 completionHandler(nil)
                 return
             }
-        print(datetime)
         completionHandler(DateApi(abbreviation: abbreviation, datetime: datetime, dayOfWeek: dayOfWeek, dayOfYear: dayOfYear, dst: dst, dst_from: dst_from, dst_offset: dst_offset, dst_until: dst_until, raw_offset: raw_offset, timezone: timezone, unixtime:unixtime, utc_datetime: utc_datetime, utc_offset: utc_offset, week_number: week_number))
         }
     .resume()
