@@ -41,28 +41,52 @@ class Resource: Upgradable {
 }
 
 enum ResourceType: CustomStringConvertible {
-    case computador
+    case computer, tablet, smartphone, smartTV, headphone
     
     var description: String {
         switch self {
-            case .computador:
+            case .computer:
                 return NSLocalizedString("ResourceTypeComputador", comment: "Computador")
+        case .tablet:
+            return NSLocalizedString("ResourceTypeTablet", comment: "Tablet")
+        case .smartphone:
+            return NSLocalizedString("ResourceTypeSmartphone", comment: "Smartphone")
+        case .smartTV:
+            return NSLocalizedString("ResourceTypeSmarttv", comment: "SmartTV")
+        case .headphone:
+            return NSLocalizedString("ResourceTypeHeadphone", comment: "Headphone")
         }
     }
     
     var key: String {
         switch self {
-            case .computador:
+            case .computer:
                 return "Computador"
+        case .tablet:
+            return "Tablet"
+        case .smartphone:
+            return "Smartphone"
+        case .smartTV:
+            return "SmartTV"
+        case .headphone:
+            return "Headphone"
         }
     }
     
     static func getKey(key: String) -> ResourceType{
         switch key {
             case "Computador":
-                return ResourceType.computador
+                return ResourceType.computer
+            case "Tablet":
+                return ResourceType.tablet
+            case "Smartphone":
+                return ResourceType.smartphone
+            case "SmartTV":
+                return ResourceType.smartTV
+            case "Headphone":
+                return ResourceType.headphone
             default:
-                return ResourceType.computador
+                return ResourceType.computer
         }
     }
 }

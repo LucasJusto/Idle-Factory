@@ -89,6 +89,7 @@ class GameMarketplaceSceneController: UIViewController {
         self.present(viewcontroller, animated: false)
     }
 
+    
     @IBAction func indexChanged(_ sender: Any) {
         switch itemTypeSelector.selectedSegmentIndex {
         case 0:
@@ -120,66 +121,30 @@ extension GameMarketplaceSceneController: UICollectionViewDataSource {
     
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        #warning("CHANGE FROM WHERE IT PULLS")
-        let generatorsSize = (GameScene.user?.generators.count)!
-        
-        if indexPath.row >= generatorsSize {
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Self.factoryID, for: indexPath) as! GameMarketplaceViewCell
-            cell.pullMarketplaceFactories(texture: "", resources: [])
-            cell.configureCell()
 
+        #warning("CHANGE FROM WHERE IT PULLS")
+        let generator = factoryArray[indexPath.row]
+        let generatorResources = (generator.resourcesArray)
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Self.factoryID, for: indexPath) as! GameMarketplaceViewCell
+
+        // Check the item selector if Basic or Premium
+        if itemTypeSelector.selectedSegmentIndex == 0 {
+            cell.pullMarketplaceFactories(texture: generator.textureName, resources: generatorResources)
+            cell.configureCell()
             return cell
         } else {
-            #warning("CHANGE FROM WHERE IT PULLS")
-            let generator = factoryArray[indexPath.row]
-            let generatorResources = (generator.resourcesArray)
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Self.factoryID, for: indexPath) as! GameMarketplaceViewCell
-
-            // Check the item selector if Basic or Premium
-            if itemTypeSelector.selectedSegmentIndex == 0 {
-//                self.collectionView.reloadData()
-                cell.pullMarketplaceFactories(texture: generator.textureName, resources: generatorResources)
-                cell.configureCell()
-                return cell
-            } else {
-//                self.collectionView.reloadData()
-                cell.pullMarketplaceFactories(texture: "", resources: [])
-                cell.configureCell()
-                return cell
-            }
-
+            cell.pullMarketplaceFactories(texture: "", resources: [])
+            cell.configureCell()
+            return cell
         }
+
+        
     }
 }
 
 
 // MARK: - COLLECTIONVIEW DELEGATE
 extension GameMarketplaceSceneController: UICollectionViewDelegateFlowLayout {
-    
-    
-    func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
-        guard let cell = collectionView.cellForItem(at: indexPath) as? GameMarketplaceViewCell else { return }
-                cell.layer.borderWidth = 0
-                cell.layer.borderColor = UIColor.black.cgColor
-                cell.layer.cornerRadius = 10
-    }
-    
-    
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        print(indexPath.row)
-        
-        guard let cell = collectionView.cellForItem(at: indexPath) as? GameMarketplaceViewCell else { return }
-                cell.layer.borderWidth = 2
-                cell.layer.borderColor = UIColor.black.cgColor
-                cell.layer.cornerRadius = 10
-        
-        #warning("SELECTED DATA FROM MARKETPLACE??")
-        guard let factory = GameScene.user?.generators else {
-            return
-        }
-        
-        
-    }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let cellSize = CGSize(width: 131, height: 201)

@@ -115,6 +115,18 @@ class GameViewController: UIViewController {
     
     
     /**
+     Calls GameShop storyboard to display the game shop.
+     */
+    func displayShop() {
+        
+        var mainView: UIStoryboard!
+        mainView = UIStoryboard(name: "GameShopScene", bundle: nil)
+        let viewcontroller : UIViewController = mainView.instantiateViewController(withIdentifier: "ShopStoryboard") as UIViewController
+        self.present(viewcontroller, animated: false)
+    }
+    
+    
+    /**
      Calls GameMarkeplace storyboard to display the game Marketplace.
      */
     func displayMarketplace() {

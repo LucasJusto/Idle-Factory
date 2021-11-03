@@ -20,7 +20,7 @@ class GameAnnounceSceneViewController: UIViewController {
     
     // MARK: - CONTROLLERS
     static let factoryID: String = "announceFactory_cell"
-    
+    private(set) var playerAnnounces: [Factory] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -64,48 +64,26 @@ class GameAnnounceSceneViewController: UIViewController {
 extension GameAnnounceSceneViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 50
+        return playerAnnounces.count
     }
     
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        
         #warning("CHANGE FROM WHERE IT PULLS")
-        self.collectionView.reloadData()
-        let generatorsSize = (GameScene.user?.generators.count)!
+        let generator = GameScene.user?.generators[indexPath.row]
+        let generatorResources = (generator?.resourcesArray)!
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Self.factoryID, for: indexPath) as! GameAnnounceViewCell
 
-        if indexPath.row >= generatorsSize {
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Self.factoryID, for: indexPath) as! GameAnnounceViewCell
-            cell.pullMarketplaceFactories(texture: "", resources: [])
-            cell.configureCell()
-
-            return cell
-        } else {
-            #warning("CHANGE FROM WHERE IT PULLS")
-            let generator = GameScene.user?.generators[indexPath.row]
-            let generatorResources = (generator?.resourcesArray)!
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Self.factoryID, for: indexPath) as! GameAnnounceViewCell
-
-            #warning("IMPLEMENT HERE ")
-            return cell
-        }
+        #warning("IMPLEMENT HERE ")
+        return cell
+        
     }
 }
 
 
 // MARK: - COLLECTIONVIEW DELEGATE
 extension GameAnnounceSceneViewController: UICollectionViewDelegateFlowLayout {
-    
-
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        print(indexPath.row)
-        
-        #warning("SELECTED DATA FROM MARKETPLACE??")
-        guard let factory = GameScene.user?.generators else {
-            return
-        }
-        
-        
-    }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let cellSize = CGSize(width: 131, height: 201)

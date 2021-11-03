@@ -16,6 +16,11 @@
 
 //MARK: - ResourceTypes
 "ResourceTypeComputador" = "Computer";
+"ResourceTypeTablet" = "Tablet";
+"ResourceTypeSmartphone" = "Smartphone";
+"ResourceTypeSmarttv" = "Smart TV";
+"ResourceTypeHeadphone" = "HeadPhone";
+
 
 
 // MARK: - INVENTORY
@@ -24,6 +29,12 @@
 "TotalProductionLabel" = "Total Production:";
 "SellFactoryButton" = "Sell Factory";
 "InsertFactoryButton" = "Insert on the Park";
+
+
+// MARK: - IN-GAME SHOP
+"ShopHeaderLabel" = "Shop";
+"GenerateNFTButton" = "Generate NFT";
+"OpenMarketplaceButton" = "Open Marketplace";
 
 
 // MARK: - MARKETPLACE
