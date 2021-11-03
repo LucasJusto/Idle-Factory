@@ -304,6 +304,30 @@ public class CKRepository {
         }
     }
     
+    static func getMarketPlaceOffers(completion: @escaping ([Offer]) -> Void) {
+        let publicDB = container.publicCloudDatabase
+        var offers: [Offer] = [Offer]()
+        
+        let predicate = NSPredicate(format: "\(MarketTable.buyerID.description) == %@", "")
+        let query = CKQuery(recordType: MarketTable.recordType.description, predicate: predicate)
+                
+        publicDB.perform(query, inZoneWith: nil) { results, error in
+            if let results = results {
+                for result in results {
+                    let id: String = result.recordID.recordName
+                    let sellerID: String = result.value(forKey: MarketTable.sellerID.description) as! String
+                    let generatorID: String = result.value(forKey: MarketTable.generatorID.description) as! String
+                    let price: Double = result.value(forKey: MarketTable.price.description) as! Double
+                    let currencyTypeString: String = result.value(forKey: MarketTable.currencyType.description) as! String
+                    let currencyType: CurrencyType = CurrencyType.getType(key: currencyTypeString)
+                    
+                    offers.append(Offer(id: id, sellerID: sellerID, generatorID: generatorID, buyerID: nil, price: price, currencyType: currencyType))
+                }
+            }
+            completion(offers)
+        }
+    }
+    
     static func errorAlertHandler(CKErrorCode: CKError.Code){
         
         let notLoggedInTitle = NSLocalizedString("CKErrorNotLoggedInTitle", comment: "Not logged in iCloud")
