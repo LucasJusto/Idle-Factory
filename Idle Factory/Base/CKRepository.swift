@@ -296,6 +296,7 @@ public class CKRepository {
         record.setObject(price as CKRecordValue?, forKey: MarketTable.price.description)
         record.setObject(currencyType.key as CKRecordValue?, forKey: MarketTable.currencyType.description)
         record.setObject(generatorID as CKRecordValue?, forKey: MarketTable.generatorID.description)
+        record.setObject("none" as CKRecordValue?, forKey: MarketTable.buyerID.description)
         
         publicDB.save(record) { _, error in
             if let ckError = error as? CKError {
@@ -308,7 +309,7 @@ public class CKRepository {
         let publicDB = container.publicCloudDatabase
         var offers: [Offer] = [Offer]()
         
-        let predicate = NSPredicate(format: "\(MarketTable.buyerID.description) == %@", "")
+        let predicate = NSPredicate(format: "\(MarketTable.buyerID.description) == %@", "none")
         let query = CKQuery(recordType: MarketTable.recordType.description, predicate: predicate)
                 
         publicDB.perform(query, inZoneWith: nil) { results, error in
@@ -335,7 +336,7 @@ public class CKRepository {
     static func buyOfferFromMarket(sellerID: String, generatorID: String, buyerID: String) {
         let publicDB = container.publicCloudDatabase
         
-        let predicate = NSPredicate(format: "\(MarketTable.sellerID.description) == \(sellerID) AND \(MarketTable.generatorID.description) == \(generatorID)")
+        let predicate = NSPredicate(format: "\(MarketTable.sellerID.description) == '\(sellerID)' AND \(MarketTable.generatorID.description) == '\(generatorID)'")
         let query = CKQuery(recordType: MarketTable.recordType.description, predicate: predicate)
         
         publicDB.perform(query, inZoneWith: nil) { result, error in
