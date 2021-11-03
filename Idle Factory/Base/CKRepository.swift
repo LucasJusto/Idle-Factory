@@ -288,6 +288,22 @@ public class CKRepository {
         publicDB.add(operation)
     }
     
+    static func storeMarketPlaceOffer(sellerID: String, generatorID: String, currencyType: CurrencyType, price: Double){
+        let publicDB = container.publicCloudDatabase
+        let record = CKRecord(recordType: MarketTable.recordType.description)
+        
+        record.setObject(sellerID as CKRecordValue?, forKey: MarketTable.sellerID.description)
+        record.setObject(price as CKRecordValue?, forKey: MarketTable.price.description)
+        record.setObject(currencyType.key as CKRecordValue?, forKey: MarketTable.currencyType.description)
+        record.setObject(generatorID as CKRecordValue?, forKey: MarketTable.generatorID.description)
+        
+        publicDB.save(record) { _, error in
+            if let ckError = error as? CKError {
+                CKRepository.errorAlertHandler(CKErrorCode: ckError.code)
+            }
+        }
+    }
+    
     static func errorAlertHandler(CKErrorCode: CKError.Code){
         
         let notLoggedInTitle = NSLocalizedString("CKErrorNotLoggedInTitle", comment: "Not logged in iCloud")
@@ -336,6 +352,30 @@ public class CKRepository {
     
 }
 
+enum CurrencyType {
+    case premium, basic
+    
+    var key: String {
+        switch self {
+            case .premium:
+                return "premium"
+            case .basic:
+                return "basic"
+        }
+    }
+    
+    static func getType(key: String) -> CurrencyType{
+        switch key {
+            case "premium":
+                return CurrencyType.premium
+            case "basic":
+                return CurrencyType.basic
+            default:
+                return CurrencyType.basic
+        }
+    }
+}
+
 enum UsersTable: CustomStringConvertible {
     case recordType, name, mainCurrency, premiumCurrency, timeLeftApp
     
@@ -381,22 +421,22 @@ enum ResourceTable: CustomStringConvertible {
 }
 
 enum MarketTable: CustomStringConvertible {
-    case recordType, buyerRef, currencyType, generatorRef, price, sellerRef
+    case recordType, buyerID, currencyType, generatorID, price, sellerID
     
     var description: String {
         switch self {
             case .recordType:
                 return "Market"
-            case .buyerRef:
-                return "buyerRef"
+            case .buyerID:
+                return "buyerID"
             case . currencyType:
                 return "currencyType"
-            case .generatorRef:
-                return "generatorRef"
+            case .generatorID:
+                return "generatorID"
             case .price:
                 return "price"
-            case .sellerRef:
-                return "sellerRef"
+            case .sellerID:
+                return "sellerID"
         }
     }
 }
