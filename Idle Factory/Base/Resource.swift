@@ -8,6 +8,7 @@
 import Foundation
 
 class Resource: Upgradable {
+    
     var id: String?
     
     var currentLevel: Int
@@ -26,7 +27,9 @@ class Resource: Upgradable {
     
     var qttPLevel: Double
     
-    init(id: String? = nil, basePrice: Double, baseQtt: Double, currentLevel: Int, qttPLevel: Double, type: ResourceType, pricePLevelIncreaseTax: Double) {
+    var generatorType: FactoryType
+    
+    init(id: String? = nil, basePrice: Double, baseQtt: Double, currentLevel: Int, qttPLevel: Double, type: ResourceType, pricePLevelIncreaseTax: Double, generatorType: FactoryType) {
         self.id = id
         self.currentLevel = currentLevel
         self.basePrice = basePrice
@@ -34,9 +37,24 @@ class Resource: Upgradable {
         self.baseQtt = baseQtt
         self.qttPLevel = qttPLevel
         self.type = type
+        self.generatorType = generatorType
         
-        currentPrice = basePrice * pow(pricePLevelIncreaseTax, Double(currentLevel))
+        if generatorType == .NFT{
+            currentPrice = (basePrice * 100) * pow(pricePLevelIncreaseTax, Double(currentLevel))
+        }else{
+            currentPrice = basePrice * pow(pricePLevelIncreaseTax, Double(currentLevel))
+        }
         perSec = baseQtt + (Double(currentLevel) * qttPLevel)
+    }
+    
+    func upgrade() {
+        if currentLevel < 100 {
+            
+            currentLevel += 1
+            currentPrice *= pricePLevelIncreaseTax
+            perSec += qttPLevel
+            
+        }
     }
 }
 

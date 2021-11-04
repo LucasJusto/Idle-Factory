@@ -13,7 +13,7 @@ import SpriteKit
  */
 class GameHud {
     
-    // MARK: - Top HUD display components
+    // MARK: - TOP HUD COMPONENTS
     private(set) var mainCurrencyIcon: SKSpriteNode = SKSpriteNode()
     private(set) var premiumCurrencyIcon: SKSpriteNode = SKSpriteNode()
     private(set) var mainCurrencyValue: SKLabelNode = SKLabelNode()
@@ -21,14 +21,14 @@ class GameHud {
     private(set) var generatingResourceValue: SKLabelNode = SKLabelNode()
     
     
-    // MARK: - Right Sidebar HUD display components
+    // MARK: - RIGHT SIDEBAR HUD COMPONENTS
     private(set) var inventoryButton: SKSpriteNode = SKSpriteNode()
     private(set) var shopButton: SKSpriteNode = SKSpriteNode()
     private(set) var marketplaceButton: SKSpriteNode = SKSpriteNode()
     private(set) var challengeButton: SKSpriteNode = SKSpriteNode()
     
     
-    // MARK: - Top HUD components creation
+    // MARK: - TOP HUD COMPONENTS CREATION
     /**
      Create a white rounded Rect ShapeNode used to display currency info on the HUD.
      */
@@ -116,7 +116,7 @@ class GameHud {
     }
     
     
-    // MARK: - Rightside HUD components creation
+    // MARK: - RIGHTSIDE HUD COMPONENTS CREATION
     /**
      Create a large right side Rect ShapeNode to display HUD actions.
      */

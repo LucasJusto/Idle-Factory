@@ -144,10 +144,10 @@ public class CKRepository {
                                 let currentLevel: Int = resource.value(forKey: ResourceTable.level.description) as? Int ?? 0
                                 let qttPLevel: Double = resource.value(forKey: ResourceTable.qttPLevel.description) as? Double ?? 0
                                 let typeString2: String = resource.value(forKey: ResourceTable.type.description) as? String ?? ""
-                                let type: ResourceType = ResourceType.getKey(key: typeString2)
+                                let resourceType: ResourceType = ResourceType.getKey(key: typeString2)
                                 let pricePLevelIncreaseTax: Double = resource.value(forKey: ResourceTable.pricePLevelIncreaseTax.description) as? Double ?? 0
                                 
-                                let r = Resource(id: rID, basePrice: basePrice, baseQtt: baseQtt, currentLevel: currentLevel, qttPLevel: qttPLevel, type: type, pricePLevelIncreaseTax: pricePLevelIncreaseTax)
+                                let r = Resource(id: rID, basePrice: basePrice, baseQtt: baseQtt, currentLevel: currentLevel, qttPLevel: qttPLevel, type: resourceType, pricePLevelIncreaseTax: pricePLevelIncreaseTax, generatorType: type)
                                 resources.append(r)
                                 semaphore.signal()
                             }
@@ -399,10 +399,10 @@ public class CKRepository {
                                 let currentLevel: Int = resource.value(forKey: ResourceTable.level.description) as? Int ?? 0
                                 let qttPLevel: Double = resource.value(forKey: ResourceTable.qttPLevel.description) as? Double ?? 0
                                 let typeString2: String = resource.value(forKey: ResourceTable.type.description) as? String ?? ""
-                                let type: ResourceType = ResourceType.getKey(key: typeString2)
+                                let resourceType: ResourceType = ResourceType.getKey(key: typeString2)
                                 let pricePLevelIncreaseTax: Double = resource.value(forKey: ResourceTable.pricePLevelIncreaseTax.description) as? Double ?? 0
                                 
-                                let r = Resource(id: rID, basePrice: basePrice, baseQtt: baseQtt, currentLevel: currentLevel, qttPLevel: qttPLevel, type: type, pricePLevelIncreaseTax: pricePLevelIncreaseTax)
+                                let r = Resource(id: rID, basePrice: basePrice, baseQtt: baseQtt, currentLevel: currentLevel, qttPLevel: qttPLevel, type: resourceType, pricePLevelIncreaseTax: pricePLevelIncreaseTax, generatorType: type)
                                 resources.append(r)
                                 semaphore.signal()
                             }
@@ -415,6 +415,47 @@ public class CKRepository {
                 }
             }
             completion(generators)
+        }
+    }
+    
+    static func deleteGeneratorByID(generatorID: String, completion: @escaping (Error?) -> Void ) {
+        let publicDB = container.publicCloudDatabase
+        var recordsToDelete: [CKRecord.ID] = [CKRecord.ID]()
+        let recordId = CKRecord.ID(recordName: generatorID)
+        
+        publicDB.fetch(withRecordID: recordId) { result, error in
+            if let ckError = error as? CKError {
+                CKRepository.errorAlertHandler(CKErrorCode: ckError.code)
+            }
+            if let result = result {
+                recordsToDelete.append(result.recordID)
+                
+                let predicateResource = NSPredicate(format: "\(ResourceTable.generatorID.description) == %@", generatorID)
+                let queryResource = CKQuery(recordType: ResourceTable.recordType.description, predicate: predicateResource)
+                
+                publicDB.perform(queryResource, inZoneWith: nil) { results, error in
+                    if let ckError = error as? CKError {
+                        CKRepository.errorAlertHandler(CKErrorCode: ckError.code)
+                    }
+                    if let results = results {
+                        let semaphore = DispatchSemaphore(value: results.count)
+                        for r in results {
+                            recordsToDelete.append(r.recordID)
+                            semaphore.signal()
+                        }
+                        let operation = CKModifyRecordsOperation(recordsToSave: nil, recordIDsToDelete: recordsToDelete)
+                        operation.savePolicy = .changedKeys
+                        operation.modifyRecordsCompletionBlock = { _, _, error in
+                            if let ckError = error as? CKError {
+                                CKRepository.errorAlertHandler(CKErrorCode: ckError.code)
+                            }
+                            completion(error)
+                        }
+                        semaphore.wait()
+                        publicDB.add(operation)
+                    }
+                }
+            }
         }
     }
     
@@ -556,7 +597,7 @@ enum MarketTable: CustomStringConvertible {
 }
 
 enum GeneratorTable: CustomStringConvertible {
-    case recordType, energy, isActive, type, userID, position, texture
+    case recordType, energy, isActive, type, userID, position, texture, recordName
     
     var description: String {
         switch self {
@@ -574,6 +615,8 @@ enum GeneratorTable: CustomStringConvertible {
                 return "position"
             case .texture:
                 return "texture"
+            case .recordName:
+                return "recordName"
         }
     }
 }

@@ -21,15 +21,21 @@
 "ResourceTypeSmarttv" = "Smart TV";
 "ResourceTypeHeadphone" = "Fone";
 
+
 // MARK: - INVENTORY
 "InventoryHeader" = "Inventário";
 "PurchaseMoreFactoryButton" = "Comprar mais fábricas";
 "TotalProductionLabel" = "Producão Total:";
-"SellFactoryButton" = "Vender Fábrica";
+"SellFactoryButton" = "Venda rápida";
 "InsertFactoryButton" = "Colocar no Parque";
+"AnnounceFactoryButton" = "Anunciar";
+"QuickSellQuestionConfirmationLabel" = "Você confirma a Venda Rápida?";
+"QuickSellEarnLabel" = "Você receberá:";
+"QuickSellCancelButton" = "Cancelar";
+"QuickSellConfirmButton" = "Confirmar";
 
 
-// MARK: - IN-GAME SHOP
+// MARK: - GAME SHOP
 "ShopHeaderLabel" = "Loja";
 "GenerateNFTButton" = "Gerar um NFT";
 "OpenMarketplaceButton" = "Abrir Marketplace";

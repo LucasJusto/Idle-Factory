@@ -7,10 +7,15 @@
 
 import UIKit
 
+
+/**
+ Display purchasable random factories on the Shop.
+ */
 class GameShopViewCell: UICollectionViewCell {
     
     // MARK: - GENERATOR OUTLETS
     @IBOutlet weak var cardView: UIView!
+    
     // Generator Image
     @IBOutlet weak var generatorImage: UIImageView!
     
@@ -27,6 +32,7 @@ class GameShopViewCell: UICollectionViewCell {
     // Button
     @IBOutlet weak var seeMoreButton: UIButton!
     
+    
     /**
      Configure cell design.
      */
@@ -40,8 +46,14 @@ class GameShopViewCell: UICollectionViewCell {
     /**
      Pull purchasable factories to display on marketplace.
      */
-    func pullShopFactories(texture: String, resources: [Resource]) {
-        generatorImage.image = UIImage(named: texture)
+    func pullShopFactories(factory: Factory) {
+        generatorImage.image = UIImage(named: factory.textureName)
+        let resources = factory.resourcesArray
+        
+        resourceType1.isHidden = false
+        resourceType2.isHidden = false
+        resourceType3.isHidden = false
+        
         switch resources.count {
         case 1:
             resourceType1.isHidden = true
@@ -52,8 +64,6 @@ class GameShopViewCell: UICollectionViewCell {
             resourceQuantityType3.text = ""
             priceLabel.text = "\(resources[0].basePrice)"
             
-
-            
         case 2:
             resourceType1.image = UIImage(systemName: getResourceImageName(resource: resources[0].type))
             resourceQuantityType1.text = "\(Int(resources[0].baseQtt))"
@@ -62,7 +72,6 @@ class GameShopViewCell: UICollectionViewCell {
             resourceType3.isHidden = true
             resourceQuantityType3.text = ""
             priceLabel.text = "\(resources[0].basePrice + resources[1].basePrice)"
-
 
         case 3:
             resourceType1.image = UIImage(systemName: getResourceImageName(resource: resources[0].type))
@@ -73,7 +82,6 @@ class GameShopViewCell: UICollectionViewCell {
             resourceQuantityType3.text = "\(Int(resources[2].baseQtt))"
             priceLabel.text = "\(resources[0].basePrice + resources[1].basePrice + resources[2].basePrice)"
 
-            
         default:
             resourceType1.isHidden = true
             resourceQuantityType1.text = ""
@@ -83,4 +91,11 @@ class GameShopViewCell: UICollectionViewCell {
             resourceQuantityType3.text = ""
         }
     }
+    
+    
+    #warning("BOTÃO SEE MORE")
+    @IBAction func seeMore(_ sender: Any) {
+    }
+    
+    
 }
