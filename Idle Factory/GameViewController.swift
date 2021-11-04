@@ -42,7 +42,6 @@ class GameViewController: UIViewController {
                     }
                 }
             }
-
         }
     }
     
@@ -100,15 +99,26 @@ class GameViewController: UIViewController {
     }
     
     
+    /**
+     Calls GameInventory storyboard to select what generator player wants to insert on the scene (if contains).
+     */
+    func selectGeneratorToInsert(position: GeneratorPositions) {
+        let mainView = UIStoryboard(name: "GameInventoryScene", bundle: nil)
+        let viewcontroller : GameInventorySceneController = mainView.instantiateViewController(withIdentifier: "InventoryStoryboard") as! GameInventorySceneController
+        viewcontroller.clickedSlotPosition = position
+        self.present(viewcontroller, animated: false)
+    }
+    
+    
     // MARK: - HUD ACTION SCENES
+    
     /**
      Calls GameInventory storyboard to display the actual players inventory.
      */
     func displayInventory() {
         
-        var mainView: UIStoryboard!
-        mainView = UIStoryboard(name: "GameInventoryScene", bundle: nil)
-        let viewcontroller : UIViewController = mainView.instantiateViewController(withIdentifier: "InventoryStoryboard") as UIViewController
+        let mainView = UIStoryboard(name: "GameInventoryScene", bundle: nil)
+        let viewcontroller : GameInventorySceneController = mainView.instantiateViewController(withIdentifier: "InventoryStoryboard") as! GameInventorySceneController
         self.present(viewcontroller, animated: false)
     }
     
@@ -130,9 +140,8 @@ class GameViewController: UIViewController {
      */
     func displayMarketplace() {
         
-        var mainView: UIStoryboard!
-        mainView = UIStoryboard(name: "GameMarketplaceScene", bundle: nil)
-        let viewcontroller : UIViewController = mainView.instantiateViewController(withIdentifier: "MarketplaceStoryboard") as UIViewController
+        let mainView = UIStoryboard(name: "GameMarketplaceScene", bundle: nil)
+        let viewcontroller : GameMarketplaceSceneController = mainView.instantiateViewController(withIdentifier: "MarketplaceStoryboard") as! GameMarketplaceSceneController
         self.present(viewcontroller, animated: false)
     }
     
@@ -142,9 +151,8 @@ class GameViewController: UIViewController {
      */
     func displayChallenge() {
         
-        var mainView: UIStoryboard!
-        mainView = UIStoryboard(name: "GameChallengeScene", bundle: nil)
-        let viewcontroller : UIViewController = mainView.instantiateViewController(withIdentifier: "ChallengeStoryboard") as UIViewController
+        let mainView = UIStoryboard(name: "GameChallengeScene", bundle: nil)
+        let viewcontroller : GameChallengeSceneController = mainView.instantiateViewController(withIdentifier: "ChallengeStoryboard") as! GameChallengeSceneController
         self.present(viewcontroller, animated: false)
     }
     

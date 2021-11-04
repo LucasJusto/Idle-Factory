@@ -8,6 +8,9 @@
 import UIKit
 
 
+/**
+ Game Shop scene controller.
+ */
 class GameShopSceneViewController: UIViewController {
 
     @IBOutlet weak var collectionView: UICollectionView!
@@ -28,6 +31,7 @@ class GameShopSceneViewController: UIViewController {
     private(set) var basicFactories: [Factory] = []
     
     
+    // MARK: - INIT
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -61,7 +65,7 @@ class GameShopSceneViewController: UIViewController {
      Close Shop scene.
      */
     @IBAction func closeShop(_ sender: Any) {
-        self.dismiss(animated: false, completion: nil)
+        self.view.window!.rootViewController?.dismiss(animated: false, completion: nil)
     }
 
     
@@ -105,10 +109,9 @@ extension GameShopSceneViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
 
         let generator = basicFactories[indexPath.row]
-        let generatorResources = (generator.resourcesArray)
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Self.factoryID, for: indexPath) as! GameShopViewCell
 
-            cell.pullShopFactories(texture: generator.textureName, resources: generatorResources)
+        cell.pullShopFactories(factory: generator)
             cell.configureCell()
             return cell
     }

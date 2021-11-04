@@ -7,6 +7,10 @@
 
 import UIKit
 
+
+/**
+ Game Marketplace scene controller.
+ */
 class GameMarketplaceSceneController: UIViewController {
     
     @IBOutlet weak var collectionView: UICollectionView!
@@ -22,20 +26,24 @@ class GameMarketplaceSceneController: UIViewController {
     @IBOutlet weak var sellAItemButton: UIButton!
     @IBOutlet weak var myAnnouncesButton: UIButton!
     
+    
     // MARK: - CONTROLLERS
     static let factoryID: String = "purchasebleFactory_cell"
     
     // Selected Factory control
     private(set) var selectedFactory: Factory? = nil
     private(set) var selectedFactoryIndex: Int = -1 // Index of the cell
-    var factoryArray: [Factory] = [] {
+    private(set) var offerArray: [Offer] = [] {
         didSet {
             DispatchQueue.main.async {
                 self.collectionView.reloadData()
             }
         }
     }
+    private(set) var generatorDict: [String: Factory] = [:]
     
+    
+    // MARK: - INIT
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -55,7 +63,24 @@ class GameMarketplaceSceneController: UIViewController {
         sellAItemButton.setTitle(NSLocalizedString("SellAItemButton", comment: ""), for: .normal)
         myAnnouncesButton.setTitle(NSLocalizedString("MyAnnouncesButton", comment: ""), for: .normal)
         loadPlayerCurrencies()
-        factoryArray = GameScene.user?.generators ?? []
+        
+        CKRepository.getMarketPlaceOffers(completion: { offers in
+            let generatorsId: [String] = offers.map { offer in
+                offer.generatorID
+            }
+            let semaphore = DispatchSemaphore(value: 0)
+            CKRepository.getGeneratorsByIDs(generatorsIDs: generatorsId) { factories in
+                for factory in factories {
+                    self.generatorDict[factory.id!] = factory
+                }
+                semaphore.signal()
+            }
+            semaphore.wait()
+
+            self.offerArray = offers.filter({ offer in
+                offer.currencyType == .basic
+            })
+        })
     }
     
     
@@ -64,7 +89,7 @@ class GameMarketplaceSceneController: UIViewController {
      Close Marketplace scene.
      */
     @IBAction func closeMarketplace(_ sender: Any) {
-        self.dismiss(animated: false, completion: nil)
+        self.view.window!.rootViewController?.dismiss(animated: false, completion: nil)
     }
     
     
@@ -90,16 +115,32 @@ class GameMarketplaceSceneController: UIViewController {
     }
 
     
+    #warning("BOTÃO SEE MORE")
+    @IBAction func seeMore(_ sender: Any) {
+    }
+    
+    
+    /**
+     Return all offers selected in segmented control.
+     */
     @IBAction func indexChanged(_ sender: Any) {
         switch itemTypeSelector.selectedSegmentIndex {
         case 0:
-            factoryArray = GameScene.user?.generators ?? []
+            CKRepository.getMarketPlaceOffers(completion: { offers in
+                self.offerArray = offers.filter({ offer in
+                    offer.currencyType == .basic
+                })
+            })
         case 1:
-            factoryArray = []
+            CKRepository.getMarketPlaceOffers(completion: { offers in
+                self.offerArray = offers.filter({ offer in
+                    offer.currencyType == .premium
+                })
+            })
         default: break
         }
-        
     }
+    
     
     /**
      Load player actual currencies value.
@@ -108,7 +149,6 @@ class GameMarketplaceSceneController: UIViewController {
         mainCurrencyLabel.text = doubleToString(value: GameScene.user?.mainCurrency ?? 0.0)
         premiumCurrencyLabel.text = doubleToString(value: GameScene.user?.premiumCurrency ?? 0.0)
     }
-    
 }
 
 
@@ -116,29 +156,24 @@ class GameMarketplaceSceneController: UIViewController {
 extension GameMarketplaceSceneController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return factoryArray.count
+        return offerArray.count
     }
-    
-    
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
 
-        #warning("CHANGE FROM WHERE IT PULLS")
-        let generator = factoryArray[indexPath.row]
-        let generatorResources = (generator.resourcesArray)
+
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let generator = generatorDict[offerArray[indexPath.row].generatorID]
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Self.factoryID, for: indexPath) as! GameMarketplaceViewCell
 
         // Check the item selector if Basic or Premium
         if itemTypeSelector.selectedSegmentIndex == 0 {
-            cell.pullMarketplaceFactories(texture: generator.textureName, resources: generatorResources)
+            cell.pullMarketplaceFactories(factory: generator!, offer: offerArray[indexPath.row])
             cell.configureCell()
             return cell
         } else {
-            cell.pullMarketplaceFactories(texture: "", resources: [])
+            cell.pullMarketplaceFactories(factory: generator!, offer: offerArray[indexPath.row])
             cell.configureCell()
             return cell
         }
-
-        
     }
 }
 
@@ -147,7 +182,7 @@ extension GameMarketplaceSceneController: UICollectionViewDataSource {
 extension GameMarketplaceSceneController: UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let cellSize = CGSize(width: 131, height: 201)
+        let cellSize = CGSize(width: 131, height: 195)
         return cellSize
     }
     

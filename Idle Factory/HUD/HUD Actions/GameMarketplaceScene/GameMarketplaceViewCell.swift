@@ -7,10 +7,15 @@
 
 import UIKit
 
+
+/**
+ Display each offer made by a real player on the Marketplace scene.
+ */
 class GameMarketplaceViewCell: UICollectionViewCell {
     
     // MARK: - GENERATOR OUTLETS
     @IBOutlet weak var cardView: UIView!
+    
     // Generator Image
     @IBOutlet weak var generatorImage: UIImageView!
     
@@ -27,6 +32,7 @@ class GameMarketplaceViewCell: UICollectionViewCell {
     // Button
     @IBOutlet weak var seeMoreButton: UIButton!
     
+    
     /**
      Configure cell design.
      */
@@ -40,8 +46,9 @@ class GameMarketplaceViewCell: UICollectionViewCell {
     /**
      Pull purchasable factories to display on marketplace.
      */
-    func pullMarketplaceFactories(texture: String, resources: [Resource]) {
-        generatorImage.image = UIImage(named: texture)
+    func pullMarketplaceFactories(factory: Factory, offer: Offer) {
+        generatorImage.image = UIImage(named: factory.textureName)
+        let resources = factory.resourcesArray
         switch resources.count {
         case 1:
             resourceType1.isHidden = true
@@ -76,6 +83,6 @@ class GameMarketplaceViewCell: UICollectionViewCell {
             resourceQuantityType3.text = ""
         }
 //        coinImage.image =
-        priceLabel.text = "999.999 M"
+        priceLabel.text = "\(offer.price)"
     }
 }
