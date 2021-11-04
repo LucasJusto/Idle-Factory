@@ -49,6 +49,11 @@ class GameShopViewCell: UICollectionViewCell {
     func pullShopFactories(factory: Factory) {
         generatorImage.image = UIImage(named: factory.textureName)
         let resources = factory.resourcesArray
+        
+        resourceType1.isHidden = false
+        resourceType2.isHidden = false
+        resourceType3.isHidden = false
+        
         switch resources.count {
         case 1:
             resourceType1.isHidden = true

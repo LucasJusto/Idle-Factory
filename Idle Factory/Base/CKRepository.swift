@@ -418,7 +418,7 @@ public class CKRepository {
         }
     }
     
-    static func deleteGeneratorByID(generatorID: String) {
+    static func deleteGeneratorByID(generatorID: String, completion: @escaping (Error?) -> Void ) {
         let publicDB = container.publicCloudDatabase
         var recordsToDelete: [CKRecord.ID] = [CKRecord.ID]()
         let recordId = CKRecord.ID(recordName: generatorID)
@@ -449,6 +449,7 @@ public class CKRepository {
                             if let ckError = error as? CKError {
                                 CKRepository.errorAlertHandler(CKErrorCode: ckError.code)
                             }
+                            completion(error)
                         }
                         semaphore.wait()
                         publicDB.add(operation)

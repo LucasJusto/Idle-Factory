@@ -74,6 +74,7 @@ class GameInventorySceneController: UIViewController {
     // Selected Factory control
     private(set) var selectedFactory: Factory? = nil
     private(set) var selectedFactoryIndex: Int = -1 // Index of the cell
+    var factoriesNotActive: [Factory] = []
     
     // Slot clicked from the GameScene (Default is .none)
     var clickedSlotPosition: GeneratorPositions = .none
@@ -113,6 +114,11 @@ class GameInventorySceneController: UIViewController {
         quickSellEarnLabel.text = NSLocalizedString("QuickSellEarnLabel", comment: "")
         cancelQuickSell.setTitle(NSLocalizedString("QuickSellCancelButton", comment: ""), for: .normal)
         confirmQuickSell.setTitle(NSLocalizedString("QuickSellConfirmButton", comment: ""), for: .normal)
+        
+        factoriesNotActive = (GameScene.user?.generators.filter({ factory in
+            factory.isActive == .no
+        }))!
+        
     }
     
     
@@ -130,6 +136,7 @@ class GameInventorySceneController: UIViewController {
      */
     @IBAction func quickSell(_ sender: Any) {
         hideQuickSellModal(status: false)
+        quickSellEarningLabel.text = "\(calculateQuickSell(factory: selectedFactory!))"
     }
     
     
@@ -145,13 +152,42 @@ class GameInventorySceneController: UIViewController {
      Confirm the quick sell action. Player lose the generator and cannot be recovered.
      */
     @IBAction func confirmQuickSell(_ sender: Any) {
-        let earnings_sell: Double = calculateQuickSell(factory: selectedFactory!)
-        GameScene.user?.addMainCurrency(value: earnings_sell)
-        GameScene.user?.generators.remove(at: selectedFactoryIndex)
-        #warning("Deletar o gerador do banco")
-        CKRepository.storeUserData(id: GameScene.user!.id , name:  GameScene.user?.name ?? "", mainCurrency:  GameScene.user!.mainCurrency , premiumCurrency:  GameScene.user!.premiumCurrency, timeLeftApp: AppDelegate.gameSave.transformToSeconds(time: AppDelegate.gameSave.getCurrentTime()) , completion: {_,_ in
-        })
-        print("Quick Sell made!!")
+        DispatchQueue.global().async {
+            let earnings_sell: Double = calculateQuickSell(factory: self.selectedFactory!)
+            let semaphore = DispatchSemaphore(value: 0)
+            CKRepository.deleteGeneratorByID(generatorID: (self.selectedFactory?.id)!) { error in
+                if error == nil {
+                    GameScene.user?.addMainCurrency(value: earnings_sell)
+                    GameScene.user?.generators.remove(at: self.selectedFactoryIndex)
+                    self.factoriesNotActive.remove(at: self.selectedFactoryIndex)
+                    CKRepository.storeUserData(id: GameScene.user!.id , name:  GameScene.user?.name ?? "", mainCurrency:  GameScene.user!.mainCurrency , premiumCurrency:  GameScene.user!.premiumCurrency, timeLeftApp: AppDelegate.gameSave.transformToSeconds(time: AppDelegate.gameSave.getCurrentTime()) , completion: {_,_ in
+                        semaphore.signal()
+                    })
+                } else {
+                    semaphore.signal()
+                }
+                semaphore.signal()
+            }
+            semaphore.wait()
+            semaphore.wait()
+
+            DispatchQueue.main.async {
+                self.deselectCell(indexPath: IndexPath(row: self.selectedFactoryIndex, section: 0))
+                self.collectionView.reloadData()
+                self.hideQuickSellModal(status: true)
+            }
+        }
+    }
+    
+    
+    func deselectCell(indexPath: IndexPath) {
+        self.collectionView.deselectItem(at: indexPath, animated: false)
+        if let cell = collectionView.cellForItem(at: indexPath) {
+            cell.layer.borderWidth = 0
+            cell.layer.borderColor = UIColor.black.cgColor
+            cell.layer.cornerRadius = 10
+        }
+        hideDisplayFactoryInfo(status: true)
     }
     
     
@@ -252,7 +288,7 @@ extension GameInventorySceneController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
-        let generatorsSize = (GameScene.user?.generators.count)!
+        let generatorsSize = factoriesNotActive.count
         
         if indexPath.row >= generatorsSize {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Self.factoryID, for: indexPath) as! GameInventoryViewCell
@@ -261,17 +297,13 @@ extension GameInventorySceneController: UICollectionViewDataSource {
 
             return cell
         } else {
-            let generator = GameScene.user?.generators[indexPath.row]
-            let generatorResources = (generator?.resourcesArray)!
+            let generator = factoriesNotActive[indexPath.row]
+            let generatorResources = (generator.resourcesArray)
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Self.factoryID, for: indexPath) as! GameInventoryViewCell
 
-            if generator?.isActive == .no {
-                cell.pullFactoryData(texture: generator!.textureName, resources: generatorResources)
-                cell.configureCell()
-            } else {
-                cell.pullFactoryData(texture: "", resources: [])
-                cell.configureCell()
-            }
+            cell.pullFactoryData(texture: generator.textureName, resources: generatorResources)
+            cell.configureCell()
+
             return cell
         }
     }
@@ -281,6 +313,18 @@ extension GameInventorySceneController: UICollectionViewDataSource {
 // MARK: - COLLECTIONVIEW DELEGATE
 extension GameInventorySceneController: UICollectionViewDelegateFlowLayout {
     
+    func collectionView(_ collectionView: UICollectionView, shouldSelectItemAt indexPath: IndexPath) -> Bool {
+        if factoriesNotActive.indices.contains(indexPath.row) {
+            return true
+        } else {
+            if let indices = collectionView.indexPathsForSelectedItems {
+                for indexPath in indices {
+                    deselectCell(indexPath: indexPath)
+                }
+            }
+            return false
+        }
+    }
     
     func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
         guard let cell = collectionView.cellForItem(at: indexPath) as? GameInventoryViewCell else { return }
@@ -297,9 +341,7 @@ extension GameInventorySceneController: UICollectionViewDelegateFlowLayout {
                 cell.layer.borderColor = UIColor.black.cgColor
                 cell.layer.cornerRadius = 10
         
-        guard let myFactories = GameScene.user?.generators else {
-            return
-        }
+        let myFactories = factoriesNotActive
         
         var resources: [Resource] = []
         if indexPath.row < myFactories.count {

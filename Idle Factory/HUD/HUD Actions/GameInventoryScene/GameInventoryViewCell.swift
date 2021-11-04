@@ -37,8 +37,15 @@ class GameInventoryViewCell: UICollectionViewCell {
      Pull factory data for each cell. Receives a texture of the Factory.
      */
     func pullFactoryData(texture: String, resources: [Resource]) {
-        
-        factoryTexture.image = UIImage(named: texture)
+        if texture.isEmpty {
+            factoryTexture.image = nil
+        } else {
+            factoryTexture.image = UIImage(named: texture)
+        }
+        resourceType1.isHidden = false
+        resourceType2.isHidden = false
+        resourceType3.isHidden = false
+
         switch resources.count {
         case 1:
             resourceType1.isHidden = true
