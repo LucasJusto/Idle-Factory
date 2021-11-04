@@ -133,18 +133,39 @@
                                 <state key="normal" image="close"/>
                                 <buttonConfiguration key="configuration" style="plain" image="close"/>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sWr-DH-FU2">
-                                <rect key="frame" x="589.5" y="338" width="78.5" height="31"/>
+                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sWr-DH-FU2">
+                                <rect key="frame" x="522.5" y="338" width="145.5" height="31"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" title="comprar"/>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="752" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5g3-UB-Y9P">
+                            <button opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="752" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5g3-UB-Y9P">
                                 <rect key="frame" x="271" y="338" width="67" height="31"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" title="Button"/>
                             </button>
                             <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="17m-nY-gMa">
-                                <rect key="frame" x="368" y="353" width="200" height="40"/>
+                                <rect key="frame" x="368" y="336" width="98" height="15"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="M86-cG-2rv">
+                                        <rect key="frame" x="0.0" y="0.0" width="41.5" height="15"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="rP9-QE-6mP">
+                                        <rect key="frame" x="41.5" y="0.0" width="15" height="15"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="15" id="gNJ-gj-EdM"/>
+                                            <constraint firstAttribute="width" constant="15" id="gQg-pV-8If"/>
+                                        </constraints>
+                                    </imageView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Huz-Hq-tXj">
+                                        <rect key="frame" x="56.5" y="0.0" width="41.5" height="15"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
                             </stackView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
@@ -168,6 +189,9 @@
                     <connections>
                         <outlet property="cancelButton" destination="5g3-UB-Y9P" id="mbi-YK-uf0"/>
                         <outlet property="id" destination="CN8-Nb-8vN" id="XSa-mi-Pdf"/>
+                        <outlet property="priceImage" destination="rP9-QE-6mP" id="kWT-G3-5Wl"/>
+                        <outlet property="priceLabel" destination="M86-cG-2rv" id="vCS-E4-fcE"/>
+                        <outlet property="priceValue" destination="Huz-Hq-tXj" id="UIH-7u-8la"/>
                         <outlet property="purchaseButton" destination="sWr-DH-FU2" id="4dt-8T-G4T"/>
                         <outlet property="tableView" destination="9p7-vw-wdv" id="G4u-dE-h4s"/>
                         <outlet property="view2" destination="ncd-Iu-cMB" id="oTJ-Y6-gae"/>
@@ -182,7 +206,7 @@
         <image name="Coin" width="50" height="43"/>
         <image name="close" width="31.5" height="31"/>
         <namedColor name="Marketplace_background">
-            <color red="0.10199999809265137" green="0.65499997138977051" blue="0.82700002193450928" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.2199999988079071" green="0.2199999988079071" blue="0.2199999988079071" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

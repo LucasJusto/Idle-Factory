@@ -17,6 +17,9 @@ class FactoryDetailSceneController: UIViewController,  UITableViewDataSource, UI
     @IBOutlet weak var purchaseButton: UIButton!
     @IBOutlet weak var cancelButton: UIButton!
     @IBOutlet weak var priceLabel: UILabel!
+    @IBOutlet weak var priceImage: UIImageView!
+    
+    @IBOutlet weak var priceValue: UILabel!
     @IBOutlet weak var tableView: UITableView!
     
     
