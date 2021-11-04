@@ -6,8 +6,11 @@
 //
 
 import UIKit
-import SpriteKit
 
+
+/**
+ Game Inventory scene controller. 
+ */
 class GameInventorySceneController: UIViewController {
     
     @IBOutlet weak var collectionView: UICollectionView!
@@ -46,6 +49,7 @@ class GameInventorySceneController: UIViewController {
     @IBOutlet weak var totalProductionPerSec: UILabel!
     @IBOutlet weak var factorySerial_ID: UILabel!
     
+    
     // MARK: - FACTORY DETAILS BUTTONS
     @IBOutlet weak var sellFactoryButton: UIButton!
     @IBOutlet weak var insertFactoryButton: UIButton!
@@ -62,6 +66,7 @@ class GameInventorySceneController: UIViewController {
     // Quick Sell Buttons
     @IBOutlet weak var cancelQuickSell: UIButton!
     @IBOutlet weak var confirmQuickSell: UIButton!
+    
     
     // MARK: - CONTROLLERS
     static let factoryID: String = "factory_cell"
@@ -117,12 +122,12 @@ class GameInventorySceneController: UIViewController {
      Close Inventory scene.
      */
     @IBAction func closeInventory(_ sender: Any) {
-        self.dismiss(animated: false, completion: nil)
+        self.view.window!.rootViewController?.dismiss(animated: false, completion: nil)
     }
     
     
     /**
-     Modal message of Quick sell is displayed. Quick Sell is a way to earn main currency quickly. The gaining is calculated by 60% of the price paid for the generator.
+     Modal message of Quick sell is displayed. Quick Sell is a way to earn main currency quickly. The gaining is calculated by 50% of the price paid for the generator.
      */
     @IBAction func quickSell(_ sender: Any) {
         hideQuickSellModal(status: false)
@@ -233,7 +238,6 @@ class GameInventorySceneController: UIViewController {
         cancelQuickSell.isHidden = status
         confirmQuickSell.isHidden = status
     }
-
 }
 
 

@@ -7,6 +7,10 @@
 
 import UIKit
 
+
+/**
+ Game Marketplace scene controller.
+ */
 class GameMarketplaceSceneController: UIViewController {
     
     @IBOutlet weak var collectionView: UICollectionView!
@@ -22,6 +26,7 @@ class GameMarketplaceSceneController: UIViewController {
     @IBOutlet weak var sellAItemButton: UIButton!
     @IBOutlet weak var myAnnouncesButton: UIButton!
     
+    
     // MARK: - CONTROLLERS
     static let factoryID: String = "purchasebleFactory_cell"
     
@@ -36,6 +41,8 @@ class GameMarketplaceSceneController: UIViewController {
         }
     }
     
+    
+    // MARK: - INIT
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -64,7 +71,7 @@ class GameMarketplaceSceneController: UIViewController {
      Close Marketplace scene.
      */
     @IBAction func closeMarketplace(_ sender: Any) {
-        self.dismiss(animated: false, completion: nil)
+        self.view.window!.rootViewController?.dismiss(animated: false, completion: nil)
     }
     
     

@@ -62,10 +62,9 @@ class GameScene: SKScene {
     }()
     
     
-    // MARK: - Nodes
+    // MARK: - NODES
     private var background: SKSpriteNode = SKSpriteNode()
     private var loadingScreen: SKSpriteNode = SKSpriteNode()
-    static var user: User? = nil
     public lazy var cameraNode: Camera = {
         let cameraNode = Camera(sceneView: self.view!, scenario: background)
         cameraNode.position = CGPoint(x: GameScene.deviceScreenWidth / 50, y: GameScene.deviceScreenHeight / 4)
@@ -73,6 +72,10 @@ class GameScene: SKScene {
         
         return cameraNode
     }()
+    
+    
+    // MARK: - USER
+    static var user: User? = nil
     
     
     // MARK: - INIT

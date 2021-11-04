@@ -12,6 +12,7 @@ import UIKit
  */
 class GameInventoryViewCell: UICollectionViewCell {
     
+    // MARK: - GENERATOR OUTLETS
     // Factory Texture.
     @IBOutlet weak var factoryTexture: UIImageView!
     

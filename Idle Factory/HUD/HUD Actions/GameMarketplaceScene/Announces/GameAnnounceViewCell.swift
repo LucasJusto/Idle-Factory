@@ -7,6 +7,10 @@
 
 import UIKit
 
+
+/**
+ Display each offer made by player (you) on your announces scene.
+ */
 class GameAnnounceViewCell: UICollectionViewCell {
     
     // MARK: - GENERATOR OUTLETS

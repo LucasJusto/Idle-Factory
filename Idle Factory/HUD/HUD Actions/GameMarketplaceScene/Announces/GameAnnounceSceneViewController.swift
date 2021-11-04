@@ -7,6 +7,10 @@
 
 import UIKit
 
+
+/**
+ Game Announce scene controller.
+ */
 class GameAnnounceSceneViewController: UIViewController {
 
     @IBOutlet weak var collectionView: UICollectionView!
@@ -18,10 +22,13 @@ class GameAnnounceSceneViewController: UIViewController {
     @IBOutlet weak var premiumCurrencyHeaderView: UIView!
     @IBOutlet weak var premiumCurrencyLabel: UILabel!
     
+    
     // MARK: - CONTROLLERS
     static let factoryID: String = "announceFactory_cell"
     private(set) var playerAnnounces: [Factory] = []
     
+    
+    // MARK: - INIT
     override func viewDidLoad() {
         super.viewDidLoad()
 

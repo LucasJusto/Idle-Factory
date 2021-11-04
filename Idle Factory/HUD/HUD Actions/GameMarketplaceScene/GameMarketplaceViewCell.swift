@@ -7,6 +7,10 @@
 
 import UIKit
 
+
+/**
+ Display each offer made by a real player on the Marketplace scene.
+ */
 class GameMarketplaceViewCell: UICollectionViewCell {
     
     // MARK: - GENERATOR OUTLETS
@@ -26,6 +30,7 @@ class GameMarketplaceViewCell: UICollectionViewCell {
     
     // Button
     @IBOutlet weak var seeMoreButton: UIButton!
+    
     
     /**
      Configure cell design.

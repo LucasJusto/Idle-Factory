@@ -7,6 +7,10 @@
 
 import UIKit
 
+
+/**
+ Display purchasable random factories on the Shop.
+ */
 class GameShopViewCell: UICollectionViewCell {
     
     // MARK: - GENERATOR OUTLETS
@@ -26,6 +30,7 @@ class GameShopViewCell: UICollectionViewCell {
     
     // Button
     @IBOutlet weak var seeMoreButton: UIButton!
+    
     
     /**
      Configure cell design.
@@ -52,8 +57,6 @@ class GameShopViewCell: UICollectionViewCell {
             resourceQuantityType3.text = ""
             priceLabel.text = "\(resources[0].basePrice)"
             
-
-            
         case 2:
             resourceType1.image = UIImage(systemName: getResourceImageName(resource: resources[0].type))
             resourceQuantityType1.text = "\(Int(resources[0].baseQtt))"
@@ -62,7 +65,6 @@ class GameShopViewCell: UICollectionViewCell {
             resourceType3.isHidden = true
             resourceQuantityType3.text = ""
             priceLabel.text = "\(resources[0].basePrice + resources[1].basePrice)"
-
 
         case 3:
             resourceType1.image = UIImage(systemName: getResourceImageName(resource: resources[0].type))
@@ -73,7 +75,6 @@ class GameShopViewCell: UICollectionViewCell {
             resourceQuantityType3.text = "\(Int(resources[2].baseQtt))"
             priceLabel.text = "\(resources[0].basePrice + resources[1].basePrice + resources[2].basePrice)"
 
-            
         default:
             resourceType1.isHidden = true
             resourceQuantityType1.text = ""

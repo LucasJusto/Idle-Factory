@@ -8,6 +8,9 @@
 import UIKit
 
 
+/**
+ Game Shop scene controller.
+ */
 class GameShopSceneViewController: UIViewController {
 
     @IBOutlet weak var collectionView: UICollectionView!
@@ -28,6 +31,7 @@ class GameShopSceneViewController: UIViewController {
     private(set) var basicFactories: [Factory] = []
     
     
+    // MARK: - INIT
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -61,7 +65,7 @@ class GameShopSceneViewController: UIViewController {
      Close Shop scene.
      */
     @IBAction func closeShop(_ sender: Any) {
-        self.dismiss(animated: false, completion: nil)
+        self.view.window!.rootViewController?.dismiss(animated: false, completion: nil)
     }
 
     
