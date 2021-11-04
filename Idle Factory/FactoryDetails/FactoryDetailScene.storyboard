@@ -133,17 +133,17 @@
                                 <state key="normal" image="close"/>
                                 <buttonConfiguration key="configuration" style="plain" image="close"/>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sWr-DH-FU2">
-                                <rect key="frame" x="522.5" y="338" width="145.5" height="31"/>
+                            <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="249" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sWr-DH-FU2">
+                                <rect key="frame" x="487.5" y="338" width="180.5" height="31"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" title="comprar"/>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="752" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5g3-UB-Y9P">
+                            <button opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="752" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5g3-UB-Y9P">
                                 <rect key="frame" x="271" y="338" width="67" height="31"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" title="Button"/>
                             </button>
-                            <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="17m-nY-gMa">
+                            <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="17m-nY-gMa">
                                 <rect key="frame" x="368" y="336" width="98" height="15"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="M86-cG-2rv">
@@ -189,6 +189,7 @@
                     <connections>
                         <outlet property="cancelButton" destination="5g3-UB-Y9P" id="mbi-YK-uf0"/>
                         <outlet property="id" destination="CN8-Nb-8vN" id="XSa-mi-Pdf"/>
+                        <outlet property="mainView" destination="5EZ-qb-Rvc" id="zKS-KL-sH1"/>
                         <outlet property="priceImage" destination="rP9-QE-6mP" id="kWT-G3-5Wl"/>
                         <outlet property="priceLabel" destination="M86-cG-2rv" id="vCS-E4-fcE"/>
                         <outlet property="priceValue" destination="Huz-Hq-tXj" id="UIH-7u-8la"/>
