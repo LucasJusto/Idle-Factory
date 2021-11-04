@@ -68,7 +68,7 @@ class FactoryDetailSceneController: UIViewController,  UITableViewDataSource, UI
             priceValue.text = "1000"
         }
         
-        //view2.layer.borderColor = CGColor()
+        view2.layer.borderColor = CGColor(red: 255, green: 255, blue: 255, alpha: 1)
     }
     
     
