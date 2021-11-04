@@ -26,7 +26,7 @@ class Factory: Generator  {
         self.energy = energy
         self.type = type
         if(type == .NFT){
-            #warning("Change SKSpriteNode() to generateVisual()")  
+#warning("Change SKSpriteNode() to generateVisual()")
             self.node = SKSpriteNode(texture: SKTexture(imageNamed: texture ?? "Basic_Factory_level_1"))
             self.textureName = ""
         }
@@ -38,6 +38,48 @@ class Factory: Generator  {
         self.isActive = isActive
         self.perSec = 0
     }
+    
+    func upgrade(index: Int) {
+        
+        var level: Double = 0.0
+        var media: Double = 0.0
+        
+        for n in 0..<resourcesArray.count{
+            level += Double(resourcesArray[n].currentLevel)
+        }
+        media = level/Double(resourcesArray.count)
+        
+        if media < 100 {
+            
+            level += 1
+            resourcesArray[index].upgrade()
+
+            media = level/Double(resourcesArray.count)
+            
+            if type == .Basic {
+                if media == 100{
+                    node.texture = SKTexture(imageNamed: "Basic_Factory_level_6")
+                    textureName = "Basic_Factory_level_6"
+                }
+                else if media >= 80{
+                    node.texture = SKTexture(imageNamed: "Basic_Factory_level_5")
+                    textureName = "Basic_Factory_level_5"
+                }
+                else if media >= 60{
+                    node.texture = SKTexture(imageNamed: "Basic_Factory_level_4")
+                    textureName = "Basic_Factory_level_4"
+                }
+                else if media >= 40{
+                    node.texture = SKTexture(imageNamed: "Basic_Factory_level_3")
+                    textureName = "Basic_Factory_level_3"
+                }
+                else if media >= 20{
+                    node.texture = SKTexture(imageNamed: "Basic_Factory_level_2")
+                    textureName = "Basic_Factory_level_2"
+                }
+            }
+        }
+    }
 }
 
 enum IsActive: CustomStringConvertible {
@@ -45,30 +87,30 @@ enum IsActive: CustomStringConvertible {
     
     var description: String {
         switch self {
-            case .yes:
-                return "yes"
-            case .no:
-                return "no"
+        case .yes:
+            return "yes"
+        case .no:
+            return "no"
         }
     }
     
     var key: String {
         switch self {
-            case .yes:
-                return "yes"
-            case .no:
-                return "no"
+        case .yes:
+            return "yes"
+        case .no:
+            return "no"
         }
     }
     
     static func getKey(isActive: String) -> IsActive {
         switch isActive {
-            case "yes":
-                return IsActive.yes
-            case "no":
-                return IsActive.no
-            default:
-                return IsActive.no
+        case "yes":
+            return IsActive.yes
+        case "no":
+            return IsActive.no
+        default:
+            return IsActive.no
         }
     }
 }
@@ -84,39 +126,39 @@ enum GeneratorPositions: CustomStringConvertible, CaseIterable {
     
     var description: String {
         switch self {
-            case .first:
-                return "first"
-            case .second:
-                return "second"
-            case .third:
-                return "third"
-            case .fourth:
-                return "fourth"
-            case .fifth:
-                return "fifth"
-            case .sixth:
-                return "sixth"
-            case .none:
-                return "none"
+        case .first:
+            return "first"
+        case .second:
+            return "second"
+        case .third:
+            return "third"
+        case .fourth:
+            return "fourth"
+        case .fifth:
+            return "fifth"
+        case .sixth:
+            return "sixth"
+        case .none:
+            return "none"
         }
     }
     
     var key: String {
         switch self {
-            case .first:
-                return "first"
-            case .second:
-                return "second"
-            case .third:
-                return "third"
-            case .fourth:
-                return "fourth"
-            case .fifth:
-                return "fifth"
-            case .sixth:
-                return "sixth"
-            case .none:
-                return "none"
+        case .first:
+            return "first"
+        case .second:
+            return "second"
+        case .third:
+            return "third"
+        case .fourth:
+            return "fourth"
+        case .fifth:
+            return "fifth"
+        case .sixth:
+            return "sixth"
+        case .none:
+            return "none"
         }
     }
     static func getGeneratorPositions(position: String) -> GeneratorPositions {
