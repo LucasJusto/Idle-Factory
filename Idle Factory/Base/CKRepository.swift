@@ -418,6 +418,46 @@ public class CKRepository {
         }
     }
     
+    static func deleteGeneratorByID(generatorID: String) {
+        let publicDB = container.publicCloudDatabase
+        var recordsToDelete: [CKRecord.ID] = [CKRecord.ID]()
+        let recordId = CKRecord.ID(recordName: generatorID)
+        
+        publicDB.fetch(withRecordID: recordId) { result, error in
+            if let ckError = error as? CKError {
+                CKRepository.errorAlertHandler(CKErrorCode: ckError.code)
+            }
+            if let result = result {
+                recordsToDelete.append(result.recordID)
+                
+                let predicateResource = NSPredicate(format: "\(ResourceTable.generatorID.description) == %@", generatorID)
+                let queryResource = CKQuery(recordType: ResourceTable.recordType.description, predicate: predicateResource)
+                
+                publicDB.perform(queryResource, inZoneWith: nil) { results, error in
+                    if let ckError = error as? CKError {
+                        CKRepository.errorAlertHandler(CKErrorCode: ckError.code)
+                    }
+                    if let results = results {
+                        let semaphore = DispatchSemaphore(value: results.count)
+                        for r in results {
+                            recordsToDelete.append(r.recordID)
+                            semaphore.signal()
+                        }
+                        let operation = CKModifyRecordsOperation(recordsToSave: nil, recordIDsToDelete: recordsToDelete)
+                        operation.savePolicy = .changedKeys
+                        operation.modifyRecordsCompletionBlock = { _, _, error in
+                            if let ckError = error as? CKError {
+                                CKRepository.errorAlertHandler(CKErrorCode: ckError.code)
+                            }
+                        }
+                        semaphore.wait()
+                        publicDB.add(operation)
+                    }
+                }
+            }
+        }
+    }
+    
     static func errorAlertHandler(CKErrorCode: CKError.Code){
         
         let notLoggedInTitle = NSLocalizedString("CKErrorNotLoggedInTitle", comment: "Not logged in iCloud")
@@ -556,7 +596,7 @@ enum MarketTable: CustomStringConvertible {
 }
 
 enum GeneratorTable: CustomStringConvertible {
-    case recordType, energy, isActive, type, userID, position, texture
+    case recordType, energy, isActive, type, userID, position, texture, recordName
     
     var description: String {
         switch self {
@@ -574,6 +614,8 @@ enum GeneratorTable: CustomStringConvertible {
                 return "position"
             case .texture:
                 return "texture"
+            case .recordName:
+                return "recordName"
         }
     }
 }
