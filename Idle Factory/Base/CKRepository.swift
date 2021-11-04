@@ -144,10 +144,10 @@ public class CKRepository {
                                 let currentLevel: Int = resource.value(forKey: ResourceTable.level.description) as? Int ?? 0
                                 let qttPLevel: Double = resource.value(forKey: ResourceTable.qttPLevel.description) as? Double ?? 0
                                 let typeString2: String = resource.value(forKey: ResourceTable.type.description) as? String ?? ""
-                                let type: ResourceType = ResourceType.getKey(key: typeString2)
+                                let resourceType: ResourceType = ResourceType.getKey(key: typeString2)
                                 let pricePLevelIncreaseTax: Double = resource.value(forKey: ResourceTable.pricePLevelIncreaseTax.description) as? Double ?? 0
                                 
-                                let r = Resource(id: rID, basePrice: basePrice, baseQtt: baseQtt, currentLevel: currentLevel, qttPLevel: qttPLevel, type: type, pricePLevelIncreaseTax: pricePLevelIncreaseTax)
+                                let r = Resource(id: rID, basePrice: basePrice, baseQtt: baseQtt, currentLevel: currentLevel, qttPLevel: qttPLevel, type: resourceType, pricePLevelIncreaseTax: pricePLevelIncreaseTax, generatorType: type)
                                 resources.append(r)
                                 semaphore.signal()
                             }
@@ -399,10 +399,10 @@ public class CKRepository {
                                 let currentLevel: Int = resource.value(forKey: ResourceTable.level.description) as? Int ?? 0
                                 let qttPLevel: Double = resource.value(forKey: ResourceTable.qttPLevel.description) as? Double ?? 0
                                 let typeString2: String = resource.value(forKey: ResourceTable.type.description) as? String ?? ""
-                                let type: ResourceType = ResourceType.getKey(key: typeString2)
+                                let resourceType: ResourceType = ResourceType.getKey(key: typeString2)
                                 let pricePLevelIncreaseTax: Double = resource.value(forKey: ResourceTable.pricePLevelIncreaseTax.description) as? Double ?? 0
                                 
-                                let r = Resource(id: rID, basePrice: basePrice, baseQtt: baseQtt, currentLevel: currentLevel, qttPLevel: qttPLevel, type: type, pricePLevelIncreaseTax: pricePLevelIncreaseTax)
+                                let r = Resource(id: rID, basePrice: basePrice, baseQtt: baseQtt, currentLevel: currentLevel, qttPLevel: qttPLevel, type: resourceType, pricePLevelIncreaseTax: pricePLevelIncreaseTax, generatorType: type)
                                 resources.append(r)
                                 semaphore.signal()
                             }

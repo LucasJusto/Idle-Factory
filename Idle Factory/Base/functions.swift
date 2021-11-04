@@ -96,7 +96,7 @@ func createBasicFactory(resourceTypeArray: [ResourceType]) -> Factory {
     
     let maxInt = min(resourceTypeArray.count+1,4)
     for n in 0..<Int.random(in: 1..<maxInt) {
-        resourceArray.append(Resource(basePrice: 100, baseQtt: Double.random(in: 1..<15), currentLevel: 1, qttPLevel: Double.random(in: 5..<15), type: shuffledArray[n], pricePLevelIncreaseTax: Double.random(in: 100..<1500)))
+        resourceArray.append(Resource(basePrice: 100, baseQtt: Double.random(in: 1..<15), currentLevel: 1, qttPLevel: Double.random(in: 5..<15), type: shuffledArray[n], pricePLevelIncreaseTax: Double.random(in: 100..<1500), generatorType: .Basic))
     }
     
     let factory = Factory(resourcesArray: resourceArray, energy: Int.random(in: 1..<10), type: FactoryType.Basic, texture: "Basic_Factory_level_1", position: GeneratorPositions.none, isActive: IsActive.no)
@@ -117,7 +117,7 @@ func createNFTFactory(resourceTypeArray: [ResourceType]) -> Factory {
     
     let maxInt = min(resourceTypeArray.count+1,4)
     for n in 0..<Int.random(in: 1..<maxInt) {
-        resourceArray.append(Resource(basePrice: 0, baseQtt: Double.random(in: 15..<25), currentLevel: 1, qttPLevel: Double.random(in: 15..<25), type: shuffledArray[n], pricePLevelIncreaseTax: Double.random(in: 1500..<15000)))
+        resourceArray.append(Resource(basePrice: 0, baseQtt: Double.random(in: 15..<25), currentLevel: 1, qttPLevel: Double.random(in: 15..<25), type: shuffledArray[n], pricePLevelIncreaseTax: Double.random(in: 1500..<15000), generatorType: .NFT))
     }
     
     let factory = Factory(resourcesArray: resourceArray, energy: Int.random(in: 5..<15), type: FactoryType.NFT, position: GeneratorPositions.none, isActive: IsActive.no)
