@@ -64,7 +64,6 @@ class GameInventoryViewCell: UICollectionViewCell {
             resourceType3.image = UIImage(systemName: getResourceImageName(resource: resources[2].type))
             quantityType3.text = "\(resources[2].baseQtt)"
 
-            
         default:
             resourceType1.isHidden = true
             quantityType1.text = ""

@@ -113,7 +113,6 @@ class GameInventorySceneController: UIViewController {
         quickSellEarnLabel.text = NSLocalizedString("QuickSellEarnLabel", comment: "")
         cancelQuickSell.setTitle(NSLocalizedString("QuickSellCancelButton", comment: ""), for: .normal)
         confirmQuickSell.setTitle(NSLocalizedString("QuickSellConfirmButton", comment: ""), for: .normal)
-        
     }
     
     
@@ -182,7 +181,7 @@ class GameInventorySceneController: UIViewController {
         selectedFactory?.position = clickedSlotPosition
         selectedFactory?.isActive = .yes
         GameScene.addFactory(factory: selectedFactory!)
-    
+        self.collectionView.reloadData()
         print("Moved to park!")
     }
     

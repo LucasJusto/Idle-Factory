@@ -15,6 +15,7 @@ class GameShopViewCell: UICollectionViewCell {
     
     // MARK: - GENERATOR OUTLETS
     @IBOutlet weak var cardView: UIView!
+    
     // Generator Image
     @IBOutlet weak var generatorImage: UIImageView!
     

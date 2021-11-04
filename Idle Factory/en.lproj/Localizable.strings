@@ -22,7 +22,6 @@
 "ResourceTypeHeadphone" = "HeadPhone";
 
 
-
 // MARK: - INVENTORY
 "InventoryHeader" = "Inventory";
 "PurchaseMoreFactoryButton" = "Buy more factories";
@@ -36,7 +35,7 @@
 "QuickSellConfirmButton" = "Confirm";
 
 
-// MARK: - IN-GAME SHOP
+// MARK: - GAME SHOP
 "ShopHeaderLabel" = "Shop";
 "GenerateNFTButton" = "Generate NFT";
 "OpenMarketplaceButton" = "Open Marketplace";
