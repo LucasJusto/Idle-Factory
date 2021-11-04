@@ -88,6 +88,10 @@ class GameShopSceneViewController: UIViewController {
     }
     
     
+    
+    func presentView(viewController: UIViewController){
+        self.present(viewController, animated: false)
+    }
     /**
      Load player actual currencies value.
      */

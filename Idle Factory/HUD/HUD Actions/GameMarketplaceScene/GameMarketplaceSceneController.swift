@@ -117,6 +117,12 @@ class GameMarketplaceSceneController: UIViewController {
     
     #warning("BOTÃO SEE MORE")
     @IBAction func seeMore(_ sender: Any) {
+        FactoryDetailSceneController.isBlue = false
+        FactoryDetailSceneController.generator = generatorDict[offerArray[0].generatorID]
+        var mainView: UIStoryboard!
+        mainView = UIStoryboard(name: "FactoryDetailScene", bundle: nil)
+        let viewcontroller : UIViewController = mainView.instantiateViewController(withIdentifier: "FactoryDetailScene") as UIViewController
+        self.present(viewcontroller, animated: false)
     }
     
     

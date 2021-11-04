@@ -13,8 +13,12 @@ class FactoryDetailSceneController: UIViewController,  UITableViewDataSource, UI
     @IBOutlet weak var view2: UIView!
     
     static var generator: Factory? = nil
+    static var offer: Offer? = nil
     static var isBlue: Bool = false
     
+    @IBAction func closeButtonAction(_ sender: Any) {
+        self.view.window!.rootViewController?.dismiss(animated: false, completion: nil)
+    }
     @IBOutlet weak var id: UILabel!
     @IBOutlet weak var purchaseButton: UIButton!
     @IBOutlet weak var cancelButton: UIButton!
@@ -29,6 +33,7 @@ class FactoryDetailSceneController: UIViewController,  UITableViewDataSource, UI
         super.viewDidLoad()
         tableView.dataSource = self
         tableView.delegate = self
+        tableView.backgroundColor = UIColor(named: FactoryDetailSceneController.isBlue ? "HudActions-background" : "Marketplace_background")
         
         
         if FactoryDetailSceneController.isBlue {
@@ -49,7 +54,7 @@ class FactoryDetailSceneController: UIViewController,  UITableViewDataSource, UI
         cancelButton.backgroundColor = UIColor.white
         purchaseButton.backgroundColor = UIColor(named: "Inventory_background")
         if let generator = FactoryDetailSceneController.generator {
-            id.text = generator.id
+            id.text = "ID: \(generator.id ?? "")"
             var resourceArray: [Resource] = []
             var price = 0.0
             for n in 0..<(generator.resourcesArray.count) {
@@ -58,6 +63,8 @@ class FactoryDetailSceneController: UIViewController,  UITableViewDataSource, UI
             }
             
             priceLabel.text = "\(NSLocalizedString("Price", comment: "Price")) "
+            priceLabel.backgroundColor = UIColor(named: FactoryDetailSceneController.isBlue ? "HudActions-background" : "Marketplace_background")
+            priceValue.backgroundColor = UIColor(named: FactoryDetailSceneController.isBlue ? "HudActions-background" : "Marketplace_background")
             if generator.type == .NFT {
                 priceImage.image = UIImage(named: "Money_premium")
             }
@@ -67,7 +74,8 @@ class FactoryDetailSceneController: UIViewController,  UITableViewDataSource, UI
 #warning("Trocar por valor da Offer")
             priceValue.text = "1000"
         }
-        
+        view2.layer.borderWidth = 1
+        view2.layer.cornerRadius = 15
         view2.layer.borderColor = CGColor(red: 255, green: 255, blue: 255, alpha: 1)
     }
     
