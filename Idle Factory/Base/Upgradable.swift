@@ -20,11 +20,3 @@ protocol Upgradable: AnyObject {
     
     func upgrade()
 }
-
-extension Upgradable {
-    func upgrade() {
-        currentLevel += 1
-        currentPrice = basePrice * pow(pricePLevelIncreaseTax, Double(currentLevel))
-        perSec += qttPLevel
-    }
-}
