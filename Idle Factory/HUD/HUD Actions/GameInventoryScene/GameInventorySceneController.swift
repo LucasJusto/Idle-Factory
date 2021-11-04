@@ -145,10 +145,12 @@ class GameInventorySceneController: UIViewController {
      Confirm the quick sell action. Player lose the generator and cannot be recovered.
      */
     @IBAction func confirmQuickSell(_ sender: Any) {
-        #warning("Give the correct formula to earn main currency")
-        let earnings_sell: Double = 0
+        let earnings_sell: Double = calculateQuickSell(factory: selectedFactory!)
         GameScene.user?.addMainCurrency(value: earnings_sell)
         GameScene.user?.generators.remove(at: selectedFactoryIndex)
+        #warning("Deletar o gerador do banco")
+        CKRepository.storeUserData(id: GameScene.user!.id , name:  GameScene.user?.name ?? "", mainCurrency:  GameScene.user!.mainCurrency , premiumCurrency:  GameScene.user!.premiumCurrency, timeLeftApp: AppDelegate.gameSave.transformToSeconds(time: AppDelegate.gameSave.getCurrentTime()) , completion: {_,_ in
+        })
         print("Quick Sell made!!")
     }
     

@@ -10,7 +10,7 @@ import UIKit
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
     
-    var gameSave: GameSave = GameSave()
+    static var gameSave: GameSave = GameSave()
     
     var window: UIWindow?
     
@@ -33,7 +33,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         self.identifier = application.beginBackgroundTask {
             
         }
-        CKRepository.storeUserData(id: GameScene.user!.id , name:  GameScene.user?.name ?? "", mainCurrency:  GameScene.user!.mainCurrency , premiumCurrency:  GameScene.user!.premiumCurrency, timeLeftApp: gameSave.transformToSeconds(time: gameSave.getCurrentTime()) , completion: {_,_ in
+        CKRepository.storeUserData(id: GameScene.user!.id , name:  GameScene.user?.name ?? "", mainCurrency:  GameScene.user!.mainCurrency , premiumCurrency:  GameScene.user!.premiumCurrency, timeLeftApp: AppDelegate.gameSave.transformToSeconds(time: AppDelegate.gameSave.getCurrentTime()) , completion: {_,_ in
             application.endBackgroundTask(self.identifier)
         })
     }
@@ -45,7 +45,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationDidBecomeActive(_ application: UIApplication) {
         // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
         let viewController = UIApplication.shared.windows.first!.rootViewController as! GameViewController
-        viewController.reload(gameSave: gameSave)
+        viewController.reload(gameSave: AppDelegate.gameSave)
         
     }
     

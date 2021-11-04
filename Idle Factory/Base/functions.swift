@@ -161,3 +161,15 @@ func getTime( completionHandler: @escaping (DateApi?) -> Void){
         }
     .resume()
 }
+
+
+func calculateQuickSell(factory: Factory) -> Double {
+    var earnings: Double = 0
+    
+    let resources = factory.resourcesArray
+    for i in 0..<resources.count {
+        earnings += resources[i].currentPrice
+    }
+    
+    return earnings / 2
+}

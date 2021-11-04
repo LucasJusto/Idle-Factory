@@ -109,10 +109,9 @@ extension GameShopSceneViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
 
         let generator = basicFactories[indexPath.row]
-        let generatorResources = (generator.resourcesArray)
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Self.factoryID, for: indexPath) as! GameShopViewCell
 
-            cell.pullShopFactories(texture: generator.textureName, resources: generatorResources)
+        cell.pullShopFactories(factory: generator)
             cell.configureCell()
             return cell
     }

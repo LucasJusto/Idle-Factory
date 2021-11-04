@@ -46,8 +46,9 @@ class GameShopViewCell: UICollectionViewCell {
     /**
      Pull purchasable factories to display on marketplace.
      */
-    func pullShopFactories(texture: String, resources: [Resource]) {
-        generatorImage.image = UIImage(named: texture)
+    func pullShopFactories(factory: Factory) {
+        generatorImage.image = UIImage(named: factory.textureName)
+        let resources = factory.resourcesArray
         switch resources.count {
         case 1:
             resourceType1.isHidden = true
@@ -85,4 +86,11 @@ class GameShopViewCell: UICollectionViewCell {
             resourceQuantityType3.text = ""
         }
     }
+    
+    
+    #warning("BOTÃO SEE MORE")
+    @IBAction func seeMore(_ sender: Any) {
+    }
+    
+    
 }
