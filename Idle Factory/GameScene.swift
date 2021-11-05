@@ -95,6 +95,20 @@ class GameScene: SKScene {
         
         startIncrement()
         
+//
+//        CKRepository.getUserId{ id in
+//                    CKRepository.storeNewGenerator(userID: id! , generator: Factory(resourcesArray: [Resource(basePrice: 100, baseQtt: 5, currentLevel: 0, qttPLevel: 2, type: ResourceType.computer, pricePLevelIncreaseTax: 2, generatorType: .Basic)], energy: 2, type: FactoryType.Basic, texture: "Basic_Factory_level_2", position: GeneratorPositions.none, isActive: IsActive.no)){_,_ in
+//
+//                            }
+//                        }
+//        CKRepository.getUserId{ id in
+//                    CKRepository.storeNewGenerator(userID: id! , generator: Factory(resourcesArray: [Resource(basePrice: 100, baseQtt: 8, currentLevel: 0, qttPLevel: 2, type: ResourceType.computer, pricePLevelIncreaseTax: 2, generatorType: .Basic)], energy: 2, type: FactoryType.Basic, texture: "Basic_Factory_level_5", position: GeneratorPositions.none, isActive: IsActive.no)){_,_ in
+//
+//                            }
+//                        }
+        
+        
+
     }
     
     
@@ -258,7 +272,7 @@ class GameScene: SKScene {
     func loadPlayerFactories() {
         for n in 0..<(GameScene.user?.generators.count ?? 0){
             if GameScene.user?.generators[n].isActive == .yes {
-                GameScene.addFactory(factory: (GameScene.user?.generators[n])!)
+                addFactory(factory: (GameScene.user?.generators[n])!)
             }
         }
     }
@@ -267,33 +281,70 @@ class GameScene: SKScene {
     /**
      Add a factory on the scene. Receives a Factory which checks what slot this factory is located.
      */
-    static func addFactory(factory: Factory) {
-                
+     func addFactory(factory: Factory) {
+         #warning("PEGAR O GENERATOR DO BANCO")
+        let generator = FactoryVisualGenerator.generateVisual()
         switch factory.position {
         case .first:
-            GameScene.factoriesPositions[0].slot.texture = SKTexture(imageNamed: factory.textureName)
+            if factory.type == .Basic {
+                GameScene.factoriesPositions[0].slot.texture = SKTexture(imageNamed: factory.textureName)
+            } else {
+                generator.position = GameScene.factoriesPositions[0].slot.position
+                GameScene.factoriesPositions[0].slot.removeFromParent()
+                background.addChild(generator)
+            }
             GameScene.factoriesPositions[0].slot.name = "factory_slot_0_occupied"
-            factory.node.zPosition = 2
+            factory.node.zPosition = 5
         case .second:
-            GameScene.factoriesPositions[1].slot.texture = SKTexture(imageNamed: factory.textureName)
+            if factory.type == .Basic {
+                GameScene.factoriesPositions[1].slot.texture = SKTexture(imageNamed: factory.textureName)
+            } else {
+                generator.position = GameScene.factoriesPositions[1].slot.position
+                GameScene.factoriesPositions[1].slot.removeFromParent()
+                background.addChild(generator)
+            }
             GameScene.factoriesPositions[1].slot.name = "factory_slot_1_occupied"
             factory.node.zPosition = 2
         case .third:
-            GameScene.factoriesPositions[2].slot.texture = SKTexture(imageNamed: factory.textureName)
+            if factory.type == .Basic {
+                GameScene.factoriesPositions[2].slot.texture = SKTexture(imageNamed: factory.textureName)
+            } else {
+                generator.position = GameScene.factoriesPositions[2].slot.position
+                GameScene.factoriesPositions[2].slot.removeFromParent()
+                background.addChild(generator)
+            }
             GameScene.factoriesPositions[2].slot.name = "factory_slot_2_occupied"
-            factory.node.zPosition = 2
+            factory.node.zPosition = 20
         case .fourth:
-            GameScene.factoriesPositions[3].slot.texture = SKTexture(imageNamed: factory.textureName)
+            if factory.type == .Basic {
+                GameScene.factoriesPositions[3].slot.texture = SKTexture(imageNamed: factory.textureName)
+            } else {
+                generator.position = GameScene.factoriesPositions[3].slot.position
+                GameScene.factoriesPositions[3].slot.removeFromParent()
+                background.addChild(generator)
+            }
             GameScene.factoriesPositions[3].slot.name = "factory_slot_3_occupied"
-            factory.node.zPosition = 1
+            factory.node.zPosition = 15
         case .fifth:
-            GameScene.factoriesPositions[4].slot.texture = SKTexture(imageNamed: factory.textureName)
+            if factory.type == .Basic {
+                GameScene.factoriesPositions[4].slot.texture = SKTexture(imageNamed: factory.textureName)
+            } else {
+                generator.position = GameScene.factoriesPositions[4].slot.position
+                GameScene.factoriesPositions[4].slot.removeFromParent()
+                background.addChild(generator)
+            }
             GameScene.factoriesPositions[4].slot.name = "factory_slot_4_occupied"
-            factory.node.zPosition = 2
+            factory.node.zPosition = 25
         case .sixth:
-            GameScene.factoriesPositions[5].slot.texture = SKTexture(imageNamed: factory.textureName)
+            if factory.type == .Basic {
+                GameScene.factoriesPositions[5].slot.texture = SKTexture(imageNamed: factory.textureName)
+            } else {
+                generator.position = GameScene.factoriesPositions[5].slot.position
+                GameScene.factoriesPositions[5].slot.removeFromParent()
+                background.addChild(generator)
+            }
             GameScene.factoriesPositions[5].slot.name = "factory_slot_5_occupied"
-            factory.node.zPosition = 1
+            factory.node.zPosition = 20
         case .none:
             let _ = 0
         }
