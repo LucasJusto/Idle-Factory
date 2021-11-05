@@ -48,13 +48,9 @@ class GameViewController: UIViewController {
     
     func didLoadUser(){
         if (!GameViewController.notFirstTime){
-            Thread.sleep(forTimeInterval: 3)
             GameViewController.notFirstTime = true
-            
         }
-        else {
-            Thread.sleep(forTimeInterval: 1.5)
-        }
+
         if let view = self.view as! SKView? {
             // Load the SKScene from 'GameScene.sks'
             
@@ -70,7 +66,6 @@ class GameViewController: UIViewController {
             
             // Present the scene
             view.presentScene(GameViewController.scene)
-            
             view.ignoresSiblingOrder = true
             
             view.showsFPS = true
