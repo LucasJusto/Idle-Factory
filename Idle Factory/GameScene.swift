@@ -63,7 +63,7 @@ class GameScene: SKScene {
     
     
     // MARK: - NODES
-    private var background: SKSpriteNode = SKSpriteNode()
+    var background: SKSpriteNode = SKSpriteNode()
     private var loadingScreen: SKSpriteNode = SKSpriteNode()
     public lazy var cameraNode: Camera = {
         let cameraNode = Camera(sceneView: self.view!, scenario: background)
