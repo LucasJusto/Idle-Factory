@@ -33,6 +33,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         self.identifier = application.beginBackgroundTask {
             
         }
+        GameViewController.scene?.background.removeAllChildren()
         CKRepository.storeUserData(id: GameScene.user!.id , name:  GameScene.user?.name ?? "", mainCurrency:  GameScene.user!.mainCurrency , premiumCurrency:  GameScene.user!.premiumCurrency, timeLeftApp: AppDelegate.gameSave.transformToSeconds(time: AppDelegate.gameSave.getCurrentTime()) , completion: {_,_ in
             application.endBackgroundTask(self.identifier)
         })

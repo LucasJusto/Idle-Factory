@@ -8,6 +8,7 @@ class GameViewController: UIViewController {
     @IBOutlet weak var backgroundLoadingView: UIImageView!
     
     static var notFirstTime: Bool = false
+    static var scene: GameScene?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -63,12 +64,12 @@ class GameViewController: UIViewController {
             //semaphore.wait()
             //Thread.sleep(forTimeInterval: 5)
             view.isHidden = false
-            let scene = GameScene(size: screenSize)
+            GameViewController.scene = GameScene(size: screenSize)
             // Set the scale mode to scale to fit the window
-            scene.scaleMode = .aspectFill
+            GameViewController.scene!.scaleMode = .aspectFill
             
             // Present the scene
-            view.presentScene(scene)
+            view.presentScene(GameViewController.scene)
             
             view.ignoresSiblingOrder = true
             

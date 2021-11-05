@@ -180,6 +180,9 @@ class GameInventorySceneController: UIViewController {
     }
     
     
+    /**
+     Deselect a cell receiving the indexPath of this cell.
+     */
     func deselectCell(indexPath: IndexPath) {
         self.collectionView.deselectItem(at: indexPath, animated: false)
         if let cell = collectionView.cellForItem(at: indexPath) {
@@ -216,11 +219,24 @@ class GameInventorySceneController: UIViewController {
      Insert a factory from the Inventory to park. Turn the factory as active to generate resource to the Idle game.
      */
     func insertOnPark() {
-        selectedFactory?.position = clickedSlotPosition
         selectedFactory?.isActive = .yes
-        GameScene.addFactory(factory: selectedFactory!)
-        self.collectionView.reloadData()
-        print("Moved to park!")
+        selectedFactory?.position = clickedSlotPosition
+        DispatchQueue.global().async {
+            CKRepository.editGenerators(userID: GameScene.user!.id, generators: GameScene.user!.generators) { record, error in
+                
+                if error == nil {
+                    DispatchQueue.main.async {
+                        self.deselectCell(indexPath: IndexPath(row: self.selectedFactoryIndex, section: 0))
+                        GameViewController.scene!.addFactory(factory: self.selectedFactory!)
+                        self.factoriesNotActive.remove(at: self.selectedFactoryIndex)
+                        self.collectionView.reloadData()
+                    }
+                } else {
+                    self.selectedFactory?.position = .none
+                    self.selectedFactory?.isActive = .no
+                }
+            }
+        }
     }
     
     
