@@ -175,8 +175,14 @@ public class CKRepository {
         record.setObject(generator.type.key as CKRecordValue?, forKey: GeneratorTable.type.description)
         record.setObject(generator.textureName as CKRecordValue?, forKey: GeneratorTable.texture.description)
         if generator.type == .NFT {
-            record.setObject(generator.visual?.bottom as CKRecordValue?, forKey: GeneratorTable.visualBottom.description)
-            record.setObject(generator.visual?.top as CKRecordValue?, forKey: GeneratorTable.visualTop.description)
+            let bottomString = generator.visual?.bottom.map({ bottom in
+                bottom.description
+            })
+            let topString = generator.visual?.top.map({ top in
+                top.description
+            })
+            record.setObject(bottomString as CKRecordValue?, forKey: GeneratorTable.visualBottom.description)
+            record.setObject(topString as CKRecordValue?, forKey: GeneratorTable.visualTop.description)
             do {
                 let bottomColor = try NSKeyedArchiver.archivedData(withRootObject: generator.visual!.bottomColor, requiringSecureCoding: false) as NSData?
                 record.setObject(bottomColor as NSData?, forKey: GeneratorTable.bottomColor.description)
