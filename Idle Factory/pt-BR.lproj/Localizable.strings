@@ -24,7 +24,9 @@
 
 // MARK: - INVENTORY
 "InventoryHeader" = "Inventário";
+"EmptySlotLabel" = "Slot Vazio";
 "PurchaseMoreFactoryButton" = "Comprar mais fábricas";
+"PurchaseAFactoryEmptySlotButton" = "Comprar uma fábrica";
 "TotalProductionLabel" = "Producão Total:";
 "SellFactoryButton" = "Venda rápida";
 "InsertFactoryButton" = "Colocar no Parque";

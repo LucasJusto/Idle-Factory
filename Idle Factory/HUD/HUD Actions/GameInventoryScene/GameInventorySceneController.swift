@@ -50,6 +50,11 @@ class GameInventorySceneController: UIViewController {
     @IBOutlet weak var factorySerial_ID: UILabel!
     
     
+    // MARK: - EMPTY FACTORY DETAILS OUTLETS
+    @IBOutlet weak var emptySlotLabel: UILabel!
+    @IBOutlet weak var purchaseFactoryEmptySlotButton: UIButton!
+    
+    
     // MARK: - FACTORY DETAILS BUTTONS
     @IBOutlet weak var sellFactoryButton: UIButton!
     @IBOutlet weak var insertFactoryButton: UIButton!
@@ -72,8 +77,8 @@ class GameInventorySceneController: UIViewController {
     static let factoryID: String = "factory_cell"
     
     // Selected Factory control
-    private(set) var selectedFactory: Factory? = nil
-    private(set) var selectedFactoryIndex: Int = -1 // Index of the cell
+    private(set) var selectedFactory: Factory?
+    private(set) var selectedFactoryIndex: Int? // Index of the cell
     var factoriesNotActive: [Factory] = []
     
     // Slot clicked from the GameScene (Default is .none)
@@ -91,34 +96,79 @@ class GameInventorySceneController: UIViewController {
         hideDisplayFactoryInfo(status: true)
         hideQuickSellModal(status: true)
         
+        loadOutletCustomizations()
+        loadCustomFont()
+        
         // Inventory Header
         inventoryHeader.text = NSLocalizedString("InventoryHeader", comment: "")
         purchaseFactoryButton.setTitle(NSLocalizedString("PurchaseMoreFactoryButton", comment: ""), for: .normal)
-        purchaseFactoryButton.layer.cornerRadius = 10
+        purchaseFactoryEmptySlotButton.setTitle(NSLocalizedString("PurchaseAFactoryEmptySlotButton", comment: ""), for: .normal)
         
         // Info Factories
-        factoryInfoView.layer.cornerRadius = 10
         totalProductionLabel.text = NSLocalizedString("TotalProductionLabel", comment: "")
         
         // Buttons
-        sellFactoryButton.layer.cornerRadius = 10
         sellFactoryButton.setTitle(NSLocalizedString("SellFactoryButton", comment: ""), for: .normal)
-        insertFactoryButton.layer.cornerRadius = 10
         insertFactoryButton.setTitle(clickedSlotPosition == .none ? NSLocalizedString("AnnounceFactoryButton", comment: "") : NSLocalizedString("InsertFactoryButton", comment: ""), for: .normal)
+        
+        // Quick Sell Modal
+        quickSellQuestionLabel.text = NSLocalizedString("QuickSellQuestionConfirmationLabel", comment: "")
+        quickSellEarnLabel.text = NSLocalizedString("QuickSellEarnLabel", comment: "")
+        cancelQuickSell.setTitle(NSLocalizedString("QuickSellCancelButton", comment: ""), for: .normal)
+        confirmQuickSell.setTitle(NSLocalizedString("QuickSellConfirmButton", comment: ""), for: .normal)
+    
+        // Load not active generators list.
+        factoriesNotActive = (GameScene.user?.generators.filter( { factory in
+            factory.isActive == .no
+        }))!
+    }
+    
+    // MARK: - DESIGN FUNCTIONS
+    func loadOutletCustomizations() {
+        // Inventory Header
+        purchaseFactoryButton.layer.cornerRadius = 10
+
+        // Info Factories
+        factoryInfoView.layer.cornerRadius = 10
+        
+        // Buttons
+        sellFactoryButton.layer.cornerRadius = 10
+        insertFactoryButton.layer.cornerRadius = 10
+        purchaseFactoryEmptySlotButton.layer.cornerRadius = 10
         
         // Quick Sell Modal
         quickSellView.layer.cornerRadius = 10
         cancelQuickSell.layer.cornerRadius = 10
         confirmQuickSell.layer.cornerRadius = 10
-        quickSellQuestionLabel.text = NSLocalizedString("QuickSellQuestionConfirmationLabel", comment: "")
-        quickSellEarnLabel.text = NSLocalizedString("QuickSellEarnLabel", comment: "")
-        cancelQuickSell.setTitle(NSLocalizedString("QuickSellCancelButton", comment: ""), for: .normal)
-        confirmQuickSell.setTitle(NSLocalizedString("QuickSellConfirmButton", comment: ""), for: .normal)
+    }
+    
+    /**
+     Load custom font to all labels and button text.
+     */
+    func loadCustomFont() {
+        // LABELS
+        inventoryHeader.font = UIFont(name: "AustralSlabBlur-Regular", size: 27)
+        emptySlotLabel.font = UIFont(name: "AustralSlabBlur-Regular", size: 27)
+        quantityType1.font = UIFont(name: "AustralSlabBlur-Regular", size: 7)
+        generatePerSecType1.font = UIFont(name: "AustralSlabBlur-Regular", size: 7)
+        quantityType2.font = UIFont(name: "AustralSlabBlur-Regular", size: 7)
+        generatePerSecType2.font = UIFont(name: "AustralSlabBlur-Regular", size: 7)
+        quantityType3.font = UIFont(name: "AustralSlabBlur-Regular", size: 7)
+        generatePerSecType3.font = UIFont(name: "AustralSlabBlur-Regular", size: 7)
+        totalProductionLabel.font = UIFont(name: "AustralSlabBlur-Regular", size: 10)
+        totalProductionPerSec.font = UIFont(name: "AustralSlabBlur-Regular", size: 10)
+        factorySerial_ID.font = UIFont(name: "AustralSlabBlur-Regular", size: 7)
+        quickSellQuestionLabel.font = UIFont(name: "AustralSlabBlur-Regular", size: 27)
+        quickSellEarnLabel.font = UIFont(name: "AustralSlabBlur-Regular", size: 10)
+        quickSellEarningLabel.font = UIFont(name: "AustralSlabBlur-Regular", size: 17)
         
-        factoriesNotActive = (GameScene.user?.generators.filter({ factory in
-            factory.isActive == .no
-        }))!
-        
+        // BUTTONS
+        purchaseFactoryButton.titleLabel?.font = UIFont(name: "AustralSlabBlur-Regular", size: 10)
+        purchaseFactoryEmptySlotButton.titleLabel?.font = UIFont(name: "AustralSlabBlur-Regular", size: 10)
+        sellFactoryButton.titleLabel?.font = UIFont(name: "AustralSlabBlur-Regular", size: 10)
+        insertFactoryButton.titleLabel?.font = UIFont(name: "AustralSlabBlur-Regular", size: 10)
+        cancelQuickSell.titleLabel?.font = UIFont(name: "AustralSlabBlur-Regular", size: 10)
+        confirmQuickSell.titleLabel?.font = UIFont(name: "AustralSlabBlur-Regular", size: 10)
     }
     
     
@@ -128,6 +178,16 @@ class GameInventorySceneController: UIViewController {
      */
     @IBAction func closeInventory(_ sender: Any) {
         self.view.window!.rootViewController?.dismiss(animated: false, completion: nil)
+    }
+    
+    
+    /**
+     Go to shop to purchase a factory.
+     */
+    @IBAction func goToShop(_ sender: Any) {
+        let mainView = UIStoryboard(name: "GameShopScene", bundle: nil)
+        let viewcontroller : UIViewController = mainView.instantiateViewController(withIdentifier: "ShopStoryboard") as UIViewController
+        self.present(viewcontroller, animated: false)
     }
     
     
@@ -158,8 +218,8 @@ class GameInventorySceneController: UIViewController {
             CKRepository.deleteGeneratorByID(generatorID: (self.selectedFactory?.id)!) { error in
                 if error == nil {
                     GameScene.user?.addMainCurrency(value: earnings_sell)
-                    GameScene.user?.generators.remove(at: self.selectedFactoryIndex)
-                    self.factoriesNotActive.remove(at: self.selectedFactoryIndex)
+                    GameScene.user?.generators.remove(at: self.selectedFactoryIndex!)
+                    self.factoriesNotActive.remove(at: self.selectedFactoryIndex!)
                     CKRepository.storeUserData(id: GameScene.user!.id , name:  GameScene.user?.name ?? "", mainCurrency:  GameScene.user!.mainCurrency , premiumCurrency:  GameScene.user!.premiumCurrency, timeLeftApp: AppDelegate.gameSave.transformToSeconds(time: AppDelegate.gameSave.getCurrentTime()) , completion: {_,_ in
                         semaphore.signal()
                     })
@@ -172,7 +232,7 @@ class GameInventorySceneController: UIViewController {
             semaphore.wait()
 
             DispatchQueue.main.async {
-                self.deselectCell(indexPath: IndexPath(row: self.selectedFactoryIndex, section: 0))
+                self.deselectCell(indexPath: IndexPath(row: self.selectedFactoryIndex!, section: 0))
                 self.collectionView.reloadData()
                 self.hideQuickSellModal(status: true)
             }
@@ -226,9 +286,9 @@ class GameInventorySceneController: UIViewController {
                 
                 if error == nil {
                     DispatchQueue.main.async {
-                        self.deselectCell(indexPath: IndexPath(row: self.selectedFactoryIndex, section: 0))
+                        self.deselectCell(indexPath: IndexPath(row: self.selectedFactoryIndex!, section: 0))
                         GameViewController.scene!.addFactory(factory: self.selectedFactory!)
-                        self.factoriesNotActive.remove(at: self.selectedFactoryIndex)
+                        self.factoriesNotActive.remove(at: self.selectedFactoryIndex!)
                         self.collectionView.reloadData()
                     }
                 } else {
@@ -275,6 +335,10 @@ class GameInventorySceneController: UIViewController {
         // Actions
         sellFactoryButton.isHidden = status
         insertFactoryButton.isHidden = status
+        
+        // Empty Slot
+        emptySlotLabel.isHidden = !status
+        purchaseFactoryEmptySlotButton.isHidden = !status
     }
     
     
@@ -308,7 +372,7 @@ extension GameInventorySceneController: UICollectionViewDataSource {
         
         if indexPath.row >= generatorsSize {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Self.factoryID, for: indexPath) as! GameInventoryViewCell
-            cell.pullFactoryData(texture: "", resources: [])
+            cell.pullFactoryData(texture: "empty-slot", resources: [])
             cell.configureCell()
 
             return cell

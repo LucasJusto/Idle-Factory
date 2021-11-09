@@ -24,12 +24,14 @@
 
 // MARK: - INVENTORY
 "InventoryHeader" = "Inventory";
+"EmptySlotLabel" = "Empty Slot";
 "PurchaseMoreFactoryButton" = "Buy more factories";
+"PurchaseAFactoryEmptySlotButton" = "Purchase factory";
 "TotalProductionLabel" = "Total Production:";
 "SellFactoryButton" = "Quick sell";
 "InsertFactoryButton" = "Insert on the Park";
 "AnnounceFactoryButton" = "Announce";
-"QuickSellQuestionConfirmationLabel" = "Do you want to confirm this Quick Sell?";
+"QuickSellQuestionConfirmationLabel" = "Confirm this Quick Sell?";
 "QuickSellEarnLabel" = "You will receive:";
 "QuickSellCancelButton" = "Cancel";
 "QuickSellConfirmButton" = "Confirm";
