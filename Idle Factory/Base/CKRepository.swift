@@ -402,7 +402,7 @@ enum MarketTable: CustomStringConvertible {
 }
 
 enum GeneratorTable: CustomStringConvertible {
-    case recordType, energy, isActive, type, userID, position, texture
+    case recordType, energy, isActive, type, userID, position, texture, visualBottom, visualTop
     
     var description: String {
         switch self {
@@ -420,6 +420,10 @@ enum GeneratorTable: CustomStringConvertible {
                 return "position"
             case .texture:
                 return "texture"
+            case .visualBottom:
+                return "visualBottom"
+            case .visualTop:
+                return "visualTop"
         }
     }
 }
