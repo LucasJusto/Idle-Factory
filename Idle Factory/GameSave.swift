@@ -103,9 +103,6 @@ class GameSave{
         }
         semaphore.wait()
         
-        print(i)
-        print(f)
-        
         let diference = f - i
         
         var result = 0.0

@@ -8,6 +8,7 @@
 import Foundation
 
 class Resource: Upgradable {
+    
     var id: String?
     
     var currentLevel: Int
@@ -26,7 +27,9 @@ class Resource: Upgradable {
     
     var qttPLevel: Double
     
-    init(id: String? = nil, basePrice: Double, baseQtt: Double, currentLevel: Int, qttPLevel: Double, type: ResourceType, pricePLevelIncreaseTax: Double) {
+    var generatorType: FactoryType
+    
+    init(id: String? = nil, basePrice: Double, baseQtt: Double, currentLevel: Int, qttPLevel: Double, type: ResourceType, pricePLevelIncreaseTax: Double, generatorType: FactoryType) {
         self.id = id
         self.currentLevel = currentLevel
         self.basePrice = basePrice
@@ -34,35 +37,74 @@ class Resource: Upgradable {
         self.baseQtt = baseQtt
         self.qttPLevel = qttPLevel
         self.type = type
+        self.generatorType = generatorType
         
-        currentPrice = basePrice * pow(pricePLevelIncreaseTax, Double(currentLevel))
+        if generatorType == .NFT{
+            currentPrice = (basePrice * 100) * pow(pricePLevelIncreaseTax, Double(currentLevel))
+        }else{
+            currentPrice = basePrice * pow(pricePLevelIncreaseTax, Double(currentLevel))
+        }
         perSec = baseQtt + (Double(currentLevel) * qttPLevel)
+    }
+    
+    func upgrade() {
+        if currentLevel < 100 {
+            
+            currentLevel += 1
+            currentPrice *= pricePLevelIncreaseTax
+            perSec += qttPLevel
+            
+        }
     }
 }
 
 enum ResourceType: CustomStringConvertible {
-    case computador
+    case computer, tablet, smartphone, smartTV, headphone
     
     var description: String {
         switch self {
-            case .computador:
+            case .computer:
                 return NSLocalizedString("ResourceTypeComputador", comment: "Computador")
+        case .tablet:
+            return NSLocalizedString("ResourceTypeTablet", comment: "Tablet")
+        case .smartphone:
+            return NSLocalizedString("ResourceTypeSmartphone", comment: "Smartphone")
+        case .smartTV:
+            return NSLocalizedString("ResourceTypeSmarttv", comment: "SmartTV")
+        case .headphone:
+            return NSLocalizedString("ResourceTypeHeadphone", comment: "Headphone")
         }
     }
     
     var key: String {
         switch self {
-            case .computador:
+            case .computer:
                 return "Computador"
+        case .tablet:
+            return "Tablet"
+        case .smartphone:
+            return "Smartphone"
+        case .smartTV:
+            return "SmartTV"
+        case .headphone:
+            return "Headphone"
         }
     }
     
     static func getKey(key: String) -> ResourceType{
         switch key {
             case "Computador":
-                return ResourceType.computador
+                return ResourceType.computer
+            case "Tablet":
+                return ResourceType.tablet
+            case "Smartphone":
+                return ResourceType.smartphone
+            case "SmartTV":
+                return ResourceType.smartTV
+            case "Headphone":
+                return ResourceType.headphone
             default:
-                return ResourceType.computador
+                return ResourceType.computer
         }
     }
 }
