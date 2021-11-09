@@ -173,6 +173,10 @@ public class CKRepository {
         record.setObject(generator.isActive.key as CKRecordValue?, forKey: GeneratorTable.isActive.description)
         record.setObject(generator.type.key as CKRecordValue?, forKey: GeneratorTable.type.description)
         record.setObject(generator.textureName as CKRecordValue?, forKey: GeneratorTable.texture.description)
+        if generator.type == .NFT {
+            record.setObject(generator.visual?.bottom as CKRecordValue?, forKey: GeneratorTable.visualBottom.description)
+            record.setObject(generator.visual?.top as CKRecordValue?, forKey: GeneratorTable.visualTop.description)
+        }
         
         publicDB.save(record) { savedRecord, error in
             if let ckError = error as? CKError {
