@@ -405,6 +405,48 @@ class FactoryVisualGenerator {
         
         return (node, visual)
     }
+    
+    static func getNode(visual: Visual) -> SKSpriteNode {
+        let node = SKSpriteNode(imageNamed: "ground")
+        node.anchorPoint = CGPoint(x: 0.5, y: 0)
+        node.zPosition = 1
+        
+        //fill bottom
+        let baseBottom = SKSpriteNode(imageNamed: "base_small")
+        baseBottom.anchorPoint = CGPoint(x: 0.5, y: 0)
+        baseBottom.zPosition = 2
+        baseBottom.position = CGPoint(x: node.size.width * SelectedBase.small.multipliersForPosition.x, y: node.size.height * SelectedBase.small.multipliersForPosition.y)
+        baseBottom.colorBlendFactor = 1
+        baseBottom.color = visual.bottomColor
+        
+        for bottomComponent in visual.bottom {
+            var n = SKSpriteNode(imageNamed: bottomComponent.image)
+            n = adjustComponent(node: n)
+            n.position = getNodePosition(base: baseBottom, nodeType: bottomComponent)
+            baseBottom.addChild(n)
+        }
+        
+        node.addChild(baseBottom)
+        
+        //fill top
+        let baseTop = SKSpriteNode(imageNamed: "base_big")
+        baseTop.anchorPoint = CGPoint(x: 0.5, y: 0)
+        baseTop.zPosition = 3
+        baseTop.position = CGPoint(x: node.size.width * SelectedBase.big.multipliersForPosition.x, y: node.size.height * SelectedBase.big.multipliersForPosition.y)
+        baseTop.colorBlendFactor = 1
+        baseTop.color = visual.topColor
+        
+        for topComponent in visual.bottom {
+            var n = SKSpriteNode(imageNamed: topComponent.image)
+            n = adjustComponent(node: n)
+            n.position = getNodePosition(base: baseTop, nodeType: topComponent)
+            baseTop.addChild(n)
+        }
+        
+        node.addChild(baseTop)
+        
+        return node
+    }
 }
 
 enum SelectedBase {
