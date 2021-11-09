@@ -518,13 +518,13 @@ enum BaseBigRelatedPositions: CustomStringConvertible {
             case .doorSmallRight3:
                 return "door3_small_right"
             case .chimney1:
-                return "chimney"
+                return "chimney1"
             case .chimney2:
-                return "chimney"
+                return "chimney2"
             case .chimney3:
-                return "chimney"
+                return "chimney3"
             case .chimney4:
-                return "chimney"
+                return "chimney4"
                 
         }
     }
