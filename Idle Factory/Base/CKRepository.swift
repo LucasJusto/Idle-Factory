@@ -7,6 +7,7 @@
 
 import CloudKit
 import UIKit
+import SwiftUI
 
 public class CKRepository {
     
@@ -176,9 +177,15 @@ public class CKRepository {
         if generator.type == .NFT {
             record.setObject(generator.visual?.bottom as CKRecordValue?, forKey: GeneratorTable.visualBottom.description)
             record.setObject(generator.visual?.top as CKRecordValue?, forKey: GeneratorTable.visualTop.description)
-            #warning("Make colors be stored at CloudKit.")
-            //record.setObject(generator.visual?.bottomColor, forKey: GeneratorTable.bottomColor.description)
-            //record.setObject(generator.visual?.topColor, forKey: GeneratorTable.topColor.description)
+            do {
+                let bottomColor = try NSKeyedArchiver.archivedData(withRootObject: generator.visual!.bottomColor, requiringSecureCoding: false) as NSData?
+                record.setObject(bottomColor as NSData?, forKey: GeneratorTable.bottomColor.description)
+                
+                let topColor = try NSKeyedArchiver.archivedData(withRootObject: generator.visual!.topColor, requiringSecureCoding: false) as NSData?
+                record.setObject(topColor, forKey: GeneratorTable.topColor.description)
+            } catch {
+                print("Error UserDefaults")
+            }
         }
         
         publicDB.save(record) { savedRecord, error in
