@@ -48,6 +48,41 @@ class FactoryDetailSceneController: UIViewController,  UITableViewDataSource, UI
         }
     }
     
+    @IBAction func buyAction(_ sender: Any) {
+        if FactoryDetailSceneController.isBlue {
+            if let generator = FactoryDetailSceneController.generator {
+                var resourceArray: [Resource] = []
+                var price = 0.0
+                for n in 0..<(generator.resourcesArray.count) {
+                    resourceArray.append((generator.resourcesArray[n]))
+                    price += resourceArray[n].basePrice
+                }
+                DispatchQueue.global().async {
+                    if(GameScene.user!.mainCurrency >= price){
+                        CKRepository.storeNewGenerator(userID: GameScene.user!.id, generator: generator){ record ,error  in
+                            if error == nil && record != nil {
+                                let semaphore = DispatchSemaphore(value: 0)
+                                generator.id = record!.recordID.recordName
+                                GameScene.user?.generators.append(generator)
+                                GameScene.user?.removeMainCurrency(value: price)
+                                CKRepository.storeUserData(id: GameScene.user!.id , name:  GameScene.user?.name ?? "", mainCurrency:  GameScene.user!.mainCurrency , premiumCurrency:  GameScene.user!.premiumCurrency, timeLeftApp: AppDelegate.gameSave.transformToSeconds(time: AppDelegate.gameSave.getCurrentTime()) , completion: {_,_ in
+                                    semaphore.signal()
+                                })
+                                semaphore.wait()
+                                
+                                DispatchQueue.main.async {
+                                    var mainView: UIStoryboard!
+                                    mainView = UIStoryboard(name: "GameShopScene", bundle: nil)
+                                    let viewcontroller : UIViewController = mainView.instantiateViewController(withIdentifier: "ShopStoryboard") as UIViewController
+                                    self.present(viewcontroller, animated: false)
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
     override func viewDidLoad() {
         headerViewMainCurrency.layer.cornerRadius = 10
         HeaderViewPreminumCurrency.layer.cornerRadius = 10

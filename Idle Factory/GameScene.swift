@@ -95,6 +95,12 @@ class GameScene: SKScene {
         
         startIncrement()
         
+//        for n in GameScene.user!.generators {
+//            CKRepository.deleteGeneratorByID(generatorID: n.id!){ _ in
+//                
+//            }
+//        }
+        
 //
 //        CKRepository.getUserId{ id in
 //                    CKRepository.storeNewGenerator(userID: id! , generator: Factory(resourcesArray: [Resource(basePrice: 100, baseQtt: 5, currentLevel: 0, qttPLevel: 2, type: ResourceType.computer, pricePLevelIncreaseTax: 2, generatorType: .Basic)], energy: 2, type: FactoryType.Basic, texture: "Basic_Factory_level_2", position: GeneratorPositions.none, isActive: IsActive.no)){_,_ in
