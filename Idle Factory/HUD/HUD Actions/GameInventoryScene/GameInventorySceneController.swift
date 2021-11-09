@@ -454,7 +454,7 @@ extension GameInventorySceneController: UICollectionViewDelegateFlowLayout {
             totalProductionPerSec.text = doubleToString(value: resources[0].perSec)
             
             factorySerial_ID.text = "ID: "
-            factorySerial_ID.text!.append(myFactories[indexPath.row].id!)
+            factorySerial_ID.text!.append(myFactories[indexPath.row].id ?? "-")
         case 2:
             hideDisplayFactoryInfo(status: false)
             factoryImage.image = UIImage(named: myFactories[indexPath.row].textureName)
@@ -477,7 +477,7 @@ extension GameInventorySceneController: UICollectionViewDelegateFlowLayout {
             totalProductionPerSec.text = doubleToString(value:total)
             
             factorySerial_ID.text = "ID: "
-            factorySerial_ID.text!.append(myFactories[indexPath.row].id!)
+            factorySerial_ID.text!.append(myFactories[indexPath.row].id ?? "-")
 
         case 3:
             hideDisplayFactoryInfo(status: false)
@@ -501,7 +501,7 @@ extension GameInventorySceneController: UICollectionViewDelegateFlowLayout {
             totalProductionPerSec.text = doubleToString(value:total)
             
             factorySerial_ID.text = "ID: "
-            factorySerial_ID.text!.append(myFactories[indexPath.row].id!)
+            factorySerial_ID.text!.append(myFactories[indexPath.row].id ?? "-")
 
         default:
             hideDisplayFactoryInfo(status: true)
