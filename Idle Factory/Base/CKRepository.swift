@@ -113,7 +113,6 @@ public class CKRepository {
         let publicDB = container.publicCloudDatabase
         var generators: [Factory] = []
         let semaphore = DispatchSemaphore(value: 0)
-        
         let generatorsPredicate = NSPredicate(format: "\(GeneratorTable.userID.description) == %@", userID)
         let generatorsQuery = CKQuery(recordType: GeneratorTable.recordType.description, predicate: generatorsPredicate)
         publicDB.perform(generatorsQuery, inZoneWith: nil) { results, error in
@@ -127,6 +126,33 @@ public class CKRepository {
                     let energy: Int = generator.value(forKey: GeneratorTable.energy.description) as? Int ?? 0
                     let typeString: String = generator.value(forKey: GeneratorTable.type.description) as? String ?? ""
                     let type: FactoryType = FactoryType.getFactoryType(factoryType: typeString)
+                    var visual: Visual? = nil
+                    if type == .NFT {
+                        do {
+                            let topColorData = generator.value(forKey: GeneratorTable.topColor.description) as? Data
+                            let topColor = try NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(topColorData!) as? UIColor
+                            let bottomColorData = generator.value(forKey: GeneratorTable.bottomColor.description) as? Data
+                            let bottomColor = try NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(bottomColorData!) as? UIColor
+                            
+                            visual = Visual(bottomColor: bottomColor!, topColor: topColor!)
+                            
+                            let bottomString = generator.value(forKey: GeneratorTable.visualBottom.description) as? [String] ?? [""]
+                            var bottomComponents: [BaseSmallRelatedPositions] = [BaseSmallRelatedPositions]()
+                            for componentString in bottomString {
+                                bottomComponents.append(BaseSmallRelatedPositions.getComponent(key: componentString))
+                            }
+                            visual?.bottom = bottomComponents
+                            
+                            let topString = generator.value(forKey: GeneratorTable.visualTop.description) as? [String] ?? [""]
+                            var topComponents: [BaseBigRelatedPositions] = [BaseBigRelatedPositions]()
+                            for componentString in topString {
+                                topComponents.append(BaseBigRelatedPositions.getComponent(key: componentString))
+                            }
+                            visual?.top = topComponents
+                        } catch {
+                            print("Error unarchive")
+                        }
+                    }
                     let positionString: String = generator.value(forKey: GeneratorTable.position.description) as? String ?? ""
                     let position: GeneratorPositions = GeneratorPositions.getGeneratorPositions(position: positionString)
                     let isActiveString: String = generator.value(forKey: GeneratorTable.isActive.description) as? String ?? ""
@@ -156,8 +182,14 @@ public class CKRepository {
                     }
                     
                     semaphore.wait()
-                    let factory = Factory(id: id, resourcesArray: resources, energy: energy, type: type, texture: texture, position: position, isActive: isActive)
-                    generators.append(factory)
+                    if visual == nil {
+                        let factory = Factory(id: id, resourcesArray: resources, energy: energy, type: type, texture: texture, position: position, isActive: isActive)
+                        generators.append(factory)
+                    } else {
+                        let factory = Factory(id: id, resourcesArray: resources, energy: energy, type: type, texture: texture, position: position, isActive: isActive, visual: visual!)
+                        generators.append(factory)
+                    }
+                    
                 }
             }
             completion(generators)
@@ -334,7 +366,7 @@ public class CKRepository {
         
         let predicate = NSPredicate(format: "\(MarketTable.buyerID.description) == %@", "none")
         let query = CKQuery(recordType: MarketTable.recordType.description, predicate: predicate)
-                
+        
         publicDB.perform(query, inZoneWith: nil) { results, error in
             if let ckError = error as? CKError {
                 CKRepository.errorAlertHandler(CKErrorCode: ckError.code)
@@ -381,6 +413,7 @@ public class CKRepository {
     }
     
     static func getGeneratorsByIDs(generatorsIDs: [String], completion: @escaping ([Factory]) -> Void){
+#warning("here")
         let publicDB = container.publicCloudDatabase
         var generators: [Factory] = [Factory]()
         
