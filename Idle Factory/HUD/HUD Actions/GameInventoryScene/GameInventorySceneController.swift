@@ -471,7 +471,7 @@ extension GameInventorySceneController: UICollectionViewDelegateFlowLayout {
             typeImage3.isHidden = true
             coinImage3.isHidden = true
             quantityType3.text = ""
-            generatePerSecType3.text = "0"
+            generatePerSecType3.text = ""
             
             let total = resources[0].perSec + resources[1].perSec
             totalProductionPerSec.text = doubleToString(value:total)

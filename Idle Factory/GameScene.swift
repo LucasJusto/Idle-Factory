@@ -18,7 +18,7 @@ class GameScene: SKScene {
     
     
     // MARK: - FACTORY POSITIONS
-    static private(set) var factoriesPositions: [(slot: SKSpriteNode, x: CGFloat, y: CGFloat)] =
+    static var factoriesPositions: [(slot: SKSpriteNode, x: CGFloat, y: CGFloat)] =
     [
         (slot: SKSpriteNode(imageNamed: "Factory_add_new"), x: -417.78, y: -68.25),
         (slot: SKSpriteNode(imageNamed: "Factory_add_new"), x: -114.40, y: 110),
@@ -139,16 +139,22 @@ class GameScene: SKScene {
             case "factory_slot_5_empty":
                 selectGeneratorToInsert(position: .sixth)
             case "factory_slot_0_occupied":
+                UpgradeFactorySceneController.generator = searchFactory(position: .first)
                 displayUpgradeFactory()
             case "factory_slot_1_occupied":
+                UpgradeFactorySceneController.generator = searchFactory(position: .second)
                 displayUpgradeFactory()
             case "factory_slot_2_occupied":
+                UpgradeFactorySceneController.generator = searchFactory(position: .third)
                 displayUpgradeFactory()
             case "factory_slot_3_occupied":
+                UpgradeFactorySceneController.generator = searchFactory(position: .fourth)
                 displayUpgradeFactory()
             case "factory_slot_4_occupied":
+                UpgradeFactorySceneController.generator = searchFactory(position: .fifth)
                 displayUpgradeFactory()
             case "factory_slot_5_occupied":
+                UpgradeFactorySceneController.generator = searchFactory(position: .sixth)
                 displayUpgradeFactory()
             default: return
             }
@@ -279,6 +285,21 @@ class GameScene: SKScene {
     
     
     /**
+     Search for a factory receiving the position as argument. Return nil if nothing is found.
+     */
+    func searchFactory(position: GeneratorPositions) -> Factory? {
+        if let factories = GameScene.user?.generators {
+            for factory in factories {
+                if factory.position == position {
+                    return factory
+                }
+            }
+        }
+        return nil
+    }
+    
+    
+    /**
      Add a factory on the scene. Receives a Factory which checks what slot this factory is located.
      */
      func addFactory(factory: Factory) {
@@ -348,6 +369,36 @@ class GameScene: SKScene {
         case .none:
             let _ = 0
         }
+    }
+    
+    
+    /**
+     Remove a factory from the scene.
+     */
+    func removeFactory(factory: Factory) {
+        switch factory.position {
+        case .first:
+            GameScene.factoriesPositions[0].slot.texture = SKTexture(imageNamed: "Factory_add_new")
+            GameScene.factoriesPositions[0].slot.name = "factory_slot_0_empty"
+        case .second:
+            GameScene.factoriesPositions[1].slot.texture = SKTexture(imageNamed: "Factory_add_new")
+            GameScene.factoriesPositions[1].slot.name = "factory_slot_1_empty"
+        case .third:
+            GameScene.factoriesPositions[2].slot.texture = SKTexture(imageNamed: "Factory_add_new")
+            GameScene.factoriesPositions[2].slot.name = "factory_slot_2_empty"
+        case .fourth:
+            GameScene.factoriesPositions[3].slot.texture = SKTexture(imageNamed: "Factory_add_new")
+            GameScene.factoriesPositions[3].slot.name = "factory_slot_3_empty"
+        case .fifth:
+            GameScene.factoriesPositions[4].slot.texture = SKTexture(imageNamed: "Factory_add_new")
+            GameScene.factoriesPositions[4].slot.name = "factory_slot_4_empty"
+        case .sixth:
+            GameScene.factoriesPositions[5].slot.texture = SKTexture(imageNamed: "Factory_add_new")
+            GameScene.factoriesPositions[5].slot.name = "factory_slot_5_empty"
+        case .none:
+            let _ = 0
+        }
+        
     }
     
     
