@@ -12,10 +12,14 @@ import SpriteKit
 struct Visual {
     var bottom: [BaseSmallRelatedPositions]
     var top: [BaseBigRelatedPositions]
+    var bottomColor: UIColor
+    var topColor: UIColor
     
-    init() {
+    init(bottomColor: UIColor, topColor: UIColor) {
         bottom = [BaseSmallRelatedPositions]()
         top = [BaseBigRelatedPositions]()
+        self.bottomColor = bottomColor
+        self.topColor = topColor
     }
 }
 
@@ -113,11 +117,12 @@ class FactoryVisualGenerator {
     
     static func generateVisual() -> (SKSpriteNode, Visual) {
         //create the base ground
-        var visual = Visual()
         let node = SKSpriteNode(imageNamed: "ground")
         node.anchorPoint = CGPoint(x: 0.5, y: 0)
         node.zPosition = 1
+        
         let colors = getRandomColors()
+        var visual = Visual(bottomColor: colors[0], topColor: colors[1])
         
         //build baseBottom
         let baseBottom = SKSpriteNode(imageNamed: "base_small")
@@ -126,6 +131,7 @@ class FactoryVisualGenerator {
         baseBottom.position = CGPoint(x: node.size.width * SelectedBase.small.multipliersForPosition.x, y: node.size.height * SelectedBase.small.multipliersForPosition.y)
         baseBottom.colorBlendFactor = 1
         baseBottom.color = colors[0]
+        
         //randomly build left wall for baseBottom
         let randomOnly1Object = Bool.random()
         if randomOnly1Object {
