@@ -11,7 +11,8 @@ import UIKit
 /**
  Game Marketplace scene controller.
  */
-class GameMarketplaceSceneController: UIViewController {
+class GameMarketplaceSceneController: UIViewController, NavigationCellDelegate {
+    
     
     @IBOutlet weak var collectionView: UICollectionView!
     
@@ -42,6 +43,13 @@ class GameMarketplaceSceneController: UIViewController {
     }
     private(set) var generatorDict: [String: Factory] = [:]
     
+    
+    func didButtonPressed() {
+        var mainView: UIStoryboard!
+        mainView = UIStoryboard(name: "FactoryDetailScene", bundle: nil)
+        let viewcontroller : UIViewController = mainView.instantiateViewController(withIdentifier: "FactoryDetailScene") as UIViewController
+        self.present(viewcontroller, animated: false)
+    }
     
     // MARK: - INIT
     override func viewDidLoad() {
@@ -113,17 +121,6 @@ class GameMarketplaceSceneController: UIViewController {
         let viewcontroller : UIViewController = mainView.instantiateViewController(withIdentifier: "AnnounceStoryboard") as UIViewController
         self.present(viewcontroller, animated: false)
     }
-
-    
-    #warning("BOTÃO SEE MORE")
-    @IBAction func seeMore(_ sender: Any) {
-        FactoryDetailSceneController.isBlue = false
-        FactoryDetailSceneController.generator = generatorDict[offerArray[0].generatorID]
-        var mainView: UIStoryboard!
-        mainView = UIStoryboard(name: "FactoryDetailScene", bundle: nil)
-        let viewcontroller : UIViewController = mainView.instantiateViewController(withIdentifier: "FactoryDetailScene") as UIViewController
-        self.present(viewcontroller, animated: false)
-    }
     
     
     /**
@@ -174,10 +171,12 @@ extension GameMarketplaceSceneController: UICollectionViewDataSource {
         if itemTypeSelector.selectedSegmentIndex == 0 {
             cell.pullMarketplaceFactories(factory: generator!, offer: offerArray[indexPath.row])
             cell.configureCell()
+            cell.delegate = self
             return cell
         } else {
             cell.pullMarketplaceFactories(factory: generator!, offer: offerArray[indexPath.row])
             cell.configureCell()
+            cell.delegate = self
             return cell
         }
     }

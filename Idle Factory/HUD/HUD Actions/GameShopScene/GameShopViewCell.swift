@@ -33,6 +33,8 @@ class GameShopViewCell: UICollectionViewCell {
     @IBOutlet weak var seeMoreButton: UIButton!
     
     var thisGenerator: Factory? = nil
+    
+    var delegate: NavigationCellDelegate?
     /**
      Configure cell design.
      */
@@ -94,15 +96,10 @@ class GameShopViewCell: UICollectionViewCell {
     }
     
     
-    #warning("BOTÃO SEE MORE")
     @IBAction func seeMore(_ sender: Any) {
         FactoryDetailSceneController.isBlue = true
         FactoryDetailSceneController.generator = thisGenerator
-        var mainView: UIStoryboard!
-        mainView = UIStoryboard(name: "FactoryDetailScene", bundle: nil)
-        let viewcontroller : UIViewController = mainView.instantiateViewController(withIdentifier: "FactoryDetailScene") as UIViewController
-        let viewController2 = UIApplication.shared.windows.first!.rootViewController as! GameViewController
-        viewController2.present(viewcontroller, animated: false)
+        delegate?.didButtonPressed()
     }
     
     
