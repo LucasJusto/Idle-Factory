@@ -412,7 +412,6 @@ public class CKRepository {
     }
     
     static func getGeneratorsByIDs(generatorsIDs: [String], completion: @escaping ([Factory]) -> Void){
-#warning("here")
         let publicDB = container.publicCloudDatabase
         var generators: [Factory] = [Factory]()
         
