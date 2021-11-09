@@ -9,6 +9,16 @@ import Foundation
 import UIKit
 import SpriteKit
 
+struct Visual {
+    var bottom: [BaseSmallRelatedPositions]
+    var top: [BaseBigRelatedPositions]
+    
+    init() {
+        bottom = [BaseSmallRelatedPositions]()
+        top = [BaseBigRelatedPositions]()
+    }
+}
+
 class FactoryVisualGenerator {
     static var smallBaseColors = [UIColor(red: 137/255, green: 137/255, blue: 137/255, alpha: 1),
                                   UIColor(red: 255/255, green: 242/255, blue: 140/255, alpha: 1),
@@ -101,18 +111,19 @@ class FactoryVisualGenerator {
         return 0
     }
     
-    static func generateVisual() -> SKSpriteNode {
+    static func generateVisual() -> (SKSpriteNode, Visual) {
         //create the base ground
-        let visual = SKSpriteNode(imageNamed: "ground")
-        visual.anchorPoint = CGPoint(x: 0.5, y: 0)
-        visual.zPosition = 1
+        var visual = Visual()
+        let node = SKSpriteNode(imageNamed: "ground")
+        node.anchorPoint = CGPoint(x: 0.5, y: 0)
+        node.zPosition = 1
         let colors = getRandomColors()
         
         //build baseBottom
         let baseBottom = SKSpriteNode(imageNamed: "base_small")
         baseBottom.anchorPoint = CGPoint(x: 0.5, y: 0)
         baseBottom.zPosition = 2
-        baseBottom.position = CGPoint(x: visual.size.width * SelectedBase.small.multipliersForPosition.x, y: visual.size.height * SelectedBase.small.multipliersForPosition.y)
+        baseBottom.position = CGPoint(x: node.size.width * SelectedBase.small.multipliersForPosition.x, y: node.size.height * SelectedBase.small.multipliersForPosition.y)
         baseBottom.colorBlendFactor = 1
         baseBottom.color = colors[0]
         //randomly build left wall for baseBottom
@@ -124,12 +135,14 @@ class FactoryVisualGenerator {
                 garage = adjustComponent(node: garage)
                 garage.position = getNodePosition(base: baseBottom, nodeType: BaseSmallRelatedPositions.doorGarageLeft)
                 baseBottom.addChild(garage)
+                visual.bottom.append(BaseSmallRelatedPositions.doorGarageLeft)
             }
             else {
                 var bigDoor = SKSpriteNode(imageNamed: BaseSmallRelatedPositions.doorBigLeft.image)
                 bigDoor = adjustComponent(node: bigDoor)
                 bigDoor.position = getNodePosition(base: baseBottom, nodeType: BaseSmallRelatedPositions.doorBigLeft)
                 baseBottom.addChild(bigDoor)
+                visual.bottom.append(BaseSmallRelatedPositions.doorBigLeft)
             }
         }
         else {
@@ -154,6 +167,7 @@ class FactoryVisualGenerator {
             d = adjustComponent(node: d)
             d.position = getNodePosition(base: baseBottom, nodeType: doorComponent)
             baseBottom.addChild(d)
+            visual.bottom.append(doorComponent)
             //create and add to base the components
             for _ in 0...qttComponents-1 {
                 let pos = getRandomAvailablePosition(positions: arrayOfAvailablePositions)
@@ -186,6 +200,7 @@ class FactoryVisualGenerator {
                 n = adjustComponent(node: n)
                 n.position = getNodePosition(base: baseBottom, nodeType: component)
                 baseBottom.addChild(n)
+                visual.bottom.append(component)
             }
 
         }
@@ -198,12 +213,14 @@ class FactoryVisualGenerator {
                 garage = adjustComponent(node: garage)
                 garage.position = getNodePosition(base: baseBottom, nodeType: BaseSmallRelatedPositions.doorGarageRight)
                 baseBottom.addChild(garage)
+                visual.bottom.append(BaseSmallRelatedPositions.doorGarageRight)
             }
             else {
                 var bigDoor = SKSpriteNode(imageNamed: BaseSmallRelatedPositions.doorBigRight.image)
                 bigDoor = adjustComponent(node: bigDoor)
                 bigDoor.position = getNodePosition(base: baseBottom, nodeType: BaseSmallRelatedPositions.doorBigRight)
                 baseBottom.addChild(bigDoor)
+                visual.bottom.append(BaseSmallRelatedPositions.doorBigRight)
             }
         }
         else {
@@ -228,6 +245,7 @@ class FactoryVisualGenerator {
             d = adjustComponent(node: d)
             d.position = getNodePosition(base: baseBottom, nodeType: doorComponent)
             baseBottom.addChild(d)
+            visual.bottom.append(doorComponent)
             //create and add to base the components
             for _ in 0...qttComponents-1 {
                 let pos = getRandomAvailablePosition(positions: arrayOfAvailablePositions)
@@ -260,16 +278,17 @@ class FactoryVisualGenerator {
                 n = adjustComponent(node: n)
                 n.position = getNodePosition(base: baseBottom, nodeType: component)
                 baseBottom.addChild(n)
+                visual.bottom.append(component)
             }
 
         }
-        visual.addChild(baseBottom)
+        node.addChild(baseBottom)
         
         //build baseTop
         let baseTop = SKSpriteNode(imageNamed: "base_big")
         baseTop.anchorPoint = CGPoint(x: 0.5, y: 0)
         baseTop.zPosition = 3
-        baseTop.position = CGPoint(x: visual.size.width * SelectedBase.big.multipliersForPosition.x, y: visual.size.height * SelectedBase.big.multipliersForPosition.y)
+        baseTop.position = CGPoint(x: node.size.width * SelectedBase.big.multipliersForPosition.x, y: node.size.height * SelectedBase.big.multipliersForPosition.y)
         baseTop.colorBlendFactor = 1
         baseTop.color = colors[1]
         
@@ -312,6 +331,7 @@ class FactoryVisualGenerator {
             n = adjustComponent(node: n)
             n.position = getNodePosition(base: baseTop, nodeType: component)
             baseTop.addChild(n)
+            visual.top.append(component)
         }
 
         //randomly build right wall for baseBottom
@@ -353,9 +373,10 @@ class FactoryVisualGenerator {
             n = adjustComponent(node: n)
             n.position = getNodePosition(base: baseTop, nodeType: component)
             baseTop.addChild(n)
+            visual.top.append(component)
         }
 
-        visual.addChild(baseTop)
+        node.addChild(baseTop)
         
         //randomly generates roof
         var chimneyComponent = BaseBigRelatedPositions.chimney1
@@ -373,9 +394,10 @@ class FactoryVisualGenerator {
         chimney = adjustComponent(node: chimney)
         chimney.position = CGPoint(x: baseTop.size.width * chimneyComponent.multipliersForPosition.x, y: baseTop.size.height * chimneyComponent.multipliersForPosition.y)
         baseTop.addChild(chimney)
+        visual.top.append(chimneyComponent)
 
         
-        return visual
+        return (node, visual)
     }
 }
 
