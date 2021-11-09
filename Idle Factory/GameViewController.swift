@@ -24,23 +24,12 @@ class GameViewController: UIViewController {
             CKRepository.refreshCurrentUser { user in
                 if let userNotnull = user {
                     GameScene.user = userNotnull
-                    if let timeAway = gameSave.getTimeAway() {
-                        if var generators = GameScene.user?.generators {
-                            var perSecTotal: Double = 0.0
-                            for n in 0..<generators.count {
-                                if(generators[n].isActive == IsActive.yes){
-                                    let perSec : Double = generators[n].getCurrencyPerSec()
-                                    GameScene.user?.addMainCurrency(value: perSec * timeAway * 0.05)
-                                    perSecTotal += perSec
-                                }
-                            }
-                        }
+                    GameScene.user?.addMainCurrency(value: calculateCurrencyAway())
                         DispatchQueue.main.async {
                             self.gifView.isHidden = true
                             self.backgroundLoadingView.isHidden = true
                             self.didLoadUser()
                         }
-                    }
                 }
             }
         }
@@ -72,6 +61,9 @@ class GameViewController: UIViewController {
             view.showsNodeCount = true
             gifView.isHidden = true
             backgroundLoadingView.isHidden = true
+            
+            let viewController1 = UIApplication.shared.windows.first!.rootViewController as! GameViewController
+            viewController1.displayWelcomeBackPopUp()
         }
     }
     override var shouldAutorotate: Bool {
@@ -93,8 +85,12 @@ class GameViewController: UIViewController {
         let viewcontroller : UIViewController = mainView.instantiateViewController(withIdentifier: "UpgradeFactoryStoryboard") as UIViewController
         self.present(viewcontroller, animated: false)
     }
-    
-    
+    func displayWelcomeBackPopUp() {
+        var mainView: UIStoryboard!
+        mainView = UIStoryboard(name: "WelcomeBack", bundle: nil)
+        let viewcontroller : UIViewController = mainView.instantiateViewController(withIdentifier: "WelcomeBackStoryBoard") as UIViewController
+        self.present(viewcontroller, animated: false)
+    }
     /**
      Calls GameInventory storyboard to select what generator player wants to insert on the scene (if contains).
      */

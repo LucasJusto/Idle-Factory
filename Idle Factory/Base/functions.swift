@@ -163,6 +163,25 @@ func getTime( completionHandler: @escaping (DateApi?) -> Void){
 }
 
 
+func calculateCurrencyAway() -> Double{
+    
+    let gameSave = GameSave()
+    
+    if let timeAway = gameSave.getTimeAway() {
+        if var generators = GameScene.user?.generators {
+            var perSecTotal: Double = 0.0
+            for n in 0..<generators.count {
+                if(generators[n].isActive == IsActive.yes){
+                    let perSec : Double = generators[n].getCurrencyPerSec()
+                    perSecTotal += perSec
+                }
+            }
+            return perSecTotal * timeAway * 0.05
+        }
+    }
+    return 0.0
+}
+
 func calculateQuickSell(factory: Factory) -> Double {
     var earnings: Double = 0
     

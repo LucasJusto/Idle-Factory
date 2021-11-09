@@ -48,6 +48,8 @@
 		55BBAC16271F404A00A86A47 /* GIFPlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55BBAC13271F404A00A86A47 /* GIFPlayerView.swift */; };
 		55BBAC17271F404A00A86A47 /* UIImageViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55BBAC14271F404A00A86A47 /* UIImageViewExtension.swift */; };
 		55BD52A92718BC2C0057C7C0 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55BD52A82718BC2C0057C7C0 /* User.swift */; };
+		F8BF29E9273AECE6009152CA /* WelcomeBackViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8BF29E8273AECE6009152CA /* WelcomeBackViewController.swift */; };
+		F8BF29ED273AED58009152CA /* WelcomeBack.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F8BF29EC273AED58009152CA /* WelcomeBack.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -98,6 +100,8 @@
 		55BBAC13271F404A00A86A47 /* GIFPlayerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GIFPlayerView.swift; sourceTree = "<group>"; };
 		55BBAC14271F404A00A86A47 /* UIImageViewExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIImageViewExtension.swift; sourceTree = "<group>"; };
 		55BD52A82718BC2C0057C7C0 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		F8BF29E8273AECE6009152CA /* WelcomeBackViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeBackViewController.swift; sourceTree = "<group>"; };
+		F8BF29EC273AED58009152CA /* WelcomeBack.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = WelcomeBack.storyboard; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -234,6 +238,7 @@
 				553E7F73272099DB00165C8E /* GameSave.swift */,
 				48A65970271F5F470021CD52 /* Localizable.strings */,
 				55439BC62721F23D00F69461 /* DateApi.swift */,
+				F8BF29E7273AEC9C009152CA /* PopUp */,
 			);
 			path = "Idle Factory";
 			sourceTree = "<group>";
@@ -272,6 +277,15 @@
 				55BBAC14271F404A00A86A47 /* UIImageViewExtension.swift */,
 			);
 			path = "GIF Extension";
+			sourceTree = "<group>";
+		};
+		F8BF29E7273AEC9C009152CA /* PopUp */ = {
+			isa = PBXGroup;
+			children = (
+				F8BF29E8273AECE6009152CA /* WelcomeBackViewController.swift */,
+				F8BF29EC273AED58009152CA /* WelcomeBack.storyboard */,
+			);
+			path = PopUp;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -335,6 +349,7 @@
 			files = (
 				487A19FB2715504000723065 /* Main.storyboard in Resources */,
 				2BD3FBF32728777400B4B4E6 /* GameChallengeScene.storyboard in Resources */,
+				F8BF29ED273AED58009152CA /* WelcomeBack.storyboard in Resources */,
 				48A6596E271F5F470021CD52 /* Localizable.strings in Resources */,
 				487A19FD2715504300723065 /* Assets.xcassets in Resources */,
 				487A1A002715504300723065 /* LaunchScreen.storyboard in Resources */,
@@ -374,6 +389,7 @@
 				487A1A072715516900723065 /* Camera.swift in Sources */,
 				487A19F62715504000723065 /* GameScene.swift in Sources */,
 				48A9AC4C273314BD007C5197 /* MarketPlaceOffer.swift in Sources */,
+				F8BF29E9273AECE6009152CA /* WelcomeBackViewController.swift in Sources */,
 				487A19F82715504000723065 /* GameViewController.swift in Sources */,
 				55BD52A92718BC2C0057C7C0 /* User.swift in Sources */,
 				55439BC52721E87400F69461 /* functions.swift in Sources */,
