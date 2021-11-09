@@ -760,6 +760,57 @@ enum BaseSmallRelatedPositions: CustomStringConvertible {
         }
     }
     
+    static func getComponent(key: String) -> BaseSmallRelatedPositions {
+        switch key {
+            case "window1_left":
+                return .windowLeft1
+            case "window2_left":
+                return .windowLeft2
+            case "window3_left":
+                return .windowLeft3
+            case "window1_right":
+                return .windowRight1
+            case "window2_right":
+                return .windowRight2
+            case "window3_right":
+                return .windowRight3
+            case "window1_big_left":
+                return .windowBigLeft1
+            case "window2_big_left":
+                return .windowBigLeft2
+            case "window3_big_left":
+                return .windowBigLeft3
+            case "window1_big_right":
+                return .windowBigRight1
+            case "window2_big_right":
+                return .windowBigRight2
+            case "window3_big_right":
+                return .windowBigRight3
+            case "door_big_left":
+                return .doorBigLeft
+            case "door_big_right":
+                return .doorBigRight
+            case "door_garage_left":
+                return .doorGarageLeft
+            case "door_garage_right":
+                return .doorGarageRight
+            case "door1_small_left":
+                return .doorSmallLeft1
+            case "door2_small_left":
+                return .doorSmallLeft2
+            case "door3_small_left":
+                return .doorSmallLeft3
+            case "door1_small_right":
+                return .doorSmallRight1
+            case "door2_small_right":
+                return .doorSmallRight2
+            case "door3_small_right":
+                return .doorSmallRight3
+            default:
+                return .doorGarageRight
+        }
+    }
+    
     var image: String {
         switch self {
             case .windowLeft1:
