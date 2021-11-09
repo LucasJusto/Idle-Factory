@@ -62,7 +62,17 @@ class FactoryDetailSceneController: UIViewController,  UITableViewDataSource, UI
                         CKRepository.storeNewGenerator(userID: GameScene.user!.id, generator: generator){ record ,error  in
                             if error == nil && record != nil {
                                 let semaphore = DispatchSemaphore(value: 0)
-                                generator.id = record!.recordID.recordName
+                                generator.id = record[0]!.recordID.recordName
+                                for r in generator.resourcesArray {
+                                    for r2 in record {
+                                        let type = r2?.value(forKey: ResourceTable.type.description) as? String ?? ""
+                                        let id = r2?.recordID.recordName
+                                        if r.type.key == type {
+                                            r.id = id
+                                        }
+                                    }
+                                }
+                                
                                 GameScene.user?.generators.append(generator)
                                 GameScene.user?.removeMainCurrency(value: price)
                                 CKRepository.storeUserData(id: GameScene.user!.id , name:  GameScene.user?.name ?? "", mainCurrency:  GameScene.user!.mainCurrency , premiumCurrency:  GameScene.user!.premiumCurrency, timeLeftApp: AppDelegate.gameSave.transformToSeconds(time: AppDelegate.gameSave.getCurrentTime()) , completion: {_,_ in

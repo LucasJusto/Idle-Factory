@@ -78,7 +78,9 @@ class GameInventorySceneController: UIViewController {
     
     // Selected Factory control
     private(set) var selectedFactory: Factory?
-    private(set) var selectedFactoryIndex: Int? // Index of the cell
+    private(set) var selectedFactoryIndex: Int?
+    private(set) var selectedFactoryIndex2: Int? // Index of the cell
+
     var factoriesNotActive: [Factory] = []
     
     // Slot clicked from the GameScene (Default is .none)
@@ -212,29 +214,31 @@ class GameInventorySceneController: UIViewController {
      Confirm the quick sell action. Player lose the generator and cannot be recovered.
      */
     @IBAction func confirmQuickSell(_ sender: Any) {
-        DispatchQueue.global().async {
-            let earnings_sell: Double = calculateQuickSell(factory: self.selectedFactory!)
-            let semaphore = DispatchSemaphore(value: 0)
-            CKRepository.deleteGeneratorByID(generatorID: (self.selectedFactory?.id)!) { error in
-                if error == nil {
-                    GameScene.user?.addMainCurrency(value: earnings_sell)
-                    GameScene.user?.generators.remove(at: self.selectedFactoryIndex!)
-                    self.factoriesNotActive.remove(at: self.selectedFactoryIndex!)
-                    CKRepository.storeUserData(id: GameScene.user!.id , name:  GameScene.user?.name ?? "", mainCurrency:  GameScene.user!.mainCurrency , premiumCurrency:  GameScene.user!.premiumCurrency, timeLeftApp: AppDelegate.gameSave.transformToSeconds(time: AppDelegate.gameSave.getCurrentTime()) , completion: {_,_ in
+        if let factory = selectedFactory, let factoryIndex = selectedFactoryIndex, let factoryIndex2 = selectedFactoryIndex2 {
+            DispatchQueue.global().async {
+                let earnings_sell: Double = calculateQuickSell(factory: factory)
+                let semaphore = DispatchSemaphore(value: 0)
+                CKRepository.deleteGeneratorByID(generatorID: (factory.id!)) { error in
+                    if error == nil {
+                        GameScene.user?.addMainCurrency(value: earnings_sell)
+                        GameScene.user?.generators.remove(at: factoryIndex2)
+                        self.factoriesNotActive.remove(at: factoryIndex)
+                        CKRepository.storeUserData(id: GameScene.user!.id , name:  GameScene.user?.name ?? "", mainCurrency:  GameScene.user!.mainCurrency , premiumCurrency:  GameScene.user!.premiumCurrency, timeLeftApp: AppDelegate.gameSave.transformToSeconds(time: AppDelegate.gameSave.getCurrentTime()) , completion: {_,_ in
+                            semaphore.signal()
+                        })
+                    } else {
                         semaphore.signal()
-                    })
-                } else {
+                    }
                     semaphore.signal()
                 }
-                semaphore.signal()
-            }
-            semaphore.wait()
-            semaphore.wait()
+                semaphore.wait()
+                semaphore.wait()
 
-            DispatchQueue.main.async {
-                self.deselectCell(indexPath: IndexPath(row: self.selectedFactoryIndex!, section: 0))
-                self.collectionView.reloadData()
-                self.hideQuickSellModal(status: true)
+                DispatchQueue.main.async {
+                    self.deselectCell(indexPath: IndexPath(row: factoryIndex, section: 0))
+                    self.collectionView.reloadData()
+                    self.hideQuickSellModal(status: true)
+                }
             }
         }
     }
@@ -279,21 +283,23 @@ class GameInventorySceneController: UIViewController {
      Insert a factory from the Inventory to park. Turn the factory as active to generate resource to the Idle game.
      */
     func insertOnPark() {
-        selectedFactory?.isActive = .yes
-        selectedFactory?.position = clickedSlotPosition
-        DispatchQueue.global().async {
-            CKRepository.editGenerators(userID: GameScene.user!.id, generators: GameScene.user!.generators) { record, error in
-                
-                if error == nil {
-                    DispatchQueue.main.async {
-                        self.deselectCell(indexPath: IndexPath(row: self.selectedFactoryIndex!, section: 0))
-                        GameViewController.scene!.addFactory(factory: self.selectedFactory!)
-                        self.factoriesNotActive.remove(at: self.selectedFactoryIndex!)
-                        self.collectionView.reloadData()
+        if let factory = selectedFactory, let factoryIndex = selectedFactoryIndex {
+            factory.isActive = .yes
+            factory.position = clickedSlotPosition
+            DispatchQueue.global().async {
+                CKRepository.editGenerators(userID: GameScene.user!.id, generators: GameScene.user!.generators) { record, error in
+                    
+                    if error == nil {
+                        DispatchQueue.main.async {
+                            self.deselectCell(indexPath: IndexPath(row: factoryIndex, section: 0))
+                            GameViewController.scene!.addFactory(factory: factory)
+                            self.factoriesNotActive.remove(at: factoryIndex)
+                            self.collectionView.reloadData()
+                        }
+                    } else {
+                        self.selectedFactory?.position = .none
+                        self.selectedFactory?.isActive = .no
                     }
-                } else {
-                    self.selectedFactory?.position = .none
-                    self.selectedFactory?.isActive = .no
                 }
             }
         }
@@ -393,18 +399,18 @@ extension GameInventorySceneController: UICollectionViewDataSource {
 // MARK: - COLLECTIONVIEW DELEGATE
 extension GameInventorySceneController: UICollectionViewDelegateFlowLayout {
     
-    func collectionView(_ collectionView: UICollectionView, shouldSelectItemAt indexPath: IndexPath) -> Bool {
-        if factoriesNotActive.indices.contains(indexPath.row) {
-            return true
-        } else {
-            if let indices = collectionView.indexPathsForSelectedItems {
-                for indexPath in indices {
-                    deselectCell(indexPath: indexPath)
-                }
-            }
-            return false
-        }
-    }
+//    func collectionView(_ collectionView: UICollectionView, shouldSelectItemAt indexPath: IndexPath) -> Bool {
+//        if factoriesNotActive.indices.contains(indexPath.row) {
+//            return true
+//        } else {
+//            if let indices = collectionView.indexPathsForSelectedItems {
+//                for indexPath in indices {
+//                    deselectCell(indexPath: indexPath)
+//                }
+//            }
+//            return false
+//        }
+//    }
     
     func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
         guard let cell = collectionView.cellForItem(at: indexPath) as? GameInventoryViewCell else { return }
@@ -428,6 +434,11 @@ extension GameInventorySceneController: UICollectionViewDelegateFlowLayout {
             if myFactories[indexPath.row].isActive == .no {
                 selectedFactory = myFactories[indexPath.row]
                 selectedFactoryIndex = indexPath.row
+                for f in 0..<GameScene.user!.generators.count {
+                    if GameScene.user!.generators[f].id! == selectedFactory!.id! {
+                        selectedFactoryIndex2 = f
+                    }
+                }
                 resources = myFactories[indexPath.row].resourcesArray
             }
         }

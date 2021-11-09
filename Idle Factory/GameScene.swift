@@ -113,7 +113,12 @@ class GameScene: SKScene {
 //                            }
 //                        }
         
-        
+//        for g in GameScene.user!.generators {
+////            if g.isActive == .no {
+//                CKRepository.deleteGeneratorByID(generatorID: g.id!) { _ in
+//                }
+////            }
+//        }
 
     }
     

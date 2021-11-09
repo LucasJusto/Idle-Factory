@@ -39,7 +39,7 @@
 
 // MARK: - GAME SHOP
 "ShopHeaderLabel" = "Shop";
-"GenerateNFTButton" = "Generate NFT";
+"GenerateNFTButton" = "Generate Premium Factory";
 "OpenMarketplaceButton" = "Open Marketplace";
 
 

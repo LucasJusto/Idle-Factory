@@ -124,7 +124,7 @@
                                     </segmentedControl>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Y7c-qD-dfZ">
                                         <rect key="frame" x="194" y="0.0" width="104" height="23"/>
-                                        <color key="backgroundColor" name="Inventory_background"/>
+                                        <color key="backgroundColor" name="actionColor1"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="104" id="ot6-Se-9gO"/>
                                         </constraints>
@@ -258,7 +258,7 @@
                                                         </view>
                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Yt5-m7-xqD">
                                                             <rect key="frame" x="22" y="173" width="87" height="21"/>
-                                                            <color key="backgroundColor" name="Inventory_background"/>
+                                                            <color key="backgroundColor" name="actionColor1"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" constant="87" id="JGs-dw-yxj"/>
                                                                 <constraint firstAttribute="height" constant="21" id="Y8j-Nx-IvL"/>
@@ -601,10 +601,13 @@
         <image name="close" width="31.5" height="31"/>
         <image name="tv" catalog="system" width="128" height="97"/>
         <namedColor name="Inventory_background">
-            <color red="0.6470000147819519" green="0.87099999189376831" blue="0.27099999785423279" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.77999997138977051" green="0.16500000655651093" blue="0.23100000619888306" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="Marketplace_background">
-            <color red="0.2199999988079071" green="0.2199999988079071" blue="0.2199999988079071" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.89803921568627454" green="0.89803921568627454" blue="0.89803921568627454" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="actionColor1">
+            <color red="0.6470000147819519" green="0.87099999189376831" blue="0.27099999785423279" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
