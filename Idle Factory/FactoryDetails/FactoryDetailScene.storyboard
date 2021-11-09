@@ -136,6 +136,9 @@
                                 <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" title="comprar"/>
+                                <connections>
+                                    <action selector="buyAction:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="pG9-Wj-l35"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5g3-UB-Y9P">
                                 <rect key="frame" x="265.5" y="328" width="67" height="31"/>
