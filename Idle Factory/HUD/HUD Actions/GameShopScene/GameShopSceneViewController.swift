@@ -11,7 +11,7 @@ import UIKit
 /**
  Game Shop scene controller.
  */
-class GameShopSceneViewController: UIViewController {
+class GameShopSceneViewController: UIViewController, NavigationCellDelegate {
 
     @IBOutlet weak var collectionView: UICollectionView!
     
@@ -30,6 +30,14 @@ class GameShopSceneViewController: UIViewController {
     static let factoryID: String = "shopFactory_cell"
     private(set) var basicFactories: [Factory] = []
     
+    
+    func didButtonPressed() {
+        print(#function)
+        var mainView: UIStoryboard!
+        mainView = UIStoryboard(name: "FactoryDetailScene", bundle: nil)
+        let viewcontroller : UIViewController = mainView.instantiateViewController(withIdentifier: "FactoryDetailScene") as UIViewController
+        self.present(viewcontroller, animated: false)
+    }
     
     // MARK: - INIT
     override func viewDidLoad() {
@@ -88,6 +96,10 @@ class GameShopSceneViewController: UIViewController {
     }
     
     
+    
+    func presentView(viewController: UIViewController){
+        self.present(viewController, animated: false)
+    }
     /**
      Load player actual currencies value.
      */
@@ -113,6 +125,7 @@ extension GameShopSceneViewController: UICollectionViewDataSource {
 
         cell.pullShopFactories(factory: generator)
             cell.configureCell()
+        cell.delegate = self
             return cell
     }
 }

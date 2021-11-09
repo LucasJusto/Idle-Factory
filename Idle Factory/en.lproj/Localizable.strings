@@ -57,3 +57,6 @@
 //MARK: - Upgrade Screen
 "MoveToInventory" = "Move to inventory";
 "ChangeFactory" = "Change factory";
+"Price" = "Price";
+"Cancel" = "Cancel";
+"Purchase" = "Purchase";

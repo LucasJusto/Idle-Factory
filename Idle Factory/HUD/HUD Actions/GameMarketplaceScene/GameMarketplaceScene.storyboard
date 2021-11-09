@@ -269,6 +269,7 @@
                                                             <state key="normal" title="See more"/>
                                                             <connections>
                                                                 <action selector="seeMore:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="1X0-1E-XHD"/>
+                                                                <action selector="seeMoreAction:" destination="HPR-26-3fr" eventType="touchUpInside" id="WNH-rH-LHV"/>
                                                             </connections>
                                                         </button>
                                                     </subviews>
