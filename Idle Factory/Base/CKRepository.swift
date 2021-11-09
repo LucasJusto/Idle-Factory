@@ -195,7 +195,7 @@ public class CKRepository {
     static func editGenerators(userID: String, generators: [Factory], completion: (([CKRecord]?, Error?) -> Void)? = nil) {
         
         let publicDB = container.publicCloudDatabase
-        let records: [CKRecord] = []
+        var records: [CKRecord] = []
         
         for factory in generators {
             let record = CKRecord(recordType: GeneratorTable.recordType.description, recordID: CKRecord.ID(recordName: factory.id ?? ""))
@@ -206,6 +206,7 @@ public class CKRepository {
             record.setObject(factory.isActive.key as CKRecordValue?, forKey: GeneratorTable.isActive.description)
             record.setObject(factory.type.key as CKRecordValue?, forKey: GeneratorTable.type.description)
             record.setObject(factory.textureName as CKRecordValue?, forKey: GeneratorTable.texture.description)
+            records.append(record)
         }
         
         let operation = CKModifyRecordsOperation(recordsToSave: records, recordIDsToDelete: nil)
@@ -213,14 +214,16 @@ public class CKRepository {
         operation.modifyRecordsCompletionBlock = { savedRecords, _, error in
             if let ckError = error as? CKError {
                 CKRepository.errorAlertHandler(CKErrorCode: ckError.code)
-            }
-            editResources(generators: generators) { _, error in
-                if let ckError = error as? CKError {
-                    CKRepository.errorAlertHandler(CKErrorCode: ckError.code)
+            } else {
+                editResources(generators: generators) { _, error in
+                    if let ckError = error as? CKError {
+                        CKRepository.errorAlertHandler(CKErrorCode: ckError.code)
+                    } else {
+                        if let completion = completion {
+                            completion(savedRecords, error)
+                        }
+                    }
                 }
-            }
-            if let completion = completion {
-                completion(savedRecords, error)
             }
         }
         publicDB.add(operation)
