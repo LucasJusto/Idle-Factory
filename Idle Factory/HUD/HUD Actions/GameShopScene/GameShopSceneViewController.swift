@@ -22,7 +22,7 @@ class GameShopSceneViewController: UIViewController, NavigationCellDelegate {
     @IBOutlet weak var premiumCurrencyHeaderView: UIView!
     @IBOutlet weak var premiumCurrencyLabel: UILabel!
     
-    @IBOutlet weak var generateNFTButton: UIButton! // It's currently being used to generate premium factory. NOT real NFT.
+    @IBOutlet weak var generateNFTButton: UIButton! // Check Disclaimer on action function generateNFT(_ sender: Any)
     @IBOutlet weak var openMarketplaceButton: UIButton!
     
     
@@ -105,6 +105,7 @@ class GameShopSceneViewController: UIViewController, NavigationCellDelegate {
     
     /**
      Generate a random NFT generator.
+     DISCLAIMER: It's currently being used to generate premium factory. NOT real NFT.
      */
     @IBAction func generateNFT(_ sender: Any) {
         
@@ -126,6 +127,8 @@ class GameShopSceneViewController: UIViewController, NavigationCellDelegate {
     func presentView(viewController: UIViewController){
         self.present(viewController, animated: false)
     }
+    
+    
     /**
      Load player actual currencies value.
      */
