@@ -58,12 +58,9 @@ class GameMarketplaceSceneController: UIViewController, NavigationCellDelegate {
         collectionView.dataSource = self
         collectionView.delegate = self
         
-        // Design components
-        mainCurrencyHeaderView.layer.cornerRadius = 10
-        premiumCurrencyHeaderView.layer.cornerRadius = 10
-        sellAItemButton.layer.cornerRadius = 10
-        myAnnouncesButton.layer.cornerRadius = 10
-        
+        loadOutletCustomizations()
+        loadCustomFont()
+
         // Setting text
         marketplaceHeaderLabel.text = NSLocalizedString("MarketplaceHeaderLabel", comment: "")
         itemTypeSelector.setTitle(NSLocalizedString("BasicSelectorItem", comment: ""), forSegmentAt: 0)
@@ -89,6 +86,36 @@ class GameMarketplaceSceneController: UIViewController, NavigationCellDelegate {
                 offer.currencyType == .basic
             })
         })
+    }
+    
+    
+    // MARK: - DESIGN FUNCTIONS
+    /**
+     Load outlet customizations.
+     */
+    func loadOutletCustomizations() {
+        // INVENTORY HEADER
+        mainCurrencyHeaderView.layer.cornerRadius = 10
+        premiumCurrencyHeaderView.layer.cornerRadius = 10
+        
+        // BUTTONS
+        sellAItemButton.layer.cornerRadius = 10
+        myAnnouncesButton.layer.cornerRadius = 10
+    }
+    
+    
+    /**
+     Load custom font to all labels and button text.
+     */
+    func loadCustomFont() {
+        // LABELS
+        marketplaceHeaderLabel.font = UIFont(name: "AustralSlabBlur-Regular", size: 27)
+        mainCurrencyLabel.font = UIFont(name: "AustralSlabBlur-Regular", size: 14)
+        premiumCurrencyLabel.font = UIFont(name: "AustralSlabBlur-Regular", size: 14)
+        
+        // BUTTONS
+        sellAItemButton.titleLabel?.font = UIFont(name: "AustralSlabBlur-Regular", size: 10)
+        myAnnouncesButton.titleLabel?.font = UIFont(name: "AustralSlabBlur-Regular", size: 10)
     }
     
     

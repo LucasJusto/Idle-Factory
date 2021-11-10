@@ -47,8 +47,18 @@ class GameMarketplaceViewCell: UICollectionViewCell {
      Configure cell design.
      */
     func configureCell() {
+        // DESIGN
         cardView.layer.cornerRadius = 20
         seeMoreButton.layer.cornerRadius = 10
+        
+        // FONT
+        resourceQuantityType1.font = UIFont(name: "AustralSlabBlur-Regular", size: 8)
+        resourceQuantityType2.font = UIFont(name: "AustralSlabBlur-Regular", size: 8)
+        resourceQuantityType3.font = UIFont(name: "AustralSlabBlur-Regular", size: 8)
+        priceLabel.font = UIFont(name: "AustralSlabBlur-Regular", size: 14)
+        seeMoreButton.titleLabel?.font = UIFont(name: "AustralSlabBlur-Regular", size: 10)
+
+        
         seeMoreButton.setTitle(NSLocalizedString("AboutNewFactoryButton", comment: ""), for: .normal)
     }
     
@@ -94,7 +104,6 @@ class GameMarketplaceViewCell: UICollectionViewCell {
             resourceType3.isHidden = true
             resourceQuantityType3.text = ""
         }
-//        coinImage.image =
         priceLabel.text = "\(offer.price)"
     }
 }
