@@ -22,7 +22,7 @@ class GameShopSceneViewController: UIViewController, NavigationCellDelegate {
     @IBOutlet weak var premiumCurrencyHeaderView: UIView!
     @IBOutlet weak var premiumCurrencyLabel: UILabel!
     
-    @IBOutlet weak var generateNFTButton: UIButton!
+    @IBOutlet weak var generateNFTButton: UIButton! // It's currently being used to generate premium factory. NOT real NFT.
     @IBOutlet weak var openMarketplaceButton: UIButton!
     
     
@@ -46,12 +46,8 @@ class GameShopSceneViewController: UIViewController, NavigationCellDelegate {
         collectionView.dataSource = self
         collectionView.delegate = self
         
-        // Design components
-        mainCurrencyHeaderView.layer.cornerRadius = 10
-        premiumCurrencyHeaderView.layer.cornerRadius = 10
-        generateNFTButton.layer.cornerRadius = 10
-        openMarketplaceButton.layer.cornerRadius = 10
-        
+        loadOutletCustomizations()
+        loadCustomFont()
         
         // Setting text
         shopHeaderLabel.text = NSLocalizedString("ShopHeaderLabel", comment: "")
@@ -65,6 +61,36 @@ class GameShopSceneViewController: UIViewController, NavigationCellDelegate {
         for _ in 0..<20 {
             basicFactories.append(createBasicFactory(resourceTypeArray: resourceArray))
         }
+    }
+    
+    
+    // MARK: - DESIGN FUNCTIONS
+    /**
+     Load outlet customizations.
+     */
+    func loadOutletCustomizations() {
+        // INVENTORY HEADER
+        mainCurrencyHeaderView.layer.cornerRadius = 10
+        premiumCurrencyHeaderView.layer.cornerRadius = 10
+        
+        // BUTTONS
+        generateNFTButton.layer.cornerRadius = 10
+        openMarketplaceButton.layer.cornerRadius = 10
+    }
+    
+    
+    /**
+     Load custom font to all labels and button text.
+     */
+    func loadCustomFont() {
+        // LABELS
+        shopHeaderLabel.font = UIFont(name: "AustralSlabBlur-Regular", size: 27)
+        mainCurrencyLabel.font = UIFont(name: "AustralSlabBlur-Regular", size: 14)
+        premiumCurrencyLabel.font = UIFont(name: "AustralSlabBlur-Regular", size: 14)
+        
+        // BUTTONS
+        generateNFTButton.titleLabel?.font = UIFont(name: "AustralSlabBlur-Regular", size: 10)
+        openMarketplaceButton.titleLabel?.font = UIFont(name: "AustralSlabBlur-Regular", size: 10)
     }
     
     

@@ -33,14 +33,24 @@ class GameShopViewCell: UICollectionViewCell {
     @IBOutlet weak var seeMoreButton: UIButton!
     
     var thisGenerator: Factory? = nil
-    
     var delegate: NavigationCellDelegate?
+    
+    
     /**
      Configure cell design.
      */
-    func configureCell() {
+    func configureCell() {        
+        // DESIGN
         cardView.layer.cornerRadius = 20
         seeMoreButton.layer.cornerRadius = 10
+        
+        // FONT
+        resourceQuantityType1.font = UIFont(name: "AustralSlabBlur-Regular", size: 8)
+        resourceQuantityType2.font = UIFont(name: "AustralSlabBlur-Regular", size: 8)
+        resourceQuantityType3.font = UIFont(name: "AustralSlabBlur-Regular", size: 8)
+        priceLabel.font = UIFont(name: "AustralSlabBlur-Regular", size: 14)
+        seeMoreButton.titleLabel?.font = UIFont(name: "AustralSlabBlur-Regular", size: 10)
+        
         seeMoreButton.setTitle(NSLocalizedString("AboutNewFactoryButton", comment: ""), for: .normal)
     }
     
@@ -101,6 +111,4 @@ class GameShopViewCell: UICollectionViewCell {
         FactoryDetailSceneController.generator = thisGenerator
         delegate?.didButtonPressed()
     }
-    
-    
 }
