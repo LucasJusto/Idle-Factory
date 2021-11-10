@@ -35,10 +35,8 @@ class GameAnnounceSceneViewController: UIViewController {
         collectionView.dataSource = self
         collectionView.delegate = self
         
-        // Design components
-        mainCurrencyHeaderView.layer.cornerRadius = 10
-        premiumCurrencyHeaderView.layer.cornerRadius = 10
-
+        loadOutletCustomizations()
+        loadCustomFont()
         
         // Setting text
         announceHeaderLabel.text = NSLocalizedString("AnnounceHeaderLabel", comment: "")
@@ -46,8 +44,29 @@ class GameAnnounceSceneViewController: UIViewController {
     }
     
     
-    // MARK: - ACTIONS
+    // MARK: - DESIGN FUNCTIONS
+    /**
+     Load outlet customizations.
+     */
+    func loadOutletCustomizations() {
+        // INVENTORY HEADER
+        mainCurrencyHeaderView.layer.cornerRadius = 10
+        premiumCurrencyHeaderView.layer.cornerRadius = 10
+    }
     
+    
+    /**
+     Load custom font to all labels and button text.
+     */
+    func loadCustomFont() {
+        // LABELS
+        announceHeaderLabel.font = UIFont(name: "AustralSlabBlur-Regular", size: 27)
+        mainCurrencyLabel.font = UIFont(name: "AustralSlabBlur-Regular", size: 14)
+        premiumCurrencyLabel.font = UIFont(name: "AustralSlabBlur-Regular", size: 14)
+    }
+    
+    
+    // MARK: - ACTIONS
     /**
      Return to Marketplace scene.
      */
