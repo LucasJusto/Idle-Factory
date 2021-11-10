@@ -384,8 +384,8 @@ class GameScene: SKScene {
     /**
      Remove a factory from the scene.
      */
-    func removeFactory(factory: Factory) {
-        switch factory.position {
+    func removeFactory(position: GeneratorPositions) {
+        switch position {
         case .first:
             GameScene.factoriesPositions[0].slot.texture = SKTexture(imageNamed: "Factory_add_new")
             GameScene.factoriesPositions[0].slot.name = "factory_slot_0_empty"

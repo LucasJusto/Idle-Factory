@@ -44,16 +44,15 @@ class GameInventoryViewCell: UICollectionViewCell {
 
         factoryTextureImage.image = UIImage(named: texture)
         
+        emptySlot.isHidden = true
         factoryTextureImage.isHidden = false
         resourceType1.isHidden = false
         resourceType2.isHidden = false
         resourceType3.isHidden = false
-
+        
         switch resources.count {
         case 1:
-            emptySlot.isHidden = true
             factoryTexture.isHidden = true
-
             resourceType1.isHidden = true
             quantityType1.text = ""
             resourceType2.image = UIImage(systemName: getResourceImageName(resource: resources[0].type))
@@ -62,9 +61,7 @@ class GameInventoryViewCell: UICollectionViewCell {
             quantityType3.text = ""
             
         case 2:
-            emptySlot.isHidden = true
             factoryTexture.isHidden = true
-
             resourceType1.image = UIImage(systemName: getResourceImageName(resource: resources[0].type))
             quantityType1.text = "\(resources[0].baseQtt)"
             resourceType2.image = UIImage(systemName: getResourceImageName(resource: resources[1].type))
@@ -73,9 +70,7 @@ class GameInventoryViewCell: UICollectionViewCell {
             quantityType3.text = ""
 
         case 3:
-            emptySlot.isHidden = true
             factoryTexture.isHidden = true
-
             resourceType1.image = UIImage(systemName: getResourceImageName(resource: resources[0].type))
             quantityType1.text = "\(resources[0].baseQtt)"
             resourceType2.image = UIImage(systemName: getResourceImageName(resource: resources[1].type))

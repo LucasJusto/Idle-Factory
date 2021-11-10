@@ -125,6 +125,7 @@ class GameInventorySceneController: UIViewController {
         }))!
     }
     
+    
     // MARK: - DESIGN FUNCTIONS
     func loadOutletCustomizations() {
         // Inventory Header
@@ -143,6 +144,7 @@ class GameInventorySceneController: UIViewController {
         cancelQuickSell.layer.cornerRadius = 10
         confirmQuickSell.layer.cornerRadius = 10
     }
+    
     
     /**
      Load custom font to all labels and button text.

@@ -47,7 +47,7 @@ class UpgradeFactorySceneController: UIViewController,  UITableViewDataSource, U
      */
     @IBAction func moveToInventory(_ sender: Any) {
         if let factory = UpgradeFactorySceneController.generator {
-            let position = UpgradeFactorySceneController.generator?.position
+            let position = factory.position
             factory.position = .none
             factory.isActive = .no
 
@@ -56,16 +56,15 @@ class UpgradeFactorySceneController: UIViewController,  UITableViewDataSource, U
                     
                     if error == nil {
                         DispatchQueue.main.async {
-                            GameViewController.scene!.removeFactory(factory: UpgradeFactorySceneController.generator!)
+                            GameViewController.scene!.removeFactory(position: position)
                         }
                     } else {
-                        factory.position = position!
+                        factory.position = position
                         factory.isActive = .yes
                     }
                 }
             }
         }
-        
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
