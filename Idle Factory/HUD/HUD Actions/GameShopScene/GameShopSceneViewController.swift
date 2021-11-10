@@ -81,7 +81,10 @@ class GameShopSceneViewController: UIViewController, NavigationCellDelegate {
      Generate a random NFT generator.
      */
     @IBAction func generateNFT(_ sender: Any) {
-        
+        var mainView: UIStoryboard!
+        mainView = UIStoryboard(name: "GenerateNFTConfirmation", bundle: nil)
+        let viewcontroller : UIViewController = mainView.instantiateViewController(withIdentifier: "PopUpConfirmation") as UIViewController
+        self.present(viewcontroller, animated: false)
     }
     
     
