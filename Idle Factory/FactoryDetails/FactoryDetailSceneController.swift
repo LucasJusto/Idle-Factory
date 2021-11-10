@@ -130,7 +130,7 @@ class FactoryDetailSceneController: UIViewController,  UITableViewDataSource, UI
         purchaseButton.titleLabel?.font = UIFont(name: "AustralSlabBlur-Regular", size: 10)
         
         cancelButton.backgroundColor = UIColor.white
-        purchaseButton.backgroundColor = UIColor(named: "Inventory_background")
+        purchaseButton.backgroundColor = UIColor(named: "actionColor1")
         if let generator = FactoryDetailSceneController.generator {
             if let id = generator.id {
                 self.id.text = "ID: \(id)"

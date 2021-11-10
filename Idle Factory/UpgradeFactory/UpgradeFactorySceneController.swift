@@ -33,7 +33,7 @@ class UpgradeFactorySceneController: UIViewController,  UITableViewDataSource, U
         changeFactoryButton.titleLabel?.font = UIFont(name: "AustralSlabBlur-Regular", size: 10)
         moveToInventoryButton.titleLabel?.font = UIFont(name: "AustralSlabBlur-Regular", size: 10)
         
-        changeFactoryButton.backgroundColor = UIColor(named: "Inventory_background")
+        changeFactoryButton.backgroundColor = UIColor(named: "actionColor1")
         moveToInventoryButton.backgroundColor = UIColor(named: "HudActions-background")
         
         factoryImage.image = UIImage(named: "Coin") // GameScene.user?.generators[generatorID].textureName ??
