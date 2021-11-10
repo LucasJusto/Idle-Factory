@@ -29,15 +29,7 @@ class GameShopSceneViewController: UIViewController, NavigationCellDelegate {
     // MARK: - CONTROLLERS
     static let factoryID: String = "shopFactory_cell"
     private(set) var basicFactories: [Factory] = []
-    
-    
-    func didButtonPressed() {
-        print(#function)
-        var mainView: UIStoryboard!
-        mainView = UIStoryboard(name: "FactoryDetailScene", bundle: nil)
-        let viewcontroller : UIViewController = mainView.instantiateViewController(withIdentifier: "FactoryDetailScene") as UIViewController
-        self.present(viewcontroller, animated: false)
-    }
+
     
     // MARK: - INIT
     override func viewDidLoad() {
@@ -123,7 +115,6 @@ class GameShopSceneViewController: UIViewController, NavigationCellDelegate {
     }
     
     
-    
     func presentView(viewController: UIViewController){
         self.present(viewController, animated: false)
     }
@@ -135,6 +126,15 @@ class GameShopSceneViewController: UIViewController, NavigationCellDelegate {
     func loadPlayerCurrencies() {
         mainCurrencyLabel.text = doubleToString(value: GameScene.user?.mainCurrency ?? 0.0)
         premiumCurrencyLabel.text = doubleToString(value: GameScene.user?.premiumCurrency ?? 0.0)
+    }
+    
+    
+    func didButtonPressed() {
+        print(#function)
+        var mainView: UIStoryboard!
+        mainView = UIStoryboard(name: "FactoryDetailScene", bundle: nil)
+        let viewcontroller : UIViewController = mainView.instantiateViewController(withIdentifier: "FactoryDetailScene") as UIViewController
+        self.present(viewcontroller, animated: false)
     }
 }
 

@@ -43,14 +43,7 @@ class GameMarketplaceSceneController: UIViewController, NavigationCellDelegate {
     }
     private(set) var generatorDict: [String: Factory] = [:]
     
-    
-    func didButtonPressed() {
-        var mainView: UIStoryboard!
-        mainView = UIStoryboard(name: "FactoryDetailScene", bundle: nil)
-        let viewcontroller : UIViewController = mainView.instantiateViewController(withIdentifier: "FactoryDetailScene") as UIViewController
-        self.present(viewcontroller, animated: false)
-    }
-    
+
     // MARK: - INIT
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -179,6 +172,14 @@ class GameMarketplaceSceneController: UIViewController, NavigationCellDelegate {
         mainCurrencyLabel.text = doubleToString(value: GameScene.user?.mainCurrency ?? 0.0)
         premiumCurrencyLabel.text = doubleToString(value: GameScene.user?.premiumCurrency ?? 0.0)
     }
+    
+    
+    func didButtonPressed() {
+        var mainView: UIStoryboard!
+        mainView = UIStoryboard(name: "FactoryDetailScene", bundle: nil)
+        let viewcontroller : UIViewController = mainView.instantiateViewController(withIdentifier: "FactoryDetailScene") as UIViewController
+        self.present(viewcontroller, animated: false)
+    }
 }
 
 
@@ -197,12 +198,12 @@ extension GameMarketplaceSceneController: UICollectionViewDataSource {
         if let generator = generatorDict[offerArray[indexPath.row].generatorID] {
             // Check the item selector if Basic or Premium
             if itemTypeSelector.selectedSegmentIndex == 0 {
-                cell.pullMarketplaceFactories(factory: generator, offer: offerArray[indexPath.row])
+                cell.pullMarketplaceFactories(factory: generator, offer: offerArray[indexPath.row], premium: false)
                 cell.configureCell()
                 cell.delegate = self
                 return cell
             } else {
-                cell.pullMarketplaceFactories(factory: generator, offer: offerArray[indexPath.row])
+                cell.pullMarketplaceFactories(factory: generator, offer: offerArray[indexPath.row], premium: true)
                 cell.configureCell()
                 cell.delegate = self
                 return cell

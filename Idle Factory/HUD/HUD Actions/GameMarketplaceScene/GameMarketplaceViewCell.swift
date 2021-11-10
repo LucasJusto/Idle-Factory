@@ -77,7 +77,7 @@ class GameMarketplaceViewCell: UICollectionViewCell {
     /**
      Pull purchasable factories to display on marketplace.
      */
-    func pullMarketplaceFactories(factory: Factory, offer: Offer) {
+    func pullMarketplaceFactories(factory: Factory, offer: Offer, premium: Bool) {
         thisOffer = offer
         thisGenerator = factory
         generatorImage.image = UIImage(named: factory.textureName)
@@ -115,6 +115,7 @@ class GameMarketplaceViewCell: UICollectionViewCell {
             resourceType3.isHidden = true
             resourceQuantityType3.text = ""
         }
+        coinImage.image = UIImage(named: premium ? "Money_premium" : "Coin")
         priceLabel.text = "\(offer.price)"
     }
 }
