@@ -57,6 +57,7 @@ class FactoryDetailSceneController: UIViewController,  UITableViewDataSource, UI
                     resourceArray.append((generator.resourcesArray[n]))
                     price += resourceArray[n].basePrice
                 }
+                self.dismiss(animated: false, completion: nil)
                 DispatchQueue.global().async {
                     if(GameScene.user!.mainCurrency >= price){
                         CKRepository.storeNewGenerator(userID: GameScene.user!.id, generator: generator){ record ,error  in

@@ -176,12 +176,12 @@ public class CKRepository {
                                 
                                 let r = Resource(id: rID, basePrice: basePrice, baseQtt: baseQtt, currentLevel: currentLevel, qttPLevel: qttPLevel, type: resourceType, pricePLevelIncreaseTax: pricePLevelIncreaseTax, generatorType: type)
                                 resources.append(r)
-                                semaphore.signal()
                             }
                         }
+                        semaphore.signal()
                     }
-                    
                     semaphore.wait()
+                    
                     if visual == nil {
                         let factory = Factory(id: id, resourcesArray: resources, energy: energy, type: type, texture: texture, position: position, isActive: isActive)
                         generators.append(factory)
@@ -491,9 +491,9 @@ public class CKRepository {
                                 
                                 let r = Resource(id: rID, basePrice: basePrice, baseQtt: baseQtt, currentLevel: currentLevel, qttPLevel: qttPLevel, type: resourceType, pricePLevelIncreaseTax: pricePLevelIncreaseTax, generatorType: type)
                                 resources.append(r)
-                                semaphore.signal()
                             }
                         }
+                        semaphore.signal()
                     }
                     
                     semaphore.wait()

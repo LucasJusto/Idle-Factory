@@ -50,7 +50,7 @@ class UpgradeFactorySceneController: UIViewController,  UITableViewDataSource, U
             let position = factory.position
             factory.position = .none
             factory.isActive = .no
-
+            self.dismiss(animated: false, completion: nil)
             DispatchQueue.global().async {
                 CKRepository.editGenerators(userID: GameScene.user!.id, generators: GameScene.user!.generators) { record, error in
                     

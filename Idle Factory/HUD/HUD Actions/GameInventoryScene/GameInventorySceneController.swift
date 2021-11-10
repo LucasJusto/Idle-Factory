@@ -217,6 +217,7 @@ class GameInventorySceneController: UIViewController {
      */
     @IBAction func confirmQuickSell(_ sender: Any) {
         if let factory = selectedFactory, let factoryIndex = selectedFactoryIndex, let factoryIndex2 = selectedFactoryIndex2 {
+            hideQuickSellModal(status: true)
             DispatchQueue.global().async {
                 let earnings_sell: Double = calculateQuickSell(factory: factory)
                 let semaphore = DispatchSemaphore(value: 0)
@@ -288,6 +289,7 @@ class GameInventorySceneController: UIViewController {
         if let factory = selectedFactory, let factoryIndex = selectedFactoryIndex {
             factory.isActive = .yes
             factory.position = clickedSlotPosition
+            self.dismiss(animated: false, completion: nil)
             DispatchQueue.global().async {
                 CKRepository.editGenerators(userID: GameScene.user!.id, generators: GameScene.user!.generators) { record, error in
                     
