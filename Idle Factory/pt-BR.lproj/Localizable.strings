@@ -51,7 +51,8 @@
 "MyAnnouncesButton" = "Meus anúncios";
 "AboutNewFactoryButton" = "Ver mais";
 
-// Announces
+
+//MARK: - Announces
 "AnnounceHeaderLabel" = "Meus anúncios";
 "AboutAnnounceButton" = "Ver anúncio";
 
@@ -59,6 +60,19 @@
 //MARK: - Upgrade Screen
 "MoveToInventory" = "Mover para o inventário";
 "ChangeFactory" = "Trocar fábrica";
+
+
+//MARK: - WelcomeBack PopUp
+"YouWon" = "Você Ganhou";
+"OutOfTown" = "enquanto esteve longe da cidade";
+"ok" = "Ok!";
 "Price" = "Preço";
 "Cancel" = "Cancelar";
 "Purchase" = "Comprar";
+
+
+//MARK: - NFT Generator PopUp
+"firstLabel" = "Gerar uma Fábrica Premium aleatória vai te custar:";
+"warningLabel" = "*As fábricas Premium possuim vantagens exclusivas nos desafios";
+"cancelButton" = "Cancelar";
+"confirmButton" = "Confirmar";

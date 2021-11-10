@@ -43,14 +43,7 @@ class GameMarketplaceSceneController: UIViewController, NavigationCellDelegate {
     }
     private(set) var generatorDict: [String: Factory] = [:]
     
-    
-    func didButtonPressed() {
-        var mainView: UIStoryboard!
-        mainView = UIStoryboard(name: "FactoryDetailScene", bundle: nil)
-        let viewcontroller : UIViewController = mainView.instantiateViewController(withIdentifier: "FactoryDetailScene") as UIViewController
-        self.present(viewcontroller, animated: false)
-    }
-    
+
     // MARK: - INIT
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -58,12 +51,9 @@ class GameMarketplaceSceneController: UIViewController, NavigationCellDelegate {
         collectionView.dataSource = self
         collectionView.delegate = self
         
-        // Design components
-        mainCurrencyHeaderView.layer.cornerRadius = 10
-        premiumCurrencyHeaderView.layer.cornerRadius = 10
-        sellAItemButton.layer.cornerRadius = 10
-        myAnnouncesButton.layer.cornerRadius = 10
-        
+        loadOutletCustomizations()
+        loadCustomFont()
+
         // Setting text
         marketplaceHeaderLabel.text = NSLocalizedString("MarketplaceHeaderLabel", comment: "")
         itemTypeSelector.setTitle(NSLocalizedString("BasicSelectorItem", comment: ""), forSegmentAt: 0)
@@ -89,6 +79,36 @@ class GameMarketplaceSceneController: UIViewController, NavigationCellDelegate {
                 offer.currencyType == .basic
             })
         })
+    }
+    
+    
+    // MARK: - DESIGN FUNCTIONS
+    /**
+     Load outlet customizations.
+     */
+    func loadOutletCustomizations() {
+        // INVENTORY HEADER
+        mainCurrencyHeaderView.layer.cornerRadius = 10
+        premiumCurrencyHeaderView.layer.cornerRadius = 10
+        
+        // BUTTONS
+        sellAItemButton.layer.cornerRadius = 10
+        myAnnouncesButton.layer.cornerRadius = 10
+    }
+    
+    
+    /**
+     Load custom font to all labels and button text.
+     */
+    func loadCustomFont() {
+        // LABELS
+        marketplaceHeaderLabel.font = UIFont(name: "AustralSlabBlur-Regular", size: 27)
+        mainCurrencyLabel.font = UIFont(name: "AustralSlabBlur-Regular", size: 14)
+        premiumCurrencyLabel.font = UIFont(name: "AustralSlabBlur-Regular", size: 14)
+        
+        // BUTTONS
+        sellAItemButton.titleLabel?.font = UIFont(name: "AustralSlabBlur-Regular", size: 10)
+        myAnnouncesButton.titleLabel?.font = UIFont(name: "AustralSlabBlur-Regular", size: 10)
     }
     
     
@@ -152,6 +172,14 @@ class GameMarketplaceSceneController: UIViewController, NavigationCellDelegate {
         mainCurrencyLabel.text = doubleToString(value: GameScene.user?.mainCurrency ?? 0.0)
         premiumCurrencyLabel.text = doubleToString(value: GameScene.user?.premiumCurrency ?? 0.0)
     }
+    
+    
+    func didButtonPressed() {
+        var mainView: UIStoryboard!
+        mainView = UIStoryboard(name: "FactoryDetailScene", bundle: nil)
+        let viewcontroller : UIViewController = mainView.instantiateViewController(withIdentifier: "FactoryDetailScene") as UIViewController
+        self.present(viewcontroller, animated: false)
+    }
 }
 
 
@@ -164,19 +192,24 @@ extension GameMarketplaceSceneController: UICollectionViewDataSource {
 
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let generator = generatorDict[offerArray[indexPath.row].generatorID]
+        
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Self.factoryID, for: indexPath) as! GameMarketplaceViewCell
-
-        // Check the item selector if Basic or Premium
-        if itemTypeSelector.selectedSegmentIndex == 0 {
-            cell.pullMarketplaceFactories(factory: generator!, offer: offerArray[indexPath.row])
-            cell.configureCell()
-            cell.delegate = self
-            return cell
+        
+        if let generator = generatorDict[offerArray[indexPath.row].generatorID] {
+            // Check the item selector if Basic or Premium
+            if itemTypeSelector.selectedSegmentIndex == 0 {
+                cell.pullMarketplaceFactories(factory: generator, offer: offerArray[indexPath.row], premium: false)
+                cell.configureCell()
+                cell.delegate = self
+                return cell
+            } else {
+                cell.pullMarketplaceFactories(factory: generator, offer: offerArray[indexPath.row], premium: true)
+                cell.configureCell()
+                cell.delegate = self
+                return cell
+            }
         } else {
-            cell.pullMarketplaceFactories(factory: generator!, offer: offerArray[indexPath.row])
-            cell.configureCell()
-            cell.delegate = self
+            cell.hideCell()
             return cell
         }
     }

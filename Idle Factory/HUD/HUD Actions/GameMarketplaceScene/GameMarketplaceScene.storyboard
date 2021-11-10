@@ -169,17 +169,17 @@
                                         </collectionViewFlowLayout>
                                         <cells>
                                             <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="purchasebleFactory_cell" id="HPR-26-3fr" customClass="GameMarketplaceViewCell" customModule="Idle_Factory" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="10" width="131" height="199"/>
+                                                <rect key="frame" x="0.0" y="9.5" width="131" height="200"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="WBj-l3-Jnz">
-                                                    <rect key="frame" x="0.0" y="0.0" width="131" height="199"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="131" height="200"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <subviews>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="auJ-6b-ZqW">
-                                                            <rect key="frame" x="0.0" y="0.0" width="131" height="183"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="131" height="184"/>
                                                             <subviews>
                                                                 <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" alignment="center" spacing="1" translatesAutoresizingMaskIntoConstraints="NO" id="XBS-CF-vpz">
-                                                                    <rect key="frame" x="25" y="121" width="81" height="15"/>
+                                                                    <rect key="frame" x="25" y="122" width="81" height="15"/>
                                                                     <subviews>
                                                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="4k.tv" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="O6R-SW-20A">
                                                                             <rect key="frame" x="0.0" y="0.5" width="12.5" height="14"/>
@@ -217,7 +217,7 @@
                                                                     </constraints>
                                                                 </stackView>
                                                                 <stackView opaque="NO" contentMode="scaleToFill" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="8bK-tZ-fOA">
-                                                                    <rect key="frame" x="17" y="149" width="101" height="18"/>
+                                                                    <rect key="frame" x="17" y="150" width="101" height="18"/>
                                                                     <subviews>
                                                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Coin" translatesAutoresizingMaskIntoConstraints="NO" id="KLN-CC-zsw">
                                                                             <rect key="frame" x="0.0" y="0.0" width="26" height="18"/>
@@ -234,10 +234,10 @@
                                                                         </label>
                                                                     </subviews>
                                                                 </stackView>
-                                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="nmH-60-SgG">
-                                                                    <rect key="frame" x="33.5" y="40" width="64" height="64"/>
+                                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="nmH-60-SgG">
+                                                                    <rect key="frame" x="15.5" y="5" width="100" height="100"/>
                                                                     <constraints>
-                                                                        <constraint firstAttribute="height" constant="64" id="bJl-8a-qcT"/>
+                                                                        <constraint firstAttribute="height" constant="100" id="bJl-8a-qcT"/>
                                                                         <constraint firstAttribute="width" secondItem="nmH-60-SgG" secondAttribute="height" multiplier="1:1" id="p0m-x4-fcQ"/>
                                                                     </constraints>
                                                                 </imageView>
@@ -251,7 +251,7 @@
                                                                 <constraint firstAttribute="bottom" secondItem="8bK-tZ-fOA" secondAttribute="bottom" constant="16" id="QTv-Eb-xHt"/>
                                                                 <constraint firstItem="nmH-60-SgG" firstAttribute="centerX" secondItem="auJ-6b-ZqW" secondAttribute="centerX" id="ST5-Nw-HBU"/>
                                                                 <constraint firstAttribute="trailing" secondItem="8bK-tZ-fOA" secondAttribute="trailing" constant="13" id="Za4-xe-iHf"/>
-                                                                <constraint firstItem="nmH-60-SgG" firstAttribute="top" secondItem="auJ-6b-ZqW" secondAttribute="top" constant="40" id="nyp-kl-Coz"/>
+                                                                <constraint firstItem="nmH-60-SgG" firstAttribute="top" secondItem="auJ-6b-ZqW" secondAttribute="top" constant="5" id="nyp-kl-Coz"/>
                                                                 <constraint firstItem="8bK-tZ-fOA" firstAttribute="top" secondItem="XBS-CF-vpz" secondAttribute="bottom" constant="13" id="onJ-w9-5Kh"/>
                                                                 <constraint firstItem="XBS-CF-vpz" firstAttribute="top" secondItem="nmH-60-SgG" secondAttribute="bottom" constant="17" id="yuW-y3-ETO"/>
                                                             </constraints>
@@ -295,6 +295,7 @@
                                                     <outlet property="resourceType2" destination="1fV-IZ-B9E" id="sG4-qJ-6kz"/>
                                                     <outlet property="resourceType3" destination="CMH-eK-Vb7" id="XjO-TN-s37"/>
                                                     <outlet property="seeMoreButton" destination="Yt5-m7-xqD" id="ZLd-rU-6JZ"/>
+                                                    <outlet property="totalCardView" destination="WBj-l3-Jnz" id="87e-CP-1yq"/>
                                                 </connections>
                                             </collectionViewCell>
                                         </cells>

@@ -22,22 +22,14 @@ class GameShopSceneViewController: UIViewController, NavigationCellDelegate {
     @IBOutlet weak var premiumCurrencyHeaderView: UIView!
     @IBOutlet weak var premiumCurrencyLabel: UILabel!
     
-    @IBOutlet weak var generateNFTButton: UIButton!
+    @IBOutlet weak var generateNFTButton: UIButton! // Check Disclaimer on action function generateNFT(_ sender: Any)
     @IBOutlet weak var openMarketplaceButton: UIButton!
     
     
     // MARK: - CONTROLLERS
     static let factoryID: String = "shopFactory_cell"
     private(set) var basicFactories: [Factory] = []
-    
-    
-    func didButtonPressed() {
-        print(#function)
-        var mainView: UIStoryboard!
-        mainView = UIStoryboard(name: "FactoryDetailScene", bundle: nil)
-        let viewcontroller : UIViewController = mainView.instantiateViewController(withIdentifier: "FactoryDetailScene") as UIViewController
-        self.present(viewcontroller, animated: false)
-    }
+
     
     // MARK: - INIT
     override func viewDidLoad() {
@@ -46,12 +38,8 @@ class GameShopSceneViewController: UIViewController, NavigationCellDelegate {
         collectionView.dataSource = self
         collectionView.delegate = self
         
-        // Design components
-        mainCurrencyHeaderView.layer.cornerRadius = 10
-        premiumCurrencyHeaderView.layer.cornerRadius = 10
-        generateNFTButton.layer.cornerRadius = 10
-        openMarketplaceButton.layer.cornerRadius = 10
-        
+        loadOutletCustomizations()
+        loadCustomFont()
         
         // Setting text
         shopHeaderLabel.text = NSLocalizedString("ShopHeaderLabel", comment: "")
@@ -68,6 +56,36 @@ class GameShopSceneViewController: UIViewController, NavigationCellDelegate {
     }
     
     
+    // MARK: - DESIGN FUNCTIONS
+    /**
+     Load outlet customizations.
+     */
+    func loadOutletCustomizations() {
+        // INVENTORY HEADER
+        mainCurrencyHeaderView.layer.cornerRadius = 10
+        premiumCurrencyHeaderView.layer.cornerRadius = 10
+        
+        // BUTTONS
+        generateNFTButton.layer.cornerRadius = 10
+        openMarketplaceButton.layer.cornerRadius = 10
+    }
+    
+    
+    /**
+     Load custom font to all labels and button text.
+     */
+    func loadCustomFont() {
+        // LABELS
+        shopHeaderLabel.font = UIFont(name: "AustralSlabBlur-Regular", size: 27)
+        mainCurrencyLabel.font = UIFont(name: "AustralSlabBlur-Regular", size: 14)
+        premiumCurrencyLabel.font = UIFont(name: "AustralSlabBlur-Regular", size: 14)
+        
+        // BUTTONS
+        generateNFTButton.titleLabel?.font = UIFont(name: "AustralSlabBlur-Regular", size: 10)
+        openMarketplaceButton.titleLabel?.font = UIFont(name: "AustralSlabBlur-Regular", size: 10)
+    }
+    
+    
     // MARK: - ACTIONS
     /**
      Close Shop scene.
@@ -79,9 +97,13 @@ class GameShopSceneViewController: UIViewController, NavigationCellDelegate {
     
     /**
      Generate a random NFT generator.
+     DISCLAIMER: It's currently being used to generate premium factory. NOT real NFT.
      */
     @IBAction func generateNFT(_ sender: Any) {
-        
+        var mainView: UIStoryboard!
+        mainView = UIStoryboard(name: "GenerateNFTConfirmation", bundle: nil)
+        let viewcontroller : UIViewController = mainView.instantiateViewController(withIdentifier: "PopUpConfirmation") as UIViewController
+        self.present(viewcontroller, animated: false)
     }
     
     
@@ -96,16 +118,26 @@ class GameShopSceneViewController: UIViewController, NavigationCellDelegate {
     }
     
     
-    
     func presentView(viewController: UIViewController){
         self.present(viewController, animated: false)
     }
+    
+    
     /**
      Load player actual currencies value.
      */
     func loadPlayerCurrencies() {
         mainCurrencyLabel.text = doubleToString(value: GameScene.user?.mainCurrency ?? 0.0)
         premiumCurrencyLabel.text = doubleToString(value: GameScene.user?.premiumCurrency ?? 0.0)
+    }
+    
+    
+    func didButtonPressed() {
+        print(#function)
+        var mainView: UIStoryboard!
+        mainView = UIStoryboard(name: "FactoryDetailScene", bundle: nil)
+        let viewcontroller : UIViewController = mainView.instantiateViewController(withIdentifier: "FactoryDetailScene") as UIViewController
+        self.present(viewcontroller, animated: false)
     }
 }
 

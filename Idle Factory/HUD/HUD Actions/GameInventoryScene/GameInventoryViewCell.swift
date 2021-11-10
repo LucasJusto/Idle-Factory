@@ -79,7 +79,7 @@ class GameInventoryViewCell: UICollectionViewCell {
             quantityType3.text = "\(resources[2].baseQtt)"
 
         default:
-            emptySlot.isHidden = true
+            emptySlot.isHidden = false
             factoryTexture.isHidden = true
             factoryTextureImage.isHidden = true
             resourceType1.isHidden = true

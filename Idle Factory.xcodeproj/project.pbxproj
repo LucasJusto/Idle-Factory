@@ -51,6 +51,10 @@
 		55BBAC16271F404A00A86A47 /* GIFPlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55BBAC13271F404A00A86A47 /* GIFPlayerView.swift */; };
 		55BBAC17271F404A00A86A47 /* UIImageViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55BBAC14271F404A00A86A47 /* UIImageViewExtension.swift */; };
 		55BD52A92718BC2C0057C7C0 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55BD52A82718BC2C0057C7C0 /* User.swift */; };
+		F8BF29E9273AECE6009152CA /* WelcomeBackViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8BF29E8273AECE6009152CA /* WelcomeBackViewController.swift */; };
+		F8BF29ED273AED58009152CA /* WelcomeBack.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F8BF29EC273AED58009152CA /* WelcomeBack.storyboard */; };
+		F8CD9B54273C4007002349B1 /* GenerateNFTConfirmation.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F8CD9B53273C4007002349B1 /* GenerateNFTConfirmation.storyboard */; };
+		F8CD9B57273C4574002349B1 /* GenerateNFTConfirmationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8CD9B56273C4574002349B1 /* GenerateNFTConfirmationViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -104,6 +108,10 @@
 		55BBAC13271F404A00A86A47 /* GIFPlayerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GIFPlayerView.swift; sourceTree = "<group>"; };
 		55BBAC14271F404A00A86A47 /* UIImageViewExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIImageViewExtension.swift; sourceTree = "<group>"; };
 		55BD52A82718BC2C0057C7C0 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		F8BF29E8273AECE6009152CA /* WelcomeBackViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeBackViewController.swift; sourceTree = "<group>"; };
+		F8BF29EC273AED58009152CA /* WelcomeBack.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = WelcomeBack.storyboard; sourceTree = "<group>"; };
+		F8CD9B53273C4007002349B1 /* GenerateNFTConfirmation.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = GenerateNFTConfirmation.storyboard; sourceTree = "<group>"; };
+		F8CD9B56273C4574002349B1 /* GenerateNFTConfirmationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenerateNFTConfirmationViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -158,6 +166,7 @@
 		2BBEC8D62733097700D0F671 /* GameShopScene */ = {
 			isa = PBXGroup;
 			children = (
+				F8CD9B55273C453E002349B1 /* Generate_NFT_Button */,
 				2BBEC8D42733097000D0F671 /* GameShopScene.storyboard */,
 				2BBEC8D727330B8E00D0F671 /* GameShopViewCell.swift */,
 				2BBEC8D927330BA700D0F671 /* GameShopSceneViewController.swift */,
@@ -241,6 +250,7 @@
 				553E7F73272099DB00165C8E /* GameSave.swift */,
 				48A65970271F5F470021CD52 /* Localizable.strings */,
 				55439BC62721F23D00F69461 /* DateApi.swift */,
+				F8BF29E7273AEC9C009152CA /* PopUp */,
 			);
 			path = "Idle Factory";
 			sourceTree = "<group>";
@@ -289,6 +299,24 @@
 				55BBAC14271F404A00A86A47 /* UIImageViewExtension.swift */,
 			);
 			path = "GIF Extension";
+			sourceTree = "<group>";
+		};
+		F8BF29E7273AEC9C009152CA /* PopUp */ = {
+			isa = PBXGroup;
+			children = (
+				F8BF29E8273AECE6009152CA /* WelcomeBackViewController.swift */,
+				F8BF29EC273AED58009152CA /* WelcomeBack.storyboard */,
+			);
+			path = PopUp;
+			sourceTree = "<group>";
+		};
+		F8CD9B55273C453E002349B1 /* Generate_NFT_Button */ = {
+			isa = PBXGroup;
+			children = (
+				F8CD9B53273C4007002349B1 /* GenerateNFTConfirmation.storyboard */,
+				F8CD9B56273C4574002349B1 /* GenerateNFTConfirmationViewController.swift */,
+			);
+			path = Generate_NFT_Button;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -352,11 +380,13 @@
 			files = (
 				487A19FB2715504000723065 /* Main.storyboard in Resources */,
 				2BD3FBF32728777400B4B4E6 /* GameChallengeScene.storyboard in Resources */,
+				F8BF29ED273AED58009152CA /* WelcomeBack.storyboard in Resources */,
 				48A6596E271F5F470021CD52 /* Localizable.strings in Resources */,
 				487A19FD2715504300723065 /* Assets.xcassets in Resources */,
 				487A1A002715504300723065 /* LaunchScreen.storyboard in Resources */,
 				2BD3FBEF27285ED200B4B4E6 /* GameInventoryScene.storyboard in Resources */,
 				2B9C314B271F50DD008A7676 /* Austral-Slab_Blur-Regular.otf in Resources */,
+				F8CD9B54273C4007002349B1 /* GenerateNFTConfirmation.storyboard in Resources */,
 				2BBEC8D52733097000D0F671 /* GameShopScene.storyboard in Resources */,
 				2BD3FBF727287CBE00B4B4E6 /* UpgradeFactoryScene.storyboard in Resources */,
 				2BD3FBF52728778500B4B4E6 /* GameMarketplaceScene.storyboard in Resources */,
@@ -388,10 +418,12 @@
 				55439BC72721F23D00F69461 /* DateApi.swift in Sources */,
 				2BD3FBF927287D1300B4B4E6 /* UpgradeFactorySceneController.swift in Sources */,
 				2B5B37512730A9A800277739 /* GameMarketplaceViewCell.swift in Sources */,
+				F8CD9B57273C4574002349B1 /* GenerateNFTConfirmationViewController.swift in Sources */,
 				55BBAC15271F404A00A86A47 /* UIImageExtension.swift in Sources */,
 				487A1A072715516900723065 /* Camera.swift in Sources */,
 				487A19F62715504000723065 /* GameScene.swift in Sources */,
 				48A9AC4C273314BD007C5197 /* MarketPlaceOffer.swift in Sources */,
+				F8BF29E9273AECE6009152CA /* WelcomeBackViewController.swift in Sources */,
 				487A19F82715504000723065 /* GameViewController.swift in Sources */,
 				55A0B4B027330B2000161FE8 /* FactoryDetailSceneController.swift in Sources */,
 				55BD52A92718BC2C0057C7C0 /* User.swift in Sources */,

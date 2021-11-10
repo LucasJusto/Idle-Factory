@@ -14,6 +14,7 @@ import UIKit
 class GameMarketplaceViewCell: UICollectionViewCell {
     
     // MARK: - GENERATOR OUTLETS
+    @IBOutlet weak var totalCardView: UIView!
     @IBOutlet weak var cardView: UIView!
     
     var delegate: NavigationCellDelegate?
@@ -43,12 +44,32 @@ class GameMarketplaceViewCell: UICollectionViewCell {
     var thisGenerator: Factory? = nil
     var thisOffer: Offer? = nil
     
+    
+    /**
+     Hide the card if the request to database returns nothing.
+     */
+    func hideCell() {
+        totalCardView.isHidden = true
+    }
+    
     /**
      Configure cell design.
      */
     func configureCell() {
+        totalCardView.isHidden = false
+
+        // DESIGN
         cardView.layer.cornerRadius = 20
         seeMoreButton.layer.cornerRadius = 10
+        
+        // FONT
+        resourceQuantityType1.font = UIFont(name: "AustralSlabBlur-Regular", size: 8)
+        resourceQuantityType2.font = UIFont(name: "AustralSlabBlur-Regular", size: 8)
+        resourceQuantityType3.font = UIFont(name: "AustralSlabBlur-Regular", size: 8)
+        priceLabel.font = UIFont(name: "AustralSlabBlur-Regular", size: 14)
+        seeMoreButton.titleLabel?.font = UIFont(name: "AustralSlabBlur-Regular", size: 10)
+
+        
         seeMoreButton.setTitle(NSLocalizedString("AboutNewFactoryButton", comment: ""), for: .normal)
     }
     
@@ -56,7 +77,7 @@ class GameMarketplaceViewCell: UICollectionViewCell {
     /**
      Pull purchasable factories to display on marketplace.
      */
-    func pullMarketplaceFactories(factory: Factory, offer: Offer) {
+    func pullMarketplaceFactories(factory: Factory, offer: Offer, premium: Bool) {
         thisOffer = offer
         thisGenerator = factory
         generatorImage.image = UIImage(named: factory.textureName)
@@ -94,7 +115,7 @@ class GameMarketplaceViewCell: UICollectionViewCell {
             resourceType3.isHidden = true
             resourceQuantityType3.text = ""
         }
-//        coinImage.image =
+        coinImage.image = UIImage(named: premium ? "Money_premium" : "Coin")
         priceLabel.text = "\(offer.price)"
     }
 }
