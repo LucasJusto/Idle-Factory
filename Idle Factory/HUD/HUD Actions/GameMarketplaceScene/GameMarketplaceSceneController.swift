@@ -109,6 +109,10 @@ class GameMarketplaceSceneController: UIViewController, NavigationCellDelegate {
         // BUTTONS
         sellAItemButton.titleLabel?.font = UIFont(name: "AustralSlabBlur-Regular", size: 10)
         myAnnouncesButton.titleLabel?.font = UIFont(name: "AustralSlabBlur-Regular", size: 10)
+        
+        // UI SEGMENTED CONTROL
+        let attr = NSDictionary(object: UIFont(name: "AustralSlabBlur-Regular", size: 10)!, forKey: NSAttributedString.Key.font as NSCopying)
+        itemTypeSelector.setTitleTextAttributes(attr as? [NSAttributedString.Key: Any] , for: .normal)
     }
     
     
