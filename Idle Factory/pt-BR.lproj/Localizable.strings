@@ -49,7 +49,8 @@
 "MyAnnouncesButton" = "Meus anúncios";
 "AboutNewFactoryButton" = "Ver mais";
 
-// Announces
+
+//MARK: - Announces
 "AnnounceHeaderLabel" = "Meus anúncios";
 "AboutAnnounceButton" = "Ver anúncio";
 
@@ -57,6 +58,12 @@
 //MARK: - Upgrade Screen
 "MoveToInventory" = "Mover para o inventário";
 "ChangeFactory" = "Trocar fábrica";
+
+
+//MARK: - WelcomeBack PopUp
+"YouWon" = "Você Ganhou";
+"OutOfTown" = "enquanto esteve fora da cidade";
+"ok" = "Ok!";
 "Price" = "Preço";
 "Cancel" = "Cancelar";
 "Purchase" = "Comprar";
