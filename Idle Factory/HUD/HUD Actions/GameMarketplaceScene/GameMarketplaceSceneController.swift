@@ -191,19 +191,24 @@ extension GameMarketplaceSceneController: UICollectionViewDataSource {
 
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let generator = generatorDict[offerArray[indexPath.row].generatorID]
+        
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Self.factoryID, for: indexPath) as! GameMarketplaceViewCell
-
-        // Check the item selector if Basic or Premium
-        if itemTypeSelector.selectedSegmentIndex == 0 {
-            cell.pullMarketplaceFactories(factory: generator!, offer: offerArray[indexPath.row])
-            cell.configureCell()
-            cell.delegate = self
-            return cell
+        
+        if let generator = generatorDict[offerArray[indexPath.row].generatorID] {
+            // Check the item selector if Basic or Premium
+            if itemTypeSelector.selectedSegmentIndex == 0 {
+                cell.pullMarketplaceFactories(factory: generator, offer: offerArray[indexPath.row])
+                cell.configureCell()
+                cell.delegate = self
+                return cell
+            } else {
+                cell.pullMarketplaceFactories(factory: generator, offer: offerArray[indexPath.row])
+                cell.configureCell()
+                cell.delegate = self
+                return cell
+            }
         } else {
-            cell.pullMarketplaceFactories(factory: generator!, offer: offerArray[indexPath.row])
-            cell.configureCell()
-            cell.delegate = self
+            cell.hideCell()
             return cell
         }
     }

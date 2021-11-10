@@ -295,6 +295,7 @@
                                                     <outlet property="resourceType2" destination="1fV-IZ-B9E" id="sG4-qJ-6kz"/>
                                                     <outlet property="resourceType3" destination="CMH-eK-Vb7" id="XjO-TN-s37"/>
                                                     <outlet property="seeMoreButton" destination="Yt5-m7-xqD" id="ZLd-rU-6JZ"/>
+                                                    <outlet property="totalCardView" destination="WBj-l3-Jnz" id="87e-CP-1yq"/>
                                                 </connections>
                                             </collectionViewCell>
                                         </cells>

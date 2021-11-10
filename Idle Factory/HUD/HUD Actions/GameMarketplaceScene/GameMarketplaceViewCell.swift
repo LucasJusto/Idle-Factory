@@ -14,6 +14,7 @@ import UIKit
 class GameMarketplaceViewCell: UICollectionViewCell {
     
     // MARK: - GENERATOR OUTLETS
+    @IBOutlet weak var totalCardView: UIView!
     @IBOutlet weak var cardView: UIView!
     
     var delegate: NavigationCellDelegate?
@@ -43,10 +44,20 @@ class GameMarketplaceViewCell: UICollectionViewCell {
     var thisGenerator: Factory? = nil
     var thisOffer: Offer? = nil
     
+    
+    /**
+     Hide the card if the request to database returns nothing.
+     */
+    func hideCell() {
+        totalCardView.isHidden = true
+    }
+    
     /**
      Configure cell design.
      */
     func configureCell() {
+        totalCardView.isHidden = false
+
         // DESIGN
         cardView.layer.cornerRadius = 20
         seeMoreButton.layer.cornerRadius = 10
