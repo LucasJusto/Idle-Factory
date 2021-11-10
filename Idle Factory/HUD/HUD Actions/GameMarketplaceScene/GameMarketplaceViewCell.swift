@@ -16,6 +16,7 @@ class GameMarketplaceViewCell: UICollectionViewCell {
     // MARK: - GENERATOR OUTLETS
     @IBOutlet weak var cardView: UIView!
     
+    var delegate: NavigationCellDelegate?
     // Generator Image
     @IBOutlet weak var generatorImage: UIImageView!
     
@@ -32,6 +33,15 @@ class GameMarketplaceViewCell: UICollectionViewCell {
     // Button
     @IBOutlet weak var seeMoreButton: UIButton!
     
+    @IBAction func seeMoreAction(_ sender: Any) {
+        FactoryDetailSceneController.isBlue = false
+        FactoryDetailSceneController.generator = thisGenerator
+        FactoryDetailSceneController.offer = thisOffer
+        delegate?.didButtonPressed()
+    }
+    
+    var thisGenerator: Factory? = nil
+    var thisOffer: Offer? = nil
     
     /**
      Configure cell design.
@@ -47,6 +57,8 @@ class GameMarketplaceViewCell: UICollectionViewCell {
      Pull purchasable factories to display on marketplace.
      */
     func pullMarketplaceFactories(factory: Factory, offer: Offer) {
+        thisOffer = offer
+        thisGenerator = factory
         generatorImage.image = UIImage(named: factory.textureName)
         let resources = factory.resourcesArray
         switch resources.count {
@@ -85,4 +97,9 @@ class GameMarketplaceViewCell: UICollectionViewCell {
 //        coinImage.image =
         priceLabel.text = "\(offer.price)"
     }
+}
+
+
+protocol NavigationCellDelegate {
+    func didButtonPressed()
 }

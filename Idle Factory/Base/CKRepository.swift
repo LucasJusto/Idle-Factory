@@ -7,6 +7,7 @@
 
 import CloudKit
 import UIKit
+import SwiftUI
 
 public class CKRepository {
     
@@ -30,6 +31,79 @@ public class CKRepository {
                 }
             }
         }
+    }
+    
+    static func currentUserQuickSave(user: User, userGenerators: [Factory], deletedGenerators: [Factory], completion: (([CKRecord]?, [CKRecord.ID]?, Error?) -> Void)? = nil) {
+        let publicDB = container.publicCloudDatabase
+        var records: [CKRecord] = [CKRecord]()
+        var deleteRecords: [CKRecord.ID] = [CKRecord.ID]()
+        
+        //edit user
+        let userRecord = CKRecord(recordType: UsersTable.recordType.description, recordID: CKRecord.ID(recordName: user.id))
+        userRecord.setObject(user.name as CKRecordValue?, forKey: UsersTable.name.description)
+        userRecord.setObject(user.premiumCurrency as CKRecordValue?, forKey: UsersTable.premiumCurrency.description)
+        userRecord.setObject(user.mainCurrency as CKRecordValue?, forKey: UsersTable.mainCurrency.description)
+        userRecord.setObject(user.timeLeftApp as CKRecordValue?, forKey: UsersTable.timeLeftApp.description)
+        records.append(userRecord)
+        
+        //edit generators
+        for g in userGenerators {
+            if let gID = g.id {
+                let recordG = CKRecord(recordType: GeneratorTable.recordType.description, recordID: CKRecord.ID(recordName: gID))
+                recordG.setObject(user.id as CKRecordValue?, forKey: GeneratorTable.userID.description)
+                recordG.setObject(g.energy as CKRecordValue?, forKey: GeneratorTable.energy.description)
+                recordG.setObject(g.isActive.key as CKRecordValue?, forKey: GeneratorTable.isActive.description)
+                recordG.setObject(g.position.key as CKRecordValue?, forKey: GeneratorTable.position.description)
+                recordG.setObject(g.type.key as CKRecordValue?, forKey: GeneratorTable.type.description)
+                if g.type == .Basic {
+                    recordG.setObject(g.textureName as CKRecordValue?, forKey: GeneratorTable.texture.description)
+                }
+                
+                records.append(recordG)
+                
+                //edit resources
+                for r in g.resourcesArray {
+                    if let rID = r.id {
+                        let recordR = CKRecord(recordType: ResourceTable.recordType.description, recordID: CKRecord.ID(recordName: rID))
+                        recordR.setObject(gID as CKRecordValue?, forKey: ResourceTable.generatorID.description)
+                        recordR.setObject(r.qttPLevel as CKRecordValue?, forKey: ResourceTable.qttPLevel.description)
+                        recordR.setObject(r.baseQtt as CKRecordValue?, forKey: ResourceTable.baseQtt.description)
+                        recordR.setObject(r.basePrice as CKRecordValue?, forKey: ResourceTable.basePrice.description)
+                        recordR.setObject(r.type.key as CKRecordValue?, forKey: ResourceTable.type.description)
+                        recordR.setObject(r.pricePLevelIncreaseTax as CKRecordValue?, forKey: ResourceTable.pricePLevelIncreaseTax.description)
+                        recordR.setObject(r.currentLevel as CKRecordValue?, forKey: ResourceTable.level.description)
+                        
+                        records.append(recordR)
+                    }
+                }
+            }
+        }
+        
+        //delete generators
+        for g in deletedGenerators {
+            if let gID = g.id {
+                deleteRecords.append(CKRecord.ID(recordName: gID))
+                
+                //delete resources
+                for r in g.resourcesArray {
+                    if let rID = r.id {
+                        deleteRecords.append(CKRecord.ID(recordName: rID))
+                    }
+                }
+            }
+        }
+        
+        let operation = CKModifyRecordsOperation(recordsToSave: records, recordIDsToDelete: deleteRecords)
+        operation.savePolicy = .changedKeys
+        operation.modifyRecordsCompletionBlock = { savedRecords, deletedRecords, error in
+            if let ckError = error as? CKError {
+                CKRepository.errorAlertHandler(CKErrorCode: ckError.code)
+            }
+            if let completion = completion {
+                completion(savedRecords, deletedRecords, error)
+            }
+        }
+        publicDB.add(operation)
     }
     
     static func storeUserData(id: String, name: String?, mainCurrency: Double?, premiumCurrency: Double?, timeLeftApp: Double?, completion: ((CKRecord?, Error?) -> Void)? = nil){
@@ -112,7 +186,6 @@ public class CKRepository {
         let publicDB = container.publicCloudDatabase
         var generators: [Factory] = []
         let semaphore = DispatchSemaphore(value: 0)
-        
         let generatorsPredicate = NSPredicate(format: "\(GeneratorTable.userID.description) == %@", userID)
         let generatorsQuery = CKQuery(recordType: GeneratorTable.recordType.description, predicate: generatorsPredicate)
         publicDB.perform(generatorsQuery, inZoneWith: nil) { results, error in
@@ -126,6 +199,33 @@ public class CKRepository {
                     let energy: Int = generator.value(forKey: GeneratorTable.energy.description) as? Int ?? 0
                     let typeString: String = generator.value(forKey: GeneratorTable.type.description) as? String ?? ""
                     let type: FactoryType = FactoryType.getFactoryType(factoryType: typeString)
+                    var visual: Visual? = nil
+                    if type == .NFT {
+                        do {
+                            let topColorData = generator.value(forKey: GeneratorTable.topColor.description) as? Data
+                            let topColor = try NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(topColorData!) as? UIColor
+                            let bottomColorData = generator.value(forKey: GeneratorTable.bottomColor.description) as? Data
+                            let bottomColor = try NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(bottomColorData!) as? UIColor
+                            
+                            visual = Visual(bottomColor: bottomColor!, topColor: topColor!)
+                            
+                            let bottomString = generator.value(forKey: GeneratorTable.visualBottom.description) as? [String] ?? [""]
+                            var bottomComponents: [BaseSmallRelatedPositions] = [BaseSmallRelatedPositions]()
+                            for componentString in bottomString {
+                                bottomComponents.append(BaseSmallRelatedPositions.getComponent(key: componentString))
+                            }
+                            visual?.bottom = bottomComponents
+                            
+                            let topString = generator.value(forKey: GeneratorTable.visualTop.description) as? [String] ?? [""]
+                            var topComponents: [BaseBigRelatedPositions] = [BaseBigRelatedPositions]()
+                            for componentString in topString {
+                                topComponents.append(BaseBigRelatedPositions.getComponent(key: componentString))
+                            }
+                            visual?.top = topComponents
+                        } catch {
+                            print("Error unarchive")
+                        }
+                    }
                     let positionString: String = generator.value(forKey: GeneratorTable.position.description) as? String ?? ""
                     let position: GeneratorPositions = GeneratorPositions.getGeneratorPositions(position: positionString)
                     let isActiveString: String = generator.value(forKey: GeneratorTable.isActive.description) as? String ?? ""
@@ -155,8 +255,13 @@ public class CKRepository {
                     }
                     
                     semaphore.wait()
-                    let factory = Factory(id: id, resourcesArray: resources, energy: energy, type: type, texture: texture, position: position, isActive: isActive)
-                    generators.append(factory)
+                    if visual == nil {
+                        let factory = Factory(id: id, resourcesArray: resources, energy: energy, type: type, texture: texture, position: position, isActive: isActive)
+                        generators.append(factory)
+                    } else {
+                        let factory = Factory(id: id, resourcesArray: resources, energy: energy, type: type, texture: texture, position: position, isActive: isActive, visual: visual!)
+                        generators.append(factory)
+                    }
                 }
             }
             completion(generators)
@@ -173,6 +278,25 @@ public class CKRepository {
         record.setObject(generator.isActive.key as CKRecordValue?, forKey: GeneratorTable.isActive.description)
         record.setObject(generator.type.key as CKRecordValue?, forKey: GeneratorTable.type.description)
         record.setObject(generator.textureName as CKRecordValue?, forKey: GeneratorTable.texture.description)
+        if generator.type == .NFT {
+            let bottomString = generator.visual?.bottom.map({ bottom in
+                bottom.description
+            })
+            let topString = generator.visual?.top.map({ top in
+                top.description
+            })
+            record.setObject(bottomString as CKRecordValue?, forKey: GeneratorTable.visualBottom.description)
+            record.setObject(topString as CKRecordValue?, forKey: GeneratorTable.visualTop.description)
+            do {
+                let bottomColor = try NSKeyedArchiver.archivedData(withRootObject: generator.visual!.bottomColor, requiringSecureCoding: false) as NSData?
+                record.setObject(bottomColor as NSData?, forKey: GeneratorTable.bottomColor.description)
+                
+                let topColor = try NSKeyedArchiver.archivedData(withRootObject: generator.visual!.topColor, requiringSecureCoding: false) as NSData?
+                record.setObject(topColor, forKey: GeneratorTable.topColor.description)
+            } catch {
+                print("Error UserDefaults")
+            }
+        }
         
         publicDB.save(record) { savedRecord, error in
             if let ckError = error as? CKError {
@@ -314,7 +438,7 @@ public class CKRepository {
         
         let predicate = NSPredicate(format: "\(MarketTable.buyerID.description) == %@", "none")
         let query = CKQuery(recordType: MarketTable.recordType.description, predicate: predicate)
-                
+        
         publicDB.perform(query, inZoneWith: nil) { results, error in
             if let ckError = error as? CKError {
                 CKRepository.errorAlertHandler(CKErrorCode: ckError.code)
@@ -384,6 +508,33 @@ public class CKRepository {
                     let energy: Int = generator.value(forKey: GeneratorTable.energy.description) as? Int ?? 0
                     let typeString: String = generator.value(forKey: GeneratorTable.type.description) as? String ?? ""
                     let type: FactoryType = FactoryType.getFactoryType(factoryType: typeString)
+                    var visual: Visual? = nil
+                    if type == .NFT {
+                        do {
+                            let topColorData = generator.value(forKey: GeneratorTable.topColor.description) as? Data
+                            let topColor = try NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(topColorData!) as? UIColor
+                            let bottomColorData = generator.value(forKey: GeneratorTable.bottomColor.description) as? Data
+                            let bottomColor = try NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(bottomColorData!) as? UIColor
+                            
+                            visual = Visual(bottomColor: bottomColor!, topColor: topColor!)
+                            
+                            let bottomString = generator.value(forKey: GeneratorTable.visualBottom.description) as? [String] ?? [""]
+                            var bottomComponents: [BaseSmallRelatedPositions] = [BaseSmallRelatedPositions]()
+                            for componentString in bottomString {
+                                bottomComponents.append(BaseSmallRelatedPositions.getComponent(key: componentString))
+                            }
+                            visual?.bottom = bottomComponents
+                            
+                            let topString = generator.value(forKey: GeneratorTable.visualTop.description) as? [String] ?? [""]
+                            var topComponents: [BaseBigRelatedPositions] = [BaseBigRelatedPositions]()
+                            for componentString in topString {
+                                topComponents.append(BaseBigRelatedPositions.getComponent(key: componentString))
+                            }
+                            visual?.top = topComponents
+                        } catch {
+                            print("Error unarchive")
+                        }
+                    }
                     let positionString: String = generator.value(forKey: GeneratorTable.position.description) as? String ?? ""
                     let position: GeneratorPositions = GeneratorPositions.getGeneratorPositions(position: positionString)
                     let isActiveString: String = generator.value(forKey: GeneratorTable.isActive.description) as? String ?? ""
@@ -413,8 +564,13 @@ public class CKRepository {
                     }
                     
                     semaphore.wait()
-                    let factory = Factory(id: id, resourcesArray: resources, energy: energy, type: type, texture: texture, position: position, isActive: isActive)
-                    generators.append(factory)
+                    if visual == nil {
+                        let factory = Factory(id: id, resourcesArray: resources, energy: energy, type: type, texture: texture, position: position, isActive: isActive)
+                        generators.append(factory)
+                    } else {
+                        let factory = Factory(id: id, resourcesArray: resources, energy: energy, type: type, texture: texture, position: position, isActive: isActive, visual: visual!)
+                        generators.append(factory)
+                    }
                 }
             }
             completion(generators)
@@ -600,7 +756,7 @@ enum MarketTable: CustomStringConvertible {
 }
 
 enum GeneratorTable: CustomStringConvertible {
-    case recordType, energy, isActive, type, userID, position, texture, recordName
+    case recordType, energy, isActive, type, userID, position, texture, visualBottom, visualTop, bottomColor, topColor, recordName
     
     var description: String {
         switch self {
@@ -618,6 +774,14 @@ enum GeneratorTable: CustomStringConvertible {
                 return "position"
             case .texture:
                 return "texture"
+            case .visualBottom:
+                return "visualBottom"
+            case .visualTop:
+                return "visualTop"
+            case .bottomColor:
+                return "bottomColor"
+            case .topColor:
+                return "topColor"
             case .recordName:
                 return "recordName"
         }

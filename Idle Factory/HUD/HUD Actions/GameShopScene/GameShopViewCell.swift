@@ -32,7 +32,9 @@ class GameShopViewCell: UICollectionViewCell {
     // Button
     @IBOutlet weak var seeMoreButton: UIButton!
     
+    var thisGenerator: Factory? = nil
     
+    var delegate: NavigationCellDelegate?
     /**
      Configure cell design.
      */
@@ -47,6 +49,7 @@ class GameShopViewCell: UICollectionViewCell {
      Pull purchasable factories to display on marketplace.
      */
     func pullShopFactories(factory: Factory) {
+        thisGenerator = factory
         generatorImage.image = UIImage(named: factory.textureName)
         let resources = factory.resourcesArray
         
@@ -93,8 +96,10 @@ class GameShopViewCell: UICollectionViewCell {
     }
     
     
-    #warning("BOTÃO SEE MORE")
     @IBAction func seeMore(_ sender: Any) {
+        FactoryDetailSceneController.isBlue = true
+        FactoryDetailSceneController.generator = thisGenerator
+        delegate?.didButtonPressed()
     }
     
     
