@@ -65,3 +65,11 @@
 "Price" = "Price";
 "Cancel" = "Cancel";
 "Purchase" = "Purchase";
+
+
+//MARK: - NFT Generator PopUp
+
+"firstLabel" = "Generating a random Premium Factory will cost you:";
+"warningLabel" = "*Premium factories have unique advantages in challenges";
+"cancelButton" = "Cancel";
+"confirmButton" = "Confirm";

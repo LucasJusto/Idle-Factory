@@ -100,7 +100,10 @@ class GameShopSceneViewController: UIViewController, NavigationCellDelegate {
      DISCLAIMER: It's currently being used to generate premium factory. NOT real NFT.
      */
     @IBAction func generateNFT(_ sender: Any) {
-        
+        var mainView: UIStoryboard!
+        mainView = UIStoryboard(name: "GenerateNFTConfirmation", bundle: nil)
+        let viewcontroller : UIViewController = mainView.instantiateViewController(withIdentifier: "PopUpConfirmation") as UIViewController
+        self.present(viewcontroller, animated: false)
     }
     
     
