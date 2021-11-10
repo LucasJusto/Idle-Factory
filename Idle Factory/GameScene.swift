@@ -95,6 +95,8 @@ class GameScene: SKScene {
         
         startIncrement()
         
+        
+        
 //        for n in GameScene.user!.generators {
 //            CKRepository.deleteGeneratorByID(generatorID: n.id!){ _ in
 //                
@@ -117,6 +119,16 @@ class GameScene: SKScene {
 
     }
     
+    func snapshot() -> UIImage {
+        UIGraphicsBeginImageContextWithOptions((self.scene?.view?.bounds.size)!, false, UIScreen.main.scale)
+        //self.view?.layer.render(in: UIGraphicsGetCurrentContext()!)
+        self.view?.drawHierarchy(in: (self.scene?.view!.bounds)!, afterScreenUpdates: true)
+        let snapShotImage = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        UIImageWriteToSavedPhotosAlbum(snapShotImage!, nil, nil, nil)
+        return snapShotImage!
+    }
+
     
     // MARK: - TOUCH SCREEN EVENTS
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -385,7 +397,7 @@ class GameScene: SKScene {
      Display in-game shop.
      */
     func displayShop() {
-        
+        snapshot()
         let viewController = UIApplication.shared.windows.first!.rootViewController as! GameViewController
         viewController.displayShop()
     }
