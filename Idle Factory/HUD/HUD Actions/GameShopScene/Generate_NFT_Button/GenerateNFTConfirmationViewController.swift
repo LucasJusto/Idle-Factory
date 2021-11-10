@@ -31,11 +31,11 @@ class GenerateNFTConfirmationViewController: UIViewController {
         
         cancelButton.layer.cornerRadius = 10.5
         cancelButton.setTitle(NSLocalizedString("cancelButton", comment: ""), for: .normal)
-        cancelButton.titleLabel?.font = UIFont(name: "AustralSlabBlur-Regular", size: 10)
+        cancelButton.titleLabel?.font = UIFont(name: "AustralSlabBlur-Regular", size: 13)
         
         confirmButton.layer.cornerRadius = 10.5
         confirmButton.setTitle(NSLocalizedString("confirmButton", comment: ""), for: .normal)
-        confirmButton.titleLabel?.font = UIFont(name: "AustralSlabBlur-Regular", size: 10)
+        confirmButton.titleLabel?.font = UIFont(name: "AustralSlabBlur-Regular", size: 13)
         
     }
     @IBAction func cancelAction(_ sender: Any) {
