@@ -98,10 +98,9 @@ public class CKRepository {
         operation.modifyRecordsCompletionBlock = { savedRecords, deletedRecords, error in
             if let ckError = error as? CKError {
                 CKRepository.errorAlertHandler(CKErrorCode: ckError.code)
-            } else {
-                if let completion = completion {
-                    completion(savedRecords, deletedRecords, error)
-                }
+            }
+            if let completion = completion {
+                completion(savedRecords, deletedRecords, error)
             }
         }
         publicDB.add(operation)
