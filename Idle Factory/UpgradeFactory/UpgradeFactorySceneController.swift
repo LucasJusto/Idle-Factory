@@ -6,13 +6,14 @@
 //
 
 import UIKit
+import SpriteKit
 
 class UpgradeFactorySceneController: UIViewController,  UITableViewDataSource, UITableViewDelegate {
-    @IBOutlet weak var factoryImage: UIImageView!
     
     @IBAction func close(_ sender: Any) {
         self.dismiss(animated: false, completion: nil)
     }
+    @IBOutlet weak var SKView: SKView!
     @IBOutlet weak var changeFactoryButton: UIButton!
     @IBOutlet weak var moveToInventoryButton: UIButton!
     @IBOutlet weak var tableView: UITableView!
@@ -36,9 +37,11 @@ class UpgradeFactorySceneController: UIViewController,  UITableViewDataSource, U
         changeFactoryButton.backgroundColor = UIColor(named: "Inventory_background")
         moveToInventoryButton.backgroundColor = UIColor(named: "HudActions-background")
         
-        factoryImage.image = UIImage(named: "Coin") // GameScene.user?.generators[generatorID].textureName ??
         //self.view.layoutIfNeeded()
         // Do any additional setup after loading the view.
+        let scene = FactoryScene(size: CGSize(width: 400, height: 400))
+        scene.scaleMode = .aspectFill
+        SKView.presentScene(scene)
     }
     
     

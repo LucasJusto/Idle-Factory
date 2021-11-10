@@ -31,6 +31,10 @@
                                         <subviews>
                                             <skView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Zxt-2w-zuJ">
                                                 <rect key="frame" x="0.0" y="0.0" width="156" height="168.5"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="168.5" id="MWA-Fq-Mnm"/>
+                                                    <constraint firstAttribute="width" constant="156" id="zbK-oO-IDo"/>
+                                                </constraints>
                                             </skView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CN8-Nb-8vN">
                                                 <rect key="frame" x="0.0" y="173.5" width="156" height="8"/>
@@ -276,6 +280,7 @@
                     </view>
                     <connections>
                         <outlet property="HeaderViewPreminumCurrency" destination="aXZ-5N-uJz" id="IcD-vF-DMw"/>
+                        <outlet property="SKview" destination="Zxt-2w-zuJ" id="0LP-6h-rjR"/>
                         <outlet property="cancelButton" destination="5g3-UB-Y9P" id="mbi-YK-uf0"/>
                         <outlet property="headerViewMainCurrency" destination="HMv-1R-RXA" id="WJz-Dw-149"/>
                         <outlet property="id" destination="CN8-Nb-8vN" id="XSa-mi-Pdf"/>

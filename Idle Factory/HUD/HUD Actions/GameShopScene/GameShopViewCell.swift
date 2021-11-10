@@ -99,6 +99,8 @@ class GameShopViewCell: UICollectionViewCell {
     @IBAction func seeMore(_ sender: Any) {
         FactoryDetailSceneController.isBlue = true
         FactoryDetailSceneController.generator = thisGenerator
+        FactoryScene.thisFactory = thisGenerator
+        FactoryScene.thiscolor = "HudActions-background"
         delegate?.didButtonPressed()
     }
     
