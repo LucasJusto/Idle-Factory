@@ -33,6 +33,80 @@ public class CKRepository {
         }
     }
     
+    static func currentUserQuickSave(user: User, userGenerators: [Factory], deletedGenerators: [Factory], completion: (([CKRecord]?, [CKRecord.ID]?, Error?) -> Void)? = nil) {
+        let publicDB = container.publicCloudDatabase
+        var records: [CKRecord] = [CKRecord]()
+        var deleteRecords: [CKRecord.ID] = [CKRecord.ID]()
+        
+        //edit user
+        let userRecord = CKRecord(recordType: UsersTable.recordType.description, recordID: CKRecord.ID(recordName: user.id))
+        userRecord.setObject(user.name as CKRecordValue?, forKey: UsersTable.name.description)
+        userRecord.setObject(user.premiumCurrency as CKRecordValue?, forKey: UsersTable.premiumCurrency.description)
+        userRecord.setObject(user.mainCurrency as CKRecordValue?, forKey: UsersTable.mainCurrency.description)
+        userRecord.setObject(user.timeLeftApp as CKRecordValue?, forKey: UsersTable.timeLeftApp.description)
+        records.append(userRecord)
+        
+        //edit generators
+        for g in userGenerators {
+            if let gID = g.id {
+                let recordG = CKRecord(recordType: GeneratorTable.recordType.description, recordID: CKRecord.ID(recordName: gID))
+                recordG.setObject(user.id as CKRecordValue?, forKey: GeneratorTable.userID.description)
+                recordG.setObject(g.energy as CKRecordValue?, forKey: GeneratorTable.energy.description)
+                recordG.setObject(g.isActive.key as CKRecordValue?, forKey: GeneratorTable.isActive.description)
+                recordG.setObject(g.position.key as CKRecordValue?, forKey: GeneratorTable.position.description)
+                recordG.setObject(g.type.key as CKRecordValue?, forKey: GeneratorTable.type.description)
+                if g.type == .Basic {
+                    recordG.setObject(g.textureName as CKRecordValue?, forKey: GeneratorTable.texture.description)
+                }
+                
+                records.append(recordG)
+                
+                //edit resources
+                for r in g.resourcesArray {
+                    if let rID = r.id {
+                        let recordR = CKRecord(recordType: ResourceTable.recordType.description, recordID: CKRecord.ID(recordName: rID))
+                        recordR.setObject(gID as CKRecordValue?, forKey: ResourceTable.generatorID.description)
+                        recordR.setObject(r.qttPLevel as CKRecordValue?, forKey: ResourceTable.qttPLevel.description)
+                        recordR.setObject(r.baseQtt as CKRecordValue?, forKey: ResourceTable.baseQtt.description)
+                        recordR.setObject(r.basePrice as CKRecordValue?, forKey: ResourceTable.basePrice.description)
+                        recordR.setObject(r.type.key as CKRecordValue?, forKey: ResourceTable.type.description)
+                        recordR.setObject(r.pricePLevelIncreaseTax as CKRecordValue?, forKey: ResourceTable.pricePLevelIncreaseTax.description)
+                        recordR.setObject(r.currentLevel as CKRecordValue?, forKey: ResourceTable.level.description)
+                        
+                        records.append(recordR)
+                    }
+                }
+            }
+        }
+        
+        //delete generators
+        for g in deletedGenerators {
+            if let gID = g.id {
+                deleteRecords.append(CKRecord.ID(recordName: gID))
+                
+                //delete resources
+                for r in g.resourcesArray {
+                    if let rID = r.id {
+                        deleteRecords.append(CKRecord.ID(recordName: rID))
+                    }
+                }
+            }
+        }
+        
+        let operation = CKModifyRecordsOperation(recordsToSave: records, recordIDsToDelete: deleteRecords)
+        operation.savePolicy = .changedKeys
+        operation.modifyRecordsCompletionBlock = { savedRecords, deletedRecords, error in
+            if let ckError = error as? CKError {
+                CKRepository.errorAlertHandler(CKErrorCode: ckError.code)
+            } else {
+                if let completion = completion {
+                    completion(savedRecords, deletedRecords, error)
+                }
+            }
+        }
+        publicDB.add(operation)
+    }
+    
     static func storeUserData(id: String, name: String?, mainCurrency: Double?, premiumCurrency: Double?, timeLeftApp: Double?, completion: ((CKRecord?, Error?) -> Void)? = nil){
         
         let recordID = CKRecord.ID(recordName: id)
