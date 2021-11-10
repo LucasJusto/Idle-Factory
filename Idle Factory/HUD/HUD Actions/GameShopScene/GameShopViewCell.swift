@@ -60,7 +60,7 @@ class GameShopViewCell: UICollectionViewCell {
      */
     func pullShopFactories(factory: Factory) {
         thisGenerator = factory
-        generatorImage.image = UIImage(named: factory.textureName)
+        generatorImage.image = UIImage(named: "Basic_Factory_level_1_shop_marketplace")
         let resources = factory.resourcesArray
         
         resourceType1.isHidden = false
