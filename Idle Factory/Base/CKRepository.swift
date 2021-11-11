@@ -487,11 +487,15 @@ public class CKRepository {
             
             if let result = result {
                 let offer = result[0]
-                offer.setObject(buyerID as CKRecordValue?, forKey: MarketTable.buyerID.description)
-                
-                publicDB.save(offer) { _, error in
-                    if let ckError = error as? CKError {
-                        CKRepository.errorAlertHandler(CKErrorCode: ckError.code)
+                if let buyer = offer.value(forKey: MarketTable.buyerID.description) as? String {
+                    if buyer == "none" {
+                        offer.setObject(buyerID as CKRecordValue?, forKey: MarketTable.buyerID.description)
+                        
+                        publicDB.save(offer) { _, error in
+                            if let ckError = error as? CKError {
+                                CKRepository.errorAlertHandler(CKErrorCode: ckError.code)
+                            }
+                        }
                     }
                 }
             }
