@@ -261,7 +261,7 @@ class GameInventorySceneController: UIViewController {
             DispatchQueue.global().async {
                 let earnings_sell: Double = calculateQuickSell(factory: factory)
                 let semaphore = DispatchSemaphore(value: 0)
-                CKRepository.deleteGeneratorByID(generatorID: (factory.id!)) { error in
+                CKRepository.deleteGeneratorByID(generator: factory) { error in
                     if error == nil {
                         GameScene.user?.addMainCurrency(value: earnings_sell)
                         GameScene.user?.generators.remove(at: factoryIndex2)

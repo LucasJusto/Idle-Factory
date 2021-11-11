@@ -55,6 +55,8 @@ public class CKRepository {
                 recordG.setObject(g.isActive.key as CKRecordValue?, forKey: GeneratorTable.isActive.description)
                 recordG.setObject(g.position.key as CKRecordValue?, forKey: GeneratorTable.position.description)
                 recordG.setObject(g.type.key as CKRecordValue?, forKey: GeneratorTable.type.description)
+                recordG.setObject(g.isOffer.key as CKRecordValue?, forKey: GeneratorTable.isOffer.description)
+                
                 if g.type == .Basic {
                     recordG.setObject(g.textureName as CKRecordValue?, forKey: GeneratorTable.texture.description)
                 }
@@ -281,6 +283,8 @@ public class CKRepository {
         record.setObject(generator.isActive.key as CKRecordValue?, forKey: GeneratorTable.isActive.description)
         record.setObject(generator.type.key as CKRecordValue?, forKey: GeneratorTable.type.description)
         record.setObject(generator.textureName as CKRecordValue?, forKey: GeneratorTable.texture.description)
+        record.setObject(generator.isOffer.key as CKRecordValue?, forKey: GeneratorTable.isOffer.description)
+        
         if generator.type == .NFT {
             let bottomString = generator.visual?.bottom.map({ bottom in
                 bottom.description
@@ -338,6 +342,8 @@ public class CKRepository {
             record.setObject(factory.isActive.key as CKRecordValue?, forKey: GeneratorTable.isActive.description)
             record.setObject(factory.type.key as CKRecordValue?, forKey: GeneratorTable.type.description)
             record.setObject(factory.textureName as CKRecordValue?, forKey: GeneratorTable.texture.description)
+            record.setObject(factory.isOffer.key as CKRecordValue?, forKey: GeneratorTable.isOffer.description)
+            
             records.append(record)
         }
         
@@ -587,45 +593,24 @@ public class CKRepository {
         }
     }
     
-    static func deleteGeneratorByID(generatorID: String, completion: @escaping (Error?) -> Void ) {
+    static func deleteGeneratorByID(generator: Factory, completion: @escaping (Error?) -> Void ) {
         let publicDB = container.publicCloudDatabase
         var recordsToDelete: [CKRecord.ID] = [CKRecord.ID]()
-        let recordId = CKRecord.ID(recordName: generatorID)
+        recordsToDelete.append(CKRecord.ID(recordName: generator.id!))
         
-        publicDB.fetch(withRecordID: recordId) { result, error in
+        for r in generator.resourcesArray {
+            recordsToDelete.append(CKRecord.ID(recordName: r.id!))
+        }
+        
+        let operation = CKModifyRecordsOperation(recordsToSave: nil, recordIDsToDelete: recordsToDelete)
+        operation.savePolicy = .changedKeys
+        operation.modifyRecordsCompletionBlock = { _, _, error in
             if let ckError = error as? CKError {
                 CKRepository.errorAlertHandler(CKErrorCode: ckError.code)
             }
-            if let result = result {
-                recordsToDelete.append(result.recordID)
-                
-                let predicateResource = NSPredicate(format: "\(ResourceTable.generatorID.description) == %@", generatorID)
-                let queryResource = CKQuery(recordType: ResourceTable.recordType.description, predicate: predicateResource)
-                
-                publicDB.perform(queryResource, inZoneWith: nil) { results, error in
-                    if let ckError = error as? CKError {
-                        CKRepository.errorAlertHandler(CKErrorCode: ckError.code)
-                    }
-                    if let results = results {
-                        let semaphore = DispatchSemaphore(value: results.count)
-                        for r in results {
-                            recordsToDelete.append(r.recordID)
-                            semaphore.signal()
-                        }
-                        let operation = CKModifyRecordsOperation(recordsToSave: nil, recordIDsToDelete: recordsToDelete)
-                        operation.savePolicy = .changedKeys
-                        operation.modifyRecordsCompletionBlock = { _, _, error in
-                            if let ckError = error as? CKError {
-                                CKRepository.errorAlertHandler(CKErrorCode: ckError.code)
-                            }
-                            completion(error)
-                        }
-                        semaphore.wait()
-                        publicDB.add(operation)
-                    }
-                }
-            }
+            completion(error)
         }
+        publicDB.add(operation)
     }
     
     static func errorAlertHandler(CKErrorCode: CKError.Code){
