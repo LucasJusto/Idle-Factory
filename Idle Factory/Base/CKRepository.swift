@@ -474,7 +474,7 @@ public class CKRepository {
         }
     }
     
-    static func buyOfferFromMarket(sellerID: String, generatorID: String, buyerID: String) {
+    static func buyOfferFromMarket(sellerID: String, generatorID: String, buyerID: String, completion: @escaping (CKRecord?, Error?) -> Void) {
         let publicDB = container.publicCloudDatabase
         
         let predicate = NSPredicate(format: "\(MarketTable.sellerID.description) == '\(sellerID)' AND \(MarketTable.generatorID.description) == '\(generatorID)'")
@@ -491,13 +491,23 @@ public class CKRepository {
                     if buyer == "none" {
                         offer.setObject(buyerID as CKRecordValue?, forKey: MarketTable.buyerID.description)
                         
-                        publicDB.save(offer) { _, error in
+                        publicDB.save(offer) { savedRecord, error in
                             if let ckError = error as? CKError {
                                 CKRepository.errorAlertHandler(CKErrorCode: ckError.code)
                             }
+                            completion(savedRecord, error)
                         }
                     }
+                    else {
+                        completion(nil, error)
+                    }
                 }
+                else {
+                    completion(nil, error)
+                }
+            }
+            else {
+                completion(nil, error)
             }
         }
     }
