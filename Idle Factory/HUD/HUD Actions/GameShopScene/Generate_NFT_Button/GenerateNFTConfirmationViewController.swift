@@ -15,6 +15,7 @@ class GenerateNFTConfirmationViewController: UIViewController {
     @IBOutlet weak var warningLabel: UILabel!
     @IBOutlet weak var cancelButton: UIButton!
     @IBOutlet weak var confirmButton: UIButton!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -42,6 +43,34 @@ class GenerateNFTConfirmationViewController: UIViewController {
         self.dismiss(animated: true)
     }
     @IBAction func confirmAction(_ sender: Any) {
+        
+        let resourceArray: [ResourceType] = [ResourceType.headphone, ResourceType.smartTV, ResourceType.smartphone, ResourceType.tablet, ResourceType.computer]
+        
+        let nftFactories = createNFTFactory(resourceTypeArray: resourceArray)
+        
+        DispatchQueue.global().async {
+            if(GameScene.user!.premiumCurrency >= 0){
+                CKRepository.storeNewGenerator(userID: GameScene.user!.id, generator: nftFactories){ record ,error  in
+                    if error == nil && record != nil {
+                        let semaphore = DispatchSemaphore(value: 0)
+                        nftFactories.id = record!.recordID.recordName
+                        GameScene.user?.generators.append(nftFactories)
+                        GameScene.user?.removePremiumCurrency(value: 0)
+                        CKRepository.storeUserData(id: GameScene.user!.id , name:  GameScene.user?.name ?? "", mainCurrency:  GameScene.user!.mainCurrency , premiumCurrency:  GameScene.user!.premiumCurrency, timeLeftApp: AppDelegate.gameSave.transformToSeconds(time: AppDelegate.gameSave.getCurrentTime()) , completion: {_,_ in
+                            semaphore.signal()
+                        })
+                        semaphore.wait()
+                        
+                        DispatchQueue.main.async {
+                            var mainView: UIStoryboard!
+                            mainView = UIStoryboard(name: "GameShopScene", bundle: nil)
+                            let viewcontroller : UIViewController = mainView.instantiateViewController(withIdentifier: "ShopStoryboard") as UIViewController
+                            self.present(viewcontroller, animated: false)
+                        }
+                    }
+                }
+            }
+        }
     }
     
 }
