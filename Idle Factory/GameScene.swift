@@ -124,7 +124,7 @@ class GameScene: SKScene {
     
     
     // MARK: - TOUCH SCREEN EVENTS
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         for touch in touches {
             let location = touch.location(in: self)
             let touchedNode = atPoint(location)
@@ -206,6 +206,7 @@ class GameScene: SKScene {
             slot.position = CGPoint(x: GameScene.factoriesPositions[n].x, y: GameScene.factoriesPositions[n].y)
             slot.zPosition = 1
             slot.name = "factory_slot_\(n)_empty"
+            slot.removeFromParent()
             background.addChild(slot)
         }
     }

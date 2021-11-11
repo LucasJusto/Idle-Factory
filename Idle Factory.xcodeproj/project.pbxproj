@@ -47,6 +47,7 @@
 		55A0B4AE2732F6C900161FE8 /* FactoryDetailScene.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 55A0B4AD2732F6C900161FE8 /* FactoryDetailScene.storyboard */; };
 		55A0B4B027330B2000161FE8 /* FactoryDetailSceneController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55A0B4AF27330B2000161FE8 /* FactoryDetailSceneController.swift */; };
 		55A0B4B227330EA500161FE8 /* FactoryDetailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55A0B4B127330EA500161FE8 /* FactoryDetailCell.swift */; };
+		55A830E3273C3F9900C23FD6 /* FactoryScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55A830E2273C3F9900C23FD6 /* FactoryScene.swift */; };
 		55BBAC15271F404A00A86A47 /* UIImageExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55BBAC12271F404A00A86A47 /* UIImageExtension.swift */; };
 		55BBAC16271F404A00A86A47 /* GIFPlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55BBAC13271F404A00A86A47 /* GIFPlayerView.swift */; };
 		55BBAC17271F404A00A86A47 /* UIImageViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55BBAC14271F404A00A86A47 /* UIImageViewExtension.swift */; };
@@ -104,6 +105,7 @@
 		55A0B4AD2732F6C900161FE8 /* FactoryDetailScene.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = FactoryDetailScene.storyboard; sourceTree = "<group>"; };
 		55A0B4AF27330B2000161FE8 /* FactoryDetailSceneController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FactoryDetailSceneController.swift; sourceTree = "<group>"; };
 		55A0B4B127330EA500161FE8 /* FactoryDetailCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FactoryDetailCell.swift; sourceTree = "<group>"; };
+		55A830E2273C3F9900C23FD6 /* FactoryScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FactoryScene.swift; sourceTree = "<group>"; };
 		55BBAC12271F404A00A86A47 /* UIImageExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIImageExtension.swift; sourceTree = "<group>"; };
 		55BBAC13271F404A00A86A47 /* GIFPlayerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GIFPlayerView.swift; sourceTree = "<group>"; };
 		55BBAC14271F404A00A86A47 /* UIImageViewExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIImageViewExtension.swift; sourceTree = "<group>"; };
@@ -251,6 +253,7 @@
 				48A65970271F5F470021CD52 /* Localizable.strings */,
 				55439BC62721F23D00F69461 /* DateApi.swift */,
 				F8BF29E7273AEC9C009152CA /* PopUp */,
+				55A830E2273C3F9900C23FD6 /* FactoryScene.swift */,
 			);
 			path = "Idle Factory";
 			sourceTree = "<group>";
@@ -418,6 +421,7 @@
 				55439BC72721F23D00F69461 /* DateApi.swift in Sources */,
 				2BD3FBF927287D1300B4B4E6 /* UpgradeFactorySceneController.swift in Sources */,
 				2B5B37512730A9A800277739 /* GameMarketplaceViewCell.swift in Sources */,
+				55A830E3273C3F9900C23FD6 /* FactoryScene.swift in Sources */,
 				F8CD9B57273C4574002349B1 /* GenerateNFTConfirmationViewController.swift in Sources */,
 				55BBAC15271F404A00A86A47 /* UIImageExtension.swift in Sources */,
 				487A1A072715516900723065 /* Camera.swift in Sources */,

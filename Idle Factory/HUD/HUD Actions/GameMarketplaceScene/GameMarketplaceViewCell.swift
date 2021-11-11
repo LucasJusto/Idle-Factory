@@ -6,7 +6,7 @@
 //
 
 import UIKit
-
+import SpriteKit
 
 /**
  Display each offer made by a real player on the Marketplace scene.
@@ -18,7 +18,7 @@ class GameMarketplaceViewCell: UICollectionViewCell {
     @IBOutlet weak var cardView: UIView!
     
     // Generator Image
-    @IBOutlet weak var generatorImage: UIImageView!
+    @IBOutlet weak var SKView: SKView!
     
     // Generator resources
     @IBOutlet weak var resourceType1: UIImageView!
@@ -82,7 +82,10 @@ class GameMarketplaceViewCell: UICollectionViewCell {
     func pullMarketplaceFactories(factory: Factory, offer: Offer, premium: Bool) {
         thisOffer = offer
         thisGenerator = factory
-        generatorImage.image = UIImage(named: factory.textureName)
+        let scene = FactoryScene(size: CGSize(width: 400, height: 400))
+        scene.thisFactory = thisGenerator
+        scene.scaleMode = .aspectFill
+        SKView.presentScene(scene)
         let resources = factory.resourcesArray
         switch resources.count {
         case 1:
