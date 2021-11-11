@@ -75,12 +75,21 @@ func getResourceImageName(resource: ResourceType) -> String{
         return "4k.tv"
     case .headphone:
         return "airpods"
-    default:
-        return "questionmark"
     }
     
 }
 
+func getUserOffers() -> [Factory] {
+    return GameScene.user!.generators.filter { factory in
+        factory.isOffer == .yes
+    }
+}
+
+func getUserInventory() -> [Factory] {
+    return GameScene.user!.generators.filter { factory in
+        factory.isOffer == .no && factory.isActive == .no
+    }
+}
 
 func createBasicFactory(resourceTypeArray: [ResourceType]) -> Factory {
     
