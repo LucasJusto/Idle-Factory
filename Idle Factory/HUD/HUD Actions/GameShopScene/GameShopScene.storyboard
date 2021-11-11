@@ -144,17 +144,17 @@
                                         </collectionViewFlowLayout>
                                         <cells>
                                             <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="shopFactory_cell" id="fte-Cw-R4p" customClass="GameShopViewCell" customModule="Idle_Factory" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="10" width="131" height="200"/>
+                                                <rect key="frame" x="0.0" y="9.5" width="131" height="201"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="bbe-hT-fnd">
-                                                    <rect key="frame" x="0.0" y="0.0" width="131" height="200"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="131" height="201"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <subviews>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Wwu-mR-IIJ">
-                                                            <rect key="frame" x="0.0" y="0.0" width="131" height="184"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="131" height="185"/>
                                                             <subviews>
                                                                 <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" alignment="center" spacing="1" translatesAutoresizingMaskIntoConstraints="NO" id="FUv-rU-gcX">
-                                                                    <rect key="frame" x="25" y="122" width="81" height="15"/>
+                                                                    <rect key="frame" x="25" y="123" width="81" height="15"/>
                                                                     <subviews>
                                                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="4k.tv" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="bUI-h4-UC6">
                                                                             <rect key="frame" x="0.0" y="0.5" width="12.5" height="14"/>
@@ -192,7 +192,7 @@
                                                                     </constraints>
                                                                 </stackView>
                                                                 <stackView opaque="NO" contentMode="scaleToFill" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="59d-PJ-HhZ">
-                                                                    <rect key="frame" x="17" y="150" width="101" height="18"/>
+                                                                    <rect key="frame" x="17" y="151" width="101" height="18"/>
                                                                     <subviews>
                                                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Coin" translatesAutoresizingMaskIntoConstraints="NO" id="rLh-s4-yYu">
                                                                             <rect key="frame" x="0.0" y="0.0" width="26" height="18"/>
@@ -209,30 +209,27 @@
                                                                         </label>
                                                                     </subviews>
                                                                 </stackView>
-                                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Dh3-a1-bWC">
-                                                                    <rect key="frame" x="15.5" y="5" width="100" height="100"/>
-                                                                    <constraints>
-                                                                        <constraint firstAttribute="width" secondItem="Dh3-a1-bWC" secondAttribute="height" multiplier="1:1" id="4VR-1q-yd9"/>
-                                                                        <constraint firstAttribute="height" constant="100" id="X8I-Im-WRb"/>
-                                                                    </constraints>
-                                                                </imageView>
+                                                                <skView userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tlx-zL-UGs">
+                                                                    <rect key="frame" x="8" y="8" width="115" height="107"/>
+                                                                </skView>
                                                             </subviews>
                                                             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                             <constraints>
+                                                                <constraint firstItem="tlx-zL-UGs" firstAttribute="top" secondItem="Wwu-mR-IIJ" secondAttribute="top" constant="8" id="37S-qs-bXW"/>
                                                                 <constraint firstItem="59d-PJ-HhZ" firstAttribute="leading" secondItem="Wwu-mR-IIJ" secondAttribute="leading" constant="17" id="Dct-Us-KHn"/>
-                                                                <constraint firstItem="FUv-rU-gcX" firstAttribute="top" secondItem="Dh3-a1-bWC" secondAttribute="bottom" constant="17" id="KoI-NA-Y6m"/>
+                                                                <constraint firstAttribute="trailing" secondItem="tlx-zL-UGs" secondAttribute="trailing" constant="8" id="Edd-90-Zsc"/>
+                                                                <constraint firstItem="FUv-rU-gcX" firstAttribute="top" secondItem="tlx-zL-UGs" secondAttribute="bottom" constant="8" symbolic="YES" id="IGp-ei-tV2"/>
+                                                                <constraint firstItem="tlx-zL-UGs" firstAttribute="leading" secondItem="Wwu-mR-IIJ" secondAttribute="leading" constant="8" id="JI2-0h-zFZ"/>
                                                                 <constraint firstAttribute="bottom" secondItem="59d-PJ-HhZ" secondAttribute="bottom" constant="16" id="NCn-vs-4Mi"/>
                                                                 <constraint firstItem="FUv-rU-gcX" firstAttribute="leading" secondItem="Wwu-mR-IIJ" secondAttribute="leading" constant="25" id="PWk-XH-ImW"/>
-                                                                <constraint firstItem="Dh3-a1-bWC" firstAttribute="top" secondItem="Wwu-mR-IIJ" secondAttribute="top" constant="5" id="Yif-SG-7IJ"/>
                                                                 <constraint firstAttribute="trailing" secondItem="59d-PJ-HhZ" secondAttribute="trailing" constant="13" id="Zef-LN-azv"/>
                                                                 <constraint firstAttribute="trailing" secondItem="FUv-rU-gcX" secondAttribute="trailing" constant="25" id="a0c-m1-KAH"/>
                                                                 <constraint firstItem="FUv-rU-gcX" firstAttribute="centerX" secondItem="Wwu-mR-IIJ" secondAttribute="centerX" id="iq2-VP-Xvb"/>
                                                                 <constraint firstItem="59d-PJ-HhZ" firstAttribute="top" secondItem="FUv-rU-gcX" secondAttribute="bottom" constant="13" id="lcb-IK-15V"/>
-                                                                <constraint firstItem="Dh3-a1-bWC" firstAttribute="centerX" secondItem="Wwu-mR-IIJ" secondAttribute="centerX" id="mzL-gf-mgA"/>
                                                             </constraints>
                                                         </view>
                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uEp-PC-Qyk">
-                                                            <rect key="frame" x="22" y="173" width="87" height="21"/>
+                                                            <rect key="frame" x="22" y="175" width="87" height="21"/>
                                                             <color key="backgroundColor" name="actionColor1"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" constant="87" id="epN-f9-JwM"/>
@@ -258,9 +255,9 @@
                                                     </constraints>
                                                 </collectionViewCellContentView>
                                                 <connections>
+                                                    <outlet property="SKView" destination="tlx-zL-UGs" id="zO2-hL-QPf"/>
                                                     <outlet property="cardView" destination="Wwu-mR-IIJ" id="yoj-aH-Smt"/>
                                                     <outlet property="coinImage" destination="rLh-s4-yYu" id="Zz4-fF-mae"/>
-                                                    <outlet property="generatorImage" destination="Dh3-a1-bWC" id="qu6-Dt-vWv"/>
                                                     <outlet property="priceLabel" destination="XDh-yI-08t" id="r4Y-Ke-g9e"/>
                                                     <outlet property="resourceQuantityType1" destination="sfW-sl-C6q" id="PJH-gM-xcZ"/>
                                                     <outlet property="resourceQuantityType2" destination="wYZ-0W-zHK" id="tNf-Up-ZSa"/>
@@ -317,7 +314,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-88" y="126"/>
+            <point key="canvasLocation" x="-88.392857142857139" y="124.6376811594203"/>
         </scene>
     </scenes>
     <resources>

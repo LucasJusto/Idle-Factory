@@ -9,8 +9,8 @@ import SpriteKit
 
 class FactoryScene: SKScene {
     
-    static var thisFactory:Factory? = nil
-    static var thiscolor:String? = nil
+    var thisFactory:Factory? = nil
+    var thiscolor:String? = nil
     
     var background: SKSpriteNode = SKSpriteNode()
     var factoryNode:SKSpriteNode =  SKSpriteNode()
@@ -25,13 +25,18 @@ class FactoryScene: SKScene {
     
     override func didMove(to view: SKView) {
         print(#function)
-        if let factory = FactoryScene.thisFactory {
-            factoryNode = factory.node
+        if let factory = thisFactory {
+            if factory.type == .NFT {
+                factoryNode = FactoryVisualGenerator.getNode(visual: factory.visual!)
+            }
+            else {
+                factoryNode = SKSpriteNode(texture: SKTexture(imageNamed: factory.textureName))
+            }
         }
         else {
             factoryNode = SKSpriteNode()
         }
-        if let color = FactoryScene.thiscolor {
+        if let color = thiscolor {
             background.color = UIColor(named: color)!
         }
         else {

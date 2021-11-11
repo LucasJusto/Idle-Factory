@@ -167,7 +167,11 @@
                                 </connections>
                             </button>
                             <skView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0Vy-77-CPo">
-                                <rect key="frame" x="119" y="97" width="239" height="155"/>
+                                <rect key="frame" x="160.5" y="84" width="156" height="168"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="156" id="Rqj-3g-HeA"/>
+                                    <constraint firstAttribute="height" constant="168" id="dra-UN-Qvk"/>
+                                </constraints>
                             </skView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
@@ -179,13 +183,12 @@
                             <constraint firstItem="3ax-gh-cGC" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" constant="41" id="IgE-x9-hU2"/>
                             <constraint firstItem="nHu-41-Guf" firstAttribute="centerY" secondItem="5EZ-qb-Rvc" secondAttribute="centerY" id="Ji7-7C-Hlu"/>
                             <constraint firstItem="nHu-41-Guf" firstAttribute="leading" secondItem="Tft-Z6-61q" secondAttribute="trailing" constant="20" id="Nma-Dn-FNm"/>
-                            <constraint firstItem="0Vy-77-CPo" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" constant="97" id="PTi-FI-GYQ"/>
                             <constraint firstItem="Tft-Z6-61q" firstAttribute="top" secondItem="0Vy-77-CPo" secondAttribute="bottom" constant="8" symbolic="YES" id="Sjs-oQ-2n3"/>
-                            <constraint firstItem="nHu-41-Guf" firstAttribute="leading" secondItem="0Vy-77-CPo" secondAttribute="trailing" constant="49" id="Vtq-dJ-rDa"/>
                             <constraint firstItem="GyE-cM-Qju" firstAttribute="trailing" secondItem="3ax-gh-cGC" secondAttribute="trailing" id="WzY-4C-2wB"/>
                             <constraint firstItem="GyE-cM-Qju" firstAttribute="top" secondItem="3ax-gh-cGC" secondAttribute="bottom" constant="59" id="bRz-kX-Stp"/>
+                            <constraint firstItem="0Vy-77-CPo" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" constant="84" id="czr-Km-NaZ"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="GyE-cM-Qju" secondAttribute="bottom" constant="75" id="lLw-DY-y6H"/>
-                            <constraint firstItem="0Vy-77-CPo" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="75" id="mgs-dB-qQu"/>
+                            <constraint firstItem="Tft-Z6-61q" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="46" id="orT-Ws-ndh"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="GyE-cM-Qju" secondAttribute="trailing" constant="16" id="rbp-cK-8br"/>
                             <constraint firstItem="Rc0-jP-p1Y" firstAttribute="top" secondItem="5EZ-qb-Rvc" secondAttribute="topMargin" constant="96.5" id="stS-hF-rJB"/>
                             <constraint firstItem="nHu-41-Guf" firstAttribute="top" secondItem="5EZ-qb-Rvc" secondAttribute="topMargin" constant="96.5" id="uj7-39-inz"/>

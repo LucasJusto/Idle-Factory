@@ -6,7 +6,7 @@
 //
 
 import UIKit
-
+import SpriteKit
 
 /**
  Game Inventory scene controller. 
@@ -24,6 +24,7 @@ class GameInventorySceneController: UIViewController {
     // MARK: - FACTORY DETAILS OUTLETS
     @IBOutlet weak var factoryInfoView: UIView!
     @IBOutlet weak var factoryAboutView: UIView!
+    @IBOutlet weak var SKView: SKView!
     @IBOutlet weak var factoryImage: UIImageView!
     
     // First Product Generation
@@ -373,7 +374,7 @@ class GameInventorySceneController: UIViewController {
         factoryAboutView.isHidden = status
         
         // Factory Image
-        factoryImage.isHidden = status
+        //factoryImage.isHidden = status
         
         // Factory Resource 1
         typeImage1.isHidden = status
@@ -441,7 +442,7 @@ extension GameInventorySceneController: UICollectionViewDataSource {
         
         if indexPath.row >= generatorsSize {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Self.factoryID, for: indexPath) as! GameInventoryViewCell
-            cell.pullFactoryData(texture: "empty-slot", resources: [])
+            cell.pullFactoryData(texture: "empty-slot", resources: [], factory: nil)
             cell.configureCell()
 
             return cell
@@ -450,7 +451,7 @@ extension GameInventorySceneController: UICollectionViewDataSource {
             let generatorResources = (generator.resourcesArray)
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Self.factoryID, for: indexPath) as! GameInventoryViewCell
 
-            cell.pullFactoryData(texture: generator.textureName, resources: generatorResources)
+            cell.pullFactoryData(texture: generator.textureName, resources: generatorResources, factory: generator)
             cell.configureCell()
 
             return cell
@@ -497,7 +498,10 @@ extension GameInventorySceneController: UICollectionViewDelegateFlowLayout {
         switch resources.count {
         case 1:
             hideDisplayFactoryInfo(status: false)
-            factoryImage.image = UIImage(named: myFactories[indexPath.row].textureName)
+            let scene = FactoryScene(size: CGSize(width: 300, height: 300))
+            scene.thisFactory = myFactories[indexPath.row]
+            scene.scaleMode = .aspectFill
+            SKView.presentScene(scene)
             typeImage1.isHidden = true
             coinImage1.isHidden = true
             quantityType1.text = ""
@@ -519,7 +523,10 @@ extension GameInventorySceneController: UICollectionViewDelegateFlowLayout {
             factorySerial_ID.text!.append(myFactories[indexPath.row].id ?? "-")
         case 2:
             hideDisplayFactoryInfo(status: false)
-            factoryImage.image = UIImage(named: myFactories[indexPath.row].textureName)
+            let scene = FactoryScene(size: CGSize(width: 300, height: 300))
+            scene.thisFactory = myFactories[indexPath.row]
+            scene.scaleMode = .aspectFill
+            SKView.presentScene(scene)
             typeImage1.image = UIImage(systemName: getResourceImageName(resource: resources[0].type))
             coinImage1.image = UIImage(named: "Coin")
             quantityType1.text = "\(resources[0].baseQtt) \(resources[0].type)"
@@ -543,7 +550,10 @@ extension GameInventorySceneController: UICollectionViewDelegateFlowLayout {
 
         case 3:
             hideDisplayFactoryInfo(status: false)
-            factoryImage.image = UIImage(named: myFactories[indexPath.row].textureName)
+            let scene = FactoryScene(size: CGSize(width: 300, height: 300))
+            scene.thisFactory = myFactories[indexPath.row]
+            scene.scaleMode = .aspectFill
+            SKView.presentScene(scene)
             typeImage1.image = UIImage(systemName: getResourceImageName(resource: resources[0].type))
             coinImage1.image = UIImage(named: "Coin")
             quantityType1.text = "\(resources[0].baseQtt) \(resources[0].type)"

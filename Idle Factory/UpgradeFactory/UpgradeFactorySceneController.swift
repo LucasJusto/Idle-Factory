@@ -40,6 +40,7 @@ class UpgradeFactorySceneController: UIViewController,  UITableViewDataSource, U
         //self.view.layoutIfNeeded()
         // Do any additional setup after loading the view.
         let scene = FactoryScene(size: CGSize(width: 400, height: 400))
+        scene.thisFactory = UpgradeFactorySceneController.generator
         scene.scaleMode = .aspectFill
         SKView.presentScene(scene)
     }

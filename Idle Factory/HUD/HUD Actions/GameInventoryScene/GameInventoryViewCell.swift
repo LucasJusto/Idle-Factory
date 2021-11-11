@@ -40,9 +40,8 @@ class GameInventoryViewCell: UICollectionViewCell {
     /**
      Pull factory data for each cell. Receives a texture of the Factory.
      */
-    func pullFactoryData(texture: String, resources: [Resource]) {
+    func pullFactoryData(texture: String, resources: [Resource], factory: Factory?) {
 
-        factoryTextureImage.image = UIImage(named: texture)
         
         emptySlot.isHidden = true
         factoryTextureImage.isHidden = false
@@ -52,7 +51,11 @@ class GameInventoryViewCell: UICollectionViewCell {
         
         switch resources.count {
         case 1:
-            factoryTexture.isHidden = true
+            let scene = FactoryScene(size: CGSize(width: 300, height: 300))
+            scene.thisFactory = factory
+            scene.scaleMode = .aspectFill
+            factoryTexture.presentScene(scene)
+            factoryTextureImage.isHidden = true
             resourceType1.isHidden = true
             quantityType1.text = ""
             resourceType2.image = UIImage(systemName: getResourceImageName(resource: resources[0].type))
@@ -61,7 +64,11 @@ class GameInventoryViewCell: UICollectionViewCell {
             quantityType3.text = ""
             
         case 2:
-            factoryTexture.isHidden = true
+            let scene = FactoryScene(size: CGSize(width: 300, height: 300))
+            scene.thisFactory = factory
+            scene.scaleMode = .aspectFill
+            factoryTexture.presentScene(scene)
+            factoryTextureImage.isHidden = true
             resourceType1.image = UIImage(systemName: getResourceImageName(resource: resources[0].type))
             quantityType1.text = "\(resources[0].baseQtt)"
             resourceType2.image = UIImage(systemName: getResourceImageName(resource: resources[1].type))
@@ -70,7 +77,11 @@ class GameInventoryViewCell: UICollectionViewCell {
             quantityType3.text = ""
 
         case 3:
-            factoryTexture.isHidden = true
+            let scene = FactoryScene(size: CGSize(width: 300, height: 300))
+            scene.thisFactory = factory
+            scene.scaleMode = .aspectFill
+            factoryTexture.presentScene(scene)
+            factoryTextureImage.isHidden = true
             resourceType1.image = UIImage(systemName: getResourceImageName(resource: resources[0].type))
             quantityType1.text = "\(resources[0].baseQtt)"
             resourceType2.image = UIImage(systemName: getResourceImageName(resource: resources[1].type))
