@@ -421,7 +421,7 @@ public class CKRepository {
         publicDB.add(operation)
     }
     
-    static func storeMarketPlaceOffer(sellerID: String, generatorID: String, currencyType: CurrencyType, price: Double){
+    static func storeMarketPlaceOffer(sellerID: String, generatorID: String, currencyType: CurrencyType, price: Double, completion: @escaping(CKRecord?, Error?) -> Void){
         let publicDB = container.publicCloudDatabase
         let record = CKRecord(recordType: MarketTable.recordType.description)
         
@@ -431,10 +431,11 @@ public class CKRepository {
         record.setObject(generatorID as CKRecordValue?, forKey: MarketTable.generatorID.description)
         record.setObject("none" as CKRecordValue?, forKey: MarketTable.buyerID.description)
         
-        publicDB.save(record) { _, error in
+        publicDB.save(record) { savedRecord, error in
             if let ckError = error as? CKError {
                 CKRepository.errorAlertHandler(CKErrorCode: ckError.code)
             }
+            completion(savedRecord, error)
         }
     }
     

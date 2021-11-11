@@ -35,9 +35,6 @@
 "QuickSellEarnLabel" = "Você receberá:";
 "QuickSellCancelButton" = "Cancelar";
 "QuickSellConfirmButton" = "Confirmar";
-"AnnounceFactoryQuestionLabel" = "Por qual valor você quer vender?";
-"AnnounceCancelButton" = "Cancelar";
-"AnnounceConfirmButton" = "Anunciar";
 
 
 // MARK: - GAME SHOP
@@ -80,3 +77,14 @@
 "warningLabel" = "*As fábricas Premium possuim vantagens exclusivas nos desafios";
 "cancelButton" = "Cancelar";
 "confirmButton" = "Confirmar";
+
+
+//MARK: - Set Value Announce
+"ToZeroButton" = "Zerar";
+"CancelButton" = "Cancelar";
+"ConfirmButton" = "Confirmar";
+"TitleInputValueSell" = "Por qual valor você quer vender?";
+"DoneButton" = "Confirmar";
+"HeaderLabelConfirmSell" = "Tem certeza que deseja anunciar sua fábrica?";
+"SubtitleLabelConfirmSell" = "Quando alguem comprar o seu anúncio você receberá:";
+"AnnounceConfirmButton" = "Anunciar";
