@@ -99,7 +99,7 @@ func createBasicFactory(resourceTypeArray: [ResourceType]) -> Factory {
         resourceArray.append(Resource(basePrice: 100, baseQtt: Double(Int.random(in: 1..<15)), currentLevel: 0, qttPLevel: Double(Int.random(in: 5..<15)), type: shuffledArray[n], pricePLevelIncreaseTax: Double.random(in: 100..<1500), generatorType: .Basic))
     }
     
-    let factory = Factory(resourcesArray: resourceArray, energy: Int.random(in: 1..<10), type: FactoryType.Basic, texture: "Basic_Factory_level_1", position: GeneratorPositions.none, isActive: IsActive.no)
+    let factory = Factory(resourcesArray: resourceArray, energy: Int.random(in: 1..<10), type: FactoryType.Basic, texture: "Basic_Factory_level_1", position: GeneratorPositions.none, isActive: IsActive.no, isOffer: IsOffer.no)
     return factory
 }
 
@@ -120,7 +120,7 @@ func createNFTFactory(resourceTypeArray: [ResourceType]) -> Factory {
         resourceArray.append(Resource(basePrice: 0, baseQtt: Double(Int.random(in: 15..<25)), currentLevel: 0, qttPLevel: Double(Int.random(in: 15..<25)), type: shuffledArray[n], pricePLevelIncreaseTax: Double.random(in: 1500..<15000), generatorType: .NFT))
     }
     
-    let factory = Factory(resourcesArray: resourceArray, energy: Int.random(in: 5..<15), type: FactoryType.NFT, position: GeneratorPositions.none, isActive: IsActive.no)
+    let factory = Factory(resourcesArray: resourceArray, energy: Int.random(in: 5..<15), type: FactoryType.NFT, position: GeneratorPositions.none, isActive: IsActive.no, isOffer: IsOffer.no)
     return factory
 }
 
