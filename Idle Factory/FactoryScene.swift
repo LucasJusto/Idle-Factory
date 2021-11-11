@@ -24,7 +24,7 @@ class FactoryScene: SKScene {
     }()
     
     override func didMove(to view: SKView) {
-        print(#function)
+        
         if let factory = thisFactory {
             if factory.type == .NFT {
                 factoryNode = FactoryVisualGenerator.getNode(visual: factory.visual!)
