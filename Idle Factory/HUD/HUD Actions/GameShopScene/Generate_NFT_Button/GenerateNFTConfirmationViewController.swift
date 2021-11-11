@@ -25,6 +25,7 @@ class GenerateNFTConfirmationViewController: UIViewController {
         firstLabel.text = NSLocalizedString("firstLabel", comment: "")
         firstLabel.font = UIFont(name: "AustralSlabBlur-Regular", size: 28)
         
+        moneyLabel.text = doubleToString(value: 25)
         moneyLabel.font = UIFont(name: "AustralSlabBlur-Regular", size: 17)
         
         warningLabel.text = NSLocalizedString("warningLabel", comment: "")
@@ -49,13 +50,23 @@ class GenerateNFTConfirmationViewController: UIViewController {
         let nftFactories = createNFTFactory(resourceTypeArray: resourceArray)
         
         DispatchQueue.global().async {
-            if(GameScene.user!.premiumCurrency >= 0){
+            if(GameScene.user!.premiumCurrency >= 50){
                 CKRepository.storeNewGenerator(userID: GameScene.user!.id, generator: nftFactories){ record ,error  in
                     if error == nil && record != nil {
                         let semaphore = DispatchSemaphore(value: 0)
-                        nftFactories.id = record!.recordID.recordName
+                        nftFactories.id = record[0]!.recordID.recordName
+                        for r in nftFactories.resourcesArray {
+                            for r2 in record {
+                                let type = r2?.value(forKey: ResourceTable.type.description) as? String ?? ""
+                                let id = r2?.recordID.recordName
+                                if r.type.key == type {
+                                    r.id = id
+                                }
+                            }
+                        }
+                        
                         GameScene.user?.generators.append(nftFactories)
-                        GameScene.user?.removePremiumCurrency(value: 0)
+                        GameScene.user?.removePremiumCurrency(value: 50)
                         CKRepository.storeUserData(id: GameScene.user!.id , name:  GameScene.user?.name ?? "", mainCurrency:  GameScene.user!.mainCurrency , premiumCurrency:  GameScene.user!.premiumCurrency, timeLeftApp: AppDelegate.gameSave.transformToSeconds(time: AppDelegate.gameSave.getCurrentTime()) , completion: {_,_ in
                             semaphore.signal()
                         })

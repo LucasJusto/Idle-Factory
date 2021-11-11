@@ -232,7 +232,7 @@
                                                             </constraints>
                                                         </view>
                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uEp-PC-Qyk">
-                                                            <rect key="frame" x="22" y="173" width="87" height="21"/>
+                                                            <rect key="frame" x="22" y="174" width="87" height="21"/>
                                                             <color key="backgroundColor" name="actionColor1"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" constant="87" id="epN-f9-JwM"/>
