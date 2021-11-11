@@ -362,6 +362,10 @@ class GameScene: SKScene {
             } else {
                 factory.node.position = GameScene.factoriesPositions[4].slot.position
                 GameScene.factoriesPositions[4].slot.removeFromParent()
+                factory.node.name = "factory_slot_4_occupied"
+                factory.node.enumerateChildNodes(withName: "*") { node, _ in
+                    node.name = "factory_slot_4_occupied"
+                }
                 background.addChild(factory.node)
             }
             GameScene.factoriesPositions[4].slot.name = "factory_slot_4_occupied"
@@ -372,6 +376,10 @@ class GameScene: SKScene {
             } else {
                 factory.node.position = GameScene.factoriesPositions[5].slot.position
                 GameScene.factoriesPositions[5].slot.removeFromParent()
+                factory.node.name = "factory_slot_5_occupied"
+                factory.node.enumerateChildNodes(withName: "*") { node, _ in
+                    node.name = "factory_slot_5_occupied"
+                }
                 background.addChild(factory.node)
             }
             GameScene.factoriesPositions[5].slot.name = "factory_slot_5_occupied"

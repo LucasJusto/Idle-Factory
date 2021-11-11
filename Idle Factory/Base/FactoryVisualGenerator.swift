@@ -436,7 +436,7 @@ class FactoryVisualGenerator {
         baseTop.colorBlendFactor = 1
         baseTop.color = visual.topColor
         
-        for topComponent in visual.bottom {
+        for topComponent in visual.top {
             var n = SKSpriteNode(imageNamed: topComponent.image)
             n = adjustComponent(node: n)
             n.position = getNodePosition(base: baseTop, nodeType: topComponent)

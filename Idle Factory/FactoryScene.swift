@@ -28,9 +28,13 @@ class FactoryScene: SKScene {
         if let factory = thisFactory {
             if factory.type == .NFT {
                 factoryNode = FactoryVisualGenerator.getNode(visual: factory.visual!)
+                factoryNode.position.y = 35
+                factoryNode.setScale(0.4)
             }
             else {
                 factoryNode = SKSpriteNode(texture: SKTexture(imageNamed: factory.textureName))
+                factoryNode.position.y = 10
+                factoryNode.setScale(0.7)
             }
         }
         else {
@@ -48,8 +52,7 @@ class FactoryScene: SKScene {
         self.anchorPoint = CGPoint(x: 0.5, y: 0)
         background.anchorPoint = CGPoint(x: 0.5, y: 0)
         addChild(background)
-        factoryNode.position.y = 10
-        factoryNode.setScale(0.7)
+        
 //        factoryNode.enumerateChildNodes(withName: "*") { node, _ in
 //            node.setScale(0.5)
 //        }
