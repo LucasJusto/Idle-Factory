@@ -94,6 +94,12 @@ class GameMarketplaceSceneController: UIViewController, NavigationCellDelegate {
         // BUTTONS
         sellAItemButton.layer.cornerRadius = 10
         myAnnouncesButton.layer.cornerRadius = 10
+        
+        // UI SEGMENTED CONTROL
+        itemTypeSelector.backgroundColor = UIColor(named: "Marketplace_background")
+        itemTypeSelector.layer.borderColor = UIColor.white.cgColor
+        itemTypeSelector.layer.borderWidth = 1
+        itemTypeSelector.layer.masksToBounds = true
     }
     
     

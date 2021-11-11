@@ -58,6 +58,7 @@
 //MARK: - Announces
 "AnnounceHeaderLabel" = "My announces";
 "AboutAnnounceButton" = "See announce";
+"AnnounceInputPlaceholder" = "Type value";
 
 
 //MARK: - Upgrade Screen

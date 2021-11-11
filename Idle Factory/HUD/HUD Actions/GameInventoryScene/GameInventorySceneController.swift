@@ -172,6 +172,12 @@ class GameInventorySceneController: UIViewController {
         announceModalView.layer.cornerRadius = 10
         announceInputView.layer.cornerRadius = 20
         announceInputValue.backgroundColor = UIColor(named: "announceInputBackgroundColor")
+        announceInputValue.placeholder = NSLocalizedString("AnnounceInputPlaceholder", comment: "")
+        currencyTypeSelector.selectedSegmentTintColor = UIColor(named: "HudActions-background")
+        currencyTypeSelector.backgroundColor = UIColor.white
+        currencyTypeSelector.layer.borderColor = UIColor.black.cgColor
+        currencyTypeSelector.layer.borderWidth = 1
+        currencyTypeSelector.layer.masksToBounds = true
         cancelAnnounce.layer.cornerRadius = 10
         confirmAnnounce.layer.cornerRadius = 10
     }

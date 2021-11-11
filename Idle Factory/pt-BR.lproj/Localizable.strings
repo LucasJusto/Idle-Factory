@@ -58,6 +58,7 @@
 //MARK: - Announces
 "AnnounceHeaderLabel" = "Meus anúncios";
 "AboutAnnounceButton" = "Ver anúncio";
+"AnnounceInputPlaceholder" = "Digite valor";
 
 
 //MARK: - Upgrade Screen
