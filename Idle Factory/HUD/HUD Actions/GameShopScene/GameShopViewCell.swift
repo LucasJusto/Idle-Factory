@@ -6,7 +6,7 @@
 //
 
 import UIKit
-
+import SpriteKit
 
 /**
  Display purchasable random factories on the Shop.
@@ -17,7 +17,6 @@ class GameShopViewCell: UICollectionViewCell {
     @IBOutlet weak var cardView: UIView!
     
     // Generator Image
-    @IBOutlet weak var generatorImage: UIImageView!
     
     // Generator resources
     @IBOutlet weak var resourceType1: UIImageView!
@@ -28,6 +27,7 @@ class GameShopViewCell: UICollectionViewCell {
     @IBOutlet weak var resourceQuantityType3: UILabel!
     @IBOutlet weak var coinImage: UIImageView!
     @IBOutlet weak var priceLabel: UILabel!
+    @IBOutlet weak var SKView: SKView!
     
     // Button
     @IBOutlet weak var seeMoreButton: UIButton!
@@ -60,7 +60,11 @@ class GameShopViewCell: UICollectionViewCell {
      */
     func pullShopFactories(factory: Factory) {
         thisGenerator = factory
-        generatorImage.image = UIImage(named: "Basic_Factory_level_1_shop_marketplace")
+        let scene = FactoryScene(size: CGSize(width: 400, height: 400))
+        scene.thisFactory = thisGenerator
+        scene.scaleMode = .aspectFill
+        SKView.presentScene(scene)
+        //generatorImage.image = UIImage(named: "Basic_Factory_level_1_shop_marketplace")
         let resources = factory.resourcesArray
         
         resourceType1.isHidden = false

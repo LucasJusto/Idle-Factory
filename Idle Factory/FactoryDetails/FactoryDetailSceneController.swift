@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SpriteKit
 
 class FactoryDetailSceneController: UIViewController,  UITableViewDataSource, UITableViewDelegate {
     @IBOutlet weak var premiumCurrencyLabel: UILabel!
@@ -18,9 +19,11 @@ class FactoryDetailSceneController: UIViewController,  UITableViewDataSource, UI
     @IBOutlet var mainView: UIView!
     @IBOutlet weak var view2: UIView!
     
+    @IBOutlet weak var SKview: SKView!
     static var generator: Factory? = nil
     static var offer: Offer? = nil
     static var isBlue: Bool = false
+    static var thiscolor = "HudActions-background"
     
     @IBAction func closeButtonAction(_ sender: Any) {
         self.view.window!.rootViewController?.dismiss(animated: false, completion: nil)
@@ -164,6 +167,11 @@ class FactoryDetailSceneController: UIViewController,  UITableViewDataSource, UI
         view2.layer.borderWidth = 1
         view2.layer.cornerRadius = 15
         view2.layer.borderColor = CGColor(red: 255, green: 255, blue: 255, alpha: 1)
+        let scene = FactoryScene(size: CGSize(width: 400, height: 400))
+        scene.thiscolor = FactoryDetailSceneController.thiscolor
+        scene.thisFactory = FactoryDetailSceneController.generator
+        scene.scaleMode = .aspectFill
+        SKview.presentScene(scene)
     }
     
     

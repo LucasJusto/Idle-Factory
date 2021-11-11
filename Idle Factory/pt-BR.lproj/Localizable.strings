@@ -44,7 +44,7 @@
 
 
 // MARK: - MARKETPLACE
-"MarketplaceHeaderLabel" = "Loja";
+"MarketplaceHeaderLabel" = "Marketplace";
 "BasicSelectorItem" = "Básico";
 "PremiumSelectorItem" = "Premium";
 "SellAItemButton" = "Vender um item";
