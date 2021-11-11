@@ -199,6 +199,8 @@ public class CKRepository {
                     let energy: Int = generator.value(forKey: GeneratorTable.energy.description) as? Int ?? 0
                     let typeString: String = generator.value(forKey: GeneratorTable.type.description) as? String ?? ""
                     let type: FactoryType = FactoryType.getFactoryType(factoryType: typeString)
+                    let isOfferString = generator.value(forKey: GeneratorTable.isOffer.description) as? String ?? ""
+                    let isOffer = IsOffer.getKey(isOffer: isOfferString)
                     var visual: Visual? = nil
                     if type == .NFT {
                         do {
@@ -256,10 +258,10 @@ public class CKRepository {
                     semaphore.wait()
                     
                     if visual == nil {
-                        let factory = Factory(id: id, resourcesArray: resources, energy: energy, type: type, texture: texture, position: position, isActive: isActive)
+                        let factory = Factory(id: id, resourcesArray: resources, energy: energy, type: type, texture: texture, position: position, isActive: isActive, isOffer: isOffer)
                         generators.append(factory)
                     } else {
-                        let factory = Factory(id: id, resourcesArray: resources, energy: energy, type: type, texture: texture, position: position, isActive: isActive, visual: visual!)
+                        let factory = Factory(id: id, resourcesArray: resources, energy: energy, type: type, texture: texture, position: position, isActive: isActive, visual: visual!, isOffer: isOffer)
                         generators.append(factory)
                     }
                 }
@@ -514,6 +516,8 @@ public class CKRepository {
                     let energy: Int = generator.value(forKey: GeneratorTable.energy.description) as? Int ?? 0
                     let typeString: String = generator.value(forKey: GeneratorTable.type.description) as? String ?? ""
                     let type: FactoryType = FactoryType.getFactoryType(factoryType: typeString)
+                    let isOfferString = generator.value(forKey: GeneratorTable.isOffer.description) as? String ?? ""
+                    let isOffer = IsOffer.getKey(isOffer: isOfferString)
                     var visual: Visual? = nil
                     if type == .NFT {
                         do {
@@ -571,10 +575,10 @@ public class CKRepository {
                     
                     semaphore.wait()
                     if visual == nil {
-                        let factory = Factory(id: id, resourcesArray: resources, energy: energy, type: type, texture: texture, position: position, isActive: isActive)
+                        let factory = Factory(id: id, resourcesArray: resources, energy: energy, type: type, texture: texture, position: position, isActive: isActive, isOffer: isOffer)
                         generators.append(factory)
                     } else {
-                        let factory = Factory(id: id, resourcesArray: resources, energy: energy, type: type, texture: texture, position: position, isActive: isActive, visual: visual!)
+                        let factory = Factory(id: id, resourcesArray: resources, energy: energy, type: type, texture: texture, position: position, isActive: isActive, visual: visual!, isOffer: isOffer)
                         generators.append(factory)
                     }
                 }
