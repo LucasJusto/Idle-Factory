@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import SpriteKit
 
 func doubleToString(value: Double) -> String {
         //convert devCoins or devCoinsPerSec to String using K, M, B, T, AA, AB...
@@ -191,4 +192,11 @@ func calculateQuickSell(factory: Factory) -> Double {
     }
     
     return earnings / 2
+}
+
+func changeAllNodeFamilyNames(node: SKNode, name: String) {
+    node.name = name
+    for child in node.children {
+        changeAllNodeFamilyNames(node: child, name: name)
+    }
 }
