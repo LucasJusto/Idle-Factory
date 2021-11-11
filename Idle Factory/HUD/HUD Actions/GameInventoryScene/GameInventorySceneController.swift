@@ -23,6 +23,7 @@ class GameInventorySceneController: UIViewController {
     
     // MARK: - FACTORY DETAILS OUTLETS
     @IBOutlet weak var factoryInfoView: UIView!
+    @IBOutlet weak var factoryAboutView: UIView!
     @IBOutlet weak var factoryImage: UIImageView!
     
     // First Product Generation
@@ -78,6 +79,7 @@ class GameInventorySceneController: UIViewController {
     @IBOutlet weak var announceModalView: UIView!
     @IBOutlet weak var announceQuestionLabel: UILabel!
     @IBOutlet weak var currencyTypeSelector: UISegmentedControl!
+    @IBOutlet weak var announceInputView: UIView!
     @IBOutlet weak var announceInputValue: UITextField!
     
     // Announce Factory Buttons
@@ -151,6 +153,7 @@ class GameInventorySceneController: UIViewController {
 
         // Info Factories
         factoryInfoView.layer.cornerRadius = 10
+        factoryAboutView.layer.cornerRadius = 10
         
         // Empty Slot
         emptySlotView.layer.cornerRadius = 10
@@ -167,6 +170,8 @@ class GameInventorySceneController: UIViewController {
         
         // Announce Modal
         announceModalView.layer.cornerRadius = 10
+        announceInputView.layer.cornerRadius = 20
+        announceInputValue.backgroundColor = UIColor(named: "announceInputBackgroundColor")
         cancelAnnounce.layer.cornerRadius = 10
         confirmAnnounce.layer.cornerRadius = 10
     }
@@ -179,12 +184,12 @@ class GameInventorySceneController: UIViewController {
         // LABELS
         inventoryHeader.font = UIFont(name: "AustralSlabBlur-Regular", size: 27)
         emptySlotLabel.font = UIFont(name: "AustralSlabBlur-Regular", size: 27)
-        quantityType1.font = UIFont(name: "AustralSlabBlur-Regular", size: 7)
-        generatePerSecType1.font = UIFont(name: "AustralSlabBlur-Regular", size: 7)
-        quantityType2.font = UIFont(name: "AustralSlabBlur-Regular", size: 7)
-        generatePerSecType2.font = UIFont(name: "AustralSlabBlur-Regular", size: 7)
-        quantityType3.font = UIFont(name: "AustralSlabBlur-Regular", size: 7)
-        generatePerSecType3.font = UIFont(name: "AustralSlabBlur-Regular", size: 7)
+        quantityType1.font = UIFont(name: "AustralSlabBlur-Regular", size: 10)
+        generatePerSecType1.font = UIFont(name: "AustralSlabBlur-Regular", size: 10)
+        quantityType2.font = UIFont(name: "AustralSlabBlur-Regular", size: 10)
+        generatePerSecType2.font = UIFont(name: "AustralSlabBlur-Regular", size: 10)
+        quantityType3.font = UIFont(name: "AustralSlabBlur-Regular", size: 10)
+        generatePerSecType3.font = UIFont(name: "AustralSlabBlur-Regular", size: 10)
         totalProductionLabel.font = UIFont(name: "AustralSlabBlur-Regular", size: 10)
         totalProductionPerSec.font = UIFont(name: "AustralSlabBlur-Regular", size: 10)
         factorySerial_ID.font = UIFont(name: "AustralSlabBlur-Regular", size: 7)
@@ -227,7 +232,7 @@ class GameInventorySceneController: UIViewController {
     /**
      Modal message of Quick sell is displayed. Quick Sell is a way to earn main currency quickly. The gaining is calculated by 50% of the price paid for the generator.
      */
-    @IBAction func quickSell(_ sender: Any) {
+    @IBAction func quickSellModal(_ sender: Any) {
         hideQuickSellModal(status: false)
         quickSellEarningLabel.text = "\(calculateQuickSell(factory: selectedFactory!))"
     }
@@ -282,7 +287,7 @@ class GameInventorySceneController: UIViewController {
     @IBAction func insertOrAnnounceFactory(_ sender: Any) {
         
         if clickedSlotPosition == .none {
-            announceFactory()
+            displayAnnounceFactoryModal()
         } else {
             insertOnPark()
         }
@@ -290,15 +295,27 @@ class GameInventorySceneController: UIViewController {
 
     
     /**
-     Announce a factory on the marketplace to other players.
+     Display announce modal to put the player factory on the marketplace to other players.
      */
-    func announceFactory() {
+    func displayAnnounceFactoryModal() {
         hideAnnounceModal(status: false)
     }
     
+    
+    /**
+     Cancel action to announce a factory.
+     */
     @IBAction func cancelAnnounce(_ sender: Any) {
         hideAnnounceModal(status: true)
     }
+    
+    
+    /**
+     Confirm action to announce a factory.
+     */
+    @IBAction func confirmAnnounceFactory(_ sender: Any) {
+    }
+    
     
     /**
      Insert a factory from the Inventory to park. Turn the factory as active to generate resource to the Idle game.
@@ -347,6 +364,8 @@ class GameInventorySceneController: UIViewController {
      Hide / Unhide all factory detail info if player selects a empty box on inventory. Receives a status of type Bool.
      */
     func hideDisplayFactoryInfo(status: Bool) {
+        factoryAboutView.isHidden = status
+        
         // Factory Image
         factoryImage.isHidden = status
         
@@ -389,12 +408,6 @@ class GameInventorySceneController: UIViewController {
     func hideQuickSellModal(status: Bool) {
         quickSellOrAnnounceBackground.isHidden = status
         quickSellModalView.isHidden = status
-        quickSellQuestionLabel.isHidden = status
-        quickSellEarnLabel.isHidden = status
-        quickSellCoinImage.isHidden = status
-        quickSellEarningLabel.isHidden = status
-        cancelQuickSell.isHidden = status
-        confirmQuickSell.isHidden = status
     }
     
     
@@ -443,18 +456,6 @@ extension GameInventorySceneController: UICollectionViewDataSource {
 // MARK: - COLLECTIONVIEW DELEGATE
 extension GameInventorySceneController: UICollectionViewDelegateFlowLayout {
     
-//    func collectionView(_ collectionView: UICollectionView, shouldSelectItemAt indexPath: IndexPath) -> Bool {
-//        if factoriesNotActive.indices.contains(indexPath.row) {
-//            return true
-//        } else {
-//            if let indices = collectionView.indexPathsForSelectedItems {
-//                for indexPath in indices {
-//                    deselectCell(indexPath: indexPath)
-//                }
-//            }
-//            return false
-//        }
-//    }
     
     func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
         guard let cell = collectionView.cellForItem(at: indexPath) as? GameInventoryViewCell else { return }
