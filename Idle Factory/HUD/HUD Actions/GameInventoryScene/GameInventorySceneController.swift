@@ -51,6 +51,7 @@ class GameInventorySceneController: UIViewController {
     
     
     // MARK: - EMPTY FACTORY DETAILS OUTLETS
+    @IBOutlet weak var emptySlotView: UIView!
     @IBOutlet weak var emptySlotLabel: UILabel!
     @IBOutlet weak var purchaseFactoryEmptySlotButton: UIButton!
     
@@ -61,8 +62,8 @@ class GameInventorySceneController: UIViewController {
     
     
     // MARK: - QUICK SELL OUTLETS
-    @IBOutlet weak var quickSellBackground: UIView!
-    @IBOutlet weak var quickSellView: UIView!
+    @IBOutlet weak var quickSellOrAnnounceBackground: UIView!
+    @IBOutlet weak var quickSellModalView: UIView!
     @IBOutlet weak var quickSellQuestionLabel: UILabel!
     @IBOutlet weak var quickSellEarnLabel: UILabel!
     @IBOutlet weak var quickSellCoinImage: UIImageView!
@@ -71,6 +72,17 @@ class GameInventorySceneController: UIViewController {
     // Quick Sell Buttons
     @IBOutlet weak var cancelQuickSell: UIButton!
     @IBOutlet weak var confirmQuickSell: UIButton!
+    
+    
+    // MARK: - ANNOUNCE OUTLETS
+    @IBOutlet weak var announceModalView: UIView!
+    @IBOutlet weak var announceQuestionLabel: UILabel!
+    @IBOutlet weak var currencyTypeSelector: UISegmentedControl!
+    @IBOutlet weak var announceInputValue: UITextField!
+    
+    // Announce Factory Buttons
+    @IBOutlet weak var cancelAnnounce: UIButton!
+    @IBOutlet weak var confirmAnnounce: UIButton!
     
     
     // MARK: - CONTROLLERS
@@ -97,6 +109,7 @@ class GameInventorySceneController: UIViewController {
         
         hideDisplayFactoryInfo(status: true)
         hideQuickSellModal(status: true)
+        hideAnnounceModal(status: true)
         
         loadOutletCustomizations()
         loadCustomFont()
@@ -118,6 +131,11 @@ class GameInventorySceneController: UIViewController {
         quickSellEarnLabel.text = NSLocalizedString("QuickSellEarnLabel", comment: "")
         cancelQuickSell.setTitle(NSLocalizedString("QuickSellCancelButton", comment: ""), for: .normal)
         confirmQuickSell.setTitle(NSLocalizedString("QuickSellConfirmButton", comment: ""), for: .normal)
+        
+        // Announce Modal
+        announceQuestionLabel.text = NSLocalizedString("AnnounceFactoryQuestionLabel", comment: "")
+        cancelAnnounce.setTitle(NSLocalizedString("AnnounceCancelButton", comment: ""), for: .normal)
+        confirmAnnounce.setTitle(NSLocalizedString("AnnounceConfirmButton", comment: ""), for: .normal)
     
         // Load not active generators list.
         factoriesNotActive = (GameScene.user?.generators.filter( { factory in
@@ -134,15 +152,23 @@ class GameInventorySceneController: UIViewController {
         // Info Factories
         factoryInfoView.layer.cornerRadius = 10
         
+        // Empty Slot
+        emptySlotView.layer.cornerRadius = 10
+        
         // Buttons
         sellFactoryButton.layer.cornerRadius = 10
         insertFactoryButton.layer.cornerRadius = 10
         purchaseFactoryEmptySlotButton.layer.cornerRadius = 10
         
         // Quick Sell Modal
-        quickSellView.layer.cornerRadius = 10
+        quickSellModalView.layer.cornerRadius = 10
         cancelQuickSell.layer.cornerRadius = 10
         confirmQuickSell.layer.cornerRadius = 10
+        
+        // Announce Modal
+        announceModalView.layer.cornerRadius = 10
+        cancelAnnounce.layer.cornerRadius = 10
+        confirmAnnounce.layer.cornerRadius = 10
     }
     
     
@@ -165,6 +191,7 @@ class GameInventorySceneController: UIViewController {
         quickSellQuestionLabel.font = UIFont(name: "AustralSlabBlur-Regular", size: 27)
         quickSellEarnLabel.font = UIFont(name: "AustralSlabBlur-Regular", size: 10)
         quickSellEarningLabel.font = UIFont(name: "AustralSlabBlur-Regular", size: 17)
+        announceQuestionLabel.font = UIFont(name: "AustralSlabBlur-Regular", size: 27)
         
         // BUTTONS
         purchaseFactoryButton.titleLabel?.font = UIFont(name: "AustralSlabBlur-Regular", size: 10)
@@ -173,6 +200,8 @@ class GameInventorySceneController: UIViewController {
         insertFactoryButton.titleLabel?.font = UIFont(name: "AustralSlabBlur-Regular", size: 10)
         cancelQuickSell.titleLabel?.font = UIFont(name: "AustralSlabBlur-Regular", size: 10)
         confirmQuickSell.titleLabel?.font = UIFont(name: "AustralSlabBlur-Regular", size: 10)
+        cancelAnnounce.titleLabel?.font = UIFont(name: "AustralSlabBlur-Regular", size: 10)
+        confirmAnnounce.titleLabel?.font = UIFont(name: "AustralSlabBlur-Regular", size: 10)
     }
     
     
@@ -246,21 +275,7 @@ class GameInventorySceneController: UIViewController {
         }
     }
     
-    
-    /**
-     Deselect a cell receiving the indexPath of this cell.
-     */
-    func deselectCell(indexPath: IndexPath) {
-        self.collectionView.deselectItem(at: indexPath, animated: false)
-        if let cell = collectionView.cellForItem(at: indexPath) {
-            cell.layer.borderWidth = 0
-            cell.layer.borderColor = UIColor.black.cgColor
-            cell.layer.cornerRadius = 10
-        }
-        hideDisplayFactoryInfo(status: true)
-    }
-    
-    
+
     /**
      Action to insert ou announce a factory. This function depends from where user clicked to enter on this scene. This is controlled by the 'clickedSource' variable. If player comes by 'add factory', this action will place a factory from the Inventory to the scene. If player clicks by Inventory button, this action will make announce a factory possible to be announced on marketplace.
      */
@@ -278,9 +293,12 @@ class GameInventorySceneController: UIViewController {
      Announce a factory on the marketplace to other players.
      */
     func announceFactory() {
-        print("Announce park")
+        hideAnnounceModal(status: false)
     }
     
+    @IBAction func cancelAnnounce(_ sender: Any) {
+        hideAnnounceModal(status: true)
+    }
     
     /**
      Insert a factory from the Inventory to park. Turn the factory as active to generate resource to the Idle game.
@@ -307,6 +325,20 @@ class GameInventorySceneController: UIViewController {
                 }
             }
         }
+    }
+    
+    
+    /**
+     Deselect a cell receiving the indexPath of this cell.
+     */
+    func deselectCell(indexPath: IndexPath) {
+        self.collectionView.deselectItem(at: indexPath, animated: false)
+        if let cell = collectionView.cellForItem(at: indexPath) {
+            cell.layer.borderWidth = 0
+            cell.layer.borderColor = UIColor.black.cgColor
+            cell.layer.cornerRadius = 10
+        }
+        hideDisplayFactoryInfo(status: true)
     }
     
     
@@ -347,8 +379,7 @@ class GameInventorySceneController: UIViewController {
         insertFactoryButton.isHidden = status
         
         // Empty Slot
-        emptySlotLabel.isHidden = !status
-        purchaseFactoryEmptySlotButton.isHidden = !status
+        emptySlotView.isHidden = !status
     }
     
     
@@ -356,14 +387,23 @@ class GameInventorySceneController: UIViewController {
      Hide / Unhide quick sell modal. Is only displayed when user clicks to quick sell a factory.
      */
     func hideQuickSellModal(status: Bool) {
-        quickSellBackground.isHidden = status
-        quickSellView.isHidden = status
+        quickSellOrAnnounceBackground.isHidden = status
+        quickSellModalView.isHidden = status
         quickSellQuestionLabel.isHidden = status
         quickSellEarnLabel.isHidden = status
         quickSellCoinImage.isHidden = status
         quickSellEarningLabel.isHidden = status
         cancelQuickSell.isHidden = status
         confirmQuickSell.isHidden = status
+    }
+    
+    
+    /**
+     Hide / Unhide announce modal. Is only displayed when user clicks to announce a factory.
+     */
+    func hideAnnounceModal(status: Bool) {
+        quickSellOrAnnounceBackground.isHidden = status
+        announceModalView.isHidden = status
     }
 }
 

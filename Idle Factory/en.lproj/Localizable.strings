@@ -35,6 +35,9 @@
 "QuickSellEarnLabel" = "You will receive:";
 "QuickSellCancelButton" = "Cancel";
 "QuickSellConfirmButton" = "Confirm";
+"AnnounceFactoryQuestionLabel" = "How much do you want to announce?";
+"AnnounceCancelButton" = "Cancel";
+"AnnounceConfirmButton" = "Announce";
 
 
 // MARK: - GAME SHOP
