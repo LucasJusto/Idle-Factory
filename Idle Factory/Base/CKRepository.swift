@@ -249,12 +249,12 @@ public class CKRepository {
                                 
                                 let r = Resource(id: rID, basePrice: basePrice, baseQtt: baseQtt, currentLevel: currentLevel, qttPLevel: qttPLevel, type: resourceType, pricePLevelIncreaseTax: pricePLevelIncreaseTax, generatorType: type)
                                 resources.append(r)
-                                semaphore.signal()
                             }
                         }
+                        semaphore.signal()
                     }
-                    
                     semaphore.wait()
+                    
                     if visual == nil {
                         let factory = Factory(id: id, resourcesArray: resources, energy: energy, type: type, texture: texture, position: position, isActive: isActive)
                         generators.append(factory)
@@ -268,9 +268,10 @@ public class CKRepository {
         }
     }
     
-    static func storeNewGenerator(userID: String, generator: Factory, completion: ((CKRecord?, Error?) -> Void)? = nil) {
+    static func storeNewGenerator(userID: String, generator: Factory, completion: (([CKRecord?], Error?) -> Void)? = nil) {
         let record = CKRecord(recordType: GeneratorTable.recordType.description)
         let publicDB = container.publicCloudDatabase
+        var records: [CKRecord?] = [CKRecord?]()
         
         record.setObject(userID as CKRecordValue?, forKey: GeneratorTable.userID.description)
         record.setObject(generator.energy as CKRecordValue?, forKey: GeneratorTable.energy.description)
@@ -303,16 +304,21 @@ public class CKRepository {
                 CKRepository.errorAlertHandler(CKErrorCode: ckError.code)
             }
             if let savedRecordNotNull = savedRecord {
-                storeResources(generatorID: savedRecordNotNull.recordID.recordName, resources: generator.resourcesArray) { _, error in
+                records.append(savedRecordNotNull)
+                storeResources(generatorID: savedRecordNotNull.recordID.recordName, resources: generator.resourcesArray) { record, error in
                     if let ckError = error as? CKError {
                         CKRepository.errorAlertHandler(CKErrorCode: ckError.code)
                     }
+                    if let recordNotNull = record {
+                        for r in recordNotNull {
+                            records.append(r)
+                        }
+                        if let completion = completion {
+                            completion(records, error)
+                        }
+                    }
                 }
             }
-            if let completion = completion {
-                completion(savedRecord, error)
-            }
-            
         }
     }
     
@@ -322,7 +328,7 @@ public class CKRepository {
         var records: [CKRecord] = []
         
         for factory in generators {
-            let record = CKRecord(recordType: GeneratorTable.recordType.description, recordID: CKRecord.ID(recordName: factory.id ?? ""))
+            let record = CKRecord(recordType: GeneratorTable.recordType.description, recordID: CKRecord.ID(recordName: factory.id!))
             
             record.setObject(userID as CKRecordValue?, forKey: GeneratorTable.userID.description)
             record.setObject(factory.energy as CKRecordValue?, forKey: GeneratorTable.energy.description)
@@ -558,9 +564,9 @@ public class CKRepository {
                                 
                                 let r = Resource(id: rID, basePrice: basePrice, baseQtt: baseQtt, currentLevel: currentLevel, qttPLevel: qttPLevel, type: resourceType, pricePLevelIncreaseTax: pricePLevelIncreaseTax, generatorType: type)
                                 resources.append(r)
-                                semaphore.signal()
                             }
                         }
+                        semaphore.signal()
                     }
                     
                     semaphore.wait()
@@ -710,7 +716,7 @@ enum UsersTable: CustomStringConvertible {
 }
 
 enum ResourceTable: CustomStringConvertible {
-    case recordType, basePrice, baseQtt, level, qttPLevel, type, generatorID, pricePLevelIncreaseTax
+    case recordType, basePrice, baseQtt, level, qttPLevel, type, generatorID, pricePLevelIncreaseTax, recordName
     
     var description: String {
         switch self {
@@ -730,6 +736,8 @@ enum ResourceTable: CustomStringConvertible {
                 return "generatorID"
             case .pricePLevelIncreaseTax:
                 return "pricePLevelIncreaseTax"
+            case .recordName:
+                return "recordName"
         }
     }
 }

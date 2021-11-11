@@ -17,7 +17,6 @@ class GameMarketplaceViewCell: UICollectionViewCell {
     @IBOutlet weak var totalCardView: UIView!
     @IBOutlet weak var cardView: UIView!
     
-    var delegate: NavigationCellDelegate?
     // Generator Image
     @IBOutlet weak var generatorImage: UIImageView!
     
@@ -34,6 +33,12 @@ class GameMarketplaceViewCell: UICollectionViewCell {
     // Button
     @IBOutlet weak var seeMoreButton: UIButton!
     
+    
+    var delegate: NavigationCellDelegate?
+    var thisGenerator: Factory? = nil
+    var thisOffer: Offer? = nil
+    
+    
     @IBAction func seeMoreAction(_ sender: Any) {
         FactoryDetailSceneController.isBlue = false
         FactoryDetailSceneController.generator = thisGenerator
@@ -41,16 +46,14 @@ class GameMarketplaceViewCell: UICollectionViewCell {
         delegate?.didButtonPressed()
     }
     
-    var thisGenerator: Factory? = nil
-    var thisOffer: Offer? = nil
-    
-    
+
     /**
      Hide the card if the request to database returns nothing.
      */
     func hideCell() {
         totalCardView.isHidden = true
     }
+    
     
     /**
      Configure cell design.
@@ -69,7 +72,6 @@ class GameMarketplaceViewCell: UICollectionViewCell {
         priceLabel.font = UIFont(name: "AustralSlabBlur-Regular", size: 14)
         seeMoreButton.titleLabel?.font = UIFont(name: "AustralSlabBlur-Regular", size: 10)
 
-        
         seeMoreButton.setTitle(NSLocalizedString("AboutNewFactoryButton", comment: ""), for: .normal)
     }
     
