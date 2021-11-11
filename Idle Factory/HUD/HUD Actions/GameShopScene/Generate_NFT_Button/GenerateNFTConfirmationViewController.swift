@@ -25,7 +25,7 @@ class GenerateNFTConfirmationViewController: UIViewController {
         firstLabel.text = NSLocalizedString("firstLabel", comment: "")
         firstLabel.font = UIFont(name: "AustralSlabBlur-Regular", size: 28)
         
-        moneyLabel.text = doubleToString(value: 25)
+        moneyLabel.text = doubleToString(value: 50)
         moneyLabel.font = UIFont(name: "AustralSlabBlur-Regular", size: 17)
         
         warningLabel.text = NSLocalizedString("warningLabel", comment: "")
