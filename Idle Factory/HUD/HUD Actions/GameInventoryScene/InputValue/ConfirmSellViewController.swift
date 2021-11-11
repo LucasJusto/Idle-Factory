@@ -33,7 +33,7 @@ class ConfirmSellViewController: UIViewController {
         super.viewDidLoad()
         
         setButton(text: NSLocalizedString("CancelButton", comment: ""), button: cancelButton)
-        setButton(text: NSLocalizedString("ConfirmButton", comment: ""), button: confirmButton)
+        setButton(text: NSLocalizedString("AnnounceConfirmButton", comment: ""), button: confirmButton)
         headerLabel.text = NSLocalizedString("HeaderLabelConfirmSell", comment: "")
         subtitleLabel.text = NSLocalizedString("SubtitleLabelConfirmSell", comment: "")
         valueSellLabel.text = doubleToString(value: value ?? 0.0)

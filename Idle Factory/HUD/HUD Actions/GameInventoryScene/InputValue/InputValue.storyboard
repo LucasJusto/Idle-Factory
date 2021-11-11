@@ -322,7 +322,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="CaD-kL-Z58" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="138.61607142857142" y="979.71014492753636"/>
+            <point key="canvasLocation" x="141" y="1071"/>
         </scene>
         <!--Input Value Keyboard View Controller-->
         <scene sceneID="PaT-Gj-oun">
@@ -404,7 +404,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ovw-0S-Kma" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="138.61607142857142" y="1795.6521739130437"/>
+            <point key="canvasLocation" x="141" y="1887"/>
         </scene>
         <!--Confirm Sell View Controller-->
         <scene sceneID="35r-CA-UQ2">
@@ -537,7 +537,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HOA-Kr-TPW" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="831.69642857142856" y="1795.6521739130437"/>
+            <point key="canvasLocation" x="834" y="1887"/>
         </scene>
     </scenes>
     <resources>
@@ -547,7 +547,7 @@
             <color red="0.10199999809265137" green="0.65499997138977051" blue="0.82700002193450928" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="Inventory_background">
-            <color red="0.6470000147819519" green="0.87099999189376831" blue="0.27099999785423279" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.77999997138977051" green="0.16500000655651093" blue="0.23100000619888306" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="Rightbar_background">
             <color red="0.13699999451637268" green="0.13699999451637268" blue="0.13699999451637268" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

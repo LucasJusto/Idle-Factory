@@ -154,7 +154,7 @@ class InputValueSellViewController: UIViewController, ComeBackData, ConfirmSell{
     
     func setValueOnLabel(text: String) {
         valueSellLabel.layer.cornerRadius = 10
-        valueSellLabel.layer.backgroundColor = UIColor.clear.cgColor
+        valueSellLabel.layer.backgroundColor = UIColor.systemGray6.cgColor
         valueSellLabel.layer.borderWidth = 1
         valueSellLabel.layer.borderColor = UIColor.lightGray.cgColor
         
@@ -237,7 +237,7 @@ class InputValueSellViewController: UIViewController, ComeBackData, ConfirmSell{
         case 10:
             return NSLocalizedString("CancelButton", comment: "")
         case 11:
-            return NSLocalizedString("ConfirmButton", comment: "")
+            return NSLocalizedString("AnnounceConfirmButton", comment: "")
         default:
             fatalError("Invalid tag for button")
         }

@@ -35,9 +35,6 @@
 "QuickSellEarnLabel" = "You will receive:";
 "QuickSellCancelButton" = "Cancel";
 "QuickSellConfirmButton" = "Confirm";
-"AnnounceFactoryQuestionLabel" = "How much do you want to announce?";
-"AnnounceCancelButton" = "Cancel";
-"AnnounceConfirmButton" = "Announce";
 
 
 // MARK: - GAME SHOP
@@ -80,3 +77,14 @@
 "warningLabel" = "*Premium factories have unique advantages in challenges";
 "cancelButton" = "Cancel";
 "confirmButton" = "Confirm";
+
+
+//MARK: - Set Value Announce
+"ToZeroButton" = "Reset";
+"CancelButton" = "Cancel";
+"ConfirmButton" = "Confirm";
+"TitleInputValueSell" = "How much do you want to announce?";
+"DoneButton" = "Done";
+"HeaderLabelConfirmSell" = "Confirm your factory announce";
+"SubtitleLabelConfirmSell" = "When someone buys your factory you will receive:";
+"AnnounceConfirmButton" = "Announce";
