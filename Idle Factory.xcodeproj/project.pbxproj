@@ -54,6 +54,8 @@
 		55BD52A92718BC2C0057C7C0 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55BD52A82718BC2C0057C7C0 /* User.swift */; };
 		F8BF29E9273AECE6009152CA /* WelcomeBackViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8BF29E8273AECE6009152CA /* WelcomeBackViewController.swift */; };
 		F8BF29ED273AED58009152CA /* WelcomeBack.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F8BF29EC273AED58009152CA /* WelcomeBack.storyboard */; };
+		F8CD9B54273C4007002349B1 /* GenerateNFTConfirmation.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F8CD9B53273C4007002349B1 /* GenerateNFTConfirmation.storyboard */; };
+		F8CD9B57273C4574002349B1 /* GenerateNFTConfirmationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8CD9B56273C4574002349B1 /* GenerateNFTConfirmationViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -110,6 +112,8 @@
 		55BD52A82718BC2C0057C7C0 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		F8BF29E8273AECE6009152CA /* WelcomeBackViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeBackViewController.swift; sourceTree = "<group>"; };
 		F8BF29EC273AED58009152CA /* WelcomeBack.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = WelcomeBack.storyboard; sourceTree = "<group>"; };
+		F8CD9B53273C4007002349B1 /* GenerateNFTConfirmation.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = GenerateNFTConfirmation.storyboard; sourceTree = "<group>"; };
+		F8CD9B56273C4574002349B1 /* GenerateNFTConfirmationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenerateNFTConfirmationViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -164,6 +168,7 @@
 		2BBEC8D62733097700D0F671 /* GameShopScene */ = {
 			isa = PBXGroup;
 			children = (
+				F8CD9B55273C453E002349B1 /* Generate_NFT_Button */,
 				2BBEC8D42733097000D0F671 /* GameShopScene.storyboard */,
 				2BBEC8D727330B8E00D0F671 /* GameShopViewCell.swift */,
 				2BBEC8D927330BA700D0F671 /* GameShopSceneViewController.swift */,
@@ -308,6 +313,15 @@
 			path = PopUp;
 			sourceTree = "<group>";
 		};
+		F8CD9B55273C453E002349B1 /* Generate_NFT_Button */ = {
+			isa = PBXGroup;
+			children = (
+				F8CD9B53273C4007002349B1 /* GenerateNFTConfirmation.storyboard */,
+				F8CD9B56273C4574002349B1 /* GenerateNFTConfirmationViewController.swift */,
+			);
+			path = Generate_NFT_Button;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -375,6 +389,7 @@
 				487A1A002715504300723065 /* LaunchScreen.storyboard in Resources */,
 				2BD3FBEF27285ED200B4B4E6 /* GameInventoryScene.storyboard in Resources */,
 				2B9C314B271F50DD008A7676 /* Austral-Slab_Blur-Regular.otf in Resources */,
+				F8CD9B54273C4007002349B1 /* GenerateNFTConfirmation.storyboard in Resources */,
 				2BBEC8D52733097000D0F671 /* GameShopScene.storyboard in Resources */,
 				2BD3FBF727287CBE00B4B4E6 /* UpgradeFactoryScene.storyboard in Resources */,
 				2BD3FBF52728778500B4B4E6 /* GameMarketplaceScene.storyboard in Resources */,
@@ -407,6 +422,7 @@
 				2BD3FBF927287D1300B4B4E6 /* UpgradeFactorySceneController.swift in Sources */,
 				2B5B37512730A9A800277739 /* GameMarketplaceViewCell.swift in Sources */,
 				55A830E3273C3F9900C23FD6 /* FactoryScene.swift in Sources */,
+				F8CD9B57273C4574002349B1 /* GenerateNFTConfirmationViewController.swift in Sources */,
 				55BBAC15271F404A00A86A47 /* UIImageExtension.swift in Sources */,
 				487A1A072715516900723065 /* Camera.swift in Sources */,
 				487A19F62715504000723065 /* GameScene.swift in Sources */,

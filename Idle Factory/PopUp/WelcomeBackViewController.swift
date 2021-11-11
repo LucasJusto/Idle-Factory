@@ -33,7 +33,8 @@ class WelcomeBackViewController: UIViewController {
         outOfTownLabel.font = UIFont(name: "AustralSlabBlur-Regular", size: 20)
         
         okButton.setTitle(NSLocalizedString("ok", comment: ""), for: .normal)
-        okButton.titleLabel?.font = UIFont(name: "AustralSlabBlur-Regular", size: 10)
+        okButton.layer.cornerRadius = 10.5
+        okButton.titleLabel?.font = UIFont(name: "AustralSlabBlur-Regular", size: 13)
     }
     @IBAction func closePopUp(_ sender: Any) {
         self.view.window!.rootViewController?.dismiss(animated: false, completion: nil)
