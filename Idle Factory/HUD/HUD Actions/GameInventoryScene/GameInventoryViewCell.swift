@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SpriteKit
 
 /**
  Display each generator which is not active in player inventory.
@@ -13,8 +14,11 @@ import UIKit
 class GameInventoryViewCell: UICollectionViewCell {
     
     // MARK: - GENERATOR OUTLETS
-    // Factory Texture.
-    @IBOutlet weak var factoryTexture: UIImageView!
+    
+    // Factory Texture || Empty Slot.
+    @IBOutlet weak var emptySlot: UIImageView!
+    @IBOutlet weak var factoryTexture: SKView!
+    @IBOutlet weak var factoryTextureImage: UIImageView!
     
     // Resources types cell.
     @IBOutlet weak var resourceType1: UIImageView!
@@ -37,17 +41,18 @@ class GameInventoryViewCell: UICollectionViewCell {
      Pull factory data for each cell. Receives a texture of the Factory.
      */
     func pullFactoryData(texture: String, resources: [Resource]) {
-        if texture.isEmpty {
-            factoryTexture.image = nil
-        } else {
-            factoryTexture.image = UIImage(named: texture)
-        }
+
+        factoryTextureImage.image = UIImage(named: texture)
+        
+        emptySlot.isHidden = true
+        factoryTextureImage.isHidden = false
         resourceType1.isHidden = false
         resourceType2.isHidden = false
         resourceType3.isHidden = false
-
+        
         switch resources.count {
         case 1:
+            factoryTexture.isHidden = true
             resourceType1.isHidden = true
             quantityType1.text = ""
             resourceType2.image = UIImage(systemName: getResourceImageName(resource: resources[0].type))
@@ -56,6 +61,7 @@ class GameInventoryViewCell: UICollectionViewCell {
             quantityType3.text = ""
             
         case 2:
+            factoryTexture.isHidden = true
             resourceType1.image = UIImage(systemName: getResourceImageName(resource: resources[0].type))
             quantityType1.text = "\(resources[0].baseQtt)"
             resourceType2.image = UIImage(systemName: getResourceImageName(resource: resources[1].type))
@@ -64,6 +70,7 @@ class GameInventoryViewCell: UICollectionViewCell {
             quantityType3.text = ""
 
         case 3:
+            factoryTexture.isHidden = true
             resourceType1.image = UIImage(systemName: getResourceImageName(resource: resources[0].type))
             quantityType1.text = "\(resources[0].baseQtt)"
             resourceType2.image = UIImage(systemName: getResourceImageName(resource: resources[1].type))
@@ -72,6 +79,9 @@ class GameInventoryViewCell: UICollectionViewCell {
             quantityType3.text = "\(resources[2].baseQtt)"
 
         default:
+            emptySlot.isHidden = false
+            factoryTexture.isHidden = true
+            factoryTextureImage.isHidden = true
             resourceType1.isHidden = true
             quantityType1.text = ""
             resourceType2.isHidden = true

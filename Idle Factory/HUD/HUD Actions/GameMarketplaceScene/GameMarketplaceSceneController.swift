@@ -94,6 +94,12 @@ class GameMarketplaceSceneController: UIViewController, NavigationCellDelegate {
         // BUTTONS
         sellAItemButton.layer.cornerRadius = 10
         myAnnouncesButton.layer.cornerRadius = 10
+        
+        // UI SEGMENTED CONTROL
+        itemTypeSelector.backgroundColor = UIColor(named: "Marketplace_background")
+        itemTypeSelector.layer.borderColor = UIColor.white.cgColor
+        itemTypeSelector.layer.borderWidth = 1
+        itemTypeSelector.layer.masksToBounds = true
     }
     
     
@@ -109,6 +115,10 @@ class GameMarketplaceSceneController: UIViewController, NavigationCellDelegate {
         // BUTTONS
         sellAItemButton.titleLabel?.font = UIFont(name: "AustralSlabBlur-Regular", size: 10)
         myAnnouncesButton.titleLabel?.font = UIFont(name: "AustralSlabBlur-Regular", size: 10)
+        
+        // UI SEGMENTED CONTROL
+        let attr = NSDictionary(object: UIFont(name: "AustralSlabBlur-Regular", size: 10)!, forKey: NSAttributedString.Key.font as NSCopying)
+        itemTypeSelector.setTitleTextAttributes(attr as? [NSAttributedString.Key: Any] , for: .normal)
     }
     
     

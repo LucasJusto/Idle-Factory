@@ -24,15 +24,20 @@
 
 // MARK: - INVENTORY
 "InventoryHeader" = "Inventory";
+"EmptySlotLabel" = "Empty Slot";
 "PurchaseMoreFactoryButton" = "Buy more factories";
+"PurchaseAFactoryEmptySlotButton" = "Purchase factory";
 "TotalProductionLabel" = "Total Production:";
 "SellFactoryButton" = "Quick sell";
 "InsertFactoryButton" = "Insert on the Park";
 "AnnounceFactoryButton" = "Announce";
-"QuickSellQuestionConfirmationLabel" = "Do you want to confirm this Quick Sell?";
+"QuickSellQuestionConfirmationLabel" = "Confirm this Quick Sell?";
 "QuickSellEarnLabel" = "You will receive:";
 "QuickSellCancelButton" = "Cancel";
 "QuickSellConfirmButton" = "Confirm";
+"AnnounceFactoryQuestionLabel" = "How much do you want to announce?";
+"AnnounceCancelButton" = "Cancel";
+"AnnounceConfirmButton" = "Announce";
 
 
 // MARK: - GAME SHOP
@@ -49,14 +54,17 @@
 "MyAnnouncesButton" = "Announces";
 "AboutNewFactoryButton" = "See more";
 
+
 //MARK: - Announces
 "AnnounceHeaderLabel" = "My announces";
 "AboutAnnounceButton" = "See announce";
+"AnnounceInputPlaceholder" = "Type value";
 
 
 //MARK: - Upgrade Screen
 "MoveToInventory" = "Move to inventory";
 "ChangeFactory" = "Change factory";
+
 
 //MARK: - WelcomeBack PopUp
 "YouWon" = "You Won";
@@ -68,7 +76,6 @@
 
 
 //MARK: - NFT Generator PopUp
-
 "firstLabel" = "Generating a random Premium Factory will cost you:";
 "warningLabel" = "*Premium factories have unique advantages in challenges";
 "cancelButton" = "Cancel";

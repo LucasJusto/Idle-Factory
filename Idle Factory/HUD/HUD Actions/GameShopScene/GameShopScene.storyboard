@@ -113,7 +113,7 @@
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hiz-8j-Bax">
                                         <rect key="frame" x="115" y="0.0" width="154" height="23"/>
-                                        <color key="backgroundColor" name="Inventory_background"/>
+                                        <color key="backgroundColor" name="actionColor1"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="154" id="yA0-UX-q0f"/>
                                         </constraints>
@@ -232,8 +232,8 @@
                                                             </constraints>
                                                         </view>
                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uEp-PC-Qyk">
-                                                            <rect key="frame" x="22" y="174" width="87" height="21"/>
-                                                            <color key="backgroundColor" name="Inventory_background"/>
+                                                            <rect key="frame" x="22" y="173" width="87" height="21"/>
+                                                            <color key="backgroundColor" name="actionColor1"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" constant="87" id="epN-f9-JwM"/>
                                                                 <constraint firstAttribute="height" constant="21" id="xK4-Dc-0WC"/>
@@ -330,7 +330,7 @@
         <namedColor name="HudActions-background">
             <color red="0.10199999809265137" green="0.65499997138977051" blue="0.82700002193450928" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
-        <namedColor name="Inventory_background">
+        <namedColor name="actionColor1">
             <color red="0.6470000147819519" green="0.87099999189376831" blue="0.27099999785423279" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <systemColor name="systemBackgroundColor">

@@ -24,6 +24,6 @@ class UpgradeCell: UITableViewCell {
         button.layer.cornerRadius = 10
         button.titleLabel?.font = UIFont(name: "AustralSlabBlur-Regular", size: 10)
         button.titleLabel?.textColor = UIColor.black
-        button.backgroundColor = UIColor(named: "Inventory_background")
+        button.backgroundColor = UIColor(named: "actionColor1")
     }
 }

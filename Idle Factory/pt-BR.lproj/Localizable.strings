@@ -24,7 +24,9 @@
 
 // MARK: - INVENTORY
 "InventoryHeader" = "Inventário";
+"EmptySlotLabel" = "Slot Vazio";
 "PurchaseMoreFactoryButton" = "Comprar mais fábricas";
+"PurchaseAFactoryEmptySlotButton" = "Comprar uma fábrica";
 "TotalProductionLabel" = "Producão Total:";
 "SellFactoryButton" = "Venda rápida";
 "InsertFactoryButton" = "Colocar no Parque";
@@ -33,6 +35,9 @@
 "QuickSellEarnLabel" = "Você receberá:";
 "QuickSellCancelButton" = "Cancelar";
 "QuickSellConfirmButton" = "Confirmar";
+"AnnounceFactoryQuestionLabel" = "Por qual valor você quer vender?";
+"AnnounceCancelButton" = "Cancelar";
+"AnnounceConfirmButton" = "Anunciar";
 
 
 // MARK: - GAME SHOP
@@ -53,6 +58,7 @@
 //MARK: - Announces
 "AnnounceHeaderLabel" = "Meus anúncios";
 "AboutAnnounceButton" = "Ver anúncio";
+"AnnounceInputPlaceholder" = "Digite valor";
 
 
 //MARK: - Upgrade Screen
@@ -70,7 +76,6 @@
 
 
 //MARK: - NFT Generator PopUp
-
 "firstLabel" = "Gerar uma Fábrica Premium aleatória vai te custar:";
 "warningLabel" = "*As fábricas Premium possuim vantagens exclusivas nos desafios";
 "cancelButton" = "Cancelar";
