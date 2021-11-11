@@ -51,7 +51,6 @@
 		55BBAC16271F404A00A86A47 /* GIFPlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55BBAC13271F404A00A86A47 /* GIFPlayerView.swift */; };
 		55BBAC17271F404A00A86A47 /* UIImageViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55BBAC14271F404A00A86A47 /* UIImageViewExtension.swift */; };
 		55BD52A92718BC2C0057C7C0 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55BD52A82718BC2C0057C7C0 /* User.swift */; };
-		DFA8A110273D86EA00623847 /* InputValue.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DFA8A10C273D86EA00623847 /* InputValue.storyboard */; };
 		DFA8A111273D86EA00623847 /* InputValueKeyboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFA8A10D273D86EA00623847 /* InputValueKeyboardViewController.swift */; };
 		DFA8A112273D86EA00623847 /* ConfirmSellViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFA8A10E273D86EA00623847 /* ConfirmSellViewController.swift */; };
 		DFA8A113273D86EA00623847 /* InputValueSellViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFA8A10F273D86EA00623847 /* InputValueSellViewController.swift */; };
@@ -113,7 +112,6 @@
 		55BBAC13271F404A00A86A47 /* GIFPlayerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GIFPlayerView.swift; sourceTree = "<group>"; };
 		55BBAC14271F404A00A86A47 /* UIImageViewExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIImageViewExtension.swift; sourceTree = "<group>"; };
 		55BD52A82718BC2C0057C7C0 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
-		DFA8A10C273D86EA00623847 /* InputValue.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = InputValue.storyboard; sourceTree = "<group>"; };
 		DFA8A10D273D86EA00623847 /* InputValueKeyboardViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InputValueKeyboardViewController.swift; sourceTree = "<group>"; };
 		DFA8A10E273D86EA00623847 /* ConfirmSellViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConfirmSellViewController.swift; sourceTree = "<group>"; };
 		DFA8A10F273D86EA00623847 /* InputValueSellViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InputValueSellViewController.swift; sourceTree = "<group>"; };
@@ -316,7 +314,6 @@
 		DFA8A10B273D86EA00623847 /* InputValue */ = {
 			isa = PBXGroup;
 			children = (
-				DFA8A10C273D86EA00623847 /* InputValue.storyboard */,
 				DFA8A10D273D86EA00623847 /* InputValueKeyboardViewController.swift */,
 				DFA8A10E273D86EA00623847 /* ConfirmSellViewController.swift */,
 				DFA8A10F273D86EA00623847 /* InputValueSellViewController.swift */,
@@ -417,7 +414,6 @@
 				487A19FD2715504300723065 /* Assets.xcassets in Resources */,
 				487A1A002715504300723065 /* LaunchScreen.storyboard in Resources */,
 				2BD3FBEF27285ED200B4B4E6 /* GameInventoryScene.storyboard in Resources */,
-				DFA8A110273D86EA00623847 /* InputValue.storyboard in Resources */,
 				2B9C314B271F50DD008A7676 /* Austral-Slab_Blur-Regular.otf in Resources */,
 				F8CD9B54273C4007002349B1 /* GenerateNFTConfirmation.storyboard in Resources */,
 				2BBEC8D52733097000D0F671 /* GameShopScene.storyboard in Resources */,
