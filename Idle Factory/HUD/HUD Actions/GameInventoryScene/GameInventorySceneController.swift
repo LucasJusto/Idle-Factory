@@ -459,6 +459,7 @@ extension GameInventorySceneController: UICollectionViewDelegateFlowLayout {
             hideDisplayFactoryInfo(status: false)
             let scene = FactoryScene(size: CGSize(width: 300, height: 300))
             scene.thisFactory = myFactories[indexPath.row]
+            scene.isSmall = true
             scene.scaleMode = .aspectFill
             SKView.presentScene(scene)
             typeImage1.isHidden = true
@@ -484,6 +485,7 @@ extension GameInventorySceneController: UICollectionViewDelegateFlowLayout {
             hideDisplayFactoryInfo(status: false)
             let scene = FactoryScene(size: CGSize(width: 300, height: 300))
             scene.thisFactory = myFactories[indexPath.row]
+            scene.isSmall = true
             scene.scaleMode = .aspectFill
             SKView.presentScene(scene)
             typeImage1.image = UIImage(systemName: getResourceImageName(resource: resources[0].type))
@@ -511,6 +513,7 @@ extension GameInventorySceneController: UICollectionViewDelegateFlowLayout {
             hideDisplayFactoryInfo(status: false)
             let scene = FactoryScene(size: CGSize(width: 300, height: 300))
             scene.thisFactory = myFactories[indexPath.row]
+            scene.isSmall = true
             scene.scaleMode = .aspectFill
             SKView.presentScene(scene)
             typeImage1.image = UIImage(systemName: getResourceImageName(resource: resources[0].type))

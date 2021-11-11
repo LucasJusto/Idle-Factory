@@ -53,6 +53,7 @@ class GameInventoryViewCell: UICollectionViewCell {
         case 1:
             let scene = FactoryScene(size: CGSize(width: 300, height: 300))
             scene.thisFactory = factory
+            scene.isSmall = true
             scene.scaleMode = .aspectFill
             factoryTexture.presentScene(scene)
             factoryTextureImage.isHidden = true
@@ -66,6 +67,7 @@ class GameInventoryViewCell: UICollectionViewCell {
         case 2:
             let scene = FactoryScene(size: CGSize(width: 300, height: 300))
             scene.thisFactory = factory
+            scene.isSmall = true
             scene.scaleMode = .aspectFill
             factoryTexture.presentScene(scene)
             factoryTextureImage.isHidden = true
@@ -79,6 +81,7 @@ class GameInventoryViewCell: UICollectionViewCell {
         case 3:
             let scene = FactoryScene(size: CGSize(width: 300, height: 300))
             scene.thisFactory = factory
+            scene.isSmall = true
             scene.scaleMode = .aspectFill
             factoryTexture.presentScene(scene)
             factoryTextureImage.isHidden = true
