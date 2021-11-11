@@ -181,7 +181,24 @@ public class CKRepository {
             }
         }
         semaphore.wait()
+        
+        CKRepository.getUserId { userID in
+            if let userID = userID {
+                CKRepository.getUserOffersByID(userID: userID) { offers in
+                    if let user = user {
+                        user.offers = offers
+                        semaphore.signal()
+                    }
+                }
+            }
+        }
+        
+        semaphore.wait()
         completion(user)
+    }
+    
+    static func getUserOffersByID(userID: String, completion: @escaping ([Offer]) -> Void) {
+        #warning("IMPLEMENT")
     }
     
     static func getUserGeneratorsByID(userID: String, completion: @escaping ([Factory]) -> Void) {

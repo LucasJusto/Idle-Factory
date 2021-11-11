@@ -15,6 +15,7 @@ class User {
     private(set) var premiumCurrency: Double
     private(set) var timeLeftApp: Double
     
+    var offers: [Offer] = []
     var generators: [Factory] = []
     /**
      TODO: Change the type of generators
