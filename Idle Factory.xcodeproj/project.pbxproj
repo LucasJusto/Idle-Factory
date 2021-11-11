@@ -47,10 +47,15 @@
 		55A0B4AE2732F6C900161FE8 /* FactoryDetailScene.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 55A0B4AD2732F6C900161FE8 /* FactoryDetailScene.storyboard */; };
 		55A0B4B027330B2000161FE8 /* FactoryDetailSceneController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55A0B4AF27330B2000161FE8 /* FactoryDetailSceneController.swift */; };
 		55A0B4B227330EA500161FE8 /* FactoryDetailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55A0B4B127330EA500161FE8 /* FactoryDetailCell.swift */; };
+		55A830E3273C3F9900C23FD6 /* FactoryScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55A830E2273C3F9900C23FD6 /* FactoryScene.swift */; };
 		55BBAC15271F404A00A86A47 /* UIImageExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55BBAC12271F404A00A86A47 /* UIImageExtension.swift */; };
 		55BBAC16271F404A00A86A47 /* GIFPlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55BBAC13271F404A00A86A47 /* GIFPlayerView.swift */; };
 		55BBAC17271F404A00A86A47 /* UIImageViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55BBAC14271F404A00A86A47 /* UIImageViewExtension.swift */; };
 		55BD52A92718BC2C0057C7C0 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55BD52A82718BC2C0057C7C0 /* User.swift */; };
+		DFA8A111273D86EA00623847 /* InputValueKeyboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFA8A10D273D86EA00623847 /* InputValueKeyboardViewController.swift */; };
+		DFA8A112273D86EA00623847 /* ConfirmSellViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFA8A10E273D86EA00623847 /* ConfirmSellViewController.swift */; };
+		DFA8A113273D86EA00623847 /* InputValueSellViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFA8A10F273D86EA00623847 /* InputValueSellViewController.swift */; };
+		DFA8A11A273D899900623847 /* SettingsScene.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DFA8A118273D899900623847 /* SettingsScene.storyboard */; };
 		F8BF29E9273AECE6009152CA /* WelcomeBackViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8BF29E8273AECE6009152CA /* WelcomeBackViewController.swift */; };
 		F8BF29ED273AED58009152CA /* WelcomeBack.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F8BF29EC273AED58009152CA /* WelcomeBack.storyboard */; };
 		F8CD9B54273C4007002349B1 /* GenerateNFTConfirmation.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F8CD9B53273C4007002349B1 /* GenerateNFTConfirmation.storyboard */; };
@@ -104,10 +109,15 @@
 		55A0B4AD2732F6C900161FE8 /* FactoryDetailScene.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = FactoryDetailScene.storyboard; sourceTree = "<group>"; };
 		55A0B4AF27330B2000161FE8 /* FactoryDetailSceneController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FactoryDetailSceneController.swift; sourceTree = "<group>"; };
 		55A0B4B127330EA500161FE8 /* FactoryDetailCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FactoryDetailCell.swift; sourceTree = "<group>"; };
+		55A830E2273C3F9900C23FD6 /* FactoryScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FactoryScene.swift; sourceTree = "<group>"; };
 		55BBAC12271F404A00A86A47 /* UIImageExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIImageExtension.swift; sourceTree = "<group>"; };
 		55BBAC13271F404A00A86A47 /* GIFPlayerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GIFPlayerView.swift; sourceTree = "<group>"; };
 		55BBAC14271F404A00A86A47 /* UIImageViewExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIImageViewExtension.swift; sourceTree = "<group>"; };
 		55BD52A82718BC2C0057C7C0 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		DFA8A10D273D86EA00623847 /* InputValueKeyboardViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InputValueKeyboardViewController.swift; sourceTree = "<group>"; };
+		DFA8A10E273D86EA00623847 /* ConfirmSellViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConfirmSellViewController.swift; sourceTree = "<group>"; };
+		DFA8A10F273D86EA00623847 /* InputValueSellViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InputValueSellViewController.swift; sourceTree = "<group>"; };
+		DFA8A118273D899900623847 /* SettingsScene.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = SettingsScene.storyboard; sourceTree = "<group>"; };
 		F8BF29E8273AECE6009152CA /* WelcomeBackViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeBackViewController.swift; sourceTree = "<group>"; };
 		F8BF29EC273AED58009152CA /* WelcomeBack.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = WelcomeBack.storyboard; sourceTree = "<group>"; };
 		F8CD9B53273C4007002349B1 /* GenerateNFTConfirmation.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = GenerateNFTConfirmation.storyboard; sourceTree = "<group>"; };
@@ -129,6 +139,7 @@
 		2B0D6D5027231F4100F7390E /* HUD Actions */ = {
 			isa = PBXGroup;
 			children = (
+				DFA8A117273D899900623847 /* SettingsScene */,
 				2BD3FBED27285EB200B4B4E6 /* GameInventoryScene */,
 				2BD3FBF02728770000B4B4E6 /* GameChallengeScene */,
 				2BD3FBF12728770B00B4B4E6 /* GameMarketplaceScene */,
@@ -177,6 +188,7 @@
 		2BD3FBED27285EB200B4B4E6 /* GameInventoryScene */ = {
 			isa = PBXGroup;
 			children = (
+				DFA8A10B273D86EA00623847 /* InputValue */,
 				2BFF82B52721D96100F16F84 /* GameInventorySceneController.swift */,
 				2BD3FBEE27285ED200B4B4E6 /* GameInventoryScene.storyboard */,
 				2BD3FBFA2728866E00B4B4E6 /* GameInventoryViewCell.swift */,
@@ -251,6 +263,7 @@
 				48A65970271F5F470021CD52 /* Localizable.strings */,
 				55439BC62721F23D00F69461 /* DateApi.swift */,
 				F8BF29E7273AEC9C009152CA /* PopUp */,
+				55A830E2273C3F9900C23FD6 /* FactoryScene.swift */,
 			);
 			path = "Idle Factory";
 			sourceTree = "<group>";
@@ -299,6 +312,24 @@
 				55BBAC14271F404A00A86A47 /* UIImageViewExtension.swift */,
 			);
 			path = "GIF Extension";
+			sourceTree = "<group>";
+		};
+		DFA8A10B273D86EA00623847 /* InputValue */ = {
+			isa = PBXGroup;
+			children = (
+				DFA8A10D273D86EA00623847 /* InputValueKeyboardViewController.swift */,
+				DFA8A10E273D86EA00623847 /* ConfirmSellViewController.swift */,
+				DFA8A10F273D86EA00623847 /* InputValueSellViewController.swift */,
+			);
+			path = InputValue;
+			sourceTree = "<group>";
+		};
+		DFA8A117273D899900623847 /* SettingsScene */ = {
+			isa = PBXGroup;
+			children = (
+				DFA8A118273D899900623847 /* SettingsScene.storyboard */,
+			);
+			path = SettingsScene;
 			sourceTree = "<group>";
 		};
 		F8BF29E7273AEC9C009152CA /* PopUp */ = {
@@ -381,6 +412,7 @@
 				487A19FB2715504000723065 /* Main.storyboard in Resources */,
 				2BD3FBF32728777400B4B4E6 /* GameChallengeScene.storyboard in Resources */,
 				F8BF29ED273AED58009152CA /* WelcomeBack.storyboard in Resources */,
+				DFA8A11A273D899900623847 /* SettingsScene.storyboard in Resources */,
 				48A6596E271F5F470021CD52 /* Localizable.strings in Resources */,
 				487A19FD2715504300723065 /* Assets.xcassets in Resources */,
 				487A1A002715504300723065 /* LaunchScreen.storyboard in Resources */,
@@ -416,13 +448,17 @@
 				55BBAC16271F404A00A86A47 /* GIFPlayerView.swift in Sources */,
 				555DFCB72729BE0D006C60D9 /* UpgradeCell.swift in Sources */,
 				55439BC72721F23D00F69461 /* DateApi.swift in Sources */,
+				DFA8A113273D86EA00623847 /* InputValueSellViewController.swift in Sources */,
+				DFA8A111273D86EA00623847 /* InputValueKeyboardViewController.swift in Sources */,
 				2BD3FBF927287D1300B4B4E6 /* UpgradeFactorySceneController.swift in Sources */,
 				2B5B37512730A9A800277739 /* GameMarketplaceViewCell.swift in Sources */,
+				55A830E3273C3F9900C23FD6 /* FactoryScene.swift in Sources */,
 				F8CD9B57273C4574002349B1 /* GenerateNFTConfirmationViewController.swift in Sources */,
 				55BBAC15271F404A00A86A47 /* UIImageExtension.swift in Sources */,
 				487A1A072715516900723065 /* Camera.swift in Sources */,
 				487A19F62715504000723065 /* GameScene.swift in Sources */,
 				48A9AC4C273314BD007C5197 /* MarketPlaceOffer.swift in Sources */,
+				DFA8A112273D86EA00623847 /* ConfirmSellViewController.swift in Sources */,
 				F8BF29E9273AECE6009152CA /* WelcomeBackViewController.swift in Sources */,
 				487A19F82715504000723065 /* GameViewController.swift in Sources */,
 				55A0B4B027330B2000161FE8 /* FactoryDetailSceneController.swift in Sources */,

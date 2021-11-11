@@ -6,7 +6,7 @@
 //
 
 import UIKit
-
+import SpriteKit
 
 /**
  Game Inventory scene controller. 
@@ -24,6 +24,7 @@ class GameInventorySceneController: UIViewController {
     // MARK: - FACTORY DETAILS OUTLETS
     @IBOutlet weak var factoryInfoView: UIView!
     @IBOutlet weak var factoryAboutView: UIView!
+    @IBOutlet weak var SKView: SKView!
     @IBOutlet weak var factoryImage: UIImageView!
     
     // First Product Generation
@@ -74,19 +75,6 @@ class GameInventorySceneController: UIViewController {
     @IBOutlet weak var cancelQuickSell: UIButton!
     @IBOutlet weak var confirmQuickSell: UIButton!
     
-    
-    // MARK: - ANNOUNCE OUTLETS
-    @IBOutlet weak var announceModalView: UIView!
-    @IBOutlet weak var announceQuestionLabel: UILabel!
-    @IBOutlet weak var currencyTypeSelector: UISegmentedControl!
-    @IBOutlet weak var announceInputView: UIView!
-    @IBOutlet weak var announceInputValue: UITextField!
-    
-    // Announce Factory Buttons
-    @IBOutlet weak var cancelAnnounce: UIButton!
-    @IBOutlet weak var confirmAnnounce: UIButton!
-    
-    
     // MARK: - CONTROLLERS
     static let factoryID: String = "factory_cell"
     
@@ -111,7 +99,6 @@ class GameInventorySceneController: UIViewController {
         
         hideDisplayFactoryInfo(status: true)
         hideQuickSellModal(status: true)
-        hideAnnounceModal(status: true)
         
         loadOutletCustomizations()
         loadCustomFont()
@@ -133,11 +120,6 @@ class GameInventorySceneController: UIViewController {
         quickSellEarnLabel.text = NSLocalizedString("QuickSellEarnLabel", comment: "")
         cancelQuickSell.setTitle(NSLocalizedString("QuickSellCancelButton", comment: ""), for: .normal)
         confirmQuickSell.setTitle(NSLocalizedString("QuickSellConfirmButton", comment: ""), for: .normal)
-        
-        // Announce Modal
-        announceQuestionLabel.text = NSLocalizedString("AnnounceFactoryQuestionLabel", comment: "")
-        cancelAnnounce.setTitle(NSLocalizedString("AnnounceCancelButton", comment: ""), for: .normal)
-        confirmAnnounce.setTitle(NSLocalizedString("AnnounceConfirmButton", comment: ""), for: .normal)
     
         // Load not active generators list.
         factoriesNotActive = (GameScene.user?.generators.filter( { factory in
@@ -168,18 +150,6 @@ class GameInventorySceneController: UIViewController {
         cancelQuickSell.layer.cornerRadius = 10
         confirmQuickSell.layer.cornerRadius = 10
         
-        // Announce Modal
-        announceModalView.layer.cornerRadius = 10
-        announceInputView.layer.cornerRadius = 20
-        announceInputValue.backgroundColor = UIColor(named: "announceInputBackgroundColor")
-        announceInputValue.placeholder = NSLocalizedString("AnnounceInputPlaceholder", comment: "")
-        currencyTypeSelector.selectedSegmentTintColor = UIColor(named: "HudActions-background")
-        currencyTypeSelector.backgroundColor = UIColor.white
-        currencyTypeSelector.layer.borderColor = UIColor.black.cgColor
-        currencyTypeSelector.layer.borderWidth = 1
-        currencyTypeSelector.layer.masksToBounds = true
-        cancelAnnounce.layer.cornerRadius = 10
-        confirmAnnounce.layer.cornerRadius = 10
     }
     
     
@@ -202,7 +172,6 @@ class GameInventorySceneController: UIViewController {
         quickSellQuestionLabel.font = UIFont(name: "AustralSlabBlur-Regular", size: 27)
         quickSellEarnLabel.font = UIFont(name: "AustralSlabBlur-Regular", size: 10)
         quickSellEarningLabel.font = UIFont(name: "AustralSlabBlur-Regular", size: 17)
-        announceQuestionLabel.font = UIFont(name: "AustralSlabBlur-Regular", size: 27)
         
         // BUTTONS
         purchaseFactoryButton.titleLabel?.font = UIFont(name: "AustralSlabBlur-Regular", size: 10)
@@ -211,8 +180,6 @@ class GameInventorySceneController: UIViewController {
         insertFactoryButton.titleLabel?.font = UIFont(name: "AustralSlabBlur-Regular", size: 10)
         cancelQuickSell.titleLabel?.font = UIFont(name: "AustralSlabBlur-Regular", size: 10)
         confirmQuickSell.titleLabel?.font = UIFont(name: "AustralSlabBlur-Regular", size: 10)
-        cancelAnnounce.titleLabel?.font = UIFont(name: "AustralSlabBlur-Regular", size: 10)
-        confirmAnnounce.titleLabel?.font = UIFont(name: "AustralSlabBlur-Regular", size: 10)
     }
     
     
@@ -293,35 +260,11 @@ class GameInventorySceneController: UIViewController {
     @IBAction func insertOrAnnounceFactory(_ sender: Any) {
         
         if clickedSlotPosition == .none {
-            displayAnnounceFactoryModal()
+            openBoxToSetValue()
         } else {
             insertOnPark()
         }
     }
-
-    
-    /**
-     Display announce modal to put the player factory on the marketplace to other players.
-     */
-    func displayAnnounceFactoryModal() {
-        hideAnnounceModal(status: false)
-    }
-    
-    
-    /**
-     Cancel action to announce a factory.
-     */
-    @IBAction func cancelAnnounce(_ sender: Any) {
-        hideAnnounceModal(status: true)
-    }
-    
-    
-    /**
-     Confirm action to announce a factory.
-     */
-    @IBAction func confirmAnnounceFactory(_ sender: Any) {
-    }
-    
     
     /**
      Insert a factory from the Inventory to park. Turn the factory as active to generate resource to the Idle game.
@@ -373,7 +316,7 @@ class GameInventorySceneController: UIViewController {
         factoryAboutView.isHidden = status
         
         // Factory Image
-        factoryImage.isHidden = status
+        //factoryImage.isHidden = status
         
         // Factory Resource 1
         typeImage1.isHidden = status
@@ -416,14 +359,29 @@ class GameInventorySceneController: UIViewController {
         quickSellModalView.isHidden = status
     }
     
+    var selected: Int = 0
     
     /**
-     Hide / Unhide announce modal. Is only displayed when user clicks to announce a factory.
+     This function opens a box where the user will select the value he wants to advertise the generator on the marketplace. After selecting the value, he can confirm the announce or cancel.
      */
-    func hideAnnounceModal(status: Bool) {
-        quickSellOrAnnounceBackground.isHidden = status
-        announceModalView.isHidden = status
+    func openBoxToSetValue() {
+        
+            guard let myFactoriesSell = GameScene.user?.generators,
+                  !myFactoriesSell.isEmpty
+                else {
+                    return
+                }
+            
+            let factorySell: Factory = myFactoriesSell[selected]
+            
+            if let infoViewController = storyboard?.instantiateViewController(identifier: "InfoViewController") as? InputValueSellViewController {
+                infoViewController.modalPresentationStyle = .overCurrentContext
+                infoViewController.factory = factorySell
+                infoViewController.modalTransitionStyle = .crossDissolve
+                present(infoViewController, animated: true)
+            }
     }
+    
 }
 
 
@@ -441,7 +399,7 @@ extension GameInventorySceneController: UICollectionViewDataSource {
         
         if indexPath.row >= generatorsSize {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Self.factoryID, for: indexPath) as! GameInventoryViewCell
-            cell.pullFactoryData(texture: "empty-slot", resources: [])
+            cell.pullFactoryData(texture: "empty-slot", resources: [], factory: nil)
             cell.configureCell()
 
             return cell
@@ -450,7 +408,7 @@ extension GameInventorySceneController: UICollectionViewDataSource {
             let generatorResources = (generator.resourcesArray)
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Self.factoryID, for: indexPath) as! GameInventoryViewCell
 
-            cell.pullFactoryData(texture: generator.textureName, resources: generatorResources)
+            cell.pullFactoryData(texture: generator.textureName, resources: generatorResources, factory: generator)
             cell.configureCell()
 
             return cell
@@ -472,6 +430,8 @@ extension GameInventorySceneController: UICollectionViewDelegateFlowLayout {
     
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
+        selected = indexPath.row
         
         guard let cell = collectionView.cellForItem(at: indexPath) as? GameInventoryViewCell else { return }
                 cell.layer.borderWidth = 2
@@ -497,7 +457,10 @@ extension GameInventorySceneController: UICollectionViewDelegateFlowLayout {
         switch resources.count {
         case 1:
             hideDisplayFactoryInfo(status: false)
-            factoryImage.image = UIImage(named: myFactories[indexPath.row].textureName)
+            let scene = FactoryScene(size: CGSize(width: 300, height: 300))
+            scene.thisFactory = myFactories[indexPath.row]
+            scene.scaleMode = .aspectFill
+            SKView.presentScene(scene)
             typeImage1.isHidden = true
             coinImage1.isHidden = true
             quantityType1.text = ""
@@ -519,7 +482,10 @@ extension GameInventorySceneController: UICollectionViewDelegateFlowLayout {
             factorySerial_ID.text!.append(myFactories[indexPath.row].id ?? "-")
         case 2:
             hideDisplayFactoryInfo(status: false)
-            factoryImage.image = UIImage(named: myFactories[indexPath.row].textureName)
+            let scene = FactoryScene(size: CGSize(width: 300, height: 300))
+            scene.thisFactory = myFactories[indexPath.row]
+            scene.scaleMode = .aspectFill
+            SKView.presentScene(scene)
             typeImage1.image = UIImage(systemName: getResourceImageName(resource: resources[0].type))
             coinImage1.image = UIImage(named: "Coin")
             quantityType1.text = "\(resources[0].baseQtt) \(resources[0].type)"
@@ -543,7 +509,10 @@ extension GameInventorySceneController: UICollectionViewDelegateFlowLayout {
 
         case 3:
             hideDisplayFactoryInfo(status: false)
-            factoryImage.image = UIImage(named: myFactories[indexPath.row].textureName)
+            let scene = FactoryScene(size: CGSize(width: 300, height: 300))
+            scene.thisFactory = myFactories[indexPath.row]
+            scene.scaleMode = .aspectFill
+            SKView.presentScene(scene)
             typeImage1.image = UIImage(systemName: getResourceImageName(resource: resources[0].type))
             coinImage1.image = UIImage(named: "Coin")
             quantityType1.text = "\(resources[0].baseQtt) \(resources[0].type)"
@@ -588,3 +557,35 @@ extension GameInventorySceneController: UICollectionViewDelegateFlowLayout {
     
 }
 
+final class CustomVisualEffectView: UIVisualEffectView {
+    /// Create visual effect view with given effect and its intensity
+    ///
+    /// - Parameters:
+    ///   - effect: visual effect, eg UIBlurEffect(style: .dark)
+    ///   - intensity: custom intensity from 0.0 (no effect) to 1.0 (full effect) using linear scale
+    init(effect: UIVisualEffect, intensity: CGFloat) {
+        theEffect = effect
+        customIntensity = intensity
+        super.init(effect: nil)
+    }
+    
+    required init?(coder aDecoder: NSCoder) { nil }
+    
+    deinit {
+        animator?.stopAnimation(true)
+    }
+    
+    override func draw(_ rect: CGRect) {
+        super.draw(rect)
+        effect = nil
+        animator?.stopAnimation(true)
+        animator = UIViewPropertyAnimator(duration: 1, curve: .linear) { [unowned self] in
+            self.effect = theEffect
+        }
+        animator?.fractionComplete = customIntensity
+    }
+    
+    private let theEffect: UIVisualEffect
+    private let customIntensity: CGFloat
+    private var animator: UIViewPropertyAnimator?
+}

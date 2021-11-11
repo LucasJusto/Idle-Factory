@@ -154,7 +154,7 @@ extension GameShopSceneViewController: UICollectionViewDataSource {
 
         let generator = basicFactories[indexPath.row]
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Self.factoryID, for: indexPath) as! GameShopViewCell
-
+        
         cell.pullShopFactories(factory: generator)
             cell.configureCell()
         cell.delegate = self
