@@ -41,7 +41,7 @@
                                         </subviews>
                                     </stackView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="*As fábricas premium possuem vantagens exclusivas nos desafios" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gGa-vw-MsS">
-                                        <rect key="frame" x="150" y="147" width="208" height="19.5"/>
+                                        <rect key="frame" x="145" y="147" width="218" height="19.5"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="8"/>
                                         <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
@@ -92,9 +92,9 @@
                                     <constraint firstItem="wFj-LT-F4Y" firstAttribute="centerX" secondItem="7k5-mr-iUE" secondAttribute="centerX" id="ahV-z2-ELh"/>
                                     <constraint firstItem="gGa-vw-MsS" firstAttribute="top" secondItem="wFj-LT-F4Y" secondAttribute="bottom" constant="10" id="bEJ-oy-NaJ"/>
                                     <constraint firstAttribute="trailing" secondItem="JWX-4z-QqM" secondAttribute="trailing" constant="10" id="dK6-Lc-LAP"/>
-                                    <constraint firstItem="gGa-vw-MsS" firstAttribute="leading" secondItem="7k5-mr-iUE" secondAttribute="leading" constant="150" id="g68-Q1-hve"/>
+                                    <constraint firstItem="gGa-vw-MsS" firstAttribute="leading" secondItem="7k5-mr-iUE" secondAttribute="leading" constant="145" id="g68-Q1-hve"/>
                                     <constraint firstItem="yyC-oE-fii" firstAttribute="centerX" secondItem="7k5-mr-iUE" secondAttribute="centerX" id="gRn-MQ-tjm"/>
-                                    <constraint firstAttribute="trailing" secondItem="gGa-vw-MsS" secondAttribute="trailing" constant="150" id="mvr-e5-dm0"/>
+                                    <constraint firstAttribute="trailing" secondItem="gGa-vw-MsS" secondAttribute="trailing" constant="145" id="mvr-e5-dm0"/>
                                     <constraint firstItem="wFj-LT-F4Y" firstAttribute="top" secondItem="JWX-4z-QqM" secondAttribute="bottom" constant="2" id="u8k-DU-BX5"/>
                                     <constraint firstAttribute="bottom" secondItem="yyC-oE-fii" secondAttribute="bottom" constant="20" id="zpx-BD-jgQ"/>
                                 </constraints>
