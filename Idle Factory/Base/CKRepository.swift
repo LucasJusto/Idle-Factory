@@ -201,6 +201,7 @@ public class CKRepository {
         let offersPredicate = NSPredicate(format: "\(MarketTable.sellerID.description) == %@", userID)
         let offersQuery = CKQuery(recordType: MarketTable.recordType.description, predicate: offersPredicate)
         var offers: [Offer] = []
+        let semaphore = DispatchSemaphore(value: 0)
         
         publicDB.perform(offersQuery, inZoneWith: nil) { results, error in
             if let ckError = error as? CKError {
@@ -221,7 +222,10 @@ public class CKRepository {
                     offers.append(Offer(id: id, sellerID: sellerID, generatorID: generatorID, buyerID: buyerID, price: price, currencyType: currencyType, isCollected: isCollected))
                 }
             }
+            semaphore.signal()
         }
+        semaphore.wait()
+        completion(offers)
     }
     
     static func getUserGeneratorsByID(userID: String, completion: @escaping ([Factory]) -> Void) {
