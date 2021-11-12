@@ -79,7 +79,7 @@ func getResourceImageName(resource: ResourceType) -> String{
     
 }
 
-func getUserOffers() -> [Factory] {
+func getUserGeneratorOffers() -> [Factory] {
     return GameScene.user!.generators.filter { factory in
         factory.isOffer == .yes
     }
