@@ -20,8 +20,9 @@ class Factory: Generator  {
     var node: SKSpriteNode
     var textureName: String
     var visual: Visual?
+    var isOffer: IsOffer
     
-    init(id: String? = nil, resourcesArray:[Resource] , energy: Int, type: FactoryType, texture: String? = nil, position: GeneratorPositions, isActive: IsActive){
+    init(id: String? = nil, resourcesArray:[Resource] , energy: Int, type: FactoryType, texture: String? = nil, position: GeneratorPositions, isActive: IsActive, isOffer: IsOffer){
         self.id = id
         self.resourcesArray = resourcesArray
         self.energy = energy
@@ -39,9 +40,10 @@ class Factory: Generator  {
         self.position = position
         self.isActive = isActive
         self.perSec = 0
+        self.isOffer = isOffer
     }
     
-    init(id: String? = nil, resourcesArray:[Resource] , energy: Int, type: FactoryType, texture: String? = nil, position: GeneratorPositions, isActive: IsActive, visual: Visual){
+    init(id: String? = nil, resourcesArray:[Resource] , energy: Int, type: FactoryType, texture: String? = nil, position: GeneratorPositions, isActive: IsActive, visual: Visual, isOffer: IsOffer){
         self.id = id
         self.resourcesArray = resourcesArray
         self.energy = energy
@@ -58,6 +60,7 @@ class Factory: Generator  {
         self.position = position
         self.isActive = isActive
         self.perSec = 0
+        self.isOffer = isOffer
     }
     
     func upgrade(index: Int) {
@@ -132,6 +135,39 @@ enum IsActive: CustomStringConvertible {
             return IsActive.no
         default:
             return IsActive.no
+        }
+    }
+}
+
+enum IsOffer: CustomStringConvertible {
+    case yes, no
+    
+    var description: String {
+        switch self {
+            case .yes:
+                return "yes"
+            case .no:
+                return "no"
+        }
+    }
+    
+    var key: String {
+        switch self {
+            case .yes:
+                return "yes"
+            case .no:
+                return "no"
+        }
+    }
+    
+    static func getKey(isOffer: String) -> IsOffer {
+        switch isOffer {
+        case "yes":
+            return IsOffer.yes
+        case "no":
+            return IsOffer.no
+        default:
+            return IsOffer.no
         }
     }
 }
