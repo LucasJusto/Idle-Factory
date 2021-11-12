@@ -12,6 +12,7 @@ class FactoryScene: SKScene {
     var thisFactory:Factory? = nil
     var isSmall:Bool = false
     var thiscolor:String? = nil
+    var thisYPosition:Float? = nil
     
     var background: SKSpriteNode = SKSpriteNode()
     var factoryNode:SKSpriteNode =  SKSpriteNode()
@@ -34,8 +35,13 @@ class FactoryScene: SKScene {
                     factoryNode.setScale(0.4)
                 }
                 else {
-                    factoryNode.position.y = -15
-                    factoryNode.setScale(0.9)
+                    if let y = thisYPosition {
+                        factoryNode.position.y = CGFloat(y)
+                    }
+                    else {
+                        factoryNode.position.y = -15
+                    }
+                    factoryNode.setScale(0.8)
                 }
             }
             else {
