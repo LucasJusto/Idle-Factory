@@ -136,30 +136,32 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sWr-DH-FU2">
-                                <rect key="frame" x="642.5" y="328" width="61.5" height="24"/>
-                                <fontDescription key="fontDescription" name="AustralSlabBlur-Regular" family="Austral Slab" pointSize="10"/>
+                                <rect key="frame" x="617" y="328" width="87" height="27"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="87" id="GrB-AI-D3k"/>
+                                    <constraint firstAttribute="height" constant="27" id="Oha-NB-DW5"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="AustralSlabBlur-Regular" family="Austral Slab" pointSize="14"/>
                                 <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                 <state key="normal" title="comprar"/>
-                                <buttonConfiguration key="configuration" style="plain" title="comprar">
-                                    <fontDescription key="titleFontDescription" name="AustralSlabBlur-Regular" family="Austral Slab" pointSize="10"/>
-                                </buttonConfiguration>
                                 <connections>
                                     <action selector="buyAction:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="pG9-Wj-l35"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5g3-UB-Y9P">
-                                <rect key="frame" x="326" y="328" width="53.5" height="24"/>
-                                <fontDescription key="fontDescription" name="AustralSlabBlur-Regular" family="Austral Slab" pointSize="10"/>
+                                <rect key="frame" x="267" y="328" width="87" height="27"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="27" id="EhS-k0-i3f"/>
+                                    <constraint firstAttribute="width" constant="87" id="nZE-0p-l30"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="AustralSlabBlur-Regular" family="Austral Slab" pointSize="14"/>
                                 <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                 <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" title="Button">
-                                    <fontDescription key="titleFontDescription" name="AustralSlabBlur-Regular" family="Austral Slab" pointSize="10"/>
-                                </buttonConfiguration>
                             </button>
                             <stackView opaque="NO" contentMode="scaleToFill" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="fQI-BB-ppd">
-                                <rect key="frame" x="469.5" y="321" width="152" height="50"/>
+                                <rect key="frame" x="444" y="321" width="152" height="50"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="1000" verticalHuggingPriority="251" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="M86-cG-2rv">
                                         <rect key="frame" x="0.0" y="0.0" width="49" height="50"/>
