@@ -431,8 +431,6 @@ extension GameInventorySceneController: UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
-        selected = indexPath.row
-        
         guard let cell = collectionView.cellForItem(at: indexPath) as? GameInventoryViewCell else { return }
                 cell.layer.borderWidth = 2
                 cell.layer.borderColor = UIColor.black.cgColor
@@ -448,6 +446,7 @@ extension GameInventorySceneController: UICollectionViewDelegateFlowLayout {
                 for f in 0..<GameScene.user!.generators.count {
                     if GameScene.user!.generators[f].id! == selectedFactory!.id! {
                         selectedFactoryIndex2 = f
+                        selected = f
                     }
                 }
                 resources = myFactories[indexPath.row].resourcesArray

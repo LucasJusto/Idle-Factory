@@ -149,7 +149,6 @@ class InputValueSellViewController: UIViewController, ComeBackData, ConfirmSell{
             typeOfMoney = .basic
             typeOfMoneyImage.image = UIImage(named: "Coin")
         }
-    
     }
     
     func setValueOnLabel(text: String) {
