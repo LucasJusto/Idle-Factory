@@ -48,7 +48,7 @@ class GenerateNFTConfirmationViewController: UIViewController {
         let resourceArray: [ResourceType] = [ResourceType.headphone, ResourceType.smartTV, ResourceType.smartphone, ResourceType.tablet, ResourceType.computer]
         
         let nftFactories = createNFTFactory(resourceTypeArray: resourceArray)
-        
+        self.dismiss(animated: true)
         DispatchQueue.global().async {
             if(GameScene.user!.premiumCurrency >= 50){
                 CKRepository.storeNewGenerator(userID: GameScene.user!.id, generator: nftFactories){ record ,error  in
@@ -72,12 +72,6 @@ class GenerateNFTConfirmationViewController: UIViewController {
                         })
                         semaphore.wait()
                         
-                        DispatchQueue.main.async {
-                            var mainView: UIStoryboard!
-                            mainView = UIStoryboard(name: "GameShopScene", bundle: nil)
-                            let viewcontroller : UIViewController = mainView.instantiateViewController(withIdentifier: "ShopStoryboard") as UIViewController
-                            self.present(viewcontroller, animated: false)
-                        }
                     }
                 }
             }

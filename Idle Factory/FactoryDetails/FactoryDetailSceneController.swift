@@ -167,8 +167,23 @@ class FactoryDetailSceneController: UIViewController,  UITableViewDataSource, UI
         view2.layer.borderWidth = 1
         view2.layer.cornerRadius = 15
         view2.layer.borderColor = CGColor(red: 255, green: 255, blue: 255, alpha: 1)
-        let scene = FactoryScene(size: CGSize(width: 400, height: 400))
+        let scene = FactoryScene(size: CGSize(width: 500, height: 500))
+        if FactoryDetailSceneController.isBlue {
+            FactoryDetailSceneController.thiscolor = "HudActions-background"
+            scene.thisYPosition = 65
+            
+        }
+        else {
+            FactoryDetailSceneController.thiscolor = "Marketplace_background"
+            if FactoryDetailSceneController.generator?.type == .NFT {
+                scene.thisYPosition = 25
+            }
+            else {
+                scene.thisYPosition = 65
+            }
+        }
         scene.thiscolor = FactoryDetailSceneController.thiscolor
+        //scene.isSmall = true
         scene.thisFactory = FactoryDetailSceneController.generator
         scene.scaleMode = .aspectFill
         SKview.presentScene(scene)

@@ -31,12 +31,16 @@ class FactoryScene: SKScene {
             if factory.type == .NFT {
                 factoryNode = FactoryVisualGenerator.getNode(visual: factory.visual!)
                 if(isSmall){
+                    factoryNode.texture = SKTexture(image: UIImage())
                     factoryNode.position.y = 35
                     factoryNode.setScale(0.4)
                 }
                 else {
                     if let y = thisYPosition {
                         factoryNode.position.y = CGFloat(y)
+                        if y != 12{
+                            factoryNode.texture = SKTexture(imageNamed: "teste")
+                        }
                     }
                     else {
                         factoryNode.position.y = -15
@@ -46,7 +50,12 @@ class FactoryScene: SKScene {
             }
             else {
                 factoryNode = SKSpriteNode(texture: SKTexture(imageNamed: factory.textureName))
-                factoryNode.position.y = 10
+                if let y = thisYPosition {
+                    factoryNode.position.y = CGFloat(y)
+                }
+                else {
+                    factoryNode.position.y = 15
+                }
                 factoryNode.setScale(0.7)
             }
         }
