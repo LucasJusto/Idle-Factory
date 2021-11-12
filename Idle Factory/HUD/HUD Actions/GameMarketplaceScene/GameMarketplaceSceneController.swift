@@ -190,6 +190,7 @@ class GameMarketplaceSceneController: UIViewController, NavigationCellDelegate {
     
     
     func didButtonPressed() {
+        print(#function)
         var mainView: UIStoryboard!
         mainView = UIStoryboard(name: "FactoryDetailScene", bundle: nil)
         let viewcontroller : UIViewController = mainView.instantiateViewController(withIdentifier: "FactoryDetailScene") as UIViewController

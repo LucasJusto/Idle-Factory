@@ -39,14 +39,21 @@ class GameMarketplaceViewCell: UICollectionViewCell {
     var thisOffer: Offer? = nil
     
     
-    @IBAction func seeMoreAction(_ sender: Any) {
+    
+    //        FactoryDetailSceneController.isBlue = false
+    //        FactoryDetailSceneController.generator = thisGenerator
+    //        FactoryDetailSceneController.offer = thisOffer
+    //        delegate?.didButtonPressed()
+    
+    
+    @IBAction func seeMore(_ sender: Any) {
         FactoryDetailSceneController.isBlue = false
         FactoryDetailSceneController.generator = thisGenerator
         FactoryDetailSceneController.offer = thisOffer
         delegate?.didButtonPressed()
     }
     
-
+    
     /**
      Hide the card if the request to database returns nothing.
      */
@@ -60,7 +67,7 @@ class GameMarketplaceViewCell: UICollectionViewCell {
      */
     func configureCell() {
         totalCardView.isHidden = false
-
+        
         // DESIGN
         cardView.layer.cornerRadius = 20
         seeMoreButton.layer.cornerRadius = 10
@@ -71,7 +78,7 @@ class GameMarketplaceViewCell: UICollectionViewCell {
         resourceQuantityType3.font = UIFont(name: "AustralSlabBlur-Regular", size: 8)
         priceLabel.font = UIFont(name: "AustralSlabBlur-Regular", size: 14)
         seeMoreButton.titleLabel?.font = UIFont(name: "AustralSlabBlur-Regular", size: 10)
-
+        
         seeMoreButton.setTitle(NSLocalizedString("AboutNewFactoryButton", comment: ""), for: .normal)
     }
     
@@ -104,7 +111,7 @@ class GameMarketplaceViewCell: UICollectionViewCell {
             resourceQuantityType2.text = "\(resources[1].baseQtt)"
             resourceType3.isHidden = true
             resourceQuantityType3.text = ""
-
+            
         case 3:
             resourceType1.image = UIImage(systemName: getResourceImageName(resource: resources[0].type))
             resourceQuantityType1.text = "\(resources[0].baseQtt)"
