@@ -79,6 +79,11 @@ class GameMarketplaceSceneController: UIViewController, NavigationCellDelegate {
                 offer.currencyType == .basic
             })
         })
+        
+        let timeToRefresh: Timer?
+        
+        timeToRefresh = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(loadPlayerCurrencies), userInfo: nil, repeats: true)
+        
     }
     
     
@@ -178,7 +183,7 @@ class GameMarketplaceSceneController: UIViewController, NavigationCellDelegate {
     /**
      Load player actual currencies value.
      */
-    func loadPlayerCurrencies() {
+    @objc func loadPlayerCurrencies() {
         mainCurrencyLabel.text = doubleToString(value: GameScene.user?.mainCurrency ?? 0.0)
         premiumCurrencyLabel.text = doubleToString(value: GameScene.user?.premiumCurrency ?? 0.0)
     }

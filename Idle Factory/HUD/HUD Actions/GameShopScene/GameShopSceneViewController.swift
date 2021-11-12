@@ -53,6 +53,10 @@ class GameShopSceneViewController: UIViewController, NavigationCellDelegate {
         for _ in 0..<20 {
             basicFactories.append(createBasicFactory(resourceTypeArray: resourceArray))
         }
+        
+        let timeToRefresh: Timer?
+        
+        timeToRefresh = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(loadPlayerCurrencies), userInfo: nil, repeats: true)
     }
     
     
@@ -126,7 +130,7 @@ class GameShopSceneViewController: UIViewController, NavigationCellDelegate {
     /**
      Load player actual currencies value.
      */
-    func loadPlayerCurrencies() {
+    @objc func loadPlayerCurrencies() {
         mainCurrencyLabel.text = doubleToString(value: GameScene.user?.mainCurrency ?? 0.0)
         premiumCurrencyLabel.text = doubleToString(value: GameScene.user?.premiumCurrency ?? 0.0)
     }
