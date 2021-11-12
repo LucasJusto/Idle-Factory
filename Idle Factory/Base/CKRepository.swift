@@ -673,6 +673,15 @@ public class CKRepository {
         publicDB.add(operation)
     }
     
+    static func deleteMarketPlaceOffer(offerID: String, completion: @escaping(CKRecord.ID?, Error?) -> Void) {
+        publicDB.delete(withRecordID: CKRecord.ID(recordName: offerID)) { deletedRecord, error in
+            if let ckError = error as? CKError {
+                CKRepository.errorAlertHandler(CKErrorCode: ckError.code)
+            }
+            completion(deletedRecord, error)
+        }
+    }
+    
     static func errorAlertHandler(CKErrorCode: CKError.Code){
         
         let notLoggedInTitle = NSLocalizedString("CKErrorNotLoggedInTitle", comment: "Not logged in iCloud")
