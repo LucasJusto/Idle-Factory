@@ -136,7 +136,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sWr-DH-FU2">
-                                <rect key="frame" x="617" y="328" width="87" height="27"/>
+                                <rect key="frame" x="607" y="328" width="87" height="27"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="87" id="GrB-AI-D3k"/>
                                     <constraint firstAttribute="height" constant="27" id="Oha-NB-DW5"/>
@@ -149,19 +149,8 @@
                                     <action selector="buyAction:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="pG9-Wj-l35"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5g3-UB-Y9P">
-                                <rect key="frame" x="267" y="328" width="87" height="27"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="27" id="EhS-k0-i3f"/>
-                                    <constraint firstAttribute="width" constant="87" id="nZE-0p-l30"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" name="AustralSlabBlur-Regular" family="Austral Slab" pointSize="14"/>
-                                <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                <state key="normal" title="Button"/>
-                            </button>
                             <stackView opaque="NO" contentMode="scaleToFill" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="fQI-BB-ppd">
-                                <rect key="frame" x="444" y="321" width="152" height="50"/>
+                                <rect key="frame" x="434" y="321" width="152" height="50"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="1000" verticalHuggingPriority="251" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="M86-cG-2rv">
                                         <rect key="frame" x="0.0" y="0.0" width="49" height="50"/>
@@ -271,7 +260,6 @@
                         <color key="backgroundColor" name="Marketplace_background"/>
                         <constraints>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="ncd-Iu-cMB" secondAttribute="bottom" constant="47" id="1Pq-qa-daP"/>
-                            <constraint firstItem="5g3-UB-Y9P" firstAttribute="top" secondItem="ncd-Iu-cMB" secondAttribute="bottom" constant="-18" id="1pA-ge-dQN"/>
                             <constraint firstItem="ncd-Iu-cMB" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="100" id="4Lj-LX-YpH"/>
                             <constraint firstItem="sWr-DH-FU2" firstAttribute="leading" secondItem="fQI-BB-ppd" secondAttribute="trailing" constant="21" id="5s7-nB-rOc"/>
                             <constraint firstItem="P5k-7M-A3n" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="15" id="9JL-bn-ZW2"/>
@@ -282,16 +270,14 @@
                             <constraint firstItem="sWr-DH-FU2" firstAttribute="top" secondItem="ncd-Iu-cMB" secondAttribute="bottom" constant="-18" id="VaQ-WP-BTM"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="ncd-Iu-cMB" secondAttribute="trailing" constant="100" id="gCJ-Z9-Yfv"/>
                             <constraint firstItem="ncd-Iu-cMB" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" constant="110" id="glr-oh-tWx"/>
-                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="sWr-DH-FU2" secondAttribute="trailing" constant="148" id="hOy-eK-uK6"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="sWr-DH-FU2" secondAttribute="trailing" constant="158" id="hOy-eK-uK6"/>
                             <constraint firstItem="P5k-7M-A3n" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" constant="41" id="qPR-VB-c0Z"/>
-                            <constraint firstItem="fQI-BB-ppd" firstAttribute="leading" secondItem="5g3-UB-Y9P" secondAttribute="trailing" constant="90" id="ubf-DW-FNw"/>
                             <constraint firstItem="Mni-es-HOv" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" constant="45" id="yXE-vo-8dt"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="HeaderViewPreminumCurrency" destination="aXZ-5N-uJz" id="IcD-vF-DMw"/>
                         <outlet property="SKview" destination="Zxt-2w-zuJ" id="0LP-6h-rjR"/>
-                        <outlet property="cancelButton" destination="5g3-UB-Y9P" id="mbi-YK-uf0"/>
                         <outlet property="headerViewMainCurrency" destination="HMv-1R-RXA" id="WJz-Dw-149"/>
                         <outlet property="id" destination="CN8-Nb-8vN" id="XSa-mi-Pdf"/>
                         <outlet property="mainCurrencyLabel" destination="hIh-ab-B1j" id="rUb-NV-p7g"/>
