@@ -103,6 +103,16 @@ class GameViewController: UIViewController {
     
     
     // MARK: - HUD ACTION SCENES
+    /**
+     Calls GameSettings storyboard to display the game settings.
+     */
+    func displaySettings() {
+        
+        let mainView = UIStoryboard(name: "Settings", bundle: nil)
+        let viewcontroller : SettingsViewController = mainView.instantiateViewController(withIdentifier: "GameSettingsScene") as! SettingsViewController
+        self.present(viewcontroller, animated: false)
+    }
+    
     
     /**
      Calls GameInventory storyboard to display the actual players inventory.

@@ -591,8 +591,8 @@
     </scenes>
     <resources>
         <image name="4k.tv" catalog="system" width="128" height="97"/>
-        <image name="Coin" width="50" height="43"/>
-        <image name="Money_premium" width="46" height="43"/>
+        <image name="Coin" width="26" height="18"/>
+        <image name="Money_premium" width="23" height="13"/>
         <image name="airpods" catalog="system" width="128" height="112"/>
         <image name="back" width="31.5" height="31"/>
         <image name="close" width="31.5" height="31"/>

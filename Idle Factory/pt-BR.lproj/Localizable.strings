@@ -52,6 +52,10 @@
 "AboutNewFactoryButton" = "Ver mais";
 
 
+// MARK: - CHALLENGES
+"UnderConstructionLabel" = "Esta seção está em construção.";
+
+
 //MARK: - Announces
 "AnnounceHeaderLabel" = "Meus anúncios";
 "AboutAnnounceButton" = "Ver anúncio";

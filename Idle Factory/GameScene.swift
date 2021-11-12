@@ -127,6 +127,8 @@ class GameScene: SKScene {
             let location = touch.location(in: self)
             let touchedNode = atPoint(location)
             switch touchedNode.name {
+            case "GameSettingsButton":
+                displaySettings()
             case "PlayerInventoryButton":
                 displayInventory()
             case "ShopButton":
@@ -214,7 +216,6 @@ class GameScene: SKScene {
      Create and displays top hud of the game.
      */
     func createTopHud() {
-        
         // Top HUD background creation
         let mainCurrencyHudBackground = gameHud.createTopHudBackground(xPos: 50)
         let premiumHudBackground = gameHud.createTopHudBackground(xPos: mainCurrencyHudBackground.calculateAccumulatedFrame().width + 60)
@@ -248,7 +249,6 @@ class GameScene: SKScene {
         premiumHudBackground.addChild(premiumCurrencyIcon)
         premiumHudBackground.addChild(premiumCurrencyData)
         mainCurrencyHudBackground.addChild(generatorResource)
-        
     }
     
     
@@ -261,22 +261,25 @@ class GameScene: SKScene {
         let sidebarBackground = gameHud.createSidebarBackground()
         
         // HUD action buttons creation
+        let settingsButton = gameHud.createSettingsButton()
+        let marketPlaceButton = gameHud.createMarketplaceButton()
         let inventoryButton = gameHud.createInventoryButton()
         let shopButton = gameHud.createShopButton()
-        let marketPlaceButton = gameHud.createMarketplaceButton()
         let challengeButton = gameHud.createChallengeButton()
         
         // Positioning buttons on the device
-        inventoryButton.position = CGPoint(x: ((GameScene.deviceScreenWidth) / 2.31), y: 130)
-        shopButton.position = CGPoint(x: ((GameScene.deviceScreenWidth) / 2.31), y: 50)
-        marketPlaceButton.position = CGPoint(x: ((GameScene.deviceScreenWidth) / 2.31), y: -30)
-        challengeButton.position = CGPoint(x: ((GameScene.deviceScreenWidth) / 2.31), y: -123)
-        
+        settingsButton.position = CGPoint(x: ((GameScene.deviceScreenWidth) / 2.31), y: 130)
+        marketPlaceButton.position = CGPoint(x: ((GameScene.deviceScreenWidth) / 2.31), y: 10)
+        inventoryButton.position = CGPoint(x: ((GameScene.deviceScreenWidth) / 2.31), y: -65)
+        shopButton.position = CGPoint(x: ((GameScene.deviceScreenWidth) / 2.31), y: -140)
+        challengeButton.position = CGPoint(x: -((GameScene.deviceScreenWidth) / 2.55), y: -123)
+
         // Add to scene
         cameraNode.addChild(sidebarBackground)
+        sidebarBackground.addChild(settingsButton)
+        sidebarBackground.addChild(marketPlaceButton)
         sidebarBackground.addChild(inventoryButton)
         sidebarBackground.addChild(shopButton)
-        sidebarBackground.addChild(marketPlaceButton)
         sidebarBackground.addChild(challengeButton)
     }
     
@@ -412,7 +415,6 @@ class GameScene: SKScene {
         case .none:
             let _ = 0
         }
-        
     }
     
     
@@ -448,6 +450,15 @@ class GameScene: SKScene {
     
     // MARK: - RIGHTBAR INTERACTIONS
     /**
+     Display game Settings.
+     */
+    func displaySettings() {
+        let viewController = UIApplication.shared.windows.first!.rootViewController as! GameViewController
+        viewController.displaySettings()
+    }
+    
+    
+    /**
      Display player inventory.
      */
     func displayInventory() {
@@ -460,7 +471,6 @@ class GameScene: SKScene {
      Display in-game shop.
      */
     func displayShop() {
-        
         let viewController = UIApplication.shared.windows.first!.rootViewController as! GameViewController
         viewController.displayShop()
     }
@@ -479,7 +489,6 @@ class GameScene: SKScene {
      Display challenge.
      */
     func displayChallenge() {
-        
         let viewController = UIApplication.shared.windows.first!.rootViewController as! GameViewController
         viewController.displayChallenge()
     }

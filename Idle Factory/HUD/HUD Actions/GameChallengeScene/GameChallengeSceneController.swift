@@ -6,38 +6,39 @@
 //
 
 import UIKit
-import SpriteKit
 
 class GameChallengeSceneController: UIViewController {
     
-    // MARK: - Challenge Scene display components
-    private(set) var sceneBackground: SKShapeNode = SKShapeNode()
+    @IBOutlet weak var warning: UILabel!
+    
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        loadCustomFont()
+        
+        warning.text = NSLocalizedString("UnderConstructionLabel", comment: "")
+
     }
     
     
+    // MARK: - DESIGN FUNCTIONS
     /**
-     Create the scene background.
+     Load custom font to all labels and button text.
      */
-    func createBackground() -> SKShapeNode {
-        sceneBackground = SKShapeNode(rect: CGRect(x: 0, y: 0, width: (GameScene.deviceScreenWidth
-), height: (GameScene.deviceScreenHeight)))
-        sceneBackground.fillColor = UIColor(named: "HudActions-background")!
-        sceneBackground.zPosition = 10
-        return sceneBackground
+    func loadCustomFont() {
+        // LABELS
+        warning.font = UIFont(name: "AustralSlabBlur-Regular", size: 27)
     }
     
     
+    // MARK: - ACTIONS
     /**
-     Create the button to close the actual scene.
+     Close Challenge scene.
      */
-    func createCloseButton() -> SKSpriteNode {
-        let closeAction = SKSpriteNode(color: .white, size: CGSize(width: 90, height: 90))
-        closeAction.name = "CloseChallengeScene"
-        closeAction.zPosition = 11
-        return closeAction
+    @IBAction func closeChallenge(_ sender: Any) {
+        self.view.window!.rootViewController?.dismiss(animated: false, completion: nil)
     }
+    
 }
