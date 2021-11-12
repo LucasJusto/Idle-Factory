@@ -322,6 +322,7 @@ class GameScene: SKScene {
             } else {
                 factory.node.position = GameScene.factoriesPositions[0].slot.position
                 GameScene.factoriesPositions[0].slot.removeFromParent()
+                changeAllNodeFamilyNames(node: factory.node, name: "factory_slot_0_occupied")
                 background.addChild(factory.node)
             }
             GameScene.factoriesPositions[0].slot.name = "factory_slot_0_occupied"
@@ -332,6 +333,7 @@ class GameScene: SKScene {
             } else {
                 factory.node.position = GameScene.factoriesPositions[1].slot.position
                 GameScene.factoriesPositions[1].slot.removeFromParent()
+                changeAllNodeFamilyNames(node: factory.node, name: "factory_slot_1_occupied")
                 background.addChild(factory.node)
             }
             GameScene.factoriesPositions[1].slot.name = "factory_slot_1_occupied"
@@ -342,6 +344,7 @@ class GameScene: SKScene {
             } else {
                 factory.node.position = GameScene.factoriesPositions[2].slot.position
                 GameScene.factoriesPositions[2].slot.removeFromParent()
+                changeAllNodeFamilyNames(node: factory.node, name: "factory_slot_2_occupied")
                 background.addChild(factory.node)
             }
             GameScene.factoriesPositions[2].slot.name = "factory_slot_2_occupied"
@@ -352,6 +355,7 @@ class GameScene: SKScene {
             } else {
                 factory.node.position = GameScene.factoriesPositions[3].slot.position
                 GameScene.factoriesPositions[3].slot.removeFromParent()
+                changeAllNodeFamilyNames(node: factory.node, name: "factory_slot_3_occupied")
                 background.addChild(factory.node)
             }
             GameScene.factoriesPositions[3].slot.name = "factory_slot_3_occupied"
@@ -362,6 +366,7 @@ class GameScene: SKScene {
             } else {
                 factory.node.position = GameScene.factoriesPositions[4].slot.position
                 GameScene.factoriesPositions[4].slot.removeFromParent()
+                changeAllNodeFamilyNames(node: factory.node, name: "factory_slot_4_occupied")
                 background.addChild(factory.node)
             }
             GameScene.factoriesPositions[4].slot.name = "factory_slot_4_occupied"
@@ -372,6 +377,7 @@ class GameScene: SKScene {
             } else {
                 factory.node.position = GameScene.factoriesPositions[5].slot.position
                 GameScene.factoriesPositions[5].slot.removeFromParent()
+                changeAllNodeFamilyNames(node: factory.node, name: "factory_slot_5_occupied")
                 background.addChild(factory.node)
             }
             GameScene.factoriesPositions[5].slot.name = "factory_slot_5_occupied"

@@ -10,7 +10,9 @@ import SpriteKit
 class FactoryScene: SKScene {
     
     var thisFactory:Factory? = nil
+    var isSmall:Bool = false
     var thiscolor:String? = nil
+    var thisYPosition:Float? = nil
     
     var background: SKSpriteNode = SKSpriteNode()
     var factoryNode:SKSpriteNode =  SKSpriteNode()
@@ -28,9 +30,24 @@ class FactoryScene: SKScene {
         if let factory = thisFactory {
             if factory.type == .NFT {
                 factoryNode = FactoryVisualGenerator.getNode(visual: factory.visual!)
+                if(isSmall){
+                    factoryNode.position.y = 35
+                    factoryNode.setScale(0.4)
+                }
+                else {
+                    if let y = thisYPosition {
+                        factoryNode.position.y = CGFloat(y)
+                    }
+                    else {
+                        factoryNode.position.y = -15
+                    }
+                    factoryNode.setScale(0.8)
+                }
             }
             else {
                 factoryNode = SKSpriteNode(texture: SKTexture(imageNamed: factory.textureName))
+                factoryNode.position.y = 10
+                factoryNode.setScale(0.7)
             }
         }
         else {
@@ -48,8 +65,7 @@ class FactoryScene: SKScene {
         self.anchorPoint = CGPoint(x: 0.5, y: 0)
         background.anchorPoint = CGPoint(x: 0.5, y: 0)
         addChild(background)
-        factoryNode.position.y = 10
-        factoryNode.setScale(0.7)
+        
 //        factoryNode.enumerateChildNodes(withName: "*") { node, _ in
 //            node.setScale(0.5)
 //        }
