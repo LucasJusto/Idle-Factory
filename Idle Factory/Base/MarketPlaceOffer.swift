@@ -14,8 +14,9 @@ class Offer {
     var buyerID: String?
     let price: Double
     let currencyType: CurrencyType
+    var isCollected: IsCollected
     
-    public init(id: String, sellerID: String, generatorID: String, buyerID: String?, price: Double, currencyType: CurrencyType) {
+    public init(id: String, sellerID: String, generatorID: String, buyerID: String?, price: Double, currencyType: CurrencyType, isCollected: IsCollected) {
         self.id = id
         self.sellerID = sellerID
         self.generatorID = generatorID
@@ -24,5 +25,39 @@ class Offer {
         }
         self.price = price
         self.currencyType = currencyType
+        self.isCollected = isCollected
+    }
+}
+
+enum IsCollected: CustomStringConvertible {
+    case yes, no
+    
+    var description: String {
+        switch self {
+            case .yes:
+                return "yes"
+            case .no:
+                return "no"
+        }
+    }
+    
+    var key: String {
+        switch self {
+            case .yes:
+                return "yes"
+            case .no:
+                return "no"
+        }
+    }
+    
+    static func getKey(isCollected: String) -> IsCollected {
+        switch isCollected {
+        case "yes":
+            return IsCollected.yes
+        case "no":
+            return IsCollected.no
+        default:
+            return IsCollected.no
+        }
     }
 }

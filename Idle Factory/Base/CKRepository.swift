@@ -198,7 +198,30 @@ public class CKRepository {
     }
     
     static func getUserOffersByID(userID: String, completion: @escaping ([Offer]) -> Void) {
-        #warning("IMPLEMENT")
+        let offersPredicate = NSPredicate(format: "\(MarketTable.sellerID.description) == %@", userID)
+        let offersQuery = CKQuery(recordType: MarketTable.recordType.description, predicate: offersPredicate)
+        var offers: [Offer] = []
+        
+        publicDB.perform(offersQuery, inZoneWith: nil) { results, error in
+            if let ckError = error as? CKError {
+                CKRepository.errorAlertHandler(CKErrorCode: ckError.code)
+            }
+            if let results = results {
+                for offer in results {
+                    let id: String = offer.recordID.recordName
+                    let sellerID: String = offer.value(forKey: MarketTable.sellerID.description) as? String ?? ""
+                    let generatorID: String = offer.value(forKey: MarketTable.generatorID.description) as? String ?? ""
+                    let buyerID: String = offer.value(forKey: MarketTable.sellerID.description) as? String ?? ""
+                    let price: Double = offer.value(forKey: MarketTable.price.description) as? Double ?? 0.0
+                    let currencyTypeString: String = offer.value(forKey: MarketTable.currencyType.description) as? String ?? ""
+                    let currencyType: CurrencyType = CurrencyType.getType(key: currencyTypeString)
+                    let collected: String = offer.value(forKey: MarketTable.collected.description) as? String ?? ""
+                    let isCollected: IsCollected = IsCollected.getKey(isCollected: collected)
+                    
+                    offers.append(Offer(id: id, sellerID: sellerID, generatorID: generatorID, buyerID: buyerID, price: price, currencyType: currencyType, isCollected: isCollected))
+                }
+            }
+        }
     }
     
     static func getUserGeneratorsByID(userID: String, completion: @escaping ([Factory]) -> Void) {
@@ -455,6 +478,7 @@ public class CKRepository {
         record.setObject(currencyType.key as CKRecordValue?, forKey: MarketTable.currencyType.description)
         record.setObject(generatorID as CKRecordValue?, forKey: MarketTable.generatorID.description)
         record.setObject("none" as CKRecordValue?, forKey: MarketTable.buyerID.description)
+        record.setObject(IsCollected.no.description as CKRecordValue?, forKey: MarketTable.collected.description)
         
         publicDB.save(record) { _, error in
             if let ckError = error as? CKError {
@@ -484,7 +508,7 @@ public class CKRepository {
                     let currencyTypeString: String = result.value(forKey: MarketTable.currencyType.description) as! String
                     let currencyType: CurrencyType = CurrencyType.getType(key: currencyTypeString)
                     
-                    offers.append(Offer(id: id, sellerID: sellerID, generatorID: generatorID, buyerID: nil, price: price, currencyType: currencyType))
+                    offers.append(Offer(id: id, sellerID: sellerID, generatorID: generatorID, buyerID: nil, price: price, currencyType: currencyType, isCollected: IsCollected.no))
                 }
             }
             completion(offers)
@@ -763,7 +787,7 @@ enum ResourceTable: CustomStringConvertible {
 }
 
 enum MarketTable: CustomStringConvertible {
-    case recordType, buyerID, currencyType, generatorID, price, sellerID
+    case recordType, buyerID, currencyType, generatorID, price, sellerID, collected
     
     var description: String {
         switch self {
@@ -779,6 +803,8 @@ enum MarketTable: CustomStringConvertible {
                 return "price"
             case .sellerID:
                 return "sellerID"
+            case .collected:
+                return "collected"
         }
     }
 }
