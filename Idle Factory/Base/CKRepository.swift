@@ -520,9 +520,10 @@ public class CKRepository {
         }
     }
     
-    static func buyOfferFromMarket(sellerID: String, generatorID: String, buyerID: String, completion: @escaping (CKRecord?, Error?) -> Void) {
+    static func buyOfferFromMarket(sellerID: String, generatorID: String, buyerID: String, price: Double, currencyType: CurrencyType, completion: @escaping ([CKRecord]?, Error?) -> Void) {
         let publicDB = container.publicCloudDatabase
-        
+        var records: [CKRecord] = []
+        let semaphore = DispatchSemaphore(value: 3)
         let predicate = NSPredicate(format: "\(MarketTable.sellerID.description) == '\(sellerID)' AND \(MarketTable.generatorID.description) == '\(generatorID)'")
         let query = CKQuery(recordType: MarketTable.recordType.description, predicate: predicate)
         
@@ -536,26 +537,51 @@ public class CKRepository {
                 if let buyer = offer.value(forKey: MarketTable.buyerID.description) as? String {
                     if buyer == "none" {
                         offer.setObject(buyerID as CKRecordValue?, forKey: MarketTable.buyerID.description)
-                        
-                        publicDB.save(offer) { savedRecord, error in
-                            if let ckError = error as? CKError {
-                                CKRepository.errorAlertHandler(CKErrorCode: ckError.code)
-                            }
-                            completion(savedRecord, error)
-                        }
-                    }
-                    else {
-                        completion(nil, error)
+                        records.append(offer)
+                        semaphore.signal()
                     }
                 }
-                else {
-                    completion(nil, error)
-                }
-            }
-            else {
-                completion(nil, error)
             }
         }
+        
+        publicDB.fetch(withRecordID: CKRecord.ID(recordName: generatorID)) { generator, error in
+            if let ckError = error as? CKError {
+                CKRepository.errorAlertHandler(CKErrorCode: ckError.code)
+            }
+            if let generator = generator {
+                generator.setObject(buyerID as CKRecordValue?, forKey: GeneratorTable.userID.description)
+                records.append(generator)
+                semaphore.signal()
+            }
+        }
+        
+        semaphore.wait()
+        let operation = CKModifyRecordsOperation(recordsToSave: records, recordIDsToDelete: nil)
+        operation.savePolicy = .changedKeys
+        operation.modifyRecordsCompletionBlock = { savedRecords, _, error in
+            if let ckError = error as? CKError {
+                CKRepository.errorAlertHandler(CKErrorCode: ckError.code)
+            }
+            completion(savedRecords, error)
+        }
+        
+        publicDB.fetch(withRecordID: CKRecord.ID(recordName: buyerID)) { buyer, error in
+            if let ckError = error as? CKError {
+                CKRepository.errorAlertHandler(CKErrorCode: ckError.code)
+            }
+            if let buyer = buyer {
+                if currencyType == .basic {
+                    buyer.setObject((GameScene.user!.mainCurrency - price) as CKRecordValue?, forKey: UsersTable.mainCurrency.description)
+                }
+                else {
+                    buyer.setObject((GameScene.user!.premiumCurrency - price) as CKRecordValue?, forKey: UsersTable.premiumCurrency.description)
+                }
+                records.append(buyer)
+                semaphore.signal()
+            }
+        }
+        
+        publicDB.add(operation)
     }
     
     static func getGeneratorsByIDs(generatorsIDs: [String], completion: @escaping ([Factory]) -> Void){
