@@ -88,3 +88,12 @@
 "HeaderLabelConfirmSell" = "Confirm your factory announce";
 "SubtitleLabelConfirmSell" = "When someone buys your factory you will receive:";
 "AnnounceConfirmButton" = "Announce";
+
+
+//MARK: - Settings
+"resetButtonLabelText" = "Reset personal informations";
+"SongLabel" = "Song";
+"SoundEffectsLabel" = "Sound effects";
+"confirmButtonSettings" = "Reset";
+"cancelButtonSettings" = "Cancel";
+"confirmResetTitle" = "Clearing your personal data will change your username, do you want to continue?";

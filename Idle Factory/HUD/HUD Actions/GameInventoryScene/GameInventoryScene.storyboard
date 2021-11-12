@@ -623,7 +623,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="138.61607142857142" y="79.710144927536234"/>
+            <point key="canvasLocation" x="143" y="-20"/>
         </scene>
         <!--Input Value Sell View Controller-->
         <scene sceneID="JNm-jv-iZ6">
