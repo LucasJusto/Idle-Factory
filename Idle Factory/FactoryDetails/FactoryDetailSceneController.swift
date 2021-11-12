@@ -30,7 +30,6 @@ class FactoryDetailSceneController: UIViewController,  UITableViewDataSource, UI
     }
     @IBOutlet weak var id: UILabel!
     @IBOutlet weak var purchaseButton: UIButton!
-    @IBOutlet weak var cancelButton: UIButton!
     @IBOutlet weak var priceLabel: UILabel!
     @IBOutlet weak var priceImage: UIImageView!
     
@@ -123,16 +122,16 @@ class FactoryDetailSceneController: UIViewController,  UITableViewDataSource, UI
         else {
             mainView.backgroundColor = UIColor(named: "Marketplace_background")
         }
-        cancelButton.layer.cornerRadius = 10
+        
         purchaseButton.layer.cornerRadius = 10
         
-        cancelButton.setTitle(NSLocalizedString("Cancel", comment: ""), for: UIControl.State.normal)
+        
         purchaseButton.setTitle(NSLocalizedString("Purchase", comment: ""), for: UIControl.State.normal)
         
-        cancelButton.titleLabel?.font = UIFont(name: "AustralSlabBlur-Regular", size: 10)
+        
         purchaseButton.titleLabel?.font = UIFont(name: "AustralSlabBlur-Regular", size: 10)
         
-        cancelButton.backgroundColor = UIColor.white
+        
         purchaseButton.backgroundColor = UIColor(named: "actionColor1")
         if let generator = FactoryDetailSceneController.generator {
             if let id = generator.id {
