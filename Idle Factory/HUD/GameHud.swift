@@ -131,6 +131,18 @@ class GameHud {
     
     
     /**
+     Create settings button for the sidebar hud.
+     */
+    func createSettingsButton() -> SKSpriteNode {
+        settingsButton = SKSpriteNode(imageNamed: "Button-settings")
+        settingsButton.name = "GameSettingsButton"
+        settingsButton.setScale(1.2)
+        settingsButton.zPosition = 50
+        return settingsButton
+    }
+    
+    
+    /**
      Create inventory button for the sidebar hud.
      */
     func createInventoryButton() -> SKSpriteNode {
@@ -175,17 +187,5 @@ class GameHud {
         challengeButton.setScale(1.3)
         challengeButton.zPosition = 50
         return challengeButton
-    }
-    
-    
-    /**
-     Create settings button for the sidebar hud.
-     */
-    func createSettingsButton() -> SKSpriteNode {
-        settingsButton = SKSpriteNode(imageNamed: "Button-settings")
-        settingsButton.name = "GameSettingsButton"
-        settingsButton.setScale(1.2)
-        settingsButton.zPosition = 50
-        return settingsButton
     }
 }

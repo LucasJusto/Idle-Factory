@@ -94,25 +94,7 @@ class GameScene: SKScene {
         addChild(cameraNode)
         
         startIncrement()
-        
-//        for n in GameScene.user!.generators {
-//            CKRepository.deleteGeneratorByID(generatorID: n.id!){ _ in
-//                
-//            }
-//        }
-        
-//
-//        CKRepository.getUserId{ id in
-//                    CKRepository.storeNewGenerator(userID: id! , generator: Factory(resourcesArray: [Resource(basePrice: 100, baseQtt: 5, currentLevel: 0, qttPLevel: 2, type: ResourceType.computer, pricePLevelIncreaseTax: 2, generatorType: .Basic)], energy: 2, type: FactoryType.Basic, texture: "Basic_Factory_level_2", position: GeneratorPositions.none, isActive: IsActive.no)){_,_ in
-//
-//                            }
-//                        }
-//        CKRepository.getUserId{ id in
-//                    CKRepository.storeNewGenerator(userID: id! , generator: Factory(resourcesArray: [Resource(basePrice: 100, baseQtt: 8, currentLevel: 0, qttPLevel: 2, type: ResourceType.computer, pricePLevelIncreaseTax: 2, generatorType: .Basic)], energy: 2, type: FactoryType.Basic, texture: "Basic_Factory_level_5", position: GeneratorPositions.none, isActive: IsActive.no)){_,_ in
-//
-//                            }
-//                        }
-        
+                
 //        for g in GameScene.user!.generators {
 //            CKRepository.deleteGeneratorByID(generator: g, completion: { _ in
 //            })
@@ -320,6 +302,7 @@ class GameScene: SKScene {
         case .first:
             if factory.type == .Basic {
                 GameScene.factoriesPositions[0].slot.texture = SKTexture(imageNamed: factory.textureName)
+                GameScene.factoriesPositions[0].slot.name = "factory_slot_0_occupied"
             } else {
                 factory.node.position = GameScene.factoriesPositions[0].slot.position
                 GameScene.factoriesPositions[0].slot.removeFromParent()
@@ -327,11 +310,11 @@ class GameScene: SKScene {
                 changeAllNodeFamilyNames(node: factory.node, name: "factory_slot_0_occupied")
                 background.addChild(factory.node)
             }
-            GameScene.factoriesPositions[0].slot.name = "factory_slot_0_occupied"
             factory.node.zPosition = 5
         case .second:
             if factory.type == .Basic {
                 GameScene.factoriesPositions[1].slot.texture = SKTexture(imageNamed: factory.textureName)
+                GameScene.factoriesPositions[1].slot.name = "factory_slot_1_occupied"
             } else {
                 factory.node.position = GameScene.factoriesPositions[1].slot.position
                 GameScene.factoriesPositions[1].slot.removeFromParent()
@@ -339,11 +322,11 @@ class GameScene: SKScene {
                 changeAllNodeFamilyNames(node: factory.node, name: "factory_slot_1_occupied")
                 background.addChild(factory.node)
             }
-            GameScene.factoriesPositions[1].slot.name = "factory_slot_1_occupied"
             factory.node.zPosition = 2
         case .third:
             if factory.type == .Basic {
                 GameScene.factoriesPositions[2].slot.texture = SKTexture(imageNamed: factory.textureName)
+                GameScene.factoriesPositions[2].slot.name = "factory_slot_2_occupied"
             } else {
                 factory.node.position = GameScene.factoriesPositions[2].slot.position
                 GameScene.factoriesPositions[2].slot.removeFromParent()
@@ -351,11 +334,11 @@ class GameScene: SKScene {
                 changeAllNodeFamilyNames(node: factory.node, name: "factory_slot_2_occupied")
                 background.addChild(factory.node)
             }
-            GameScene.factoriesPositions[2].slot.name = "factory_slot_2_occupied"
             factory.node.zPosition = 20
         case .fourth:
             if factory.type == .Basic {
                 GameScene.factoriesPositions[3].slot.texture = SKTexture(imageNamed: factory.textureName)
+                GameScene.factoriesPositions[3].slot.name = "factory_slot_3_occupied"
             } else {
                 factory.node.position = GameScene.factoriesPositions[3].slot.position
                 GameScene.factoriesPositions[3].slot.removeFromParent()
@@ -363,11 +346,11 @@ class GameScene: SKScene {
                 changeAllNodeFamilyNames(node: factory.node, name: "factory_slot_3_occupied")
                 background.addChild(factory.node)
             }
-            GameScene.factoriesPositions[3].slot.name = "factory_slot_3_occupied"
             factory.node.zPosition = 15
         case .fifth:
             if factory.type == .Basic {
                 GameScene.factoriesPositions[4].slot.texture = SKTexture(imageNamed: factory.textureName)
+                GameScene.factoriesPositions[4].slot.name = "factory_slot_4_occupied"
             } else {
                 factory.node.position = GameScene.factoriesPositions[4].slot.position
                 GameScene.factoriesPositions[4].slot.removeFromParent()
@@ -375,11 +358,11 @@ class GameScene: SKScene {
                 changeAllNodeFamilyNames(node: factory.node, name: "factory_slot_4_occupied")
                 background.addChild(factory.node)
             }
-            GameScene.factoriesPositions[4].slot.name = "factory_slot_4_occupied"
             factory.node.zPosition = 25
         case .sixth:
             if factory.type == .Basic {
                 GameScene.factoriesPositions[5].slot.texture = SKTexture(imageNamed: factory.textureName)
+                GameScene.factoriesPositions[5].slot.name = "factory_slot_5_occupied"
             } else {
                 factory.node.position = GameScene.factoriesPositions[5].slot.position
                 GameScene.factoriesPositions[5].slot.removeFromParent()
@@ -387,7 +370,6 @@ class GameScene: SKScene {
                 changeAllNodeFamilyNames(node: factory.node, name: "factory_slot_5_occupied")
                 background.addChild(factory.node)
             }
-            GameScene.factoriesPositions[5].slot.name = "factory_slot_5_occupied"
             factory.node.zPosition = 20
         case .none:
             let _ = 0

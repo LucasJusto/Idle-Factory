@@ -25,7 +25,6 @@ class GameInventorySceneController: UIViewController {
     @IBOutlet weak var factoryInfoView: UIView!
     @IBOutlet weak var factoryAboutView: UIView!
     @IBOutlet weak var SKView: SKView!
-    @IBOutlet weak var factoryImage: UIImageView!
     
     // First Product Generation
     @IBOutlet weak var typeImage1: UIImageView!
