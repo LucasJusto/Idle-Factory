@@ -1057,7 +1057,7 @@
                                                             <constraint firstAttribute="height" constant="30" id="cW0-Bl-lfT"/>
                                                         </constraints>
                                                     </imageView>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="999.999 M" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FMH-PW-gCd">
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="999.999 M" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FMH-PW-gCd">
                                                         <rect key="frame" x="35" y="7" width="97" height="16.5"/>
                                                         <fontDescription key="fontDescription" name="AustralSlabBlur-Regular" family="Austral Slab" pointSize="14"/>
                                                         <color key="textColor" name="Rightbar_background"/>
