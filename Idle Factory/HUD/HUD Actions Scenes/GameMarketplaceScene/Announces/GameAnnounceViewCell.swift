@@ -6,7 +6,7 @@
 //
 
 import UIKit
-
+import SpriteKit
 
 /**
  Display each offer made by player (you) on your announces scene.
@@ -15,8 +15,9 @@ class GameAnnounceViewCell: UICollectionViewCell {
     
     // MARK: - GENERATOR OUTLETS
     @IBOutlet weak var cardView: UIView!
+    
     // Generator Image
-    @IBOutlet weak var generatorImage: UIImageView!
+    @IBOutlet weak var generatorImage: SKView!
     
     // Generator resources
     @IBOutlet weak var resourceType1: UIImageView!
@@ -31,6 +32,10 @@ class GameAnnounceViewCell: UICollectionViewCell {
     // Button
     @IBOutlet weak var seeAnnounceButton: UIButton!
     
+    
+    // MARK: - VARIABLES
+    var myFactoryAnnounce: Factory?
+
     
     // MARK: - CELL FUNCTIONS
     override func prepareForReuse() {
@@ -64,8 +69,14 @@ class GameAnnounceViewCell: UICollectionViewCell {
     /**
      Pull purchasable factories to display on marketplace.
      */
-    func pullMarketplaceFactories(texture: String, resources: [Resource]) {
-        generatorImage.image = UIImage(named: texture)
+    func pullMyAnnouncesFactories(factory: Factory, offer: Offer, premium: Bool) {
+        let scene = FactoryScene(size: CGSize(width: 400, height: 400))
+        scene.thisFactory = factory
+        scene.thisYPosition = 12
+        scene.scaleMode = .aspectFill
+        generatorImage.presentScene(scene)
+        let resources = factory.resourcesArray
+        
         switch resources.count {
         case 1:
             resourceType1.isHidden = true
@@ -99,6 +110,7 @@ class GameAnnounceViewCell: UICollectionViewCell {
             resourceType3.isHidden = true
             resourceQuantityType3.isHidden = true
         }
-        priceLabel.text = "999.999 M"
+        coinImage.image = UIImage(named: premium ? "Money_premium" : "Coin")
+        priceLabel.text = "\(offer.price)"
     }
 }
