@@ -120,10 +120,8 @@ class GameInventorySceneController: UIViewController {
         cancelQuickSell.setTitle(NSLocalizedString("QuickSellCancelButton", comment: ""), for: .normal)
         confirmQuickSell.setTitle(NSLocalizedString("QuickSellConfirmButton", comment: ""), for: .normal)
     
-        // Load not active generators list.
-        factoriesNotActive = (GameScene.user?.generators.filter( { factory in
-            factory.isActive == .no
-        }))!
+        // Load users not active and not offered on marketplace generators list.
+        factoriesNotActive = getUserInventory()
     }
     
     
@@ -398,16 +396,15 @@ extension GameInventorySceneController: UICollectionViewDataSource {
         
         if indexPath.row >= generatorsSize {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Self.factoryID, for: indexPath) as! GameInventoryViewCell
-            cell.pullFactoryData(texture: "empty-slot", resources: [], factory: nil)
+            cell.pullFactoryData(factory: nil)
             cell.configureCell()
 
             return cell
         } else {
             let generator = factoriesNotActive[indexPath.row]
-            let generatorResources = (generator.resourcesArray)
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Self.factoryID, for: indexPath) as! GameInventoryViewCell
 
-            cell.pullFactoryData(texture: generator.textureName, resources: generatorResources, factory: generator)
+            cell.pullFactoryData(factory: generator)
             cell.configureCell()
 
             return cell

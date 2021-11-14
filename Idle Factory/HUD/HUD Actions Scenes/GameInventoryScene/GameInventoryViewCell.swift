@@ -55,7 +55,19 @@ class GameInventoryViewCell: UICollectionViewCell {
     /**
      Pull factory data for each cell. Receives a texture of the Factory.
      */
-    func pullFactoryData(texture: String, resources: [Resource], factory: Factory?) {
+    func pullFactoryData(factory: Factory?) {
+        
+        var resources: [Resource] = []
+        
+        if let factory = factory {
+            let scene = FactoryScene(size: CGSize(width: 300, height: 300))
+            scene.thisFactory = factory
+            scene.isSmall = true
+            scene.scaleMode = .aspectFill
+            factoryTexture.presentScene(scene)
+            
+            resources = factory.resourcesArray
+        }
         
         emptySlot.isHidden = true
         leftMargin.isHidden = false
@@ -63,11 +75,6 @@ class GameInventoryViewCell: UICollectionViewCell {
         
         switch resources.count {
         case 1:
-            let scene = FactoryScene(size: CGSize(width: 300, height: 300))
-            scene.thisFactory = factory
-            scene.isSmall = true
-            scene.scaleMode = .aspectFill
-            factoryTexture.presentScene(scene)
             resourceType1.isHidden = true
             quantityType1.isHidden = true
             resourceType2.image = UIImage(systemName: getResourceImageName(resource: resources[0].type))
@@ -76,11 +83,6 @@ class GameInventoryViewCell: UICollectionViewCell {
             quantityType3.isHidden = true
             
         case 2:
-            let scene = FactoryScene(size: CGSize(width: 300, height: 300))
-            scene.thisFactory = factory
-            scene.isSmall = true
-            scene.scaleMode = .aspectFill
-            factoryTexture.presentScene(scene)
             resourceType1.image = UIImage(systemName: getResourceImageName(resource: resources[0].type))
             quantityType1.text = "\(Int(resources[0].baseQtt))"
             resourceType2.image = UIImage(systemName: getResourceImageName(resource: resources[1].type))
@@ -89,11 +91,6 @@ class GameInventoryViewCell: UICollectionViewCell {
             quantityType3.isHidden = true
 
         case 3:
-            let scene = FactoryScene(size: CGSize(width: 300, height: 300))
-            scene.thisFactory = factory
-            scene.isSmall = true
-            scene.scaleMode = .aspectFill
-            factoryTexture.presentScene(scene)
             leftMargin.isHidden = true
             resourceType1.image = UIImage(systemName: getResourceImageName(resource: resources[0].type))
             quantityType1.text = "\(Int(resources[0].baseQtt))"
