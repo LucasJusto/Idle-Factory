@@ -14,6 +14,7 @@ import SpriteKit
 class GameShopViewCell: UICollectionViewCell {
     
     // MARK: - GENERATOR OUTLETS
+    // Cell CardView
     @IBOutlet weak var cardView: UIView!
     
     // Generator Image
@@ -32,10 +33,21 @@ class GameShopViewCell: UICollectionViewCell {
     // Button
     @IBOutlet weak var seeMoreButton: UIButton!
     
+    
+    // MARK: - VARIABLES
     var thisGenerator: Factory? = nil
     var delegate: NavigationCellDelegate?
     
     
+    // MARK: - ACTIONS
+    @IBAction func seeMore(_ sender: Any) {
+        FactoryDetailSceneController.isBlue = true
+        FactoryDetailSceneController.generator = thisGenerator
+        delegate?.didButtonPressed()
+    }
+    
+    
+    // MARK: - CELL FUNCTIONS
     override func prepareForReuse() {
         resourceType1.isHidden = false
         resourceQuantityType1.isHidden = false
@@ -114,12 +126,5 @@ class GameShopViewCell: UICollectionViewCell {
             resourceType3.isHidden = true
             resourceQuantityType3.isHidden = true
         }
-    }
-    
-    
-    @IBAction func seeMore(_ sender: Any) {
-        FactoryDetailSceneController.isBlue = true
-        FactoryDetailSceneController.generator = thisGenerator
-        delegate?.didButtonPressed()
     }
 }

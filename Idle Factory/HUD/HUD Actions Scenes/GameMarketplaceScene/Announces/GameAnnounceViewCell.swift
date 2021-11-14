@@ -32,6 +32,7 @@ class GameAnnounceViewCell: UICollectionViewCell {
     @IBOutlet weak var seeAnnounceButton: UIButton!
     
     
+    // MARK: - CELL FUNCTIONS
     override func prepareForReuse() {
         resourceType1.isHidden = false
         resourceQuantityType1.isHidden = false

@@ -14,6 +14,7 @@ import SpriteKit
 class GameMarketplaceViewCell: UICollectionViewCell {
     
     // MARK: - GENERATOR OUTLETS
+    // Cell CardView
     @IBOutlet weak var totalCardView: UIView!
     @IBOutlet weak var cardView: UIView!
     
@@ -34,11 +35,13 @@ class GameMarketplaceViewCell: UICollectionViewCell {
     @IBOutlet weak var seeMoreButton: UIButton!
     
     
+    // MARK: - VARIABLES
     var delegate: NavigationCellDelegate?
     var thisGenerator: Factory? = nil
     var thisOffer: Offer? = nil
     
     
+    // MARK: - ACTIONS
     @IBAction func seeMore(_ sender: Any) {
         FactoryDetailSceneController.isBlue = false
         FactoryDetailSceneController.generator = thisGenerator
@@ -47,6 +50,7 @@ class GameMarketplaceViewCell: UICollectionViewCell {
     }
     
     
+    // MARK: - CELL FUNCTIONS
     override func prepareForReuse() {
         totalCardView.isHidden = false
         resourceType1.isHidden = false

@@ -14,7 +14,6 @@ import SpriteKit
 class GameInventoryViewCell: UICollectionViewCell {
     
     // MARK: - GENERATOR OUTLETS
-    
     // Factory Texture || Empty Slot.
     @IBOutlet weak var emptySlot: UIImageView!
     @IBOutlet weak var factoryTexture: SKView!
@@ -28,6 +27,7 @@ class GameInventoryViewCell: UICollectionViewCell {
     @IBOutlet weak var quantityType3: UILabel!
     
     
+    // MARK: - CELL FUNCTIONS
     override func prepareForReuse() {
         factoryTexture.isHidden = false
         resourceType1.isHidden = false

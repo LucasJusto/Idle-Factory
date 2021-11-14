@@ -85,12 +85,16 @@ class GameViewController: UIViewController {
         let viewcontroller : UIViewController = mainView.instantiateViewController(withIdentifier: "UpgradeFactoryStoryboard") as UIViewController
         self.present(viewcontroller, animated: false)
     }
+    
+    
     func displayWelcomeBackPopUp() {
         var mainView: UIStoryboard!
         mainView = UIStoryboard(name: "WelcomeBack", bundle: nil)
         let viewcontroller : UIViewController = mainView.instantiateViewController(withIdentifier: "WelcomeBackStoryBoard") as UIViewController
         self.present(viewcontroller, animated: false)
     }
+    
+    
     /**
      Calls GameInventory storyboard to select what generator player wants to insert on the scene (if contains).
      */
