@@ -388,36 +388,44 @@
                                                 <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="dmo-V2-lTz">
                                                     <rect key="frame" x="9" y="75" width="75" height="10"/>
                                                     <subviews>
+                                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xaM-hz-Mz6">
+                                                            <rect key="frame" x="0.0" y="0.0" width="9.5" height="10"/>
+                                                            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                        </view>
                                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="4k.tv" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="XZ5-yh-Yo6">
-                                                            <rect key="frame" x="0.0" y="0.5" width="12.5" height="9"/>
+                                                            <rect key="frame" x="9.5" y="0.5" width="9.5" height="9"/>
                                                             <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         </imageView>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="20" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8Tw-OE-Pv6">
-                                                            <rect key="frame" x="12.5" y="1" width="12.5" height="8.5"/>
+                                                            <rect key="frame" x="19" y="1" width="9" height="8.5"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="7"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="airpods" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="Zzm-Bj-6CK">
-                                                            <rect key="frame" x="25" y="0.5" width="12.5" height="8.5"/>
+                                                            <rect key="frame" x="28" y="0.5" width="9.5" height="8.5"/>
                                                             <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         </imageView>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="20" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="epJ-dj-EYa">
-                                                            <rect key="frame" x="37.5" y="1" width="12.5" height="8.5"/>
+                                                            <rect key="frame" x="37.5" y="1" width="9.5" height="8.5"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="7"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="tv" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="wsc-p7-nU9">
-                                                            <rect key="frame" x="50" y="0.5" width="12.5" height="9"/>
+                                                            <rect key="frame" x="47" y="0.5" width="9.5" height="9"/>
                                                             <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         </imageView>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="20" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oEg-wo-FFu">
-                                                            <rect key="frame" x="62.5" y="1" width="12.5" height="8.5"/>
+                                                            <rect key="frame" x="56.5" y="1" width="9" height="8.5"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="7"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
+                                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oLj-A8-axb">
+                                                            <rect key="frame" x="65.5" y="0.0" width="9.5" height="10"/>
+                                                            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                        </view>
                                                     </subviews>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="10" id="Sss-j6-JIj"/>
@@ -441,12 +449,14 @@
                                         <connections>
                                             <outlet property="emptySlot" destination="DJ2-CY-FKD" id="0ap-YG-g6s"/>
                                             <outlet property="factoryTexture" destination="Zvy-Ka-w9c" id="FRY-kU-yLx"/>
+                                            <outlet property="leftMargin" destination="xaM-hz-Mz6" id="dnQ-5M-n9P"/>
                                             <outlet property="quantityType1" destination="8Tw-OE-Pv6" id="Ee2-wq-Yhh"/>
                                             <outlet property="quantityType2" destination="epJ-dj-EYa" id="rFe-Bs-sc0"/>
                                             <outlet property="quantityType3" destination="oEg-wo-FFu" id="Yiw-UZ-GJq"/>
                                             <outlet property="resourceType1" destination="XZ5-yh-Yo6" id="mPg-Fu-Q7g"/>
                                             <outlet property="resourceType2" destination="Zzm-Bj-6CK" id="2Zu-0i-CrH"/>
                                             <outlet property="resourceType3" destination="wsc-p7-nU9" id="SDc-fJ-pki"/>
+                                            <outlet property="rightMargin" destination="oLj-A8-axb" id="oYY-V6-Ff5"/>
                                         </connections>
                                     </collectionViewCell>
                                 </cells>

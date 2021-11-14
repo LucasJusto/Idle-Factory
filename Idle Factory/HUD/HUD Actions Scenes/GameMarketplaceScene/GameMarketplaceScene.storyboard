@@ -181,36 +181,44 @@
                                                         <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" alignment="center" spacing="1" translatesAutoresizingMaskIntoConstraints="NO" id="XBS-CF-vpz">
                                                             <rect key="frame" x="25" y="123" width="81" height="15"/>
                                                             <subviews>
+                                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1Sy-ab-aCh">
+                                                                    <rect key="frame" x="0.0" y="0.0" width="9.5" height="15"/>
+                                                                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                                </view>
                                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="4k.tv" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="O6R-SW-20A">
-                                                                    <rect key="frame" x="0.0" y="0.5" width="12.5" height="14"/>
+                                                                    <rect key="frame" x="10.5" y="0.5" width="9" height="14"/>
                                                                     <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 </imageView>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="20" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Yo1-bd-2S7">
-                                                                    <rect key="frame" x="13.5" y="3.5" width="13" height="8.5"/>
+                                                                    <rect key="frame" x="20.5" y="3.5" width="9.5" height="8.5"/>
                                                                     <fontDescription key="fontDescription" type="system" pointSize="7"/>
                                                                     <nil key="textColor"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
                                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="airpods" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="1fV-IZ-B9E">
-                                                                    <rect key="frame" x="27.5" y="0.5" width="12.5" height="13.5"/>
+                                                                    <rect key="frame" x="31" y="0.5" width="9" height="13.5"/>
                                                                     <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 </imageView>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="20" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4ML-zS-55P">
-                                                                    <rect key="frame" x="41" y="3.5" width="12.5" height="8.5"/>
+                                                                    <rect key="frame" x="41" y="3.5" width="9.5" height="8.5"/>
                                                                     <fontDescription key="fontDescription" type="system" pointSize="7"/>
                                                                     <nil key="textColor"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
                                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="tv" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="CMH-eK-Vb7">
-                                                                    <rect key="frame" x="54.5" y="0.5" width="13" height="14"/>
+                                                                    <rect key="frame" x="51.5" y="0.5" width="9" height="14"/>
                                                                     <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 </imageView>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="id" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qsB-yd-ATF">
-                                                                    <rect key="frame" x="68.5" y="3.5" width="12.5" height="8.5"/>
+                                                                    <rect key="frame" x="61.5" y="3.5" width="9.5" height="8.5"/>
                                                                     <fontDescription key="fontDescription" type="system" pointSize="7"/>
                                                                     <nil key="textColor"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
+                                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="acK-pH-WV8">
+                                                                    <rect key="frame" x="72" y="0.0" width="9" height="15"/>
+                                                                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                                </view>
                                                             </subviews>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="15" id="fnY-FY-jjr"/>
@@ -281,6 +289,7 @@
                                             <outlet property="SKView" destination="bAn-mb-2hG" id="IgR-aS-NO6"/>
                                             <outlet property="cardView" destination="auJ-6b-ZqW" id="PqP-yL-md2"/>
                                             <outlet property="coinImage" destination="KLN-CC-zsw" id="WB0-C1-RmN"/>
+                                            <outlet property="leftMargin" destination="1Sy-ab-aCh" id="6X5-H3-CJH"/>
                                             <outlet property="priceLabel" destination="5eo-lf-kmA" id="wNt-Tl-xIb"/>
                                             <outlet property="resourceQuantityType1" destination="Yo1-bd-2S7" id="Moc-1H-NUo"/>
                                             <outlet property="resourceQuantityType2" destination="4ML-zS-55P" id="r43-Qd-yJ4"/>
@@ -288,6 +297,7 @@
                                             <outlet property="resourceType1" destination="O6R-SW-20A" id="YAz-ip-osq"/>
                                             <outlet property="resourceType2" destination="1fV-IZ-B9E" id="sG4-qJ-6kz"/>
                                             <outlet property="resourceType3" destination="CMH-eK-Vb7" id="XjO-TN-s37"/>
+                                            <outlet property="rightMargin" destination="acK-pH-WV8" id="7Fl-o5-11Z"/>
                                             <outlet property="seeMoreButton" destination="Yt5-m7-xqD" id="ZLd-rU-6JZ"/>
                                             <outlet property="totalCardView" destination="WBj-l3-Jnz" id="87e-CP-1yq"/>
                                         </connections>
@@ -446,36 +456,44 @@
                                                         <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" alignment="center" spacing="1" translatesAutoresizingMaskIntoConstraints="NO" id="uwc-AH-6Hz">
                                                             <rect key="frame" x="25" y="123" width="81" height="15"/>
                                                             <subviews>
+                                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JDe-NB-MKn">
+                                                                    <rect key="frame" x="0.0" y="0.0" width="9.5" height="15"/>
+                                                                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                                </view>
                                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="4k.tv" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="D03-vU-vwM">
-                                                                    <rect key="frame" x="0.0" y="0.5" width="12.5" height="14"/>
+                                                                    <rect key="frame" x="10.5" y="0.5" width="9" height="14"/>
                                                                     <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 </imageView>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="20" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YzL-3Q-Z2g">
-                                                                    <rect key="frame" x="13.5" y="3.5" width="13" height="8.5"/>
+                                                                    <rect key="frame" x="20.5" y="3.5" width="9.5" height="8.5"/>
                                                                     <fontDescription key="fontDescription" type="system" pointSize="7"/>
                                                                     <nil key="textColor"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
                                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="airpods" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="JhS-fc-fJa">
-                                                                    <rect key="frame" x="27.5" y="0.5" width="12.5" height="13.5"/>
+                                                                    <rect key="frame" x="31" y="0.5" width="9" height="13.5"/>
                                                                     <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 </imageView>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="20" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="i2A-ng-B1a">
-                                                                    <rect key="frame" x="41" y="3.5" width="12.5" height="8.5"/>
+                                                                    <rect key="frame" x="41" y="3.5" width="9.5" height="8.5"/>
                                                                     <fontDescription key="fontDescription" type="system" pointSize="7"/>
                                                                     <nil key="textColor"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
                                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="tv" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="tWw-I4-dYM">
-                                                                    <rect key="frame" x="54.5" y="0.5" width="13" height="14"/>
+                                                                    <rect key="frame" x="51.5" y="0.5" width="9" height="14"/>
                                                                     <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 </imageView>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="id" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TJz-be-zY0">
-                                                                    <rect key="frame" x="68.5" y="3.5" width="12.5" height="8.5"/>
+                                                                    <rect key="frame" x="61.5" y="3.5" width="9.5" height="8.5"/>
                                                                     <fontDescription key="fontDescription" type="system" pointSize="7"/>
                                                                     <nil key="textColor"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
+                                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZuD-8V-qgK">
+                                                                    <rect key="frame" x="72" y="0.0" width="9" height="15"/>
+                                                                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                                </view>
                                                             </subviews>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="15" id="RhZ-Nk-bx9"/>
@@ -543,6 +561,7 @@
                                             <outlet property="cardView" destination="B1D-Pg-ZWi" id="Brg-AY-XoV"/>
                                             <outlet property="coinImage" destination="Vmd-30-UdV" id="4uX-Fz-GCu"/>
                                             <outlet property="generatorImage" destination="2pV-BJ-xfq" id="lqz-ew-Msq"/>
+                                            <outlet property="leftMargin" destination="JDe-NB-MKn" id="HBR-gK-Drr"/>
                                             <outlet property="priceLabel" destination="ca5-qK-bRf" id="K81-99-YGb"/>
                                             <outlet property="resourceQuantityType1" destination="YzL-3Q-Z2g" id="Uus-N5-KXQ"/>
                                             <outlet property="resourceQuantityType2" destination="i2A-ng-B1a" id="wWP-eO-esW"/>
@@ -550,6 +569,7 @@
                                             <outlet property="resourceType1" destination="D03-vU-vwM" id="Dmm-MW-daP"/>
                                             <outlet property="resourceType2" destination="JhS-fc-fJa" id="Ydx-u7-4QB"/>
                                             <outlet property="resourceType3" destination="tWw-I4-dYM" id="NyS-0r-ftT"/>
+                                            <outlet property="rightMargin" destination="ZuD-8V-qgK" id="dWq-7U-f4W"/>
                                             <outlet property="seeAnnounceButton" destination="Bzl-o8-j0O" id="m4Y-ja-CUC"/>
                                         </connections>
                                     </collectionViewCell>
