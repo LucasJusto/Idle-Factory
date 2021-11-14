@@ -467,7 +467,7 @@ extension GameInventorySceneController: UICollectionViewDelegateFlowLayout {
             
             typeImage2.image = UIImage(systemName: getResourceImageName(resource: resources[0].type))
             coinImage2.image = UIImage(named: "Coin")
-            quantityType2.text = "\(resources[0].baseQtt) \(resources[0].type)"
+            quantityType2.text = "\(Int(resources[0].baseQtt)) \(resources[0].type)"
             generatePerSecType2.text = doubleToString(value: resources[0].perSec)
             
             typeImage3.isHidden = true
@@ -488,12 +488,12 @@ extension GameInventorySceneController: UICollectionViewDelegateFlowLayout {
             SKView.presentScene(scene)
             typeImage1.image = UIImage(systemName: getResourceImageName(resource: resources[0].type))
             coinImage1.image = UIImage(named: "Coin")
-            quantityType1.text = "\(resources[0].baseQtt) \(resources[0].type)"
+            quantityType1.text = "\(Int(resources[0].baseQtt)) \(resources[0].type)"
             generatePerSecType1.text = doubleToString(value: resources[0].perSec)
             
             typeImage2.image = UIImage(systemName: getResourceImageName(resource: resources[1].type))
             coinImage2.image = UIImage(named: "Coin")
-            quantityType2.text = "\(resources[1].baseQtt) \(resources[1].type)"
+            quantityType2.text = "\(Int(resources[1].baseQtt)) \(resources[1].type)"
             generatePerSecType2.text = doubleToString(value: resources[1].perSec)
             
             typeImage3.isHidden = true
@@ -516,17 +516,17 @@ extension GameInventorySceneController: UICollectionViewDelegateFlowLayout {
             SKView.presentScene(scene)
             typeImage1.image = UIImage(systemName: getResourceImageName(resource: resources[0].type))
             coinImage1.image = UIImage(named: "Coin")
-            quantityType1.text = "\(resources[0].baseQtt) \(resources[0].type)"
+            quantityType1.text = "\(Int(resources[0].baseQtt)) \(resources[0].type)"
             generatePerSecType1.text = doubleToString(value: resources[0].perSec)
             
             typeImage2.image = UIImage(systemName: getResourceImageName(resource: resources[1].type))
             coinImage2.image = UIImage(named: "Coin")
-            quantityType2.text = "\(resources[1].baseQtt) \(resources[1].type)"
+            quantityType2.text = "\(Int(resources[1].baseQtt)) \(resources[1].type)"
             generatePerSecType2.text = doubleToString(value: resources[1].perSec)
             
             typeImage3.image = UIImage(systemName: getResourceImageName(resource: resources[2].type))
             coinImage3.image = UIImage(named: "Coin")
-            quantityType3.text = "\(resources[2].baseQtt) \(resources[2].type)"
+            quantityType3.text = "\(Int(resources[2].baseQtt)) \(resources[2].type)"
             generatePerSecType3.text = doubleToString(value: resources[2].perSec)
             
             let total = resources[0].perSec + resources[1].perSec + resources[2].perSec

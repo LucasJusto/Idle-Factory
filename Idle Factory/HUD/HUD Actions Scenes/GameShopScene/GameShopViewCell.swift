@@ -17,7 +17,8 @@ class GameShopViewCell: UICollectionViewCell {
     @IBOutlet weak var cardView: UIView!
     
     // Generator Image
-    
+    @IBOutlet weak var SKView: SKView!
+
     // Generator resources
     @IBOutlet weak var resourceType1: UIImageView!
     @IBOutlet weak var resourceQuantityType1: UILabel!
@@ -27,13 +28,22 @@ class GameShopViewCell: UICollectionViewCell {
     @IBOutlet weak var resourceQuantityType3: UILabel!
     @IBOutlet weak var coinImage: UIImageView!
     @IBOutlet weak var priceLabel: UILabel!
-    @IBOutlet weak var SKView: SKView!
     
     // Button
     @IBOutlet weak var seeMoreButton: UIButton!
     
     var thisGenerator: Factory? = nil
     var delegate: NavigationCellDelegate?
+    
+    
+    override func prepareForReuse() {
+        resourceType1.isHidden = false
+        resourceQuantityType1.isHidden = false
+        resourceType2.isHidden = false
+        resourceQuantityType2.isHidden = false
+        resourceType3.isHidden = false
+        resourceQuantityType3.isHidden = false
+    }
     
     
     /**
@@ -67,18 +77,15 @@ class GameShopViewCell: UICollectionViewCell {
         //generatorImage.image = UIImage(named: "Basic_Factory_level_1_shop_marketplace")
         let resources = factory.resourcesArray
         
-        resourceType1.isHidden = false
-        resourceType2.isHidden = false
-        resourceType3.isHidden = false
         
         switch resources.count {
         case 1:
             resourceType1.isHidden = true
-            resourceQuantityType1.text = ""
+            resourceQuantityType1.text = "  "
             resourceType2.image = UIImage(systemName: getResourceImageName(resource: resources[0].type))
             resourceQuantityType2.text = "\(Int(resources[0].baseQtt))"
             resourceType3.isHidden = true
-            resourceQuantityType3.text = ""
+            resourceQuantityType3.text = "  "
             priceLabel.text = "\(resources[0].basePrice)"
             
         case 2:
@@ -87,7 +94,7 @@ class GameShopViewCell: UICollectionViewCell {
             resourceType2.image = UIImage(systemName: getResourceImageName(resource: resources[1].type))
             resourceQuantityType2.text = "\(Int(resources[1].baseQtt))"
             resourceType3.isHidden = true
-            resourceQuantityType3.text = ""
+            resourceQuantityType3.isHidden = true
             priceLabel.text = "\(resources[0].basePrice + resources[1].basePrice)"
 
         case 3:
@@ -101,11 +108,11 @@ class GameShopViewCell: UICollectionViewCell {
 
         default:
             resourceType1.isHidden = true
-            resourceQuantityType1.text = ""
+            resourceQuantityType1.isHidden = true
             resourceType2.isHidden = true
-            resourceQuantityType2.text = ""
+            resourceQuantityType2.isHidden = true
             resourceType3.isHidden = true
-            resourceQuantityType3.text = ""
+            resourceQuantityType3.isHidden = true
         }
     }
     

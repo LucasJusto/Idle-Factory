@@ -39,18 +39,22 @@ class GameMarketplaceViewCell: UICollectionViewCell {
     var thisOffer: Offer? = nil
     
     
-    
-    //        FactoryDetailSceneController.isBlue = false
-    //        FactoryDetailSceneController.generator = thisGenerator
-    //        FactoryDetailSceneController.offer = thisOffer
-    //        delegate?.didButtonPressed()
-    
-    
     @IBAction func seeMore(_ sender: Any) {
         FactoryDetailSceneController.isBlue = false
         FactoryDetailSceneController.generator = thisGenerator
         FactoryDetailSceneController.offer = thisOffer
         delegate?.didButtonPressed()
+    }
+    
+    
+    override func prepareForReuse() {
+        totalCardView.isHidden = false
+        resourceType1.isHidden = false
+        resourceQuantityType1.isHidden = false
+        resourceType2.isHidden = false
+        resourceQuantityType2.isHidden = false
+        resourceType3.isHidden = false
+        resourceQuantityType3.isHidden = false
     }
     
     
@@ -65,9 +69,7 @@ class GameMarketplaceViewCell: UICollectionViewCell {
     /**
      Configure cell design.
      */
-    func configureCell() {
-        totalCardView.isHidden = false
-        
+    func configureCell() {        
         // DESIGN
         cardView.layer.cornerRadius = 20
         seeMoreButton.layer.cornerRadius = 10
@@ -95,38 +97,39 @@ class GameMarketplaceViewCell: UICollectionViewCell {
         scene.scaleMode = .aspectFill
         SKView.presentScene(scene)
         let resources = factory.resourcesArray
+        
         switch resources.count {
         case 1:
             resourceType1.isHidden = true
-            resourceQuantityType1.text = ""
+            resourceQuantityType1.text = "  "
             resourceType2.image = UIImage(systemName: getResourceImageName(resource: resources[0].type))
-            resourceQuantityType2.text = "\(resources[0].baseQtt)"
+            resourceQuantityType2.text = "\(Int(resources[0].baseQtt))"
             resourceType3.isHidden = true
-            resourceQuantityType3.text = ""
+            resourceQuantityType3.text = "  "
             
         case 2:
             resourceType1.image = UIImage(systemName: getResourceImageName(resource: resources[0].type))
-            resourceQuantityType1.text = "\(resources[0].baseQtt)"
+            resourceQuantityType1.text = "\(Int(resources[0].baseQtt))"
             resourceType2.image = UIImage(systemName: getResourceImageName(resource: resources[1].type))
-            resourceQuantityType2.text = "\(resources[1].baseQtt)"
+            resourceQuantityType2.text = "\(Int(resources[1].baseQtt))"
             resourceType3.isHidden = true
-            resourceQuantityType3.text = ""
+            resourceQuantityType3.isHidden = true
             
         case 3:
             resourceType1.image = UIImage(systemName: getResourceImageName(resource: resources[0].type))
-            resourceQuantityType1.text = "\(resources[0].baseQtt)"
+            resourceQuantityType1.text = "\(Int(resources[0].baseQtt))"
             resourceType2.image = UIImage(systemName: getResourceImageName(resource: resources[1].type))
-            resourceQuantityType2.text = "\(resources[1].baseQtt)"
+            resourceQuantityType2.text = "\(Int(resources[1].baseQtt))"
             resourceType3.image = UIImage(systemName: getResourceImageName(resource: resources[2].type))
-            resourceQuantityType3.text = "\(resources[2].baseQtt)"
+            resourceQuantityType3.text = "\(Int(resources[2].baseQtt))"
             
         default:
             resourceType1.isHidden = true
-            resourceQuantityType1.text = ""
+            resourceQuantityType1.isHidden = true
             resourceType2.isHidden = true
-            resourceQuantityType2.text = ""
+            resourceQuantityType2.isHidden = true
             resourceType3.isHidden = true
-            resourceQuantityType3.text = ""
+            resourceQuantityType3.isHidden = true
         }
         coinImage.image = UIImage(named: premium ? "Money_premium" : "Coin")
         priceLabel.text = "\(offer.price)"

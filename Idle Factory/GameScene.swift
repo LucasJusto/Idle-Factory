@@ -132,22 +132,22 @@ class GameScene: SKScene {
             case "factory_slot_5_empty":
                 selectGeneratorToInsert(position: .sixth)
             case "factory_slot_0_occupied":
-                UpgradeFactorySceneController.generator = searchFactory(position: .first)
+                UpgradeFactorySceneController.generator = searchActiveFactory(position: .first)
                 displayUpgradeFactory()
             case "factory_slot_1_occupied":
-                UpgradeFactorySceneController.generator = searchFactory(position: .second)
+                UpgradeFactorySceneController.generator = searchActiveFactory(position: .second)
                 displayUpgradeFactory()
             case "factory_slot_2_occupied":
-                UpgradeFactorySceneController.generator = searchFactory(position: .third)
+                UpgradeFactorySceneController.generator = searchActiveFactory(position: .third)
                 displayUpgradeFactory()
             case "factory_slot_3_occupied":
-                UpgradeFactorySceneController.generator = searchFactory(position: .fourth)
+                UpgradeFactorySceneController.generator = searchActiveFactory(position: .fourth)
                 displayUpgradeFactory()
             case "factory_slot_4_occupied":
-                UpgradeFactorySceneController.generator = searchFactory(position: .fifth)
+                UpgradeFactorySceneController.generator = searchActiveFactory(position: .fifth)
                 displayUpgradeFactory()
             case "factory_slot_5_occupied":
-                UpgradeFactorySceneController.generator = searchFactory(position: .sixth)
+                UpgradeFactorySceneController.generator = searchActiveFactory(position: .sixth)
                 displayUpgradeFactory()
             default: return
             }
@@ -280,10 +280,14 @@ class GameScene: SKScene {
     
     
     /**
-     Search for a factory receiving the position as argument. Return nil if nothing is found.
+     Search for the factory receiving the position as argument. Return nil if nothing is found.
      */
-    func searchFactory(position: GeneratorPositions) -> Factory? {
-        if let factories = GameScene.user?.generators {
+    func searchActiveFactory(position: GeneratorPositions) -> Factory? {
+        let activeFactories = GameScene.user?.generators.filter({ factory in
+            factory.isActive == .yes
+        })
+        
+        if let factories = activeFactories {
             for factory in factories {
                 if factory.position == position {
                     return factory

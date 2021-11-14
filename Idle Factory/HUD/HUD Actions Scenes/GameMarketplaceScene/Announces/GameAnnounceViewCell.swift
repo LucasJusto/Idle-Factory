@@ -32,6 +32,16 @@ class GameAnnounceViewCell: UICollectionViewCell {
     @IBOutlet weak var seeAnnounceButton: UIButton!
     
     
+    override func prepareForReuse() {
+        resourceType1.isHidden = false
+        resourceQuantityType1.isHidden = false
+        resourceType2.isHidden = false
+        resourceQuantityType2.isHidden = false
+        resourceType3.isHidden = false
+        resourceQuantityType3.isHidden = false
+    }
+    
+    
     /**
      Configure cell design.
      */
@@ -58,35 +68,35 @@ class GameAnnounceViewCell: UICollectionViewCell {
         switch resources.count {
         case 1:
             resourceType1.isHidden = true
-            resourceQuantityType1.text = ""
+            resourceQuantityType1.text = "  "
             resourceType2.image = UIImage(systemName: getResourceImageName(resource: resources[0].type))
-            resourceQuantityType2.text = "\(resources[0].baseQtt)"
+            resourceQuantityType2.text = "\(Int(resources[0].baseQtt))"
             resourceType3.isHidden = true
-            resourceQuantityType3.text = ""
+            resourceQuantityType3.text = "  "
             
         case 2:
             resourceType1.image = UIImage(systemName: getResourceImageName(resource: resources[0].type))
-            resourceQuantityType1.text = "\(resources[0].baseQtt)"
+            resourceQuantityType1.text = "\(Int(resources[0].baseQtt))"
             resourceType2.image = UIImage(systemName: getResourceImageName(resource: resources[1].type))
-            resourceQuantityType2.text = "\(resources[1].baseQtt)"
+            resourceQuantityType2.text = "\(Int(resources[1].baseQtt))"
             resourceType3.isHidden = true
-            resourceQuantityType3.text = ""
+            resourceQuantityType3.isHidden = true
 
         case 3:
             resourceType1.image = UIImage(systemName: getResourceImageName(resource: resources[0].type))
-            resourceQuantityType1.text = "\(resources[0].baseQtt)"
+            resourceQuantityType1.text = "\(Int(resources[0].baseQtt))"
             resourceType2.image = UIImage(systemName: getResourceImageName(resource: resources[1].type))
-            resourceQuantityType2.text = "\(resources[1].baseQtt)"
+            resourceQuantityType2.text = "\(Int(resources[1].baseQtt))"
             resourceType3.image = UIImage(systemName: getResourceImageName(resource: resources[2].type))
-            resourceQuantityType3.text = "\(resources[2].baseQtt)"
+            resourceQuantityType3.text = "\(Int(resources[2].baseQtt))"
             
         default:
             resourceType1.isHidden = true
-            resourceQuantityType1.text = ""
+            resourceQuantityType1.isHidden = true
             resourceType2.isHidden = true
-            resourceQuantityType2.text = ""
+            resourceQuantityType2.isHidden = true
             resourceType3.isHidden = true
-            resourceQuantityType3.text = ""
+            resourceQuantityType3.isHidden = true
         }
         priceLabel.text = "999.999 M"
     }
