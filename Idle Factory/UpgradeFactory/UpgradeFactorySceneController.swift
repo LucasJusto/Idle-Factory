@@ -87,7 +87,9 @@ class UpgradeFactorySceneController: UIViewController,  UITableViewDataSource, U
             cell.qtdPerSec.text = "\(doubleToString(value: resource.perSec))/s"
             cell.resourceImage.image = UIImage(named: getResourceImageName(resource: resource.type))
             // TODO: Change upgrade cost
-            cell.upgradeCostLabel.text = "\(doubleToString(value: resource.basePrice))"
+            cell.setFactory(factory: factory, resourceID: indexPath.row)
+            cell.tableView = tableView
+            cell.upgradeCostLabel.text = "\(doubleToString(value: (resource.currentPrice) * (resource.pricePLevelIncreaseTax)))"
             let qtd = (resource.qttPLevel * Double(resource.currentLevel)) + resource.baseQtt
             cell.resourceNameAndQtdPerSec.text = "\(doubleToString(value: qtd)) \(resource.type.description)/s"
         }
