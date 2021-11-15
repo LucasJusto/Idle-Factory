@@ -81,7 +81,6 @@ class GameMarketplaceSceneController: UIViewController, NavigationCellDelegate {
         })
         
         let timeToRefresh: Timer?
-        
         timeToRefresh = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(loadPlayerCurrencies), userInfo: nil, repeats: true)
         
     }

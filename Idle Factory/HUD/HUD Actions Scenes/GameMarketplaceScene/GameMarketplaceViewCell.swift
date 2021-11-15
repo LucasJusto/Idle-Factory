@@ -112,11 +112,11 @@ class GameMarketplaceViewCell: UICollectionViewCell {
         switch resources.count {
         case 1:
             resourceType1.isHidden = true
-            resourceQuantityType1.text = "  "
+            resourceQuantityType1.isHidden = true
             resourceType2.image = UIImage(systemName: getResourceImageName(resource: resources[0].type))
             resourceQuantityType2.text = "\(Int(resources[0].baseQtt))"
             resourceType3.isHidden = true
-            resourceQuantityType3.text = "  "
+            resourceQuantityType3.isHidden = true
             
         case 2:
             resourceType1.image = UIImage(systemName: getResourceImageName(resource: resources[0].type))
@@ -147,7 +147,7 @@ class GameMarketplaceViewCell: UICollectionViewCell {
             rightMargin.isHidden = true
         }
         coinImage.image = UIImage(named: premium ? "Money_premium" : "Coin")
-        priceLabel.text = "\(offer.price)"
+        priceLabel.text = doubleToString(value: offer.price)
     }
 }
 

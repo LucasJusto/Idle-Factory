@@ -99,12 +99,12 @@ class GameShopViewCell: UICollectionViewCell {
         switch resources.count {
         case 1:
             resourceType1.isHidden = true
-            resourceQuantityType1.text = "  "
+            resourceQuantityType1.isHidden = true
             resourceType2.image = UIImage(systemName: getResourceImageName(resource: resources[0].type))
             resourceQuantityType2.text = "\(Int(resources[0].baseQtt))"
             resourceType3.isHidden = true
-            resourceQuantityType3.text = "  "
-            priceLabel.text = "\(resources[0].basePrice)"
+            resourceQuantityType3.isHidden = true
+            priceLabel.text = doubleToString(value: resources[0].basePrice)
             
         case 2:
             resourceType1.image = UIImage(systemName: getResourceImageName(resource: resources[0].type))
@@ -113,7 +113,7 @@ class GameShopViewCell: UICollectionViewCell {
             resourceQuantityType2.text = "\(Int(resources[1].baseQtt))"
             resourceType3.isHidden = true
             resourceQuantityType3.isHidden = true
-            priceLabel.text = "\(resources[0].basePrice + resources[1].basePrice)"
+            priceLabel.text = doubleToString(value: (resources[0].basePrice + resources[1].basePrice))
 
         case 3:
             leftMargin.isHidden = true
@@ -124,7 +124,7 @@ class GameShopViewCell: UICollectionViewCell {
             resourceType3.image = UIImage(systemName: getResourceImageName(resource: resources[2].type))
             resourceQuantityType3.text = "\(Int(resources[2].baseQtt))"
             rightMargin.isHidden = true
-            priceLabel.text = "\(resources[0].basePrice + resources[1].basePrice + resources[2].basePrice)"
+            priceLabel.text = doubleToString(value: (resources[0].basePrice + resources[1].basePrice + resources[2].basePrice))
 
         default:
             leftMargin.isHidden = true
