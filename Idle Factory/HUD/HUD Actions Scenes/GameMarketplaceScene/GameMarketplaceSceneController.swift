@@ -27,6 +27,8 @@ class GameMarketplaceSceneController: UIViewController, NavigationCellDelegate {
     @IBOutlet weak var sellAItemButton: UIButton!
     @IBOutlet weak var myAnnouncesButton: UIButton!
     
+    // MARK: - EMPTY MARKETPLACE LABEL
+    @IBOutlet weak var emptyMarketplaceLabel: UILabel!
     
     // MARK: - CONTROLLERS
     static let factoryID: String = "purchasebleFactory_cell"
@@ -38,6 +40,11 @@ class GameMarketplaceSceneController: UIViewController, NavigationCellDelegate {
         didSet {
             DispatchQueue.main.async {
                 self.collectionView.reloadData()
+                if self.offerArray.count != 0 {
+                    self.emptyMarketplaceLabel.isHidden = true
+                } else {
+                    self.emptyMarketplaceLabel.isHidden = false
+                }
             }
         }
     }
@@ -60,26 +67,11 @@ class GameMarketplaceSceneController: UIViewController, NavigationCellDelegate {
         itemTypeSelector.setTitle(NSLocalizedString("PremiumSelectorItem", comment: ""), forSegmentAt: 1)
         sellAItemButton.setTitle(NSLocalizedString("SellAItemButton", comment: ""), for: .normal)
         myAnnouncesButton.setTitle(NSLocalizedString("MyAnnouncesButton", comment: ""), for: .normal)
-        loadPlayerCurrencies()
-        
-        CKRepository.getMarketPlaceOffers(completion: { offers in
-            let generatorsId: [String] = offers.map { offer in
-                offer.generatorID
-            }
-            let semaphore = DispatchSemaphore(value: 0)
-            CKRepository.getGeneratorsByIDs(generatorsIDs: generatorsId) { factories in
-                for factory in factories {
-                    self.generatorDict[factory.id!] = factory
-                }
-                semaphore.signal()
-            }
-            semaphore.wait()
+        emptyMarketplaceLabel.text = NSLocalizedString("EmptyMarketplaceLabel", comment: "")
 
-            self.offerArray = offers.filter({ offer in
-                offer.currencyType == .basic
-            })
-        })
-        
+        loadPlayerCurrencies()
+        loadMarketplace()
+
         let timeToRefresh: Timer?
         timeToRefresh = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(loadPlayerCurrencies), userInfo: nil, repeats: true)
         
@@ -115,6 +107,7 @@ class GameMarketplaceSceneController: UIViewController, NavigationCellDelegate {
         marketplaceHeaderLabel.font = UIFont(name: "AustralSlabBlur-Regular", size: 27)
         mainCurrencyLabel.font = UIFont(name: "AustralSlabBlur-Regular", size: 14)
         premiumCurrencyLabel.font = UIFont(name: "AustralSlabBlur-Regular", size: 14)
+        emptyMarketplaceLabel.font = UIFont(name: "AustralSlabBlur-Regular", size: 27)
         
         // BUTTONS
         sellAItemButton.titleLabel?.font = UIFont(name: "AustralSlabBlur-Regular", size: 10)
@@ -188,8 +181,33 @@ class GameMarketplaceSceneController: UIViewController, NavigationCellDelegate {
     }
     
     
+    /**
+     Load marketplace offers. Marketplace contains a selector between basic and premium offers. The default option of the selector is Basic, so this function loads only the basic offers first.
+     */
+    func loadMarketplace() {
+        DispatchQueue.main.async {
+            CKRepository.getMarketPlaceOffers(completion: { offers in
+                let generatorsId: [String] = offers.map { offer in
+                    offer.generatorID
+                }
+                let semaphore = DispatchSemaphore(value: 0)
+                CKRepository.getGeneratorsByIDs(generatorsIDs: generatorsId) { factories in
+                    for factory in factories {
+                        self.generatorDict[factory.id!] = factory
+                    }
+                    semaphore.signal()
+                }
+                semaphore.wait()
+
+                self.offerArray = offers.filter({ offer in
+                    offer.currencyType == .basic
+                })
+            })
+        }
+    }
+    
+    
     func didButtonPressed() {
-        print(#function)
         var mainView: UIStoryboard!
         mainView = UIStoryboard(name: "FactoryDetailScene", bundle: nil)
         let viewcontroller : UIViewController = mainView.instantiateViewController(withIdentifier: "FactoryDetailScene") as UIViewController

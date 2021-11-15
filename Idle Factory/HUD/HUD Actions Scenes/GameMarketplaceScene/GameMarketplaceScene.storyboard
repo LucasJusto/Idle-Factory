@@ -304,6 +304,15 @@
                                     </collectionViewCell>
                                 </cells>
                             </collectionView>
+                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vUy-E1-zRZ">
+                                <rect key="frame" x="235.5" y="197" width="425" height="20.5"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="425" id="QuJ-E9-ID2"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
                         <color key="backgroundColor" name="Marketplace_background"/>
@@ -311,17 +320,20 @@
                             <constraint firstAttribute="trailing" secondItem="iEe-xV-qjF" secondAttribute="trailing" id="Fdc-GU-K31"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="zpB-Pn-JzX" secondAttribute="trailing" constant="20" id="QFx-U3-are"/>
                             <constraint firstItem="iEe-xV-qjF" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="R6D-iR-8Na"/>
+                            <constraint firstItem="vUy-E1-zRZ" firstAttribute="centerY" secondItem="5EZ-qb-Rvc" secondAttribute="centerY" id="TTx-FJ-1xn"/>
                             <constraint firstItem="iEe-xV-qjF" firstAttribute="top" secondItem="T6z-zc-YC5" secondAttribute="bottom" constant="17" id="hg4-xW-Z7D"/>
                             <constraint firstItem="T6z-zc-YC5" firstAttribute="centerX" secondItem="5EZ-qb-Rvc" secondAttribute="centerX" id="hy8-Yr-t0u"/>
                             <constraint firstItem="zpB-Pn-JzX" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" constant="52" id="joT-p2-hNs"/>
                             <constraint firstItem="T6z-zc-YC5" firstAttribute="top" secondItem="wDb-KZ-U6e" secondAttribute="bottom" constant="30" id="lkX-uw-WXl"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="iEe-xV-qjF" secondAttribute="bottom" constant="30" id="sGG-MY-xwt"/>
+                            <constraint firstItem="vUy-E1-zRZ" firstAttribute="centerX" secondItem="5EZ-qb-Rvc" secondAttribute="centerX" id="seZ-yS-6fg"/>
                             <constraint firstItem="wDb-KZ-U6e" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" constant="43" id="u9T-R4-nqC"/>
                             <constraint firstItem="wDb-KZ-U6e" firstAttribute="centerX" secondItem="5EZ-qb-Rvc" secondAttribute="centerX" id="y7i-SP-WFb"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="collectionView" destination="iEe-xV-qjF" id="6XW-nm-8Ue"/>
+                        <outlet property="emptyMarketplaceLabel" destination="vUy-E1-zRZ" id="wkp-mk-vKg"/>
                         <outlet property="itemTypeSelector" destination="ka5-pU-UL4" id="2SI-84-kJk"/>
                         <outlet property="mainCurrencyHeaderView" destination="zTG-eb-b6A" id="pzb-bm-b8V"/>
                         <outlet property="mainCurrencyLabel" destination="N1M-BS-Hbh" id="vIL-Eu-B3e"/>
@@ -571,6 +583,7 @@
                                             <outlet property="resourceType3" destination="tWw-I4-dYM" id="NyS-0r-ftT"/>
                                             <outlet property="rightMargin" destination="ZuD-8V-qgK" id="dWq-7U-f4W"/>
                                             <outlet property="seeAnnounceButton" destination="Bzl-o8-j0O" id="m4Y-ja-CUC"/>
+                                            <outlet property="totalCardView" destination="iNn-j3-cs2" id="Fsm-bJ-gOp"/>
                                         </connections>
                                     </collectionViewCell>
                                 </cells>

@@ -50,6 +50,7 @@
 "SellAItemButton" = "Sell item";
 "MyAnnouncesButton" = "Announces";
 "AboutNewFactoryButton" = "See more";
+"EmptyMarketplaceLabel" = "Do not found any generators in offer at the moment";
 
 
 // MARK: - CHALLENGES

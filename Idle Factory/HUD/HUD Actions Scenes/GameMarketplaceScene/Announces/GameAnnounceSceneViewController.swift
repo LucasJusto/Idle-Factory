@@ -27,8 +27,8 @@ class GameAnnounceSceneViewController: UIViewController {
     
     // MARK: - CONTROLLERS
     static let factoryID: String = "announceFactory_cell"
-    private(set) var playerAnnounces: [Factory] = []
-    
+    private(set) var playerAnnounces: [Offer] = []
+    private(set) var announcesDict:  [String: Factory] = [:]
     
     // MARK: - INIT
     override func viewDidLoad() {
@@ -95,14 +95,29 @@ class GameAnnounceSceneViewController: UIViewController {
      Load player announced generators.
      */
     func loadPlayerAnnounces() {
-        playerAnnounces = (GameScene.user?.generators.filter({ factory in
-            factory.isOffer == .yes
-        }))!
-        
-        if playerAnnounces.count != 0 {
-            emptyAnnounceLabel.isHidden = true
-        } else {
-            emptyAnnounceLabel.isHidden = false
+        DispatchQueue.main.async {
+            CKRepository.getUserOffersByID(userID: GameScene.user!.id) { offers in
+                let generatorsId: [String] = offers.map { offer in
+                    offer.generatorID
+                }
+                let semaphore = DispatchSemaphore(value: 0)
+                CKRepository.getGeneratorsByIDs(generatorsIDs: generatorsId) { factories in
+                    for factory in factories {
+                        self.announcesDict[factory.id!] = factory
+                    }
+                    semaphore.signal()
+                }
+                semaphore.wait()
+
+                self.playerAnnounces = offers
+            }
+            
+            
+            if self.playerAnnounces.count != 0 {
+                self.emptyAnnounceLabel.isHidden = true
+            } else {
+                self.emptyAnnounceLabel.isHidden = false
+            }
         }
     }
 }
@@ -120,9 +135,15 @@ extension GameAnnounceSceneViewController: UICollectionViewDataSource {
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Self.factoryID, for: indexPath) as! GameAnnounceViewCell
 
-        let factory = playerAnnounces[indexPath.row]
-        cell.pullMyAnnouncesFactories(factory: factory, premium: factory.type == .Basic ? false : true)
-        return cell
+        if let generatorOffer = announcesDict[playerAnnounces[indexPath.row].generatorID] {
+            cell.pullMyAnnouncesFactories(factory: generatorOffer, offer: playerAnnounces[indexPath.row], premium: generatorOffer.type == .Basic ? false : true)
+            return cell
+
+        } else {
+            cell.hideCell()
+            return cell
+        }
+        
         
     }
 }
