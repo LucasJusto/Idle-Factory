@@ -73,7 +73,7 @@ class GameAnnounceViewCell: UICollectionViewCell {
     /**
      Pull purchasable factories to display on marketplace.
      */
-    func pullMyAnnouncesFactories(factory: Factory, offer: Offer, premium: Bool) {
+    func pullMyAnnouncesFactories(factory: Factory, premium: Bool) {
         let scene = FactoryScene(size: CGSize(width: 400, height: 400))
         scene.thisFactory = factory
         scene.thisYPosition = 12
@@ -122,6 +122,6 @@ class GameAnnounceViewCell: UICollectionViewCell {
             rightMargin.isHidden = true
         }
         coinImage.image = UIImage(named: premium ? "Money_premium" : "Coin")
-        priceLabel.text = doubleToString(value:offer.price)
+        priceLabel.text = doubleToString(value: 9999)
     }
 }

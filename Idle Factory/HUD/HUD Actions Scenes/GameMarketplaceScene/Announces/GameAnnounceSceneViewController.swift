@@ -91,8 +91,13 @@ class GameAnnounceSceneViewController: UIViewController {
     }
     
     
+    /**
+     Load player announced generators.
+     */
     func loadPlayerAnnounces() {
-        playerAnnounces = []
+        playerAnnounces = (GameScene.user?.generators.filter({ factory in
+            factory.isOffer == .yes
+        }))!
         
         if playerAnnounces.count != 0 {
             emptyAnnounceLabel.isHidden = true
@@ -113,12 +118,10 @@ extension GameAnnounceSceneViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
-        #warning("CHANGE FROM WHERE IT PULLS")
-        let generator = GameScene.user?.generators[indexPath.row]
-        let generatorResources = (generator?.resourcesArray)!
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Self.factoryID, for: indexPath) as! GameAnnounceViewCell
 
-        #warning("IMPLEMENT HERE ")
+        let factory = playerAnnounces[indexPath.row]
+        cell.pullMyAnnouncesFactories(factory: factory, premium: factory.type == .Basic ? false : true)
         return cell
         
     }
