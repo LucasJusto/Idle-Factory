@@ -127,21 +127,22 @@ class GameShopSceneViewController: UIViewController, NavigationCellDelegate {
     }
     
     
-    /**
-     Load player actual currencies value.
-     */
-    @objc func loadPlayerCurrencies() {
-        mainCurrencyLabel.text = doubleToString(value: GameScene.user?.mainCurrency ?? 0.0)
-        premiumCurrencyLabel.text = doubleToString(value: GameScene.user?.premiumCurrency ?? 0.0)
-    }
-    
-    
     func didButtonPressed() {
         print(#function)
         var mainView: UIStoryboard!
         mainView = UIStoryboard(name: "FactoryDetailScene", bundle: nil)
         let viewcontroller : UIViewController = mainView.instantiateViewController(withIdentifier: "FactoryDetailScene") as UIViewController
         self.present(viewcontroller, animated: false)
+    }
+    
+    
+    // MARK: - LOAD DATA
+    /**
+     Load player actual currencies value.
+     */
+    @objc func loadPlayerCurrencies() {
+        mainCurrencyLabel.text = doubleToString(value: GameScene.user?.mainCurrency ?? 0.0)
+        premiumCurrencyLabel.text = doubleToString(value: GameScene.user?.premiumCurrency ?? 0.0)
     }
 }
 

@@ -70,7 +70,10 @@ class GameMarketplaceSceneController: UIViewController, NavigationCellDelegate {
         emptyMarketplaceLabel.text = NSLocalizedString("EmptyMarketplaceLabel", comment: "")
 
         loadPlayerCurrencies()
-        loadMarketplace()
+        
+        DispatchQueue.main.async {
+            self.loadMarketplace()
+        }
 
         let timeToRefresh: Timer?
         timeToRefresh = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(loadPlayerCurrencies), userInfo: nil, repeats: true)
@@ -172,6 +175,15 @@ class GameMarketplaceSceneController: UIViewController, NavigationCellDelegate {
     }
     
     
+    func didButtonPressed() {
+        var mainView: UIStoryboard!
+        mainView = UIStoryboard(name: "FactoryDetailScene", bundle: nil)
+        let viewcontroller : UIViewController = mainView.instantiateViewController(withIdentifier: "FactoryDetailScene") as UIViewController
+        self.present(viewcontroller, animated: false)
+    }
+    
+    
+    //MARK: - LOAD DATA
     /**
      Load player actual currencies value.
      */
@@ -185,33 +197,23 @@ class GameMarketplaceSceneController: UIViewController, NavigationCellDelegate {
      Load marketplace offers. Marketplace contains a selector between basic and premium offers. The default option of the selector is Basic, so this function loads only the basic offers first.
      */
     func loadMarketplace() {
-        DispatchQueue.main.async {
-            CKRepository.getMarketPlaceOffers(completion: { offers in
-                let generatorsId: [String] = offers.map { offer in
-                    offer.generatorID
+        CKRepository.getMarketPlaceOffers(completion: { offers in
+            let generatorsId: [String] = offers.map { offer in
+                offer.generatorID
+            }
+            let semaphore = DispatchSemaphore(value: 0)
+            CKRepository.getGeneratorsByIDs(generatorsIDs: generatorsId) { factories in
+                for factory in factories {
+                    self.generatorDict[factory.id!] = factory
                 }
-                let semaphore = DispatchSemaphore(value: 0)
-                CKRepository.getGeneratorsByIDs(generatorsIDs: generatorsId) { factories in
-                    for factory in factories {
-                        self.generatorDict[factory.id!] = factory
-                    }
-                    semaphore.signal()
-                }
-                semaphore.wait()
+                semaphore.signal()
+            }
+            semaphore.wait()
 
-                self.offerArray = offers.filter({ offer in
-                    offer.currencyType == .basic
-                })
+            self.offerArray = offers.filter({ offer in
+                offer.currencyType == .basic
             })
-        }
-    }
-    
-    
-    func didButtonPressed() {
-        var mainView: UIStoryboard!
-        mainView = UIStoryboard(name: "FactoryDetailScene", bundle: nil)
-        let viewcontroller : UIViewController = mainView.instantiateViewController(withIdentifier: "FactoryDetailScene") as UIViewController
-        self.present(viewcontroller, animated: false)
+        })
     }
 }
 

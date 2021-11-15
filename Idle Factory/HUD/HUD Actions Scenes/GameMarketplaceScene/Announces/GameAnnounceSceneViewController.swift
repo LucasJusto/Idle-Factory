@@ -43,10 +43,13 @@ class GameAnnounceSceneViewController: UIViewController {
         // Setting text
         announceHeaderLabel.text = NSLocalizedString("AnnounceHeaderLabel", comment: "")
         emptyAnnounceLabel.text = NSLocalizedString("EmptyAnnounceLabel", comment: "")
+        
         loadPlayerCurrencies()
         
         // Load player announces
-        loadPlayerAnnounces()
+        DispatchQueue.main.async {
+            self.loadPlayerAnnounces()
+        }
     }
     
     
@@ -82,6 +85,7 @@ class GameAnnounceSceneViewController: UIViewController {
     }
     
     
+    // MARK: - LOAD DATA
     /**
      Load player actual currencies value.
      */
@@ -95,29 +99,26 @@ class GameAnnounceSceneViewController: UIViewController {
      Load player announced generators.
      */
     func loadPlayerAnnounces() {
-        DispatchQueue.main.async {
-            CKRepository.getUserOffersByID(userID: GameScene.user!.id) { offers in
-                let generatorsId: [String] = offers.map { offer in
-                    offer.generatorID
+        CKRepository.getUserOffersByID(userID: GameScene.user!.id) { offers in
+            let generatorsId: [String] = offers.map { offer in
+                offer.generatorID
+            }
+            let semaphore = DispatchSemaphore(value: 0)
+            CKRepository.getGeneratorsByIDs(generatorsIDs: generatorsId) { factories in
+                for factory in factories {
+                    self.announcesDict[factory.id!] = factory
                 }
-                let semaphore = DispatchSemaphore(value: 0)
-                CKRepository.getGeneratorsByIDs(generatorsIDs: generatorsId) { factories in
-                    for factory in factories {
-                        self.announcesDict[factory.id!] = factory
-                    }
-                    semaphore.signal()
-                }
-                semaphore.wait()
+                semaphore.signal()
+            }
+            semaphore.wait()
 
-                self.playerAnnounces = offers
-            }
-            
-            
-            if self.playerAnnounces.count != 0 {
-                self.emptyAnnounceLabel.isHidden = true
-            } else {
-                self.emptyAnnounceLabel.isHidden = false
-            }
+            self.playerAnnounces = offers
+        }
+        
+        if self.playerAnnounces.count != 0 {
+            self.emptyAnnounceLabel.isHidden = true
+        } else {
+            self.emptyAnnounceLabel.isHidden = false
         }
     }
 }
