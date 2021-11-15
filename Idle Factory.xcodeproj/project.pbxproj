@@ -169,6 +169,24 @@
 			path = Fonts;
 			sourceTree = "<group>";
 		};
+		2B1B0CD627429064003274C3 /* Support */ = {
+			isa = PBXGroup;
+			children = (
+				2B0F084127249BF2009F024C /* Fonts */,
+			);
+			path = Support;
+			sourceTree = "<group>";
+		};
+		2B1B0CD72742908F003274C3 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				487A1A0E271552C700723065 /* Base */,
+				553E7F73272099DB00165C8E /* GameSave.swift */,
+				55439BC62721F23D00F69461 /* DateApi.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		2BA6773527319A9200D6F9EB /* Announces */ = {
 			isa = PBXGroup;
 			children = (
@@ -261,11 +279,9 @@
 				487A19FE2715504300723065 /* LaunchScreen.storyboard */,
 				487A1A062715516900723065 /* Camera.swift */,
 				2B0D6D5127231F6500F7390E /* HUD */,
-				2B0F084127249BF2009F024C /* Fonts */,
-				487A1A0E271552C700723065 /* Base */,
-				553E7F73272099DB00165C8E /* GameSave.swift */,
+				2B1B0CD627429064003274C3 /* Support */,
+				2B1B0CD72742908F003274C3 /* Model */,
 				48A65970271F5F470021CD52 /* Localizable.strings */,
-				55439BC62721F23D00F69461 /* DateApi.swift */,
 				F8BF29E7273AEC9C009152CA /* PopUp */,
 				55A830E2273C3F9900C23FD6 /* FactoryScene.swift */,
 			);

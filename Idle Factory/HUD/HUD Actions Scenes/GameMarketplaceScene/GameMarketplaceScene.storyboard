@@ -575,15 +575,23 @@
                                     </collectionViewCell>
                                 </cells>
                             </collectionView>
+                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3eK-pa-iFx">
+                                <rect key="frame" x="427.5" y="197" width="41.5" height="20.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="v0y-Qd-Mdh"/>
                         <color key="backgroundColor" name="Marketplace_background"/>
                         <constraints>
+                            <constraint firstItem="3eK-pa-iFx" firstAttribute="centerY" secondItem="D9q-YL-Ycv" secondAttribute="centerY" id="1kw-d4-Z03"/>
                             <constraint firstItem="uUL-tu-Vgi" firstAttribute="top" secondItem="v0y-Qd-Mdh" secondAttribute="top" constant="45" id="9IB-K3-dEk"/>
                             <constraint firstItem="YgV-Dj-bDE" firstAttribute="trailing" secondItem="D9q-YL-Ycv" secondAttribute="trailing" id="BrU-Fb-CnN"/>
                             <constraint firstItem="v0y-Qd-Mdh" firstAttribute="bottom" secondItem="YgV-Dj-bDE" secondAttribute="bottom" constant="30" id="K1A-Vh-Ztc"/>
                             <constraint firstItem="YgV-Dj-bDE" firstAttribute="leading" secondItem="v0y-Qd-Mdh" secondAttribute="leading" id="Wh6-fY-BkP"/>
                             <constraint firstItem="pxO-EI-DEX" firstAttribute="top" secondItem="v0y-Qd-Mdh" secondAttribute="top" constant="52" id="cJS-04-GUI"/>
+                            <constraint firstItem="3eK-pa-iFx" firstAttribute="centerX" secondItem="D9q-YL-Ycv" secondAttribute="centerX" id="eOb-pg-oiX"/>
                             <constraint firstItem="pxO-EI-DEX" firstAttribute="leading" secondItem="v0y-Qd-Mdh" secondAttribute="leading" constant="20" id="fq1-ux-c55"/>
                             <constraint firstItem="YgV-Dj-bDE" firstAttribute="top" secondItem="pxO-EI-DEX" secondAttribute="bottom" constant="52" id="obR-uY-uVy"/>
                             <constraint firstItem="uUL-tu-Vgi" firstAttribute="centerX" secondItem="D9q-YL-Ycv" secondAttribute="centerX" id="qt4-AO-Cvw"/>
@@ -592,6 +600,7 @@
                     <connections>
                         <outlet property="announceHeaderLabel" destination="rxV-fj-xZV" id="LaM-pJ-9gI"/>
                         <outlet property="collectionView" destination="YgV-Dj-bDE" id="Dod-Ke-sm6"/>
+                        <outlet property="emptyAnnounceLabel" destination="3eK-pa-iFx" id="pxR-5L-rud"/>
                         <outlet property="mainCurrencyHeaderView" destination="OpT-9o-H1u" id="MGI-Nu-hfk"/>
                         <outlet property="mainCurrencyLabel" destination="7Bo-7z-VXG" id="oAk-HR-Wj9"/>
                         <outlet property="premiumCurrencyHeaderView" destination="EOG-YB-6jq" id="OFK-my-70E"/>

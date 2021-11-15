@@ -15,13 +15,15 @@ class GameAnnounceSceneViewController: UIViewController {
 
     @IBOutlet weak var collectionView: UICollectionView!
     
-    // MARK: - MARKETPLACE HEADER
+    // MARK: - ANNOUNCE HEADER
     @IBOutlet weak var announceHeaderLabel: UILabel!
     @IBOutlet weak var mainCurrencyHeaderView: UIView!
     @IBOutlet weak var mainCurrencyLabel: UILabel!
     @IBOutlet weak var premiumCurrencyHeaderView: UIView!
     @IBOutlet weak var premiumCurrencyLabel: UILabel!
     
+    // MARK: - EMPTY ANNOUNCE LABEL
+    @IBOutlet weak var emptyAnnounceLabel: UILabel!
     
     // MARK: - CONTROLLERS
     static let factoryID: String = "announceFactory_cell"
@@ -40,7 +42,11 @@ class GameAnnounceSceneViewController: UIViewController {
         
         // Setting text
         announceHeaderLabel.text = NSLocalizedString("AnnounceHeaderLabel", comment: "")
+        emptyAnnounceLabel.text = NSLocalizedString("EmptyAnnounceLabel", comment: "")
         loadPlayerCurrencies()
+        
+        // Load player announces
+        loadPlayerAnnounces()
     }
     
     
@@ -63,6 +69,7 @@ class GameAnnounceSceneViewController: UIViewController {
         announceHeaderLabel.font = UIFont(name: "AustralSlabBlur-Regular", size: 27)
         mainCurrencyLabel.font = UIFont(name: "AustralSlabBlur-Regular", size: 14)
         premiumCurrencyLabel.font = UIFont(name: "AustralSlabBlur-Regular", size: 14)
+        emptyAnnounceLabel.font = UIFont(name: "AustralSlabBlur-Regular", size: 27)
     }
     
     
@@ -82,7 +89,17 @@ class GameAnnounceSceneViewController: UIViewController {
         mainCurrencyLabel.text = doubleToString(value: GameScene.user?.mainCurrency ?? 0.0)
         premiumCurrencyLabel.text = doubleToString(value: GameScene.user?.premiumCurrency ?? 0.0)
     }
-
+    
+    
+    func loadPlayerAnnounces() {
+        playerAnnounces = []
+        
+        if playerAnnounces.count != 0 {
+            emptyAnnounceLabel.isHidden = true
+        } else {
+            emptyAnnounceLabel.isHidden = false
+        }
+    }
 }
 
 
