@@ -60,7 +60,7 @@
 "AnnounceHeaderLabel" = "Meus anúncios";
 "AboutAnnounceButton" = "Ver anúncio";
 "AnnounceInputPlaceholder" = "Digite valor";
-"EmptyAnnounceLabel" = "Você não possui nenhum anúncio";
+"EmptyAnnounceLabel" = "Você não possui anúncios";
 
 //MARK: - Upgrade Screen
 "MoveToInventory" = "Mover para o inventário";

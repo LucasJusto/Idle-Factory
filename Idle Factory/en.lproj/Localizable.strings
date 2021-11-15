@@ -60,7 +60,7 @@
 "AnnounceHeaderLabel" = "My announces";
 "AboutAnnounceButton" = "See announce";
 "AnnounceInputPlaceholder" = "Type value";
-"EmptyAnnounceLabel" = "You do not have any announces";
+"EmptyAnnounceLabel" = "You do not have announces";
 
 
 //MARK: - Upgrade Screen
