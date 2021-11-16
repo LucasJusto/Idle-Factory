@@ -36,9 +36,17 @@ class GameAnnounceViewCell: UICollectionViewCell {
     @IBOutlet weak var seeAnnounceButton: UIButton!
     
     
+    @IBAction func buttonCell(_ sender: Any) {
+        if offer?.buyerID == "none" {
+            //abrir tela de detalhes
+        } else if offer?.isCollected == .no {
+            // resgata o dinheiro e tira o gerador dessa lista e adiciona
+        }
+    }
+    
     // MARK: - VARIABLES
     var myFactoryAnnounce: Factory?
-
+    var offer: Offer?
     
     // MARK: - CELL FUNCTIONS
     override func prepareForReuse() {
@@ -75,7 +83,13 @@ class GameAnnounceViewCell: UICollectionViewCell {
         priceLabel.font = UIFont(name: "AustralSlabBlur-Regular", size: 14)
         seeAnnounceButton.titleLabel?.font = UIFont(name: "AustralSlabBlur-Regular", size: 10)
         
-        seeAnnounceButton.setTitle(NSLocalizedString("AboutAnnounceButton", comment: ""), for: .normal)
+        if offer?.buyerID == "none" {
+            seeAnnounceButton.backgroundColor = UIColor(named: "actionColor1")
+            seeAnnounceButton.setTitle(NSLocalizedString("AboutNewFactoryButton", comment: ""), for: .normal)
+        } else if offer?.isCollected == .no {
+            seeAnnounceButton.backgroundColor = UIColor(named: "HudActions-background")
+            seeAnnounceButton.setTitle(NSLocalizedString("RedeemValueButton", comment: ""), for: .normal)
+        }
     }
     
     
@@ -83,6 +97,7 @@ class GameAnnounceViewCell: UICollectionViewCell {
      Pull purchasable factories to display on marketplace.
      */
     func pullMyAnnouncesFactories(factory: Factory, offer: Offer, premium: Bool) {
+        self.offer = offer
         let scene = FactoryScene(size: CGSize(width: 400, height: 400))
         scene.thisFactory = factory
         scene.thisYPosition = 12
