@@ -97,9 +97,11 @@
 
 
 //MARK: - Settings
-"resetButtonLabelText" = "Apagar informações pessoais";
+"SettingHeader" = "Configurações";
 "SongLabel" = "Música";
 "SoundEffectsLabel" = "Efeitos sonoros";
-"confirmButtonSettings" = "Apagar";
-"cancelButtonSettings" = "Cancelar";
-"confirmResetTitle" = "Limpar os dados pessoais vai alterar o seu nome de usuário, deseja continuar?";
+"NameLabel" = "Nome";
+"ResetPersonalDataLabel" = "Apagar informações pessoais";
+"ConfirmResetQuestionTitle" = "Limpar os dados pessoais vai alterar o seu nome de usuário, deseja continuar?";
+"CancelResetAction" = "Cancelar";
+"ConfirmResetAction" = "Apagar";

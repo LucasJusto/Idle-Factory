@@ -10,6 +10,11 @@
 		2B5B37512730A9A800277739 /* GameMarketplaceViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B5B37502730A9A800277739 /* GameMarketplaceViewCell.swift */; };
 		2B9C3146271F4BC3008A7676 /* GameHud.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B9C3145271F4BC3008A7676 /* GameHud.swift */; };
 		2B9C314B271F50DD008A7676 /* Austral-Slab_Blur-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 2B9C314A271F50DD008A7676 /* Austral-Slab_Blur-Regular.otf */; };
+		2B9C8FF127441E5500CDD36C /* GameSound.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B9C8FF027441E5500CDD36C /* GameSound.swift */; };
+		2B9C8FF727441EEB00CDD36C /* bkg_music.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 2B9C8FF327441EEB00CDD36C /* bkg_music.mp3 */; };
+		2B9C8FF827441EEB00CDD36C /* deactivated_button.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 2B9C8FF427441EEB00CDD36C /* deactivated_button.mp3 */; };
+		2B9C8FF927441EEB00CDD36C /* clicked_button.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 2B9C8FF527441EEB00CDD36C /* clicked_button.mp3 */; };
+		2B9C8FFA27441EEB00CDD36C /* upgrade.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 2B9C8FF627441EEB00CDD36C /* upgrade.mp3 */; };
 		2BA6773227319A6C00D6F9EB /* GameAnnounceSceneViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BA6773127319A6C00D6F9EB /* GameAnnounceSceneViewController.swift */; };
 		2BA6773427319A8C00D6F9EB /* GameAnnounceViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BA6773327319A8C00D6F9EB /* GameAnnounceViewCell.swift */; };
 		2BBEC8D52733097000D0F671 /* GameShopScene.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2BBEC8D42733097000D0F671 /* GameShopScene.storyboard */; };
@@ -69,6 +74,11 @@
 		2B9C3145271F4BC3008A7676 /* GameHud.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameHud.swift; sourceTree = "<group>"; };
 		2B9C3147271F4C1B008A7676 /* Idle-Factory-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "Idle-Factory-Info.plist"; sourceTree = SOURCE_ROOT; };
 		2B9C314A271F50DD008A7676 /* Austral-Slab_Blur-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Austral-Slab_Blur-Regular.otf"; sourceTree = "<group>"; };
+		2B9C8FF027441E5500CDD36C /* GameSound.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameSound.swift; sourceTree = "<group>"; };
+		2B9C8FF327441EEB00CDD36C /* bkg_music.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = bkg_music.mp3; sourceTree = "<group>"; };
+		2B9C8FF427441EEB00CDD36C /* deactivated_button.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = deactivated_button.mp3; sourceTree = "<group>"; };
+		2B9C8FF527441EEB00CDD36C /* clicked_button.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = clicked_button.mp3; sourceTree = "<group>"; };
+		2B9C8FF627441EEB00CDD36C /* upgrade.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = upgrade.mp3; sourceTree = "<group>"; };
 		2BA6773127319A6C00D6F9EB /* GameAnnounceSceneViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameAnnounceSceneViewController.swift; sourceTree = "<group>"; };
 		2BA6773327319A8C00D6F9EB /* GameAnnounceViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameAnnounceViewCell.swift; sourceTree = "<group>"; };
 		2BBEC8D42733097000D0F671 /* GameShopScene.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = GameShopScene.storyboard; sourceTree = "<group>"; };
@@ -187,6 +197,26 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
+		2B9C8FF227441E5A00CDD36C /* Sound */ = {
+			isa = PBXGroup;
+			children = (
+				2B9C8FFB27441F6A00CDD36C /* Audios */,
+				2B9C8FF027441E5500CDD36C /* GameSound.swift */,
+			);
+			path = Sound;
+			sourceTree = "<group>";
+		};
+		2B9C8FFB27441F6A00CDD36C /* Audios */ = {
+			isa = PBXGroup;
+			children = (
+				2B9C8FF327441EEB00CDD36C /* bkg_music.mp3 */,
+				2B9C8FF527441EEB00CDD36C /* clicked_button.mp3 */,
+				2B9C8FF427441EEB00CDD36C /* deactivated_button.mp3 */,
+				2B9C8FF627441EEB00CDD36C /* upgrade.mp3 */,
+			);
+			path = Audios;
+			sourceTree = "<group>";
+		};
 		2BA6773527319A9200D6F9EB /* Announces */ = {
 			isa = PBXGroup;
 			children = (
@@ -284,6 +314,7 @@
 				48A65970271F5F470021CD52 /* Localizable.strings */,
 				F8BF29E7273AEC9C009152CA /* PopUp */,
 				55A830E2273C3F9900C23FD6 /* FactoryScene.swift */,
+				2B9C8FF227441E5A00CDD36C /* Sound */,
 			);
 			path = "Idle Factory";
 			sourceTree = "<group>";
@@ -432,17 +463,21 @@
 			buildActionMask = 2147483647;
 			files = (
 				487A19FB2715504000723065 /* Main.storyboard in Resources */,
+				2B9C8FFA27441EEB00CDD36C /* upgrade.mp3 in Resources */,
 				2BD3FBF32728777400B4B4E6 /* GameChallengeScene.storyboard in Resources */,
 				F8BF29ED273AED58009152CA /* WelcomeBack.storyboard in Resources */,
 				48A6596E271F5F470021CD52 /* Localizable.strings in Resources */,
+				2B9C8FF727441EEB00CDD36C /* bkg_music.mp3 in Resources */,
 				487A19FD2715504300723065 /* Assets.xcassets in Resources */,
 				487A1A002715504300723065 /* LaunchScreen.storyboard in Resources */,
 				2BD3FBEF27285ED200B4B4E6 /* GameInventoryScene.storyboard in Resources */,
 				2B9C314B271F50DD008A7676 /* Austral-Slab_Blur-Regular.otf in Resources */,
 				DF6A8B4D273DB2AA009AA31D /* Settings.storyboard in Resources */,
 				F8CD9B54273C4007002349B1 /* GenerateNFTConfirmation.storyboard in Resources */,
+				2B9C8FF927441EEB00CDD36C /* clicked_button.mp3 in Resources */,
 				2BBEC8D52733097000D0F671 /* GameShopScene.storyboard in Resources */,
 				2BD3FBF727287CBE00B4B4E6 /* UpgradeFactoryScene.storyboard in Resources */,
+				2B9C8FF827441EEB00CDD36C /* deactivated_button.mp3 in Resources */,
 				2BD3FBF52728778500B4B4E6 /* GameMarketplaceScene.storyboard in Resources */,
 				55A0B4AE2732F6C900161FE8 /* FactoryDetailScene.storyboard in Resources */,
 			);
@@ -493,6 +528,7 @@
 				480A2043272A7AB000F5BC49 /* FactoryVisualGenerator.swift in Sources */,
 				2BBEC8D827330B8E00D0F671 /* GameShopViewCell.swift in Sources */,
 				487A19F02715504000723065 /* AppDelegate.swift in Sources */,
+				2B9C8FF127441E5500CDD36C /* GameSound.swift in Sources */,
 				487A1A09271551BA00723065 /* Generator.swift in Sources */,
 				2BA6773427319A8C00D6F9EB /* GameAnnounceViewCell.swift in Sources */,
 			);

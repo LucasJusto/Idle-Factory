@@ -11,42 +11,60 @@ class ConfirmResetPersonalDataViewController: UIViewController {
 
     weak var delegate: ResetPersonalData?
     
-    @IBOutlet weak var confirmResetLabel: UILabel!
-    @IBOutlet weak var cancelButton: UIButton!
-    @IBOutlet weak var confirmButton: UIButton!
+    // MARK: - OUTLETS
+    @IBOutlet weak var backgroundView: UIView!
+    @IBOutlet weak var confirmResetQuestionLabel: UILabel!
+    @IBOutlet weak var cancelResetButton: UIButton!
+    @IBOutlet weak var confirmResetButton: UIButton!
     
-    @IBAction func cancelButton(_ sender: Any) {
-        self.dismiss(animated: false, completion: nil)
-    }
-    
-    @IBAction func confirmResetButton(_ sender: Any) {
-        delegate?.resetPersonalData()
-    }
-    
-    
+
+    // MARK: - INIT
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        confirmResetLabel.text = NSLocalizedString("confirmResetTitle", comment: "")
+        loadOutletCustomizations()
+        loadCustomFont()
         
-        setupButtons(button: cancelButton, text: NSLocalizedString("cancelButtonSettings", comment: ""))
-        setupButtons(button: confirmButton, text: NSLocalizedString("confirmButtonSettings", comment: ""))
-
+        confirmResetQuestionLabel.text = NSLocalizedString("ConfirmResetQuestionTitle", comment: "")
+        cancelResetButton.setTitle(NSLocalizedString("CancelResetAction", comment: ""), for: .normal)
+        confirmResetButton.setTitle(NSLocalizedString("ConfirmResetAction", comment: ""), for: .normal)
     }
     
-   func setupButtons(button: UIButton, text: String) {
+    
+    // MARK: - DESIGN FUNCTIONS
+    func loadOutletCustomizations() {
+        backgroundView.layer.cornerRadius = 10
+        cancelResetButton.layer.cornerRadius = 10
+        confirmResetButton.layer.cornerRadius = 10
+    }
+    
+    
+    /**
+     Load custom font to all labels and button text.
+     */
+    func loadCustomFont() {
+        // LABELS
+        confirmResetQuestionLabel.font = UIFont(name: "AustralSlabBlur-Regular", size: 27)
         
-            button.layer.cornerRadius = 10
-            
-            let font =  UIFont(name: "AustralSlabBlur-Regular", size: 10)!
-            
-            let fontAttribute = [NSAttributedString.Key.font: font]
-            
-            let title = text
-            
-            let attributedString = NSAttributedString(string: title, attributes: fontAttribute)
-            
-            button.setAttributedTitle(attributedString, for: .normal)
-        
+        // BUTTONS
+        cancelResetButton.titleLabel?.font = UIFont(name: "AustralSlabBlur-Regular", size: 10)
+        confirmResetButton.titleLabel?.font = UIFont(name: "AustralSlabBlur-Regular", size: 10)
+    }
+    
+    
+    // MARK: - ACTIONS
+    /**
+     Cancel reset action.
+     */
+    @IBAction func cancelReset(_ sender: Any) {
+        self.dismiss(animated: false, completion: nil)
+    }
+    
+    
+    /**
+     Confirm reset data.
+     */
+    @IBAction func confirmReset(_ sender: Any) {
+        delegate?.resetPersonalData()
     }
 }
