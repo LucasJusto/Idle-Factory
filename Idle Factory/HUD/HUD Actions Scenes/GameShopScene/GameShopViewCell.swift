@@ -99,32 +99,38 @@ class GameShopViewCell: UICollectionViewCell {
         switch resources.count {
         case 1:
             resourceType1.isHidden = true
+            let qtd = (resources[0].qttPLevel * Double(resources[0].currentLevel)) + resources[0].baseQtt
             resourceQuantityType1.isHidden = true
             resourceType2.image = UIImage(systemName: getResourceImageName(resource: resources[0].type))
-            resourceQuantityType2.text = "\(Int(resources[0].baseQtt))"
+            resourceQuantityType2.text = "\(Int(qtd))"
             resourceType3.isHidden = true
+            priceLabel.text = "\(doubleToString(value: resources[0].basePrice))"
             resourceQuantityType3.isHidden = true
-            priceLabel.text = doubleToString(value: resources[0].basePrice)
             
         case 2:
             resourceType1.image = UIImage(systemName: getResourceImageName(resource: resources[0].type))
-            resourceQuantityType1.text = "\(Int(resources[0].baseQtt))"
+            let qtd0 = (resources[0].qttPLevel * Double(resources[0].currentLevel)) + resources[0].baseQtt
+            resourceQuantityType1.text = "\(Int(qtd0))"
+            let qtd1 = (resources[1].qttPLevel * Double(resources[1].currentLevel)) + resources[1].baseQtt
             resourceType2.image = UIImage(systemName: getResourceImageName(resource: resources[1].type))
-            resourceQuantityType2.text = "\(Int(resources[1].baseQtt))"
+            resourceQuantityType2.text = "\(Int(qtd1))"
             resourceType3.isHidden = true
+            priceLabel.text = "\(doubleToString(value: resources[0].basePrice + resources[1].basePrice))"
             resourceQuantityType3.isHidden = true
-            priceLabel.text = doubleToString(value: (resources[0].basePrice + resources[1].basePrice))
 
         case 3:
             leftMargin.isHidden = true
             resourceType1.image = UIImage(systemName: getResourceImageName(resource: resources[0].type))
-            resourceQuantityType1.text = "\(Int(resources[0].baseQtt))"
+            let qtd0 = (resources[0].qttPLevel * Double(resources[0].currentLevel)) + resources[0].baseQtt
+            resourceQuantityType1.text = "\(Int(qtd0))"
             resourceType2.image = UIImage(systemName: getResourceImageName(resource: resources[1].type))
-            resourceQuantityType2.text = "\(Int(resources[1].baseQtt))"
+            let qtd1 = (resources[1].qttPLevel * Double(resources[1].currentLevel)) + resources[1].baseQtt
+            resourceQuantityType2.text = "\(Int(qtd1))"
             resourceType3.image = UIImage(systemName: getResourceImageName(resource: resources[2].type))
-            resourceQuantityType3.text = "\(Int(resources[2].baseQtt))"
+            let qtd2 = (resources[2].qttPLevel * Double(resources[2].currentLevel)) + resources[2].baseQtt
+            resourceQuantityType3.text = "\(Int(qtd2))"
+            priceLabel.text = "\(doubleToString(value: resources[0].basePrice + resources[1].basePrice + resources[2].basePrice))"
             rightMargin.isHidden = true
-            priceLabel.text = doubleToString(value: (resources[0].basePrice + resources[1].basePrice + resources[2].basePrice))
 
         default:
             leftMargin.isHidden = true

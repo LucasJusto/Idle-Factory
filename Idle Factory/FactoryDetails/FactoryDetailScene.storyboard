@@ -55,8 +55,9 @@
                                                     <rect key="frame" x="0.0" y="0.0" width="290" height="40"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <subviews>
-                                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="back" translatesAutoresizingMaskIntoConstraints="NO" id="xPC-09-vaa">
-                                                            <rect key="frame" x="5" y="5" width="24" height="30"/>
+                                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="pencil.circle" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="xPC-09-vaa">
+                                                            <rect key="frame" x="5" y="5.5" width="24" height="29"/>
+                                                            <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="24" id="ie2-QW-orU"/>
                                                                 <constraint firstAttribute="width" constant="24" id="whk-RK-yZc"/>
@@ -136,7 +137,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sWr-DH-FU2">
-                                <rect key="frame" x="607" y="328" width="87" height="27"/>
+                                <rect key="frame" x="607" y="331" width="87" height="27"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="87" id="GrB-AI-D3k"/>
                                     <constraint firstAttribute="height" constant="27" id="Oha-NB-DW5"/>
@@ -150,7 +151,7 @@
                                 </connections>
                             </button>
                             <stackView opaque="NO" contentMode="scaleToFill" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="fQI-BB-ppd">
-                                <rect key="frame" x="434" y="321" width="152" height="50"/>
+                                <rect key="frame" x="434" y="333" width="152" height="50"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="1000" verticalHuggingPriority="251" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="M86-cG-2rv">
                                         <rect key="frame" x="0.0" y="0.0" width="49" height="50"/>
@@ -263,11 +264,11 @@
                             <constraint firstItem="ncd-Iu-cMB" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="100" id="4Lj-LX-YpH"/>
                             <constraint firstItem="sWr-DH-FU2" firstAttribute="leading" secondItem="fQI-BB-ppd" secondAttribute="trailing" constant="21" id="5s7-nB-rOc"/>
                             <constraint firstItem="P5k-7M-A3n" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="15" id="9JL-bn-ZW2"/>
-                            <constraint firstItem="fQI-BB-ppd" firstAttribute="top" secondItem="ncd-Iu-cMB" secondAttribute="bottom" constant="-25" id="9Kj-Mu-wlF"/>
+                            <constraint firstItem="fQI-BB-ppd" firstAttribute="top" secondItem="ncd-Iu-cMB" secondAttribute="bottom" constant="-13" id="9Kj-Mu-wlF"/>
                             <constraint firstItem="0GZ-Ut-UXT" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" constant="41" id="JEm-TW-yPF"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="0GZ-Ut-UXT" secondAttribute="trailing" constant="15" id="M1u-S9-EzR"/>
                             <constraint firstItem="Mni-es-HOv" firstAttribute="centerX" secondItem="5EZ-qb-Rvc" secondAttribute="centerX" id="NOm-FA-cyO"/>
-                            <constraint firstItem="sWr-DH-FU2" firstAttribute="top" secondItem="ncd-Iu-cMB" secondAttribute="bottom" constant="-18" id="VaQ-WP-BTM"/>
+                            <constraint firstItem="sWr-DH-FU2" firstAttribute="top" secondItem="ncd-Iu-cMB" secondAttribute="bottom" constant="-15" id="VaQ-WP-BTM"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="ncd-Iu-cMB" secondAttribute="trailing" constant="100" id="gCJ-Z9-Yfv"/>
                             <constraint firstItem="ncd-Iu-cMB" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" constant="110" id="glr-oh-tWx"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="sWr-DH-FU2" secondAttribute="trailing" constant="158" id="hOy-eK-uK6"/>
@@ -299,10 +300,11 @@
         </scene>
     </scenes>
     <resources>
-        <image name="Coin" width="50" height="43"/>
-        <image name="Money_premium" width="46" height="43"/>
+        <image name="Coin" width="26" height="18"/>
+        <image name="Money_premium" width="23" height="13"/>
         <image name="back" width="31.5" height="31"/>
         <image name="close" width="31.5" height="31"/>
+        <image name="pencil.circle" catalog="system" width="128" height="121"/>
         <namedColor name="Marketplace_background">
             <color red="0.63899999856948853" green="0.63899999856948853" blue="0.63899999856948853" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
