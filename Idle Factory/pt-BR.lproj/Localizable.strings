@@ -103,3 +103,9 @@
 "confirmButtonSettings" = "Apagar";
 "cancelButtonSettings" = "Cancelar";
 "confirmResetTitle" = "Limpar os dados pessoais vai alterar o seu nome de usuário, deseja continuar?";
+
+//MARK: - Onboarding
+"Onboarding1" = "Adquira fábricas para aumentar o seu parque industrial";
+"Onboarding2" = "Faça upgrades nas fábricas produzir mais produtos";
+"Onboarding3" = "Compre fábricas premium para ter vantagens exclusivas";
+"startPlaying" = "Comece a Jogar"

@@ -8,6 +8,11 @@
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
+    <customFonts key="customFonts">
+        <array key="Austral-Slab_Blur-Regular.otf">
+            <string>AustralSlabBlur-Regular</string>
+        </array>
+    </customFonts>
     <scenes>
         <!--Main Page View Controller-->
         <scene sceneID="XVw-tr-EHs">
@@ -26,22 +31,26 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="I1" translatesAutoresizingMaskIntoConstraints="NO" id="tDh-Vp-lO1">
-                                <rect key="frame" x="425" y="13" width="406" height="359"/>
+                                <rect key="frame" x="425" y="27.5" width="406" height="359"/>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MmG-Nj-OD4">
-                                <rect key="frame" x="196" y="196.5" width="42" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MmG-Nj-OD4">
+                                <rect key="frame" x="196" y="193" width="208" height="28"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="208" id="GRW-Gd-Uqt"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="AustralSlabBlur-Regular" family="Austral Slab" pointSize="28"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="TeM-yl-d4G"/>
                         <color key="backgroundColor" name="HudActions-background"/>
                         <constraints>
-                            <constraint firstItem="TeM-yl-d4G" firstAttribute="bottom" secondItem="tDh-Vp-lO1" secondAttribute="bottom" constant="21" id="9Y6-Xk-nFQ"/>
                             <constraint firstItem="MmG-Nj-OD4" firstAttribute="leading" secondItem="TeM-yl-d4G" secondAttribute="leading" constant="152" id="COD-TG-gpF"/>
                             <constraint firstItem="MmG-Nj-OD4" firstAttribute="centerY" secondItem="E1a-Mx-qgw" secondAttribute="centerY" id="Mt7-6w-SgI"/>
-                            <constraint firstItem="TeM-yl-d4G" firstAttribute="trailing" secondItem="tDh-Vp-lO1" secondAttribute="trailing" constant="21" id="wJZ-pd-OCP"/>
+                            <constraint firstItem="TeM-yl-d4G" firstAttribute="trailing" secondItem="tDh-Vp-lO1" secondAttribute="trailing" constant="21" id="OpA-eV-J1g"/>
+                            <constraint firstItem="tDh-Vp-lO1" firstAttribute="centerY" secondItem="E1a-Mx-qgw" secondAttribute="centerY" id="n7R-Xl-Ppp"/>
+                            <constraint firstItem="tDh-Vp-lO1" firstAttribute="leading" secondItem="MmG-Nj-OD4" secondAttribute="trailing" constant="21" id="s7s-sn-ILe"/>
                         </constraints>
                     </view>
                     <connections>
@@ -59,13 +68,37 @@
                     <view key="view" contentMode="scaleToFill" id="I1K-k2-fpy">
                         <rect key="frame" x="0.0" y="0.0" width="896" height="414"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oED-8V-OjC">
+                                <rect key="frame" x="196" y="193" width="208" height="28"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="208" id="db9-Zm-bCY"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="AustralSlabBlur-Regular" family="Austral Slab" pointSize="28"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="I2" translatesAutoresizingMaskIntoConstraints="NO" id="mFH-SZ-J1j">
+                                <rect key="frame" x="425" y="65" width="406" height="284"/>
+                            </imageView>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="Cyr-3k-u0H"/>
-                        <color key="backgroundColor" name="actionColor1"/>
+                        <color key="backgroundColor" name="HudActions-background"/>
+                        <constraints>
+                            <constraint firstItem="oED-8V-OjC" firstAttribute="centerY" secondItem="I1K-k2-fpy" secondAttribute="centerY" id="10O-bT-0fV"/>
+                            <constraint firstItem="Cyr-3k-u0H" firstAttribute="trailing" secondItem="mFH-SZ-J1j" secondAttribute="trailing" constant="21" id="52O-45-erv"/>
+                            <constraint firstItem="mFH-SZ-J1j" firstAttribute="leading" secondItem="oED-8V-OjC" secondAttribute="trailing" constant="21" id="EpD-1s-cE9"/>
+                            <constraint firstItem="oED-8V-OjC" firstAttribute="leading" secondItem="Cyr-3k-u0H" secondAttribute="leading" constant="152" id="JVW-Py-cuH"/>
+                            <constraint firstItem="mFH-SZ-J1j" firstAttribute="centerY" secondItem="I1K-k2-fpy" secondAttribute="centerY" id="WIp-Fe-7L2"/>
+                        </constraints>
                     </view>
+                    <connections>
+                        <outlet property="Label" destination="oED-8V-OjC" id="Utz-y9-kRs"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="UQH-6Q-G9O" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2095" y="122"/>
+            <point key="canvasLocation" x="2093.9732142857142" y="121.73913043478262"/>
         </scene>
         <!--Third View Controller-->
         <scene sceneID="XGe-Dr-mkB">
@@ -74,25 +107,59 @@
                     <view key="view" contentMode="scaleToFill" id="eVE-ri-Qdo">
                         <rect key="frame" x="0.0" y="0.0" width="896" height="414"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TgS-TX-9kI">
+                                <rect key="frame" x="196" y="193" width="208" height="28"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="208" id="bBk-HD-pn0"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="AustralSlabBlur-Regular" family="Austral Slab" pointSize="28"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="I3" translatesAutoresizingMaskIntoConstraints="NO" id="7zX-zF-2cs">
+                                <rect key="frame" x="425" y="92.5" width="406" height="229"/>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DAT-ob-1Ky">
+                                <rect key="frame" x="765.5" y="350" width="65.5" height="28"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="Button">
+                                    <fontDescription key="titleFontDescription" name="AustralSlabBlur-Regular" family="Austral Slab" pointSize="14"/>
+                                    <color key="baseForegroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </buttonConfiguration>
+                                <connections>
+                                    <action selector="startAction:" destination="1YM-BF-RFa" eventType="touchUpInside" id="3hl-pG-RMm"/>
+                                </connections>
+                            </button>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="SMe-vW-lmz"/>
-                        <color key="backgroundColor" name="Inventory_background"/>
+                        <color key="backgroundColor" name="HudActions-background"/>
+                        <constraints>
+                            <constraint firstItem="7zX-zF-2cs" firstAttribute="leading" secondItem="TgS-TX-9kI" secondAttribute="trailing" constant="21" id="1ES-Pd-rjs"/>
+                            <constraint firstItem="SMe-vW-lmz" firstAttribute="bottom" secondItem="DAT-ob-1Ky" secondAttribute="bottom" constant="15" id="39H-hD-T9a"/>
+                            <constraint firstItem="7zX-zF-2cs" firstAttribute="centerY" secondItem="eVE-ri-Qdo" secondAttribute="centerY" id="3Gw-w4-t3F"/>
+                            <constraint firstItem="SMe-vW-lmz" firstAttribute="trailing" secondItem="DAT-ob-1Ky" secondAttribute="trailing" constant="21" id="eqJ-b2-eDB"/>
+                            <constraint firstItem="TgS-TX-9kI" firstAttribute="centerY" secondItem="eVE-ri-Qdo" secondAttribute="centerY" id="lTC-Cm-ShX"/>
+                            <constraint firstItem="SMe-vW-lmz" firstAttribute="trailing" secondItem="7zX-zF-2cs" secondAttribute="trailing" constant="21" id="sFh-Tj-QJW"/>
+                            <constraint firstItem="TgS-TX-9kI" firstAttribute="leading" secondItem="SMe-vW-lmz" secondAttribute="leading" constant="152" id="zY5-fm-bxW"/>
+                        </constraints>
                     </view>
+                    <connections>
+                        <outlet property="Label" destination="TgS-TX-9kI" id="1v4-4y-Sgy"/>
+                        <outlet property="startButton" destination="DAT-ob-1Ky" id="Wwd-1N-bwF"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nkR-Ib-7py" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2774" y="122"/>
+            <point key="canvasLocation" x="2773.6607142857142" y="121.73913043478262"/>
         </scene>
     </scenes>
     <resources>
         <image name="I1" width="406" height="359"/>
+        <image name="I2" width="322" height="284"/>
+        <image name="I3" width="198" height="229"/>
         <namedColor name="HudActions-background">
             <color red="0.10199999809265137" green="0.65499997138977051" blue="0.82700002193450928" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </namedColor>
-        <namedColor name="Inventory_background">
-            <color red="0.77999997138977051" green="0.16500000655651093" blue="0.23100000619888306" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </namedColor>
-        <namedColor name="actionColor1">
-            <color red="0.6470000147819519" green="0.87099999189376831" blue="0.27099999785423279" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
     </resources>
 </document>

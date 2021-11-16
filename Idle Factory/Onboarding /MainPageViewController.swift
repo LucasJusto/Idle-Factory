@@ -30,7 +30,7 @@ class MainPageViewController : UIPageViewController{
         layout()
         pageControl.translatesAutoresizingMaskIntoConstraints = false
         pageControl.currentPageIndicatorTintColor = .white
-        pageControl.pageIndicatorTintColor = .systemGray4
+        pageControl.pageIndicatorTintColor = UIColor(red: 0.769, green: 0.769, blue: 0.769, alpha: 1)
         pageControl.numberOfPages = viewControllerList.count
         pageControl.currentPage = 0
         pageControl.addTarget(self, action: #selector(pageControlTapped(_:)), for: .valueChanged)

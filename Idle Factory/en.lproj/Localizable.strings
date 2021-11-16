@@ -104,3 +104,9 @@
 "confirmButtonSettings" = "Reset";
 "cancelButtonSettings" = "Cancel";
 "confirmResetTitle" = "Clearing your personal data will change your username, do you want to continue?";
+
+//MARK: - Onboarding
+"Onboarding1" = "Acquire factories to increase your park";
+"Onboarding2" = "Upgrade your factories to produce more products";
+"Onboarding3" = "Acquire premium factories to unlock exclusive perks";
+"startPlaying" = "Start Playing";

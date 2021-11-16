@@ -13,7 +13,7 @@ class FirstViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        Label1.text = NSLocalizedString("Adquira fábricas e evolua para aumentar o seu parque industrial", comment: "")
+        Label1.text = NSLocalizedString("Onboarding1", comment: "")
         // Do any additional setup after loading the view.
     }
     

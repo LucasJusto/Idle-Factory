@@ -9,9 +9,16 @@ import UIKit
 
 class ThirdViewController: UIViewController {
 
+    @IBAction func startAction(_ sender: Any) {
+        self.dismiss(animated: true)
+    }
+    @IBOutlet weak var startButton: UIButton!
+    @IBOutlet weak var Label: UILabel!
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        Label.text = NSLocalizedString("Onboarding2", comment: "")
+        startButton.backgroundColor = UIColor(named: "actionColor1")
+        startButton.layer.cornerRadius = 15
         // Do any additional setup after loading the view.
     }
     
