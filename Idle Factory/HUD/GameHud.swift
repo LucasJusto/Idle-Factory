@@ -26,7 +26,8 @@ class GameHud {
     private(set) var shopButton: SKSpriteNode = SKSpriteNode()
     private(set) var marketplaceButton: SKSpriteNode = SKSpriteNode()
     private(set) var challengeButton: SKSpriteNode = SKSpriteNode()
-    
+    private(set) var settingsButton: SKSpriteNode = SKSpriteNode()
+
     
     // MARK: - TOP HUD COMPONENTS CREATION
     /**
@@ -130,12 +131,24 @@ class GameHud {
     
     
     /**
+     Create settings button for the sidebar hud.
+     */
+    func createSettingsButton() -> SKSpriteNode {
+        settingsButton = SKSpriteNode(imageNamed: "Button-settings")
+        settingsButton.name = "GameSettingsButton"
+        settingsButton.setScale(1.2)
+        settingsButton.zPosition = 50
+        return settingsButton
+    }
+    
+    
+    /**
      Create inventory button for the sidebar hud.
      */
     func createInventoryButton() -> SKSpriteNode {
         inventoryButton = SKSpriteNode(imageNamed: "Button-inventory")
         inventoryButton.name = "PlayerInventoryButton"
-        inventoryButton.setScale(0.8)
+        inventoryButton.setScale(1.2)
         inventoryButton.zPosition = 50
         return inventoryButton
     }
@@ -147,7 +160,7 @@ class GameHud {
     func createShopButton() -> SKSpriteNode {
         shopButton = SKSpriteNode(imageNamed: "Button-shop")
         shopButton.name = "ShopButton"
-        shopButton.setScale(0.8)
+        shopButton.setScale(1.2)
         shopButton.zPosition = 50
         return shopButton
     }
@@ -159,7 +172,7 @@ class GameHud {
     func createMarketplaceButton() -> SKSpriteNode {
         marketplaceButton = SKSpriteNode(imageNamed: "Button-marketplace")
         marketplaceButton.name = "MarketplaceButton"
-        marketplaceButton.setScale(0.8)
+        marketplaceButton.setScale(1.2)
         marketplaceButton.zPosition = 50
         return marketplaceButton
     }
@@ -171,7 +184,7 @@ class GameHud {
     func createChallengeButton() -> SKSpriteNode {
         challengeButton = SKSpriteNode(imageNamed: "Button-challenges")
         challengeButton.name = "ChallengeButton"
-        challengeButton.setScale(0.8)
+        challengeButton.setScale(1.3)
         challengeButton.zPosition = 50
         return challengeButton
     }

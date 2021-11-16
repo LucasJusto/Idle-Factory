@@ -50,18 +50,24 @@
 "SellAItemButton" = "Vender um item";
 "MyAnnouncesButton" = "Meus anúncios";
 "AboutNewFactoryButton" = "Ver mais";
+"EmptyMarketplaceLabel" = "No momento não temos geradores a venda no marketplace";
+
+
+// MARK: - CHALLENGES
+"UnderConstructionLabel" = "Esta seção está em construção.";
 
 
 //MARK: - Announces
 "AnnounceHeaderLabel" = "Meus anúncios";
 "AboutAnnounceButton" = "Ver anúncio";
 "AnnounceInputPlaceholder" = "Digite valor";
+"EmptyAnnounceLabel" = "Você não possui anúncios";
 
 
 //MARK: - Upgrade Screen
 "MoveToInventory" = "Mover para o inventário";
 "ChangeFactory" = "Trocar fábrica";
-
+"level" = "nível";
 
 //MARK: - WelcomeBack PopUp
 "YouWon" = "Você Ganhou";

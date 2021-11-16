@@ -94,30 +94,10 @@ class GameScene: SKScene {
         addChild(cameraNode)
         
         startIncrement()
-        
-//        for n in GameScene.user!.generators {
-//            CKRepository.deleteGeneratorByID(generatorID: n.id!){ _ in
-//                
-//            }
-//        }
-        
-//
-//        CKRepository.getUserId{ id in
-//                    CKRepository.storeNewGenerator(userID: id! , generator: Factory(resourcesArray: [Resource(basePrice: 100, baseQtt: 5, currentLevel: 0, qttPLevel: 2, type: ResourceType.computer, pricePLevelIncreaseTax: 2, generatorType: .Basic)], energy: 2, type: FactoryType.Basic, texture: "Basic_Factory_level_2", position: GeneratorPositions.none, isActive: IsActive.no)){_,_ in
-//
-//                            }
-//                        }
-//        CKRepository.getUserId{ id in
-//                    CKRepository.storeNewGenerator(userID: id! , generator: Factory(resourcesArray: [Resource(basePrice: 100, baseQtt: 8, currentLevel: 0, qttPLevel: 2, type: ResourceType.computer, pricePLevelIncreaseTax: 2, generatorType: .Basic)], energy: 2, type: FactoryType.Basic, texture: "Basic_Factory_level_5", position: GeneratorPositions.none, isActive: IsActive.no)){_,_ in
-//
-//                            }
-//                        }
-        
+                
 //        for g in GameScene.user!.generators {
-////            if g.isActive == .no {
-//                CKRepository.deleteGeneratorByID(generatorID: g.id!) { _ in
-//                }
-////            }
+//            CKRepository.deleteGeneratorByID(generator: g, completion: { _ in
+//            })
 //        }
 
     }
@@ -129,6 +109,8 @@ class GameScene: SKScene {
             let location = touch.location(in: self)
             let touchedNode = atPoint(location)
             switch touchedNode.name {
+            case "GameSettingsButton":
+                displaySettings()
             case "PlayerInventoryButton":
                 displayInventory()
             case "ShopButton":
@@ -150,22 +132,22 @@ class GameScene: SKScene {
             case "factory_slot_5_empty":
                 selectGeneratorToInsert(position: .sixth)
             case "factory_slot_0_occupied":
-                UpgradeFactorySceneController.generator = searchFactory(position: .first)
+                UpgradeFactorySceneController.generator = searchActiveFactory(position: .first)
                 displayUpgradeFactory()
             case "factory_slot_1_occupied":
-                UpgradeFactorySceneController.generator = searchFactory(position: .second)
+                UpgradeFactorySceneController.generator = searchActiveFactory(position: .second)
                 displayUpgradeFactory()
             case "factory_slot_2_occupied":
-                UpgradeFactorySceneController.generator = searchFactory(position: .third)
+                UpgradeFactorySceneController.generator = searchActiveFactory(position: .third)
                 displayUpgradeFactory()
             case "factory_slot_3_occupied":
-                UpgradeFactorySceneController.generator = searchFactory(position: .fourth)
+                UpgradeFactorySceneController.generator = searchActiveFactory(position: .fourth)
                 displayUpgradeFactory()
             case "factory_slot_4_occupied":
-                UpgradeFactorySceneController.generator = searchFactory(position: .fifth)
+                UpgradeFactorySceneController.generator = searchActiveFactory(position: .fifth)
                 displayUpgradeFactory()
             case "factory_slot_5_occupied":
-                UpgradeFactorySceneController.generator = searchFactory(position: .sixth)
+                UpgradeFactorySceneController.generator = searchActiveFactory(position: .sixth)
                 displayUpgradeFactory()
             default: return
             }
@@ -216,7 +198,6 @@ class GameScene: SKScene {
      Create and displays top hud of the game.
      */
     func createTopHud() {
-        
         // Top HUD background creation
         let mainCurrencyHudBackground = gameHud.createTopHudBackground(xPos: 50)
         let premiumHudBackground = gameHud.createTopHudBackground(xPos: mainCurrencyHudBackground.calculateAccumulatedFrame().width + 60)
@@ -250,7 +231,6 @@ class GameScene: SKScene {
         premiumHudBackground.addChild(premiumCurrencyIcon)
         premiumHudBackground.addChild(premiumCurrencyData)
         mainCurrencyHudBackground.addChild(generatorResource)
-        
     }
     
     
@@ -263,22 +243,25 @@ class GameScene: SKScene {
         let sidebarBackground = gameHud.createSidebarBackground()
         
         // HUD action buttons creation
+        let settingsButton = gameHud.createSettingsButton()
+        let marketPlaceButton = gameHud.createMarketplaceButton()
         let inventoryButton = gameHud.createInventoryButton()
         let shopButton = gameHud.createShopButton()
-        let marketPlaceButton = gameHud.createMarketplaceButton()
         let challengeButton = gameHud.createChallengeButton()
         
         // Positioning buttons on the device
-        inventoryButton.position = CGPoint(x: ((GameScene.deviceScreenWidth) / 2.31), y: 130)
-        shopButton.position = CGPoint(x: ((GameScene.deviceScreenWidth) / 2.31), y: 50)
-        marketPlaceButton.position = CGPoint(x: ((GameScene.deviceScreenWidth) / 2.31), y: -30)
-        challengeButton.position = CGPoint(x: ((GameScene.deviceScreenWidth) / 2.31), y: -123)
-        
+        settingsButton.position = CGPoint(x: ((GameScene.deviceScreenWidth) / 2.31), y: 130)
+        marketPlaceButton.position = CGPoint(x: ((GameScene.deviceScreenWidth) / 2.31), y: 10)
+        inventoryButton.position = CGPoint(x: ((GameScene.deviceScreenWidth) / 2.31), y: -65)
+        shopButton.position = CGPoint(x: ((GameScene.deviceScreenWidth) / 2.31), y: -140)
+        challengeButton.position = CGPoint(x: -((GameScene.deviceScreenWidth) / 2.55), y: -123)
+
         // Add to scene
         cameraNode.addChild(sidebarBackground)
+        sidebarBackground.addChild(settingsButton)
+        sidebarBackground.addChild(marketPlaceButton)
         sidebarBackground.addChild(inventoryButton)
         sidebarBackground.addChild(shopButton)
-        sidebarBackground.addChild(marketPlaceButton)
         sidebarBackground.addChild(challengeButton)
     }
     
@@ -297,10 +280,14 @@ class GameScene: SKScene {
     
     
     /**
-     Search for a factory receiving the position as argument. Return nil if nothing is found.
+     Search for the factory receiving the position as argument. Return nil if nothing is found.
      */
-    func searchFactory(position: GeneratorPositions) -> Factory? {
-        if let factories = GameScene.user?.generators {
+    func searchActiveFactory(position: GeneratorPositions) -> Factory? {
+        let activeFactories = GameScene.user?.generators.filter({ factory in
+            factory.isActive == .yes
+        })
+        
+        if let factories = activeFactories {
             for factory in factories {
                 if factory.position == position {
                     return factory
@@ -319,68 +306,74 @@ class GameScene: SKScene {
         case .first:
             if factory.type == .Basic {
                 GameScene.factoriesPositions[0].slot.texture = SKTexture(imageNamed: factory.textureName)
+                GameScene.factoriesPositions[0].slot.name = "factory_slot_0_occupied"
             } else {
                 factory.node.position = GameScene.factoriesPositions[0].slot.position
                 GameScene.factoriesPositions[0].slot.removeFromParent()
+                GameScene.factoriesPositions[0].slot = factory.node
                 changeAllNodeFamilyNames(node: factory.node, name: "factory_slot_0_occupied")
                 background.addChild(factory.node)
             }
-            GameScene.factoriesPositions[0].slot.name = "factory_slot_0_occupied"
             factory.node.zPosition = 5
         case .second:
             if factory.type == .Basic {
                 GameScene.factoriesPositions[1].slot.texture = SKTexture(imageNamed: factory.textureName)
+                GameScene.factoriesPositions[1].slot.name = "factory_slot_1_occupied"
             } else {
                 factory.node.position = GameScene.factoriesPositions[1].slot.position
                 GameScene.factoriesPositions[1].slot.removeFromParent()
+                GameScene.factoriesPositions[1].slot = factory.node
                 changeAllNodeFamilyNames(node: factory.node, name: "factory_slot_1_occupied")
                 background.addChild(factory.node)
             }
-            GameScene.factoriesPositions[1].slot.name = "factory_slot_1_occupied"
             factory.node.zPosition = 2
         case .third:
             if factory.type == .Basic {
                 GameScene.factoriesPositions[2].slot.texture = SKTexture(imageNamed: factory.textureName)
+                GameScene.factoriesPositions[2].slot.name = "factory_slot_2_occupied"
             } else {
                 factory.node.position = GameScene.factoriesPositions[2].slot.position
                 GameScene.factoriesPositions[2].slot.removeFromParent()
+                GameScene.factoriesPositions[2].slot = factory.node
                 changeAllNodeFamilyNames(node: factory.node, name: "factory_slot_2_occupied")
                 background.addChild(factory.node)
             }
-            GameScene.factoriesPositions[2].slot.name = "factory_slot_2_occupied"
             factory.node.zPosition = 20
         case .fourth:
             if factory.type == .Basic {
                 GameScene.factoriesPositions[3].slot.texture = SKTexture(imageNamed: factory.textureName)
+                GameScene.factoriesPositions[3].slot.name = "factory_slot_3_occupied"
             } else {
                 factory.node.position = GameScene.factoriesPositions[3].slot.position
                 GameScene.factoriesPositions[3].slot.removeFromParent()
+                GameScene.factoriesPositions[3].slot = factory.node
                 changeAllNodeFamilyNames(node: factory.node, name: "factory_slot_3_occupied")
                 background.addChild(factory.node)
             }
-            GameScene.factoriesPositions[3].slot.name = "factory_slot_3_occupied"
             factory.node.zPosition = 15
         case .fifth:
             if factory.type == .Basic {
                 GameScene.factoriesPositions[4].slot.texture = SKTexture(imageNamed: factory.textureName)
+                GameScene.factoriesPositions[4].slot.name = "factory_slot_4_occupied"
             } else {
                 factory.node.position = GameScene.factoriesPositions[4].slot.position
                 GameScene.factoriesPositions[4].slot.removeFromParent()
+                GameScene.factoriesPositions[4].slot = factory.node
                 changeAllNodeFamilyNames(node: factory.node, name: "factory_slot_4_occupied")
                 background.addChild(factory.node)
             }
-            GameScene.factoriesPositions[4].slot.name = "factory_slot_4_occupied"
             factory.node.zPosition = 25
         case .sixth:
             if factory.type == .Basic {
                 GameScene.factoriesPositions[5].slot.texture = SKTexture(imageNamed: factory.textureName)
+                GameScene.factoriesPositions[5].slot.name = "factory_slot_5_occupied"
             } else {
                 factory.node.position = GameScene.factoriesPositions[5].slot.position
                 GameScene.factoriesPositions[5].slot.removeFromParent()
+                GameScene.factoriesPositions[5].slot = factory.node
                 changeAllNodeFamilyNames(node: factory.node, name: "factory_slot_5_occupied")
                 background.addChild(factory.node)
             }
-            GameScene.factoriesPositions[5].slot.name = "factory_slot_5_occupied"
             factory.node.zPosition = 20
         case .none:
             let _ = 0
@@ -394,27 +387,34 @@ class GameScene: SKScene {
     func removeFactory(position: GeneratorPositions) {
         switch position {
         case .first:
-            GameScene.factoriesPositions[0].slot.texture = SKTexture(imageNamed: "Factory_add_new")
-            GameScene.factoriesPositions[0].slot.name = "factory_slot_0_empty"
+            cleanSlot(positionIndex: 0)
         case .second:
-            GameScene.factoriesPositions[1].slot.texture = SKTexture(imageNamed: "Factory_add_new")
-            GameScene.factoriesPositions[1].slot.name = "factory_slot_1_empty"
+            cleanSlot(positionIndex: 1)
         case .third:
-            GameScene.factoriesPositions[2].slot.texture = SKTexture(imageNamed: "Factory_add_new")
-            GameScene.factoriesPositions[2].slot.name = "factory_slot_2_empty"
+            cleanSlot(positionIndex: 2)
         case .fourth:
-            GameScene.factoriesPositions[3].slot.texture = SKTexture(imageNamed: "Factory_add_new")
-            GameScene.factoriesPositions[3].slot.name = "factory_slot_3_empty"
+            cleanSlot(positionIndex: 3)
         case .fifth:
-            GameScene.factoriesPositions[4].slot.texture = SKTexture(imageNamed: "Factory_add_new")
-            GameScene.factoriesPositions[4].slot.name = "factory_slot_4_empty"
+            cleanSlot(positionIndex: 4)
         case .sixth:
-            GameScene.factoriesPositions[5].slot.texture = SKTexture(imageNamed: "Factory_add_new")
-            GameScene.factoriesPositions[5].slot.name = "factory_slot_5_empty"
+            cleanSlot(positionIndex: 5)
         case .none:
             let _ = 0
         }
-        
+    }
+    
+    
+    /**
+     Clean slot to a empty slot again.
+     */
+    func cleanSlot(positionIndex: Int) {
+        GameScene.factoriesPositions[positionIndex].slot.removeFromParent()
+        GameScene.factoriesPositions[positionIndex].slot = SKSpriteNode(imageNamed: "Factory_add_new")
+        GameScene.factoriesPositions[positionIndex].slot.anchorPoint = CGPoint(x: 0.5, y: 0)
+        GameScene.factoriesPositions[positionIndex].slot.position = CGPoint(x: GameScene.factoriesPositions[positionIndex].x, y: GameScene.factoriesPositions[positionIndex].y)
+        GameScene.factoriesPositions[positionIndex].slot.zPosition = 5
+        GameScene.factoriesPositions[positionIndex].slot.name = "factory_slot_\(positionIndex)_empty"
+        background.addChild(GameScene.factoriesPositions[positionIndex].slot)
     }
     
     
@@ -436,6 +436,15 @@ class GameScene: SKScene {
     
     // MARK: - RIGHTBAR INTERACTIONS
     /**
+     Display game Settings.
+     */
+    func displaySettings() {
+        let viewController = UIApplication.shared.windows.first!.rootViewController as! GameViewController
+        viewController.displaySettings()
+    }
+    
+    
+    /**
      Display player inventory.
      */
     func displayInventory() {
@@ -448,7 +457,6 @@ class GameScene: SKScene {
      Display in-game shop.
      */
     func displayShop() {
-        
         let viewController = UIApplication.shared.windows.first!.rootViewController as! GameViewController
         viewController.displayShop()
     }
@@ -467,7 +475,6 @@ class GameScene: SKScene {
      Display challenge.
      */
     func displayChallenge() {
-        
         let viewController = UIApplication.shared.windows.first!.rootViewController as! GameViewController
         viewController.displayChallenge()
     }

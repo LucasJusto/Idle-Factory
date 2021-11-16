@@ -16,8 +16,26 @@ class UpgradeCell: UITableViewCell {
     @IBOutlet weak var qtdPerSec: UILabel!
     @IBOutlet weak var resourceNameAndQtdPerSec: UILabel!
     @IBAction func UpgradeAction(_ sender: Any) {
+        var value = (generator?.resourcesArray[thisResourceID].currentPrice ?? 0) * (generator?.resourcesArray[thisResourceID].pricePLevelIncreaseTax ?? 0)
+       
+        if(value <= GameScene.user!.mainCurrency) {
+            
+            GameScene.user?.removeMainCurrency(value: value)
+            generator?.upgrade(index: thisResourceID)
+            tableView?.reloadData()
+        }
+        value = (generator?.resourcesArray[thisResourceID].currentPrice ?? 0) * (generator?.resourcesArray[thisResourceID].pricePLevelIncreaseTax ?? 0)
+        upgradeCostLabel.text = "\(doubleToString(value: value))"
     }
     
+    
+    var generator: Factory? = nil
+    var thisResourceID: Int = 0
+    var tableView: UITableView? = nil
+    func setFactory(factory: Factory, resourceID: Int){
+        thisResourceID = resourceID
+        generator = factory
+    }
     
     override func awakeFromNib() {
         super.awakeFromNib()

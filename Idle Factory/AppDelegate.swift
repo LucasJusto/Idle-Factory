@@ -28,9 +28,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             
         }
         GameViewController.scene?.background.removeAllChildren()
-        CKRepository.storeUserData(id: GameScene.user!.id , name:  GameScene.user?.name ?? "", mainCurrency:  GameScene.user!.mainCurrency , premiumCurrency:  GameScene.user!.premiumCurrency, timeLeftApp: AppDelegate.gameSave.transformToSeconds(time: AppDelegate.gameSave.getCurrentTime()) , completion: {_,_ in
+        CKRepository.currentUserQuickSave(user: GameScene.user!, userGenerators: GameScene.user!.generators, deletedGenerators: []) { _, _, _ in
             application.endBackgroundTask(self.identifier)
-        })
+        }
     }
     
     func applicationWillEnterForeground(_ application: UIApplication) {
