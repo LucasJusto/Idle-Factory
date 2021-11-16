@@ -12,8 +12,10 @@ class InputValueSellViewController: UIViewController, ComeBackData, ConfirmSell{
     var factory: Factory?
     var typeOfMoney: CurrencyType = .basic
     var valueSell: Double = 0
+    weak var delegate: RefreshInventory?
     
     func confirmSell() {
+        
         CKRepository.getUserId { id in
             if let id = id {
                 if let generatorID = self.factory?.id {
@@ -26,7 +28,17 @@ class InputValueSellViewController: UIViewController, ComeBackData, ConfirmSell{
                                     break
                                 }
                             }
-                            GameScene.user!.generators.remove(at: index)
+                            GameScene.user!.generators[index].isOffer = IsOffer.yes
+                            self.delegate?.refresh()
+                            CKRepository.editGenerators(userID: id, generators: GameScene.user!.generators) { _, error in
+                                if error != nil {
+                                    GameScene.user!.generators[index].isOffer = IsOffer.no
+                                    self.delegate?.refresh()
+                                    CKRepository.deleteMarketPlaceOffer(offerID: savedRecord?.recordID.recordName ?? "", completion: { deletedRecord, error in
+                                        
+                                    })
+                                }
+                            }
                         }
                     })
                 }

@@ -96,6 +96,28 @@ class FactoryDetailSceneController: UIViewController,  UITableViewDataSource, UI
                 }
             }
         }
+        else {
+            self.dismiss(animated: true, completion: nil)
+            if FactoryDetailSceneController.generator?.type == .NFT {
+                if GameScene.user!.premiumCurrency >= FactoryDetailSceneController.offer!.price {
+                    CKRepository.buyOfferFromMarket(sellerID: FactoryDetailSceneController.offer!.sellerID, generatorID: FactoryDetailSceneController.offer!.generatorID, buyerID: GameScene.user!.id, price: FactoryDetailSceneController.offer!.price, currencyType: .premium) { savedRecord, error in
+                        if error == nil {
+                            GameScene.user!.removePremiumCurrency(value: FactoryDetailSceneController.offer!.price)
+                            GameScene.user!.generators.append(FactoryDetailSceneController.generator!)
+                        }
+                    }
+                }
+            } else {
+                if GameScene.user!.mainCurrency >= FactoryDetailSceneController.offer!.price {
+                    CKRepository.buyOfferFromMarket(sellerID: FactoryDetailSceneController.offer!.sellerID, generatorID: FactoryDetailSceneController.offer!.generatorID, buyerID: GameScene.user!.id, price: FactoryDetailSceneController.offer!.price, currencyType: .premium) { savedRecord, error in
+                        if error == nil {
+                            GameScene.user!.removeMainCurrency(value: FactoryDetailSceneController.offer!.price)
+                            GameScene.user!.generators.append(FactoryDetailSceneController.generator!)
+                        }
+                    }
+                }
+            }
+        }
     }
     override func viewDidLoad() {
         headerViewMainCurrency.layer.cornerRadius = 10

@@ -44,7 +44,7 @@ class GameInventoryViewCell: UICollectionViewCell {
 
         
         emptySlot.isHidden = true
-        factoryTextureImage.isHidden = false
+        factoryTexture.isHidden = false
         resourceType1.isHidden = false
         resourceType2.isHidden = false
         resourceType3.isHidden = false

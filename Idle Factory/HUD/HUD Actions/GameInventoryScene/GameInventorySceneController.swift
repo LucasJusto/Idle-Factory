@@ -11,7 +11,15 @@ import SpriteKit
 /**
  Game Inventory scene controller. 
  */
-class GameInventorySceneController: UIViewController {
+class GameInventorySceneController: UIViewController, RefreshInventory{
+    func refresh() {
+        factoriesNotActive = getUserInventory()
+        DispatchQueue.main.async {
+            self.collectionView.reloadData()
+        }
+        
+    }
+    
     
     @IBOutlet weak var collectionView: UICollectionView!
     
@@ -122,9 +130,7 @@ class GameInventorySceneController: UIViewController {
         confirmQuickSell.setTitle(NSLocalizedString("QuickSellConfirmButton", comment: ""), for: .normal)
     
         // Load not active generators list.
-        factoriesNotActive = (GameScene.user?.generators.filter( { factory in
-            factory.isActive == .no
-        }))!
+        factoriesNotActive = getUserInventory()
     }
     
     
@@ -377,6 +383,7 @@ class GameInventorySceneController: UIViewController {
             if let infoViewController = storyboard?.instantiateViewController(identifier: "InfoViewController") as? InputValueSellViewController {
                 infoViewController.modalPresentationStyle = .overCurrentContext
                 infoViewController.factory = factorySell
+                infoViewController.delegate = self
                 infoViewController.modalTransitionStyle = .crossDissolve
                 present(infoViewController, animated: true)
             }
@@ -590,4 +597,8 @@ final class CustomVisualEffectView: UIVisualEffectView {
     private let theEffect: UIVisualEffect
     private let customIntensity: CGFloat
     private var animator: UIViewPropertyAnimator?
+}
+
+protocol RefreshInventory: AnyObject {
+    func refresh()
 }

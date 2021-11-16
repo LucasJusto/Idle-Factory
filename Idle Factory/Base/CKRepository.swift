@@ -496,7 +496,7 @@ public class CKRepository {
         let publicDB = container.publicCloudDatabase
         var offers: [Offer] = [Offer]()
         
-        let predicate = NSPredicate(format: "\(MarketTable.buyerID.description) == %@", "none")
+        let predicate = NSPredicate(format: "\(MarketTable.buyerID.description) == 'none' AND \(MarketTable.sellerID.description) != '\(GameScene.user!.id)'")
         let query = CKQuery(recordType: MarketTable.recordType.description, predicate: predicate)
         
         publicDB.perform(query, inZoneWith: nil) { results, error in
@@ -555,16 +555,6 @@ public class CKRepository {
             }
         }
         
-        semaphore.wait()
-        let operation = CKModifyRecordsOperation(recordsToSave: records, recordIDsToDelete: nil)
-        operation.savePolicy = .changedKeys
-        operation.modifyRecordsCompletionBlock = { savedRecords, _, error in
-            if let ckError = error as? CKError {
-                CKRepository.errorAlertHandler(CKErrorCode: ckError.code)
-            }
-            completion(savedRecords, error)
-        }
-        
         publicDB.fetch(withRecordID: CKRecord.ID(recordName: buyerID)) { buyer, error in
             if let ckError = error as? CKError {
                 CKRepository.errorAlertHandler(CKErrorCode: ckError.code)
@@ -580,6 +570,17 @@ public class CKRepository {
                 semaphore.signal()
             }
         }
+        semaphore.wait()
+        
+        let operation = CKModifyRecordsOperation(recordsToSave: records, recordIDsToDelete: nil)
+        operation.savePolicy = .changedKeys
+        operation.modifyRecordsCompletionBlock = { savedRecords, _, error in
+            if let ckError = error as? CKError {
+                CKRepository.errorAlertHandler(CKErrorCode: ckError.code)
+            }
+            completion(savedRecords, error)
+        }
+        
         
         publicDB.add(operation)
     }
