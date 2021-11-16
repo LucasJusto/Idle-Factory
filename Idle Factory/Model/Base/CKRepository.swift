@@ -512,8 +512,9 @@ public class CKRepository {
                     let price: Double = result.value(forKey: MarketTable.price.description) as! Double
                     let currencyTypeString: String = result.value(forKey: MarketTable.currencyType.description) as! String
                     let currencyType: CurrencyType = CurrencyType.getType(key: currencyTypeString)
+                    let buyerID: String = result.value(forKey: MarketTable.buyerID.description) as! String
                     
-                    offers.append(Offer(id: id, sellerID: sellerID, generatorID: generatorID, buyerID: nil, price: price, currencyType: currencyType, isCollected: IsCollected.no))
+                    offers.append(Offer(id: id, sellerID: sellerID, generatorID: generatorID, buyerID: buyerID, price: price, currencyType: currencyType, isCollected: IsCollected.no))
                 }
             }
             completion(offers)
@@ -523,10 +524,10 @@ public class CKRepository {
     static func buyOfferFromMarket(sellerID: String, generatorID: String, buyerID: String, price: Double, currencyType: CurrencyType, completion: @escaping ([CKRecord]?, Error?) -> Void) {
         let publicDB = container.publicCloudDatabase
         var records: [CKRecord] = []
-        let semaphore = DispatchSemaphore(value: 3)
         let predicate = NSPredicate(format: "\(MarketTable.sellerID.description) == '\(sellerID)' AND \(MarketTable.generatorID.description) == '\(generatorID)'")
         let query = CKQuery(recordType: MarketTable.recordType.description, predicate: predicate)
-        
+        let dispatchGroup = DispatchGroup()
+        dispatchGroup.enter()
         publicDB.perform(query, inZoneWith: nil) { result, error in
             if let ckError = error as? CKError {
                 CKRepository.errorAlertHandler(CKErrorCode: ckError.code)
@@ -538,12 +539,12 @@ public class CKRepository {
                     if buyer == "none" {
                         offer.setObject(buyerID as CKRecordValue?, forKey: MarketTable.buyerID.description)
                         records.append(offer)
-                        semaphore.signal()
+                        dispatchGroup.leave()
                     }
                 }
             }
         }
-        
+        dispatchGroup.enter()
         publicDB.fetch(withRecordID: CKRecord.ID(recordName: generatorID)) { generator, error in
             if let ckError = error as? CKError {
                 CKRepository.errorAlertHandler(CKErrorCode: ckError.code)
@@ -553,10 +554,10 @@ public class CKRepository {
                 generator.setObject(IsOffer.no.description as CKRecordValue?, forKey: GeneratorTable.isOffer.description)
                 generator.setObject(IsActive.no.description as CKRecordValue?, forKey: GeneratorTable.isActive.description)
                 records.append(generator)
-                semaphore.signal()
+                dispatchGroup.leave()
             }
         }
-        
+        dispatchGroup.enter()
         publicDB.fetch(withRecordID: CKRecord.ID(recordName: buyerID)) { buyer, error in
             if let ckError = error as? CKError {
                 CKRepository.errorAlertHandler(CKErrorCode: ckError.code)
@@ -569,22 +570,22 @@ public class CKRepository {
                     buyer.setObject((GameScene.user!.premiumCurrency - price) as CKRecordValue?, forKey: UsersTable.premiumCurrency.description)
                 }
                 records.append(buyer)
-                semaphore.signal()
+                dispatchGroup.leave()
             }
         }
-        semaphore.wait()
-        
-        let operation = CKModifyRecordsOperation(recordsToSave: records, recordIDsToDelete: nil)
-        operation.savePolicy = .changedKeys
-        operation.modifyRecordsCompletionBlock = { savedRecords, _, error in
-            if let ckError = error as? CKError {
-                CKRepository.errorAlertHandler(CKErrorCode: ckError.code)
+        dispatchGroup.notify(queue: .global()) {
+            let operation = CKModifyRecordsOperation(recordsToSave: records, recordIDsToDelete: nil)
+            operation.savePolicy = .changedKeys
+            operation.modifyRecordsCompletionBlock = { savedRecords, _, error in
+                if let ckError = error as? CKError {
+                    CKRepository.errorAlertHandler(CKErrorCode: ckError.code)
+                }
+                completion(savedRecords, error)
             }
-            completion(savedRecords, error)
+            
+            
+            publicDB.add(operation)
         }
-        
-        
-        publicDB.add(operation)
     }
     
     static func getGeneratorsByIDs(generatorsIDs: [String], completion: @escaping ([Factory]) -> Void){

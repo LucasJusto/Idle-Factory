@@ -51,6 +51,7 @@ class GameScene: SKScene {
                     }
                 }
                 self.gameHud.mainCurrencyValue.text = "\(doubleToString(value:GameScene.user?.mainCurrency ?? 0.0))"
+                self.gameHud.premiumCurrencyValue.text = "\(doubleToString(value:GameScene.user?.premiumCurrency ?? 0.0))"
                 self.gameHud.generatingResourceValue.text = "+ \(doubleToString(value: perSecTotal))/s"
             }
         }
@@ -80,7 +81,6 @@ class GameScene: SKScene {
     
     // MARK: - INIT
     override func didMove(to view: SKView) {
-        
         self.anchorPoint = CGPoint(x: 0.5, y: 0.5)
         
         createBackground()

@@ -35,6 +35,7 @@ class FactoryDetailSceneController: UIViewController,  UITableViewDataSource, UI
     
     @IBOutlet weak var priceValue: UILabel!
     @IBOutlet weak var tableView: UITableView!
+    weak var delegate: MarketPlaceRefresh?
     
     @IBAction func BackAction(_ sender: Any) {
         if FactoryDetailSceneController.isBlue {
@@ -106,6 +107,7 @@ class FactoryDetailSceneController: UIViewController,  UITableViewDataSource, UI
                             FactoryDetailSceneController.generator!.isActive = .no
                             FactoryDetailSceneController.generator!.isOffer = .no
                             GameScene.user!.generators.append(FactoryDetailSceneController.generator!)
+                            self.delegate?.refresh(offer: FactoryDetailSceneController.offer!)
                         }
                     }
                 }
@@ -118,6 +120,7 @@ class FactoryDetailSceneController: UIViewController,  UITableViewDataSource, UI
                             FactoryDetailSceneController.generator!.isActive = .no
                             FactoryDetailSceneController.generator!.isOffer = .no
                             GameScene.user!.generators.append(FactoryDetailSceneController.generator!)
+                            self.delegate?.refresh(offer: FactoryDetailSceneController.offer!)
                         }
                     }
                 }

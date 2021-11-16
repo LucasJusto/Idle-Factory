@@ -37,7 +37,7 @@ class GameMarketplaceSceneController: UIViewController, NavigationCellDelegate {
     private(set) var timeToRefreshCurrency: Timer?
     private(set) var selectedFactory: Factory? = nil
     private(set) var selectedFactoryIndex: Int = -1 // Index of the cell
-    private(set) var offerArray: [Offer] = [] {
+    fileprivate(set) var offerArray: [Offer] = [] {
         didSet {
             DispatchQueue.main.async {
                 self.collectionView.reloadData()
@@ -178,7 +178,10 @@ class GameMarketplaceSceneController: UIViewController, NavigationCellDelegate {
     func didButtonPressed() {
         var mainView: UIStoryboard!
         mainView = UIStoryboard(name: "FactoryDetailScene", bundle: nil)
-        let viewcontroller : UIViewController = mainView.instantiateViewController(withIdentifier: "FactoryDetailScene") as UIViewController
+        guard let viewcontroller = mainView.instantiateViewController(withIdentifier: "FactoryDetailScene") as? FactoryDetailSceneController
+        else {fatalError("deveria ser do tipo FactoryDetailSceneController.")}
+        viewcontroller.delegate = self
+        
         self.present(viewcontroller, animated: false)
     }
     
@@ -265,4 +268,19 @@ extension GameMarketplaceSceneController: UICollectionViewDelegateFlowLayout {
         return UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
     }
     
+}
+
+protocol MarketPlaceRefresh: AnyObject {
+    func refresh(offer: Offer)
+}
+
+extension GameMarketplaceSceneController: MarketPlaceRefresh {
+    func refresh(offer: Offer) {
+        offerArray.removeAll(where: { o in
+            o.id == offer.id
+        })
+        DispatchQueue.main.async {
+            self.collectionView.reloadData()
+        }
+    }
 }
