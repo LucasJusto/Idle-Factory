@@ -64,6 +64,62 @@ func doubleToString(value: Double) -> String {
     return "\(nInteger).\(nDecimal)\(str)"
 }
 
+func doubleToStringAsInt(value: Double) -> String {
+    //convert devCoins or devCoinsPerSec to String using K, M, B, T, AA, AB...
+    var str: String = ""
+    var n: String = "0"
+    
+    if value < pow(10, 3) {
+        str = ""
+        n = "\(value)"
+    }
+    else if value < pow(10, 6) {
+        str = "K"
+        n = "\(value/pow(10, 3))"
+    }
+    else if value < pow(10, 9) {
+        str = "M"
+        n = "\(value/pow(10, 6))"
+    }
+    else if value < pow(10, 12) {
+        str = "B"
+        n = "\(value/pow(10, 9))"
+    }
+    else if value < pow(10, 15) {
+        str = "T"
+        n = "\(value/pow(10, 12))"
+    }
+    else if value < pow(10, 18) {
+        str = "AA"
+        n = "\(value/pow(10, 15))"
+    }
+    else if value < pow(10, 21) {
+        str = "AB"
+        n = "\(value/pow(10, 18))"
+    }
+    else if value < pow(10, 24) {
+        str = "AC"
+        n = "\(value/pow(10, 21))"
+    }
+    else if value < pow(10, 27) {
+        str = "AD"
+        n = "\(value/pow(10, 24))"
+    }
+    else if value < pow(10, 30) {
+        str = "AE"
+        n = "\(value/pow(10, 27))"
+    }
+    
+    
+    let splitedN = n.split(separator: ".")
+    let nInteger: String = "\(splitedN[0])"
+    var nDecimal: String = "00"
+    if splitedN.count > 1  {
+        nDecimal = "\(splitedN[1].prefix(2))"
+    }
+    return "\(nInteger)\(str)"
+}
+
 func getResourceImageName(resource: ResourceType) -> String{
     switch resource {
     case .computer:
@@ -104,7 +160,7 @@ func createBasicFactory(resourceTypeArray: [ResourceType]) -> Factory {
     shuffledArray.shuffle()
     
     let maxInt = min(resourceTypeArray.count+1,4)
-    var basicQtd = Int.random(in: 5..<10)
+    var basicQtd = Int.random(in: 5..<8)
     let generatorQtd = Int.random(in: 1..<maxInt)
     var value = 0
     var generatorsLeft = generatorQtd
@@ -118,12 +174,13 @@ func createBasicFactory(resourceTypeArray: [ResourceType]) -> Factory {
             generatorsLeft -= 1
         }
         basicQtd -= value
-        let levelAux1 = Int.random(in: 1..<4)
-        let levelAux2 = Int.random(in: 1..<12)
-        let levelAux4 = Int.random(in: 1..<41)
-        let levelAux3 = [levelAux1,levelAux2,levelAux4]
-        let level = levelAux3[Int.random(in: 0..<3)]
-        let tax = 2.0
+        let levelAux1 = 1
+        let levelAux2 = Int.random(in: 1..<4)
+        let levelAux4 = Int.random(in: 1..<21)
+        let levelAux5 = Int.random(in: 1..<31)
+        let levelAux3 = [levelAux1,levelAux2,levelAux4,levelAux5]
+        let level = levelAux3[Int.random(in: 0..<4)]
+        let tax = 1.5
         resourceArray.append(Resource(basePrice: (Double(value) * qttPLevel1 * pow(tax , Double(level))), baseQtt: Double(value + (level * Int(qttPLevel1))), currentLevel: level, qttPLevel: qttPLevel1, type: shuffledArray[n], pricePLevelIncreaseTax: tax, generatorType: .Basic))
     }
     var aux = 0
@@ -184,7 +241,7 @@ func createNFTFactory(resourceTypeArray: [ResourceType]) -> Factory {
             generatorsLeft -= 1
         }
         basicQtd -= value
-        let tax = 3.0
+        let tax = 2.0
         resourceArray.append(Resource(basePrice: (Double(value) * qttPLevel1), baseQtt: Double(value), currentLevel: 0, qttPLevel: qttPLevel1, type: shuffledArray[n], pricePLevelIncreaseTax: tax, generatorType: .NFT))
     }
     

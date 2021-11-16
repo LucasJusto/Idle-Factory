@@ -44,7 +44,19 @@ class Resource: Upgradable {
         }else{
             currentPrice = basePrice * pow(pricePLevelIncreaseTax, Double(currentLevel))
         }
-        perSec = baseQtt + (Double(currentLevel) * qttPLevel)
+        
+        switch type {
+        case .computer:
+            perSec = (baseQtt + (Double(currentLevel) * qttPLevel)) * 4
+        case .tablet:
+            perSec = (baseQtt + (Double(currentLevel) * qttPLevel)) * 3
+        case .smartphone:
+            perSec = (baseQtt + (Double(currentLevel) * qttPLevel)) * 2
+        case .smartTV:
+            perSec = (baseQtt + (Double(currentLevel) * qttPLevel)) * 5
+        case .headphone:
+            perSec = (baseQtt + (Double(currentLevel) * qttPLevel)) * 1
+        }
     }
     
     func upgrade() {

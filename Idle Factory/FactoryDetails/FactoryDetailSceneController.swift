@@ -202,9 +202,9 @@ class FactoryDetailSceneController: UIViewController,  UITableViewDataSource, UI
         if let generator = FactoryDetailSceneController.generator {
             let resource =  generator.resourcesArray[indexPath.row]
             let qtd = (resource.qttPLevel * Double(resource.currentLevel)) + resource.baseQtt
-            cell.name.text = "\(doubleToString(value: qtd)) \(resource.type.description)/s - level: \(resource.currentLevel)"
-            cell.price.text = "\(doubleToString(value: resource.perSec))/s"
-            cell.imageInCell.image = UIImage(named: getResourceImageName(resource: resource.type))
+            cell.name.text = "\(doubleToStringAsInt(value: qtd)) \(resource.type.description)/s - \(NSLocalizedString("level", comment: "")): \(resource.currentLevel)"
+            cell.price.text = "\(doubleToStringAsInt(value: resource.perSec))/s"
+            cell.imageInCell.image = UIImage(systemName: getResourceImageName(resource: resource.type))
             cell.imageInCell.image?.withTintColor(.black)
             
             
