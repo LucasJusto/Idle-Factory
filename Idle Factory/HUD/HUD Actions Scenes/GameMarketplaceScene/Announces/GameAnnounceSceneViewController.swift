@@ -148,8 +148,6 @@ extension GameAnnounceSceneViewController: UICollectionViewDataSource {
             cell.hideCell()
             return cell
         }
-        
-        
     }
 }
 

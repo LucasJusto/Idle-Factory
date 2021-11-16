@@ -14,16 +14,18 @@ import SpriteKit
 class GameInventorySceneController: UIViewController {
     
     @IBOutlet weak var collectionView: UICollectionView!
-    
+    @IBOutlet weak var collectionViewHeight: NSLayoutConstraint!
+
     // MARK: - HEADER OUTLETS
     @IBOutlet weak var inventoryHeader: UILabel!
     @IBOutlet weak var purchaseFactoryButton: UIButton!
     @IBOutlet weak var closeButton: UIButton!
     
-    
     // MARK: - FACTORY DETAILS OUTLETS
     @IBOutlet weak var factoryInfoView: UIView!
     @IBOutlet weak var factoryAboutView: UIView!
+    @IBOutlet weak var widthInfo: NSLayoutConstraint!
+    @IBOutlet weak var heightInfo: NSLayoutConstraint!
     @IBOutlet weak var SKView: SKView!
     
     // First Product Generation
@@ -109,7 +111,9 @@ class GameInventorySceneController: UIViewController {
         
         // Info Factories
         totalProductionLabel.text = NSLocalizedString("TotalProductionLabel", comment: "")
-        
+//        widthInfo.constant = UIScreen.main.bounds.width * 0.3116
+        heightInfo.constant = UIScreen.main.bounds.height * 0.4923
+        collectionViewHeight.constant = UIScreen.main.bounds.height * 0.4923
         // Buttons
         sellFactoryButton.setTitle(NSLocalizedString("SellFactoryButton", comment: ""), for: .normal)
         insertFactoryButton.setTitle(clickedSlotPosition == .none ? NSLocalizedString("AnnounceFactoryButton", comment: "") : NSLocalizedString("InsertFactoryButton", comment: ""), for: .normal)
@@ -538,7 +542,7 @@ extension GameInventorySceneController: UICollectionViewDelegateFlowLayout {
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let cellSize = CGSize(width: 94, height: 90)
+        let cellSize = CGSize(width: UIScreen.main.bounds.width * 0.1113, height: UIScreen.main.bounds.height * 0.2307)
         return cellSize
     }
     
