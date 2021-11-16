@@ -27,6 +27,7 @@ class GameShopSceneViewController: UIViewController, NavigationCellDelegate {
     
     
     // MARK: - CONTROLLERS
+    private(set) var timeToRefreshCurrency: Timer?
     static let factoryID: String = "shopFactory_cell"
     private(set) var basicFactories: [Factory] = []
 
@@ -53,10 +54,8 @@ class GameShopSceneViewController: UIViewController, NavigationCellDelegate {
         for _ in 0..<20 {
             basicFactories.append(createBasicFactory(resourceTypeArray: resourceArray))
         }
-        
-        let timeToRefresh: Timer?
-        
-        timeToRefresh = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(loadPlayerCurrencies), userInfo: nil, repeats: true)
+                
+        timeToRefreshCurrency = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(loadPlayerCurrencies), userInfo: nil, repeats: true)
     }
     
     

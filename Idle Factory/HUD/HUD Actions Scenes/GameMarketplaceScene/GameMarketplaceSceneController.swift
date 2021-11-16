@@ -34,6 +34,7 @@ class GameMarketplaceSceneController: UIViewController, NavigationCellDelegate {
     static let factoryID: String = "purchasebleFactory_cell"
     
     // Selected Factory control
+    private(set) var timeToRefreshCurrency: Timer?
     private(set) var selectedFactory: Factory? = nil
     private(set) var selectedFactoryIndex: Int = -1 // Index of the cell
     private(set) var offerArray: [Offer] = [] {
@@ -75,8 +76,7 @@ class GameMarketplaceSceneController: UIViewController, NavigationCellDelegate {
             self.loadMarketplace()
         }
 
-        let timeToRefresh: Timer?
-        timeToRefresh = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(loadPlayerCurrencies), userInfo: nil, repeats: true)
+        timeToRefreshCurrency = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(loadPlayerCurrencies), userInfo: nil, repeats: true)
         
     }
     

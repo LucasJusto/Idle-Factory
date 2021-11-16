@@ -26,6 +26,7 @@ class GameAnnounceSceneViewController: UIViewController {
     @IBOutlet weak var emptyAnnounceLabel: UILabel!
     
     // MARK: - CONTROLLERS
+    private(set) var timeToRefreshCurrency: Timer?
     static let factoryID: String = "announceFactory_cell"
     private(set) var playerAnnounces: [Offer] = []
     private(set) var announcesDict:  [String: Factory] = [:]
@@ -50,6 +51,8 @@ class GameAnnounceSceneViewController: UIViewController {
         DispatchQueue.main.async {
             self.loadPlayerAnnounces()
         }
+        
+        timeToRefreshCurrency = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(loadPlayerCurrencies), userInfo: nil, repeats: true)
     }
     
     
@@ -89,7 +92,7 @@ class GameAnnounceSceneViewController: UIViewController {
     /**
      Load player actual currencies value.
      */
-    func loadPlayerCurrencies() {
+    @objc func loadPlayerCurrencies() {
         mainCurrencyLabel.text = doubleToString(value: GameScene.user?.mainCurrency ?? 0.0)
         premiumCurrencyLabel.text = doubleToString(value: GameScene.user?.premiumCurrency ?? 0.0)
     }
