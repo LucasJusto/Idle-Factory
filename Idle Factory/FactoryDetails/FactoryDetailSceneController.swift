@@ -75,7 +75,7 @@ class FactoryDetailSceneController: UIViewController,  UITableViewDataSource, UI
                                         }
                                     }
                                 }
-                                
+                                generator.userID = GameScene.user!.id
                                 GameScene.user?.generators.append(generator)
                                 GameScene.user?.removeMainCurrency(value: price)
                                 CKRepository.storeUserData(id: GameScene.user!.id , name:  GameScene.user?.name ?? "", mainCurrency:  GameScene.user!.mainCurrency , premiumCurrency:  GameScene.user!.premiumCurrency, timeLeftApp: AppDelegate.gameSave.transformToSeconds(time: AppDelegate.gameSave.getCurrentTime()) , completion: {_,_ in
@@ -102,6 +102,7 @@ class FactoryDetailSceneController: UIViewController,  UITableViewDataSource, UI
                     CKRepository.buyOfferFromMarket(sellerID: FactoryDetailSceneController.offer!.sellerID, generatorID: FactoryDetailSceneController.offer!.generatorID, buyerID: GameScene.user!.id, price: FactoryDetailSceneController.offer!.price, currencyType: .premium) { savedRecord, error in
                         if error == nil {
                             GameScene.user!.removePremiumCurrency(value: FactoryDetailSceneController.offer!.price)
+                            FactoryDetailSceneController.generator?.userID = GameScene.user!.id
                             GameScene.user!.generators.append(FactoryDetailSceneController.generator!)
                         }
                     }
@@ -111,6 +112,7 @@ class FactoryDetailSceneController: UIViewController,  UITableViewDataSource, UI
                     CKRepository.buyOfferFromMarket(sellerID: FactoryDetailSceneController.offer!.sellerID, generatorID: FactoryDetailSceneController.offer!.generatorID, buyerID: GameScene.user!.id, price: FactoryDetailSceneController.offer!.price, currencyType: .premium) { savedRecord, error in
                         if error == nil {
                             GameScene.user!.removeMainCurrency(value: FactoryDetailSceneController.offer!.price)
+                            FactoryDetailSceneController.generator?.userID = GameScene.user!.id
                             GameScene.user!.generators.append(FactoryDetailSceneController.generator!)
                         }
                     }

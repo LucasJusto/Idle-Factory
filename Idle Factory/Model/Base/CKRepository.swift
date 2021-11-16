@@ -304,10 +304,10 @@ public class CKRepository {
                     semaphore.wait()
                     
                     if visual == nil {
-                        let factory = Factory(id: id, resourcesArray: resources, energy: energy, type: type, texture: texture, position: position, isActive: isActive, isOffer: isOffer)
+                        let factory = Factory(id: id, resourcesArray: resources, energy: energy, type: type, texture: texture, position: position, isActive: isActive, isOffer: isOffer, userID: userID)
                         generators.append(factory)
                     } else {
-                        let factory = Factory(id: id, resourcesArray: resources, energy: energy, type: type, texture: texture, position: position, isActive: isActive, visual: visual!, isOffer: isOffer)
+                        let factory = Factory(id: id, resourcesArray: resources, energy: energy, type: type, texture: texture, position: position, isActive: isActive, visual: visual!, isOffer: isOffer, userID: userID)
                         generators.append(factory)
                     }
                 }
@@ -643,6 +643,7 @@ public class CKRepository {
                     let isActiveString: String = generator.value(forKey: GeneratorTable.isActive.description) as? String ?? ""
                     let isActive: IsActive = IsActive.getKey(isActive: isActiveString)
                     let texture: String = generator.value(forKey: GeneratorTable.texture.description) as? String ?? ""
+                    let userID: String = generator.value(forKey: GeneratorTable.userID.description) as? String ?? ""
                     
                     let resourcesPredicate = NSPredicate(format: "\(ResourceTable.generatorID.description) == %@", id)
                     let resourcesQuery = CKQuery(recordType: ResourceTable.recordType.description, predicate: resourcesPredicate)
@@ -668,10 +669,10 @@ public class CKRepository {
                     
                     semaphore.wait()
                     if visual == nil {
-                        let factory = Factory(id: id, resourcesArray: resources, energy: energy, type: type, texture: texture, position: position, isActive: isActive, isOffer: isOffer)
+                        let factory = Factory(id: id, resourcesArray: resources, energy: energy, type: type, texture: texture, position: position, isActive: isActive, isOffer: isOffer, userID: userID)
                         generators.append(factory)
                     } else {
-                        let factory = Factory(id: id, resourcesArray: resources, energy: energy, type: type, texture: texture, position: position, isActive: isActive, visual: visual!, isOffer: isOffer)
+                        let factory = Factory(id: id, resourcesArray: resources, energy: energy, type: type, texture: texture, position: position, isActive: isActive, visual: visual!, isOffer: isOffer, userID: userID)
                         generators.append(factory)
                     }
                 }

@@ -21,8 +21,9 @@ class Factory: Generator  {
     var textureName: String
     var visual: Visual?
     var isOffer: IsOffer
+    var userID: String
     
-    init(id: String? = nil, resourcesArray:[Resource] , energy: Int, type: FactoryType, texture: String? = nil, position: GeneratorPositions, isActive: IsActive, isOffer: IsOffer){
+    init(id: String? = nil, resourcesArray:[Resource] , energy: Int, type: FactoryType, texture: String? = nil, position: GeneratorPositions, isActive: IsActive, isOffer: IsOffer, userID: String){
         self.id = id
         self.resourcesArray = resourcesArray
         self.energy = energy
@@ -41,9 +42,10 @@ class Factory: Generator  {
         self.isActive = isActive
         self.perSec = 0
         self.isOffer = isOffer
+        self.userID = userID
     }
     
-    init(id: String? = nil, resourcesArray:[Resource] , energy: Int, type: FactoryType, texture: String? = nil, position: GeneratorPositions, isActive: IsActive, visual: Visual, isOffer: IsOffer){
+    init(id: String? = nil, resourcesArray:[Resource] , energy: Int, type: FactoryType, texture: String? = nil, position: GeneratorPositions, isActive: IsActive, visual: Visual, isOffer: IsOffer, userID: String){
         self.id = id
         self.resourcesArray = resourcesArray
         self.energy = energy
@@ -61,6 +63,7 @@ class Factory: Generator  {
         self.isActive = isActive
         self.perSec = 0
         self.isOffer = isOffer
+        self.userID = userID
     }
     
     func upgrade(index: Int) {
