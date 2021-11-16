@@ -50,12 +50,18 @@
 "SellAItemButton" = "Sell item";
 "MyAnnouncesButton" = "Announces";
 "AboutNewFactoryButton" = "See more";
+"EmptyMarketplaceLabel" = "Do not found any generators in offer at the moment";
+
+
+// MARK: - CHALLENGES
+"UnderConstructionLabel" = "This section is under construction.";
 
 
 //MARK: - Announces
 "AnnounceHeaderLabel" = "My announces";
 "AboutAnnounceButton" = "See announce";
 "AnnounceInputPlaceholder" = "Type value";
+"EmptyAnnounceLabel" = "You do not have announces";
 
 
 //MARK: - Upgrade Screen
