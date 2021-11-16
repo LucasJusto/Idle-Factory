@@ -19,6 +19,7 @@ class ThirdViewController: UIViewController {
         Label.text = NSLocalizedString("Onboarding2", comment: "")
         startButton.backgroundColor = UIColor(named: "actionColor1")
         startButton.layer.cornerRadius = 15
+        startButton.setTitle(NSLocalizedString("startPlaying", comment: ""), for: .normal) 
         // Do any additional setup after loading the view.
     }
     
