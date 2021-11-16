@@ -67,7 +67,7 @@
 //MARK: - Upgrade Screen
 "MoveToInventory" = "Mover para o inventário";
 "ChangeFactory" = "Trocar fábrica";
-
+"level" = "nível";
 
 //MARK: - WelcomeBack PopUp
 "YouWon" = "Você Ganhou";
