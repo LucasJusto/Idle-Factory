@@ -550,6 +550,8 @@ public class CKRepository {
             }
             if let generator = generator {
                 generator.setObject(buyerID as CKRecordValue?, forKey: GeneratorTable.userID.description)
+                generator.setObject(IsOffer.no.description as CKRecordValue?, forKey: GeneratorTable.isOffer.description)
+                generator.setObject(IsActive.no.description as CKRecordValue?, forKey: GeneratorTable.isActive.description)
                 records.append(generator)
                 semaphore.signal()
             }

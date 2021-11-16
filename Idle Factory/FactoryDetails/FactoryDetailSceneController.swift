@@ -103,6 +103,8 @@ class FactoryDetailSceneController: UIViewController,  UITableViewDataSource, UI
                         if error == nil {
                             GameScene.user!.removePremiumCurrency(value: FactoryDetailSceneController.offer!.price)
                             FactoryDetailSceneController.generator?.userID = GameScene.user!.id
+                            FactoryDetailSceneController.generator!.isActive = .no
+                            FactoryDetailSceneController.generator!.isOffer = .no
                             GameScene.user!.generators.append(FactoryDetailSceneController.generator!)
                         }
                     }
@@ -113,6 +115,8 @@ class FactoryDetailSceneController: UIViewController,  UITableViewDataSource, UI
                         if error == nil {
                             GameScene.user!.removeMainCurrency(value: FactoryDetailSceneController.offer!.price)
                             FactoryDetailSceneController.generator?.userID = GameScene.user!.id
+                            FactoryDetailSceneController.generator!.isActive = .no
+                            FactoryDetailSceneController.generator!.isOffer = .no
                             GameScene.user!.generators.append(FactoryDetailSceneController.generator!)
                         }
                     }
