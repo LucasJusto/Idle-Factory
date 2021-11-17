@@ -40,6 +40,7 @@ class FactoryDetailSceneController: UIViewController,  UITableViewDataSource, UI
     var timeToRefreshCurrency:Timer?
     
     @IBAction func BackAction(_ sender: Any) {
+        GameSound.shared.playSoundFXIfActivated(sound: .BUTTON_CLICK)
         if FactoryDetailSceneController.isBlue {
             var mainView: UIStoryboard!
             mainView = UIStoryboard(name: "GameShopScene", bundle: nil)
@@ -54,6 +55,7 @@ class FactoryDetailSceneController: UIViewController,  UITableViewDataSource, UI
     }
     
     @IBAction func buyAction(_ sender: Any) {
+        GameSound.shared.playSoundFXIfActivated(sound: .BUTTON_CLICK)
         if FactoryDetailSceneController.isBlue {
             if let generator = FactoryDetailSceneController.generator {
                 var resourceArray: [Resource] = []

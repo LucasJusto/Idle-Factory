@@ -27,6 +27,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         self.identifier = application.beginBackgroundTask {
             
         }
+        
+        if GameSound.shared.backgroundMusicStatus {
+            GameSound.shared.stopBackgroundMusic()
+        }
+        
         GameViewController.scene?.background.removeAllChildren()
         let semaphore = DispatchSemaphore(value: 0)
         checkMyOffers(semaphore: semaphore)

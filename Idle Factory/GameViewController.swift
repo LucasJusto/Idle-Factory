@@ -68,10 +68,17 @@ class GameViewController: UIViewController {
                 mainView = UIStoryboard(name: "OnboardingScene", bundle: nil)
                 let viewcontroller : UIViewController = mainView.instantiateViewController(withIdentifier: "welcome") as UIViewController
                 self.present(viewcontroller, animated: false)
+                GameSound.shared.saveBackgroundMusicSettings(status: true)
+                GameSound.shared.startBackgroundMusic()
+                GameSound.shared.saveSoundFXSettings(status: true)
+
                 OnboardingManager.shared.isFirstLaunch = true
-               } else {
-                   viewController1.displayWelcomeBackPopUp()
+           } else {
+               viewController1.displayWelcomeBackPopUp()
+               if GameSound.shared.backgroundMusicStatus {
+                   GameSound.shared.startBackgroundMusic()
                }
+           }
         }
     }
     override var shouldAutorotate: Bool {

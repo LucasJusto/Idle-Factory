@@ -94,6 +94,7 @@ class GameShopSceneViewController: UIViewController, NavigationCellDelegate {
      Close Shop scene.
      */
     @IBAction func closeShop(_ sender: Any) {
+        GameSound.shared.playSoundFXIfActivated(sound: .BUTTON_CLICK)
         self.view.window!.rootViewController?.dismiss(animated: false, completion: nil)
     }
 
@@ -103,6 +104,7 @@ class GameShopSceneViewController: UIViewController, NavigationCellDelegate {
      DISCLAIMER: It's currently being used to generate premium factory. NOT real NFT.
      */
     @IBAction func generateNFT(_ sender: Any) {
+        GameSound.shared.playSoundFXIfActivated(sound: .BUTTON_CLICK)
         var mainView: UIStoryboard!
         mainView = UIStoryboard(name: "GenerateNFTConfirmation", bundle: nil)
         let viewcontroller : UIViewController = mainView.instantiateViewController(withIdentifier: "PopUpConfirmation") as UIViewController
@@ -114,6 +116,7 @@ class GameShopSceneViewController: UIViewController, NavigationCellDelegate {
      Display Marketplace scene.
      */
     @IBAction func displayMarketplace(_ sender: Any) {
+        GameSound.shared.playSoundFXIfActivated(sound: .BUTTON_CLICK)
         var mainView: UIStoryboard!
         mainView = UIStoryboard(name: "GameMarketplaceScene", bundle: nil)
         let viewcontroller : UIViewController = mainView.instantiateViewController(withIdentifier: "MarketplaceStoryboard") as UIViewController
@@ -127,6 +130,7 @@ class GameShopSceneViewController: UIViewController, NavigationCellDelegate {
     
     
     func didButtonPressed() {
+        GameSound.shared.playSoundFXIfActivated(sound: .BUTTON_CLICK)
         print(#function)
         var mainView: UIStoryboard!
         mainView = UIStoryboard(name: "FactoryDetailScene", bundle: nil)

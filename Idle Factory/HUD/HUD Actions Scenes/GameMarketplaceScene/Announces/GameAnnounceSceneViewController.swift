@@ -84,6 +84,7 @@ class GameAnnounceSceneViewController: UIViewController {
      Return to Marketplace scene.
      */
     @IBAction func returnToMarketplace(_ sender: Any) {
+        GameSound.shared.playSoundFXIfActivated(sound: .BUTTON_CLICK)
         self.dismiss(animated: false, completion: nil)
     }
     
@@ -141,14 +142,13 @@ extension GameAnnounceSceneViewController: UICollectionViewDataSource {
 
         if let generatorOffer = announcesDict[playerAnnounces[indexPath.row].generatorID] {
             cell.pullMyAnnouncesFactories(factory: generatorOffer, offer: playerAnnounces[indexPath.row], premium: generatorOffer.type == .Basic ? false : true)
+            cell.configureCell()
             return cell
 
         } else {
             cell.hideCell()
             return cell
         }
-        
-        
     }
 }
 

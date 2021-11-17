@@ -11,7 +11,12 @@ class InputValueSellViewController: UIViewController, ComeBackData, ConfirmSell{
     
     var factory: Factory?
     var typeOfMoney: CurrencyType = .basic
-    var valueSell: Double = 0
+    var valueSell: Double = 0 {
+        didSet {
+            let backgroundColor: UIColor = valueSell.isZero ? UIColor(named:"deactivatedActionColor1")! : UIColor(named:"actionColor1")!
+            confirmButton.backgroundColor = backgroundColor
+        }
+    }
     weak var delegate: RefreshInventory?
     
     func confirmSell() {
@@ -59,55 +64,70 @@ class InputValueSellViewController: UIViewController, ComeBackData, ConfirmSell{
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var backgroundView: UIView!
     @IBOutlet weak var cancelButton: UIButton!
-    @IBOutlet weak var confirmButton: UIButton!
+    @IBOutlet weak var confirmButton: UIButton! {
+        didSet {
+            let backgroundColor: UIColor = valueSell.isZero ? UIColor(named:"deactivatedActionColor1")! : UIColor(named:"actionColor1")!
+            confirmButton.backgroundColor = backgroundColor
+        }
+    }
     @IBOutlet var buttons: [UIButton]!
     
     // MARK: - BUTTONS THAT ADD VALUE
     @IBAction func button1(_ sender: Any) {
+        GameSound.shared.playSoundFXIfActivated(sound: .BUTTON_CLICK)
         valueSell = 0.0
         setValueOnLabel(text: doubleToString(value: valueSell))
     }
     @IBAction func button2(_ sender: Any) {
+        GameSound.shared.playSoundFXIfActivated(sound: .BUTTON_CLICK)
         valueSell += 100
         setValueOnLabel(text: doubleToString(value: valueSell))
         
     }
     @IBAction func button3(_ sender: Any) {
+        GameSound.shared.playSoundFXIfActivated(sound: .BUTTON_CLICK)
         valueSell += 1000
         setValueOnLabel(text: doubleToString(value: valueSell))
         
     }
     @IBAction func button4(_ sender: Any) {
+        GameSound.shared.playSoundFXIfActivated(sound: .BUTTON_CLICK)
         valueSell += 10000
         setValueOnLabel(text: doubleToString(value: valueSell))
         
     }
     @IBAction func button5(_ sender: Any) {
+        GameSound.shared.playSoundFXIfActivated(sound: .BUTTON_CLICK)
         valueSell += 100000
         setValueOnLabel(text: doubleToString(value: valueSell))
         
     }
     @IBAction func button6(_ sender: Any) {
+        GameSound.shared.playSoundFXIfActivated(sound: .BUTTON_CLICK)
         valueSell += 1000000
         setValueOnLabel(text: doubleToString(value: valueSell))
         
     }
     @IBAction func button7(_ sender: Any) {
+        GameSound.shared.playSoundFXIfActivated(sound: .BUTTON_CLICK)
         valueSell += 1000000000
         setValueOnLabel(text: doubleToString(value: valueSell))
         
     }
     @IBAction func button8(_ sender: Any) {
+        GameSound.shared.playSoundFXIfActivated(sound: .BUTTON_CLICK)
         valueSell += 1000000000000
         setValueOnLabel(text: doubleToString(value: valueSell))
         
     }
     @IBAction func button9(_ sender: Any) {
+        GameSound.shared.playSoundFXIfActivated(sound: .BUTTON_CLICK)
         valueSell += 1000000000000000
         setValueOnLabel(text: doubleToString(value: valueSell))
         
     }
     @IBAction func button10(_ sender: Any) {
+        GameSound.shared.playSoundFXIfActivated(sound: .BUTTON_CLICK)
         valueSell += 1000000000000000000
         setValueOnLabel(text: doubleToString(value: valueSell))
         
@@ -122,19 +142,26 @@ class InputValueSellViewController: UIViewController, ComeBackData, ConfirmSell{
     }
     
     @IBAction func closeScreen(_ sender: Any) {
+        GameSound.shared.playSoundFXIfActivated(sound: .BUTTON_CLICK)
         self.dismiss(animated: false, completion: nil)
     }
     @IBAction func cancelButton(_ sender: Any) {
+        GameSound.shared.playSoundFXIfActivated(sound: .BUTTON_CLICK)
         self.dismiss(animated: false, completion: nil)
     }
     @IBAction func confirmButton(_ sender: Any) {
-        if let infoViewController = storyboard?.instantiateViewController(identifier: "ConfirmSell") as? ConfirmSellViewController {
-            infoViewController.modalPresentationStyle = .overCurrentContext
-            infoViewController.delegate = self
-            infoViewController.value = valueSell
-            infoViewController.typeOfMoney = typeOfMoney
-            infoViewController.modalTransitionStyle = .crossDissolve
-            present(infoViewController, animated: true)
+        if valueSell.isZero {
+            GameSound.shared.playSoundFXIfActivated(sound: .DEACTIVATE_BUTTON)
+        } else {
+            GameSound.shared.playSoundFXIfActivated(sound: .BUTTON_CLICK)
+            if let infoViewController = storyboard?.instantiateViewController(identifier: "ConfirmSell") as? ConfirmSellViewController {
+                infoViewController.modalPresentationStyle = .overCurrentContext
+                infoViewController.delegate = self
+                infoViewController.value = valueSell
+                infoViewController.typeOfMoney = typeOfMoney
+                infoViewController.modalTransitionStyle = .crossDissolve
+                present(infoViewController, animated: true)
+            }
         }
     }
     
