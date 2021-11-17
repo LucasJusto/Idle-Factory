@@ -49,6 +49,12 @@
 		55439BC72721F23D00F69461 /* DateApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55439BC62721F23D00F69461 /* DateApi.swift */; };
 		555DFCB72729BE0D006C60D9 /* UpgradeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 555DFCB62729BE0D006C60D9 /* UpgradeCell.swift */; };
 		5567745C271A09A7006BA5C0 /* Factory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5567745B271A09A7006BA5C0 /* Factory.swift */; };
+		558ADE8E2744277F008EB9F0 /* OnboardingScene.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 558ADE8D2744277F008EB9F0 /* OnboardingScene.storyboard */; };
+		558ADE9227442B7C008EB9F0 /* MainPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 558ADE9127442B7C008EB9F0 /* MainPageViewController.swift */; };
+		558ADE9427442D73008EB9F0 /* FirstViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 558ADE9327442D73008EB9F0 /* FirstViewController.swift */; };
+		558ADE9627442D96008EB9F0 /* SecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 558ADE9527442D96008EB9F0 /* SecondViewController.swift */; };
+		558ADE9827442DC9008EB9F0 /* ThirdViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 558ADE9727442DC9008EB9F0 /* ThirdViewController.swift */; };
+		558ADE9A27443351008EB9F0 /* OnboardingManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 558ADE9927443351008EB9F0 /* OnboardingManager.swift */; };
 		55A0B4AE2732F6C900161FE8 /* FactoryDetailScene.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 55A0B4AD2732F6C900161FE8 /* FactoryDetailScene.storyboard */; };
 		55A0B4B027330B2000161FE8 /* FactoryDetailSceneController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55A0B4AF27330B2000161FE8 /* FactoryDetailSceneController.swift */; };
 		55A0B4B227330EA500161FE8 /* FactoryDetailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55A0B4B127330EA500161FE8 /* FactoryDetailCell.swift */; };
@@ -118,6 +124,12 @@
 		55439BC62721F23D00F69461 /* DateApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateApi.swift; sourceTree = "<group>"; };
 		555DFCB62729BE0D006C60D9 /* UpgradeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpgradeCell.swift; sourceTree = "<group>"; };
 		5567745B271A09A7006BA5C0 /* Factory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Factory.swift; sourceTree = "<group>"; };
+		558ADE8D2744277F008EB9F0 /* OnboardingScene.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = OnboardingScene.storyboard; sourceTree = "<group>"; };
+		558ADE9127442B7C008EB9F0 /* MainPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainPageViewController.swift; sourceTree = "<group>"; };
+		558ADE9327442D73008EB9F0 /* FirstViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstViewController.swift; sourceTree = "<group>"; };
+		558ADE9527442D96008EB9F0 /* SecondViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondViewController.swift; sourceTree = "<group>"; };
+		558ADE9727442DC9008EB9F0 /* ThirdViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThirdViewController.swift; sourceTree = "<group>"; };
+		558ADE9927443351008EB9F0 /* OnboardingManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingManager.swift; sourceTree = "<group>"; };
 		55A0B4AD2732F6C900161FE8 /* FactoryDetailScene.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = FactoryDetailScene.storyboard; sourceTree = "<group>"; };
 		55A0B4AF27330B2000161FE8 /* FactoryDetailSceneController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FactoryDetailSceneController.swift; sourceTree = "<group>"; };
 		55A0B4B127330EA500161FE8 /* FactoryDetailCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FactoryDetailCell.swift; sourceTree = "<group>"; };
@@ -296,6 +308,7 @@
 		487A19EE2715504000723065 /* Idle Factory */ = {
 			isa = PBXGroup;
 			children = (
+				558ADE8C2744272A008EB9F0 /* Onboarding  */,
 				55A0B4AC2732F66700161FE8 /* FactoryDetails */,
 				555DFCB52729BDC5006C60D9 /* UpgradeFactory */,
 				2B9C3147271F4C1B008A7676 /* Idle-Factory-Info.plist */,
@@ -343,6 +356,19 @@
 				555DFCB62729BE0D006C60D9 /* UpgradeCell.swift */,
 			);
 			path = UpgradeFactory;
+			sourceTree = "<group>";
+		};
+		558ADE8C2744272A008EB9F0 /* Onboarding  */ = {
+			isa = PBXGroup;
+			children = (
+				558ADE8D2744277F008EB9F0 /* OnboardingScene.storyboard */,
+				558ADE9127442B7C008EB9F0 /* MainPageViewController.swift */,
+				558ADE9327442D73008EB9F0 /* FirstViewController.swift */,
+				558ADE9527442D96008EB9F0 /* SecondViewController.swift */,
+				558ADE9727442DC9008EB9F0 /* ThirdViewController.swift */,
+				558ADE9927443351008EB9F0 /* OnboardingManager.swift */,
+			);
+			path = "Onboarding ";
 			sourceTree = "<group>";
 		};
 		55A0B4AC2732F66700161FE8 /* FactoryDetails */ = {
@@ -465,6 +491,7 @@
 				487A19FB2715504000723065 /* Main.storyboard in Resources */,
 				2B9C8FFA27441EEB00CDD36C /* upgrade.mp3 in Resources */,
 				2BD3FBF32728777400B4B4E6 /* GameChallengeScene.storyboard in Resources */,
+				558ADE8E2744277F008EB9F0 /* OnboardingScene.storyboard in Resources */,
 				F8BF29ED273AED58009152CA /* WelcomeBack.storyboard in Resources */,
 				48A6596E271F5F470021CD52 /* Localizable.strings in Resources */,
 				2B9C8FF727441EEB00CDD36C /* bkg_music.mp3 in Resources */,
@@ -505,6 +532,7 @@
 				55BBAC16271F404A00A86A47 /* GIFPlayerView.swift in Sources */,
 				555DFCB72729BE0D006C60D9 /* UpgradeCell.swift in Sources */,
 				55439BC72721F23D00F69461 /* DateApi.swift in Sources */,
+				558ADE9627442D96008EB9F0 /* SecondViewController.swift in Sources */,
 				DFA8A113273D86EA00623847 /* InputValueSellViewController.swift in Sources */,
 				DFA8A111273D86EA00623847 /* InputValueKeyboardViewController.swift in Sources */,
 				2BD3FBF927287D1300B4B4E6 /* UpgradeFactorySceneController.swift in Sources */,
@@ -517,7 +545,9 @@
 				DF6A8B4E273DB2AA009AA31D /* SettingsViewController.swift in Sources */,
 				487A19F62715504000723065 /* GameScene.swift in Sources */,
 				48A9AC4C273314BD007C5197 /* MarketPlaceOffer.swift in Sources */,
+				558ADE9427442D73008EB9F0 /* FirstViewController.swift in Sources */,
 				DFA8A112273D86EA00623847 /* ConfirmSellViewController.swift in Sources */,
+				558ADE9827442DC9008EB9F0 /* ThirdViewController.swift in Sources */,
 				F8BF29E9273AECE6009152CA /* WelcomeBackViewController.swift in Sources */,
 				487A19F82715504000723065 /* GameViewController.swift in Sources */,
 				55A0B4B027330B2000161FE8 /* FactoryDetailSceneController.swift in Sources */,
@@ -530,6 +560,8 @@
 				487A19F02715504000723065 /* AppDelegate.swift in Sources */,
 				2B9C8FF127441E5500CDD36C /* GameSound.swift in Sources */,
 				487A1A09271551BA00723065 /* Generator.swift in Sources */,
+				558ADE9A27443351008EB9F0 /* OnboardingManager.swift in Sources */,
+				558ADE9227442B7C008EB9F0 /* MainPageViewController.swift in Sources */,
 				2BA6773427319A8C00D6F9EB /* GameAnnounceViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

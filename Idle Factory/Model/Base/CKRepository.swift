@@ -304,10 +304,10 @@ public class CKRepository {
                     semaphore.wait()
                     
                     if visual == nil {
-                        let factory = Factory(id: id, resourcesArray: resources, energy: energy, type: type, texture: texture, position: position, isActive: isActive, isOffer: isOffer)
+                        let factory = Factory(id: id, resourcesArray: resources, energy: energy, type: type, texture: texture, position: position, isActive: isActive, isOffer: isOffer, userID: userID)
                         generators.append(factory)
                     } else {
-                        let factory = Factory(id: id, resourcesArray: resources, energy: energy, type: type, texture: texture, position: position, isActive: isActive, visual: visual!, isOffer: isOffer)
+                        let factory = Factory(id: id, resourcesArray: resources, energy: energy, type: type, texture: texture, position: position, isActive: isActive, visual: visual!, isOffer: isOffer, userID: userID)
                         generators.append(factory)
                     }
                 }
@@ -496,7 +496,7 @@ public class CKRepository {
         let publicDB = container.publicCloudDatabase
         var offers: [Offer] = [Offer]()
         
-        let predicate = NSPredicate(format: "\(MarketTable.buyerID.description) == %@", "none")
+        let predicate = NSPredicate(format: "\(MarketTable.buyerID.description) == 'none' AND \(MarketTable.sellerID.description) != '\(GameScene.user!.id)'")
         let query = CKQuery(recordType: MarketTable.recordType.description, predicate: predicate)
         
         publicDB.perform(query, inZoneWith: nil) { results, error in
@@ -512,20 +512,22 @@ public class CKRepository {
                     let price: Double = result.value(forKey: MarketTable.price.description) as! Double
                     let currencyTypeString: String = result.value(forKey: MarketTable.currencyType.description) as! String
                     let currencyType: CurrencyType = CurrencyType.getType(key: currencyTypeString)
+                    let buyerID: String = result.value(forKey: MarketTable.buyerID.description) as! String
                     
-                    offers.append(Offer(id: id, sellerID: sellerID, generatorID: generatorID, buyerID: nil, price: price, currencyType: currencyType, isCollected: IsCollected.no))
+                    offers.append(Offer(id: id, sellerID: sellerID, generatorID: generatorID, buyerID: buyerID, price: price, currencyType: currencyType, isCollected: IsCollected.no))
                 }
             }
             completion(offers)
         }
     }
     
-    static func buyOfferFromMarket(sellerID: String, generatorID: String, buyerID: String, completion: @escaping (CKRecord?, Error?) -> Void) {
+    static func buyOfferFromMarket(sellerID: String, generatorID: String, buyerID: String, price: Double, currencyType: CurrencyType, completion: @escaping ([CKRecord]?, Error?) -> Void) {
         let publicDB = container.publicCloudDatabase
-        
+        var records: [CKRecord] = []
         let predicate = NSPredicate(format: "\(MarketTable.sellerID.description) == '\(sellerID)' AND \(MarketTable.generatorID.description) == '\(generatorID)'")
         let query = CKQuery(recordType: MarketTable.recordType.description, predicate: predicate)
-        
+        let dispatchGroup = DispatchGroup()
+        dispatchGroup.enter()
         publicDB.perform(query, inZoneWith: nil) { result, error in
             if let ckError = error as? CKError {
                 CKRepository.errorAlertHandler(CKErrorCode: ckError.code)
@@ -536,25 +538,53 @@ public class CKRepository {
                 if let buyer = offer.value(forKey: MarketTable.buyerID.description) as? String {
                     if buyer == "none" {
                         offer.setObject(buyerID as CKRecordValue?, forKey: MarketTable.buyerID.description)
-                        
-                        publicDB.save(offer) { savedRecord, error in
-                            if let ckError = error as? CKError {
-                                CKRepository.errorAlertHandler(CKErrorCode: ckError.code)
-                            }
-                            completion(savedRecord, error)
-                        }
+                        records.append(offer)
+                        dispatchGroup.leave()
                     }
-                    else {
-                        completion(nil, error)
-                    }
+                }
+            }
+        }
+        dispatchGroup.enter()
+        publicDB.fetch(withRecordID: CKRecord.ID(recordName: generatorID)) { generator, error in
+            if let ckError = error as? CKError {
+                CKRepository.errorAlertHandler(CKErrorCode: ckError.code)
+            }
+            if let generator = generator {
+                generator.setObject(buyerID as CKRecordValue?, forKey: GeneratorTable.userID.description)
+                generator.setObject(IsOffer.no.description as CKRecordValue?, forKey: GeneratorTable.isOffer.description)
+                generator.setObject(IsActive.no.description as CKRecordValue?, forKey: GeneratorTable.isActive.description)
+                records.append(generator)
+                dispatchGroup.leave()
+            }
+        }
+        dispatchGroup.enter()
+        publicDB.fetch(withRecordID: CKRecord.ID(recordName: buyerID)) { buyer, error in
+            if let ckError = error as? CKError {
+                CKRepository.errorAlertHandler(CKErrorCode: ckError.code)
+            }
+            if let buyer = buyer {
+                if currencyType == .basic {
+                    buyer.setObject((GameScene.user!.mainCurrency - price) as CKRecordValue?, forKey: UsersTable.mainCurrency.description)
                 }
                 else {
-                    completion(nil, error)
+                    buyer.setObject((GameScene.user!.premiumCurrency - price) as CKRecordValue?, forKey: UsersTable.premiumCurrency.description)
                 }
+                records.append(buyer)
+                dispatchGroup.leave()
             }
-            else {
-                completion(nil, error)
+        }
+        dispatchGroup.notify(queue: .global()) {
+            let operation = CKModifyRecordsOperation(recordsToSave: records, recordIDsToDelete: nil)
+            operation.savePolicy = .changedKeys
+            operation.modifyRecordsCompletionBlock = { savedRecords, _, error in
+                if let ckError = error as? CKError {
+                    CKRepository.errorAlertHandler(CKErrorCode: ckError.code)
+                }
+                completion(savedRecords, error)
             }
+            
+            
+            publicDB.add(operation)
         }
     }
     
@@ -616,6 +646,7 @@ public class CKRepository {
                     let isActiveString: String = generator.value(forKey: GeneratorTable.isActive.description) as? String ?? ""
                     let isActive: IsActive = IsActive.getKey(isActive: isActiveString)
                     let texture: String = generator.value(forKey: GeneratorTable.texture.description) as? String ?? ""
+                    let userID: String = generator.value(forKey: GeneratorTable.userID.description) as? String ?? ""
                     
                     let resourcesPredicate = NSPredicate(format: "\(ResourceTable.generatorID.description) == %@", id)
                     let resourcesQuery = CKQuery(recordType: ResourceTable.recordType.description, predicate: resourcesPredicate)
@@ -641,10 +672,10 @@ public class CKRepository {
                     
                     semaphore.wait()
                     if visual == nil {
-                        let factory = Factory(id: id, resourcesArray: resources, energy: energy, type: type, texture: texture, position: position, isActive: isActive, isOffer: isOffer)
+                        let factory = Factory(id: id, resourcesArray: resources, energy: energy, type: type, texture: texture, position: position, isActive: isActive, isOffer: isOffer, userID: userID)
                         generators.append(factory)
                     } else {
-                        let factory = Factory(id: id, resourcesArray: resources, energy: energy, type: type, texture: texture, position: position, isActive: isActive, visual: visual!, isOffer: isOffer)
+                        let factory = Factory(id: id, resourcesArray: resources, energy: energy, type: type, texture: texture, position: position, isActive: isActive, visual: visual!, isOffer: isOffer, userID: userID)
                         generators.append(factory)
                     }
                 }
@@ -671,6 +702,15 @@ public class CKRepository {
             completion(error)
         }
         publicDB.add(operation)
+    }
+    
+    static func deleteMarketPlaceOffer(offerID: String, completion: @escaping(CKRecord.ID?, Error?) -> Void) {
+        publicDB.delete(withRecordID: CKRecord.ID(recordName: offerID)) { deletedRecord, error in
+            if let ckError = error as? CKError {
+                CKRepository.errorAlertHandler(CKErrorCode: ckError.code)
+            }
+            completion(deletedRecord, error)
+        }
     }
     
     static func errorAlertHandler(CKErrorCode: CKError.Code){

@@ -35,6 +35,7 @@ class FactoryDetailSceneController: UIViewController,  UITableViewDataSource, UI
     
     @IBOutlet weak var priceValue: UILabel!
     @IBOutlet weak var tableView: UITableView!
+    weak var delegate: MarketPlaceRefresh?
     
     @IBAction func BackAction(_ sender: Any) {
         GameSound.shared.playSoundFXIfActivated(sound: .BUTTON_CLICK)
@@ -77,7 +78,7 @@ class FactoryDetailSceneController: UIViewController,  UITableViewDataSource, UI
                                         }
                                     }
                                 }
-                                
+                                generator.userID = GameScene.user!.id
                                 GameScene.user?.generators.append(generator)
                                 GameScene.user?.removeMainCurrency(value: price)
                                 CKRepository.storeUserData(id: GameScene.user!.id , name:  GameScene.user?.name ?? "", mainCurrency:  GameScene.user!.mainCurrency , premiumCurrency:  GameScene.user!.premiumCurrency, timeLeftApp: AppDelegate.gameSave.transformToSeconds(time: AppDelegate.gameSave.getCurrentTime()) , completion: {_,_ in
@@ -92,6 +93,36 @@ class FactoryDetailSceneController: UIViewController,  UITableViewDataSource, UI
                                     self.present(viewcontroller, animated: false)
                                 }
                             }
+                        }
+                    }
+                }
+            }
+        }
+        else {
+            self.dismiss(animated: true, completion: nil)
+            if FactoryDetailSceneController.generator?.type == .NFT {
+                if GameScene.user!.premiumCurrency >= FactoryDetailSceneController.offer!.price {
+                    CKRepository.buyOfferFromMarket(sellerID: FactoryDetailSceneController.offer!.sellerID, generatorID: FactoryDetailSceneController.offer!.generatorID, buyerID: GameScene.user!.id, price: FactoryDetailSceneController.offer!.price, currencyType: .premium) { savedRecord, error in
+                        if error == nil {
+                            GameScene.user!.removePremiumCurrency(value: FactoryDetailSceneController.offer!.price)
+                            FactoryDetailSceneController.generator?.userID = GameScene.user!.id
+                            FactoryDetailSceneController.generator!.isActive = .no
+                            FactoryDetailSceneController.generator!.isOffer = .no
+                            GameScene.user!.generators.append(FactoryDetailSceneController.generator!)
+                            self.delegate?.refresh(offer: FactoryDetailSceneController.offer!)
+                        }
+                    }
+                }
+            } else {
+                if GameScene.user!.mainCurrency >= FactoryDetailSceneController.offer!.price {
+                    CKRepository.buyOfferFromMarket(sellerID: FactoryDetailSceneController.offer!.sellerID, generatorID: FactoryDetailSceneController.offer!.generatorID, buyerID: GameScene.user!.id, price: FactoryDetailSceneController.offer!.price, currencyType: .premium) { savedRecord, error in
+                        if error == nil {
+                            GameScene.user!.removeMainCurrency(value: FactoryDetailSceneController.offer!.price)
+                            FactoryDetailSceneController.generator?.userID = GameScene.user!.id
+                            FactoryDetailSceneController.generator!.isActive = .no
+                            FactoryDetailSceneController.generator!.isOffer = .no
+                            GameScene.user!.generators.append(FactoryDetailSceneController.generator!)
+                            self.delegate?.refresh(offer: FactoryDetailSceneController.offer!)
                         }
                     }
                 }

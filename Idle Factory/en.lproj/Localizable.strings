@@ -107,3 +107,9 @@
 "CancelResetAction" = "Cancel";
 "ConfirmResetAction" = "Reset";
 
+
+//MARK: - Onboarding
+"Onboarding1" = "Acquire factories to increase your park";
+"Onboarding2" = "Upgrade your factories to produce more products";
+"Onboarding3" = "Acquire premium factories to unlock exclusive perks";
+"startPlaying" = "Start Playing";

@@ -7,6 +7,7 @@
 
 import Foundation
 import SpriteKit
+import SwiftUI
 
 func doubleToString(value: Double) -> String {
     //convert devCoins or devCoinsPerSec to String using K, M, B, T, AA, AB...
@@ -62,6 +63,53 @@ func doubleToString(value: Double) -> String {
         nDecimal = "\(splitedN[1].prefix(2))"
     }
     return "\(nInteger).\(nDecimal)\(str)"
+}
+
+func checkMyOffers(semaphore: DispatchSemaphore){
+    CKRepository.getUserId { id in
+        CKRepository.getUserOffersByID(userID: id!) { offers in
+            let generatorsIDs = offers.map { offer in
+                offer.generatorID
+            }
+            CKRepository.getGeneratorsByIDs(generatorsIDs: generatorsIDs) { generators in
+                let myGeneratorsIDs = GameScene.user!.generators.map { generator in
+                    generator.id
+                }
+                var generatorsToDelete: [Factory] = []
+                for generator in generators {
+                    for offer in offers {
+                        if generator.id == offer.generatorID {
+                            if offer.buyerID != "none" {
+                                if myGeneratorsIDs.contains(generator.id) {
+                                    if offer.currencyType == .premium {
+                                        GameScene.user!.addPremiumCurrency(value: offer.price)
+                                    }
+                                    else {
+                                        GameScene.user!.addMainCurrency(value: offer.price)
+                                    }
+                                    generatorsToDelete.append(generator)
+                                }
+                            }
+                        }
+                    }
+                }
+                for g in generatorsToDelete {
+                    removeGenerator(generator: g)
+                }
+                semaphore.signal()
+            }
+        }
+    }
+}
+
+func removeGenerator(generator: Factory) {
+    var i = 0
+    for j in 0..<GameScene.user!.generators.count {
+        if GameScene.user!.generators[j].id == generator.id {
+            i = j
+        }
+    }
+    GameScene.user!.generators.remove(at: i)
 }
 
 func doubleToStringAsInt(value: Double) -> String {
@@ -210,7 +258,7 @@ func createBasicFactory(resourceTypeArray: [ResourceType]) -> Factory {
         txtName = "Basic_Factory_level_1"
     }
     
-    let factory = Factory(resourcesArray: resourceArray, energy: Int.random(in: 1..<10), type: FactoryType.Basic, texture: txtName, position: GeneratorPositions.none, isActive: IsActive.no, isOffer: IsOffer.no)
+    let factory = Factory(resourcesArray: resourceArray, energy: Int.random(in: 1..<10), type: FactoryType.Basic, texture: txtName, position: GeneratorPositions.none, isActive: IsActive.no, isOffer: IsOffer.no, userID: "")
     return factory
 }
 
@@ -245,7 +293,7 @@ func createNFTFactory(resourceTypeArray: [ResourceType]) -> Factory {
         resourceArray.append(Resource(basePrice: (Double(value) * qttPLevel1), baseQtt: Double(value), currentLevel: 0, qttPLevel: qttPLevel1, type: shuffledArray[n], pricePLevelIncreaseTax: tax, generatorType: .NFT))
     }
     
-    let factory = Factory(resourcesArray: resourceArray, energy: Int.random(in: 5..<15), type: FactoryType.NFT, position: GeneratorPositions.none, isActive: IsActive.no, isOffer: IsOffer.no)
+    let factory = Factory(resourcesArray: resourceArray, energy: Int.random(in: 5..<15), type: FactoryType.NFT, position: GeneratorPositions.none, isActive: IsActive.no, isOffer: IsOffer.no, userID: "")
     return factory
 }
 

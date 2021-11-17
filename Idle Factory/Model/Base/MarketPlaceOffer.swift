@@ -11,18 +11,16 @@ class Offer {
     let id: String
     let sellerID: String
     let generatorID: String
-    var buyerID: String?
+    var buyerID: String
     let price: Double
     let currencyType: CurrencyType
     var isCollected: IsCollected
     
-    public init(id: String, sellerID: String, generatorID: String, buyerID: String?, price: Double, currencyType: CurrencyType, isCollected: IsCollected) {
+    public init(id: String, sellerID: String, generatorID: String, buyerID: String, price: Double, currencyType: CurrencyType, isCollected: IsCollected) {
         self.id = id
         self.sellerID = sellerID
         self.generatorID = generatorID
-        if let buyerID = buyerID {
-            self.buyerID = buyerID
-        }
+        self.buyerID = buyerID
         self.price = price
         self.currencyType = currencyType
         self.isCollected = isCollected
