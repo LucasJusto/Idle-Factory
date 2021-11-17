@@ -456,6 +456,7 @@ public class CKRepository {
             record.setObject(resource.basePrice as CKRecordValue?, forKey: ResourceTable.basePrice.description)
             record.setObject(resource.currentLevel as CKRecordValue?, forKey: ResourceTable.level.description)
             record.setObject(resource.type.key as CKRecordValue?, forKey: ResourceTable.type.description)
+            record.setObject(resource.pricePLevelIncreaseTax as CKRecordValue?, forKey: ResourceTable.pricePLevelIncreaseTax.description)
             
             records.append(record)
         }
