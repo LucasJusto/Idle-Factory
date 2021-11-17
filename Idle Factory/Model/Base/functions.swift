@@ -228,8 +228,8 @@ func createBasicFactory(resourceTypeArray: [ResourceType]) -> Factory {
         let levelAux5 = Int.random(in: 1..<31)
         let levelAux3 = [levelAux1,levelAux2,levelAux4,levelAux5]
         let level = levelAux3[Int.random(in: 0..<4)]
-        let tax = 1.5
-        resourceArray.append(Resource(basePrice: (Double(value) * qttPLevel1 * pow(tax , Double(level))), baseQtt: Double(value + (level * Int(qttPLevel1))), currentLevel: level, qttPLevel: qttPLevel1, type: shuffledArray[n], pricePLevelIncreaseTax: tax, generatorType: .Basic))
+        let tax = 1.3
+        resourceArray.append(Resource(basePrice: (Double(value) * qttPLevel1 * 100), baseQtt: Double(value), currentLevel: level, qttPLevel: qttPLevel1, type: shuffledArray[n], pricePLevelIncreaseTax: tax, generatorType: .Basic))
     }
     var aux = 0
     var media = 0.0
@@ -289,7 +289,7 @@ func createNFTFactory(resourceTypeArray: [ResourceType]) -> Factory {
             generatorsLeft -= 1
         }
         basicQtd -= value
-        let tax = 2.0
+        let tax = 1.5
         resourceArray.append(Resource(basePrice: (Double(value) * qttPLevel1), baseQtt: Double(value), currentLevel: 0, qttPLevel: qttPLevel1, type: shuffledArray[n], pricePLevelIncreaseTax: tax, generatorType: .NFT))
     }
     

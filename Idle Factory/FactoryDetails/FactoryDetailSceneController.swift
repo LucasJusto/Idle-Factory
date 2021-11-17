@@ -37,6 +37,8 @@ class FactoryDetailSceneController: UIViewController,  UITableViewDataSource, UI
     @IBOutlet weak var tableView: UITableView!
     weak var delegate: MarketPlaceRefresh?
     
+    var timeToRefreshCurrency:Timer?
+    
     @IBAction func BackAction(_ sender: Any) {
         if FactoryDetailSceneController.isBlue {
             var mainView: UIStoryboard!
@@ -133,6 +135,9 @@ class FactoryDetailSceneController: UIViewController,  UITableViewDataSource, UI
         super.viewDidLoad()
         tableView.dataSource = self
         tableView.delegate = self
+        
+        timeToRefreshCurrency = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(loadPlayerCurrencies), userInfo: nil, repeats: true)
+        
         if !FactoryDetailSceneController.isBlue {
             nameLabel.text = NSLocalizedString("MarketplaceHeaderLabel", comment: "")
         }
@@ -175,7 +180,7 @@ class FactoryDetailSceneController: UIViewController,  UITableViewDataSource, UI
             var price = 0.0
             for n in 0..<(generator.resourcesArray.count) {
                 resourceArray.append((generator.resourcesArray[n]))
-                price += resourceArray[n].basePrice
+                price += resourceArray[n].currentPrice
             }
             
             priceLabel.text = "\(NSLocalizedString("Price", comment: "Price")) "
@@ -189,9 +194,23 @@ class FactoryDetailSceneController: UIViewController,  UITableViewDataSource, UI
             }
             if !FactoryDetailSceneController.isBlue {
                 priceValue.text = "\(doubleToString(value: FactoryDetailSceneController.offer!.price))"
+                if FactoryDetailSceneController.generator?.type == .NFT{
+                    if GameScene.user!.premiumCurrency < FactoryDetailSceneController.offer!.price{
+                        buttonIsEnable()
+                    }
+                }
+                else{
+                    if GameScene.user!.mainCurrency < FactoryDetailSceneController.offer!.price{
+                        buttonIsEnable()
+                    }
+                }
+                
             }
             else {
                 priceValue.text = "\(doubleToString(value: price))"
+                if GameScene.user!.mainCurrency < price {
+                    buttonIsEnable()
+                }
             }
         }
         view2.layer.borderWidth = 1
@@ -218,7 +237,47 @@ class FactoryDetailSceneController: UIViewController,  UITableViewDataSource, UI
         scene.scaleMode = .aspectFill
         SKview.presentScene(scene)
     }
-    
+    func buttonIsEnable(){
+        purchaseButton.backgroundColor = .gray
+        purchaseButton.isUserInteractionEnabled = false
+    }
+    func buttonIsNotEnable(){
+        purchaseButton.backgroundColor = UIColor(named: "actionColor1")
+        purchaseButton.isUserInteractionEnabled = true
+    }
+    @objc func loadPlayerCurrencies() {
+        mainCurrencyLabel.text = doubleToString(value: GameScene.user?.mainCurrency ?? 0.0)
+        premiumCurrencyLabel.text = doubleToString(value: GameScene.user?.premiumCurrency ?? 0.0)
+        
+        var resourceArray: [Resource] = []
+        var price = 0.0
+        for n in 0..<(FactoryDetailSceneController.generator!.resourcesArray.count) {
+            resourceArray.append((FactoryDetailSceneController.generator!.resourcesArray[n]))
+            price += resourceArray[n].currentPrice
+        }
+        
+        if !FactoryDetailSceneController.isBlue {
+            priceValue.text = "\(doubleToString(value: FactoryDetailSceneController.offer!.price))"
+            if FactoryDetailSceneController.generator?.type == .NFT{
+                if GameScene.user!.premiumCurrency >= FactoryDetailSceneController.offer!.price{
+                    buttonIsNotEnable()
+                }
+            }
+            else{
+                if GameScene.user!.mainCurrency >= FactoryDetailSceneController.offer!.price{
+                    buttonIsNotEnable()
+                }
+            }
+            
+        }
+        else {
+            priceValue.text = "\(doubleToString(value: price))"
+            if GameScene.user!.mainCurrency >= price {
+                buttonIsNotEnable()
+            }
+        }
+        
+    }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if let generator = FactoryDetailSceneController.generator {

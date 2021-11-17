@@ -29,6 +29,8 @@ class Resource: Upgradable {
     
     var generatorType: FactoryType
     
+    var typeMultiplier: Double
+    
     init(id: String? = nil, basePrice: Double, baseQtt: Double, currentLevel: Int, qttPLevel: Double, type: ResourceType, pricePLevelIncreaseTax: Double, generatorType: FactoryType) {
         self.id = id
         self.currentLevel = currentLevel
@@ -39,24 +41,30 @@ class Resource: Upgradable {
         self.type = type
         self.generatorType = generatorType
         
-        if generatorType == .NFT{
-            currentPrice = (basePrice * 100) * pow(pricePLevelIncreaseTax, Double(currentLevel))
-        }else{
-            currentPrice = basePrice * pow(pricePLevelIncreaseTax, Double(currentLevel))
-        }
-        
         switch type {
         case .computer:
-            perSec = (baseQtt + (Double(currentLevel) * qttPLevel)) * 4
+            typeMultiplier = 2
+            perSec = (baseQtt + (Double(currentLevel) * qttPLevel)) * typeMultiplier
         case .tablet:
-            perSec = (baseQtt + (Double(currentLevel) * qttPLevel)) * 3
+            typeMultiplier = 1.5
+            perSec = (baseQtt + (Double(currentLevel) * qttPLevel)) * typeMultiplier
         case .smartphone:
-            perSec = (baseQtt + (Double(currentLevel) * qttPLevel)) * 2
+            typeMultiplier = 1
+            perSec = (baseQtt + (Double(currentLevel) * qttPLevel)) * typeMultiplier
         case .smartTV:
-            perSec = (baseQtt + (Double(currentLevel) * qttPLevel)) * 5
+            typeMultiplier = 2.5
+            perSec = (baseQtt + (Double(currentLevel) * qttPLevel)) * typeMultiplier
         case .headphone:
-            perSec = (baseQtt + (Double(currentLevel) * qttPLevel)) * 1
+            typeMultiplier = 0.5
+            perSec = (baseQtt + (Double(currentLevel) * qttPLevel)) * typeMultiplier
         }
+        
+        if generatorType == .NFT{
+            currentPrice = (basePrice * 100) * pow(pricePLevelIncreaseTax, Double(currentLevel)) * typeMultiplier
+        }else{
+            currentPrice = basePrice * pow(pricePLevelIncreaseTax, Double(currentLevel)) * typeMultiplier
+        }
+        
     }
     
     func upgrade() {

@@ -89,7 +89,7 @@ class UpgradeFactorySceneController: UIViewController,  UITableViewDataSource, U
             // TODO: Change upgrade cost
             cell.setFactory(factory: factory, resourceID: indexPath.row)
             cell.tableView = tableView
-            cell.upgradeCostLabel.text = "\(doubleToStringAsInt(value: (resource.currentPrice) * (resource.pricePLevelIncreaseTax)))"
+            cell.upgradeCostLabel.text = "\(doubleToStringAsInt(value: (resource.currentPrice)))"
             let qtd = (resource.qttPLevel * Double(resource.currentLevel)) + resource.baseQtt
             cell.resourceNameAndQtdPerSec.text = "\(doubleToString(value: qtd)) \(resource.type.description)/s - \(NSLocalizedString("level", comment: "")): \(resource.currentLevel)"
         }
