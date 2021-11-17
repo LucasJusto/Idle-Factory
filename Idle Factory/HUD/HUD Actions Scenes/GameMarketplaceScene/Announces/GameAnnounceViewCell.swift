@@ -40,7 +40,7 @@ class GameAnnounceViewCell: UICollectionViewCell {
         if offer?.buyerID == "none" {
             //abrir tela de detalhes
         } else if offer?.isCollected == .no {
-            // resgata o dinheiro e tira o gerador dessa lista e adiciona
+            // resgata o dinheiro e tira o gerador dessa lista
         }
     }
     
