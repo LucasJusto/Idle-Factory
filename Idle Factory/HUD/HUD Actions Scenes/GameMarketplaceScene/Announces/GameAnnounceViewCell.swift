@@ -32,6 +32,7 @@ class GameAnnounceViewCell: UICollectionViewCell {
     @IBOutlet weak var coinImage: UIImageView!
     @IBOutlet weak var priceLabel: UILabel!
     var delegate: NavigationCellDelegate?
+    var delegate2: RefreshCollectionDelegate?
     
     // Button
     @IBOutlet weak var seeAnnounceButton: UIButton!
@@ -46,7 +47,11 @@ class GameAnnounceViewCell: UICollectionViewCell {
             delegate?.didButtonPressed()
         } else if offer?.isCollected == .no {
             // resgata o dinheiro e tira o gerador dessa lista
-            
+            CKRepository.redeemOfferPrice(offerID: offer!.id) { error in
+                if error == nil {
+                    self.delegate2?.refresh()
+                }
+            }
         }
     }
     
@@ -104,6 +109,7 @@ class GameAnnounceViewCell: UICollectionViewCell {
      */
     func pullMyAnnouncesFactories(factory: Factory, offer: Offer, premium: Bool) {
         self.offer = offer
+        self.myFactoryAnnounce = factory
         let scene = FactoryScene(size: CGSize(width: 400, height: 400))
         scene.thisFactory = factory
         scene.thisYPosition = 12

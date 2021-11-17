@@ -11,7 +11,36 @@ import UIKit
 /**
  Game Announce scene controller.
  */
-class GameAnnounceSceneViewController: UIViewController, NavigationCellDelegate {
+class GameAnnounceSceneViewController: UIViewController, NavigationCellDelegate, RefreshCollectionDelegate {
+    func refresh() {
+        CKRepository.getUserOffersByID(userID: GameScene.user!.id) { offers in
+            let generatorsId: [String] = offers.map { offer in
+                offer.generatorID
+            }
+            let semaphore = DispatchSemaphore(value: 0)
+            CKRepository.getGeneratorsByIDs(generatorsIDs: generatorsId) { factories in
+                for factory in factories {
+                    self.announcesDict[factory.id!] = factory
+                }
+                semaphore.signal()
+            }
+            semaphore.wait()
+
+            self.playerAnnounces = offers
+            DispatchQueue.main.async {
+                self.collectionView.reloadData()
+            }
+        }
+        DispatchQueue.main.async {
+            if self.playerAnnounces.count != 0 {
+                self.emptyAnnounceLabel.isHidden = true
+            } else {
+                self.emptyAnnounceLabel.isHidden = false
+            }
+        }
+        
+    }
+    
     func didButtonPressed() {
         var mainView: UIStoryboard!
         mainView = UIStoryboard(name: "FactoryDetailScene", bundle: nil)
@@ -151,11 +180,13 @@ extension GameAnnounceSceneViewController: UICollectionViewDataSource {
             cell.pullMyAnnouncesFactories(factory: generatorOffer, offer: playerAnnounces[indexPath.row], premium: generatorOffer.type == .Basic ? false : true)
             cell.configureCell()
             cell.delegate = self
+            cell.delegate2 = self
             return cell
 
         } else {
             cell.hideCell()
             cell.delegate = self
+            cell.delegate2 = self
             return cell
         }
     }
@@ -178,3 +209,6 @@ extension GameAnnounceSceneViewController: UICollectionViewDelegateFlowLayout {
     
 }
 
+protocol RefreshCollectionDelegate {
+    func refresh()
+}
