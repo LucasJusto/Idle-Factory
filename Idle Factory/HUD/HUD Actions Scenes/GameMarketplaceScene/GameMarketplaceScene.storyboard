@@ -19,7 +19,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="896" height="414"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zpB-Pn-JzX">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zpB-Pn-JzX">
                                 <rect key="frame" x="787" y="52" width="45" height="45"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="45" id="0hL-Xj-YLb"/>
@@ -156,8 +156,9 @@
                                 </constraints>
                             </stackView>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="iEe-xV-qjF">
-                                <rect key="frame" x="44" y="144" width="852" height="219"/>
+                                <rect key="frame" x="0.0" y="144" width="896" height="219"/>
                                 <color key="backgroundColor" name="Marketplace_background"/>
+                                <inset key="scrollIndicatorInsets" minX="2" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="QWk-eb-vST">
                                     <size key="itemSize" width="131" height="201"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
@@ -306,7 +307,7 @@
                                 </cells>
                             </collectionView>
                             <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vUy-E1-zRZ">
-                                <rect key="frame" x="235.5" y="197" width="425" height="20.5"/>
+                                <rect key="frame" x="235.5" y="228" width="425" height="20.5"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="425" id="QuJ-E9-ID2"/>
                                 </constraints>
@@ -320,8 +321,8 @@
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="iEe-xV-qjF" secondAttribute="trailing" id="Fdc-GU-K31"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="zpB-Pn-JzX" secondAttribute="trailing" constant="20" id="QFx-U3-are"/>
-                            <constraint firstItem="iEe-xV-qjF" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="R6D-iR-8Na"/>
-                            <constraint firstItem="vUy-E1-zRZ" firstAttribute="centerY" secondItem="5EZ-qb-Rvc" secondAttribute="centerY" id="TTx-FJ-1xn"/>
+                            <constraint firstItem="iEe-xV-qjF" firstAttribute="leading" secondItem="5EZ-qb-Rvc" secondAttribute="leading" id="R6D-iR-8Na"/>
+                            <constraint firstItem="vUy-E1-zRZ" firstAttribute="centerY" secondItem="5EZ-qb-Rvc" secondAttribute="centerY" multiplier="1.15" id="TTx-FJ-1xn"/>
                             <constraint firstItem="iEe-xV-qjF" firstAttribute="top" secondItem="T6z-zc-YC5" secondAttribute="bottom" constant="17" id="hg4-xW-Z7D"/>
                             <constraint firstItem="T6z-zc-YC5" firstAttribute="centerX" secondItem="5EZ-qb-Rvc" secondAttribute="centerX" id="hy8-Yr-t0u"/>
                             <constraint firstItem="zpB-Pn-JzX" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" constant="52" id="joT-p2-hNs"/>
@@ -445,8 +446,9 @@
                                 </connections>
                             </button>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="YgV-Dj-bDE">
-                                <rect key="frame" x="44" y="135" width="852" height="228"/>
+                                <rect key="frame" x="0.0" y="135" width="896" height="228"/>
                                 <color key="backgroundColor" name="Marketplace_background"/>
+                                <inset key="scrollIndicatorInsets" minX="2" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="zkK-Tp-u9Q">
                                     <size key="itemSize" width="131" height="201"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
@@ -594,7 +596,7 @@
                                 </cells>
                             </collectionView>
                             <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3eK-pa-iFx">
-                                <rect key="frame" x="427.5" y="197" width="41.5" height="20.5"/>
+                                <rect key="frame" x="427.5" y="228" width="41.5" height="20.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
@@ -603,11 +605,11 @@
                         <viewLayoutGuide key="safeArea" id="v0y-Qd-Mdh"/>
                         <color key="backgroundColor" name="Marketplace_background"/>
                         <constraints>
-                            <constraint firstItem="3eK-pa-iFx" firstAttribute="centerY" secondItem="D9q-YL-Ycv" secondAttribute="centerY" id="1kw-d4-Z03"/>
+                            <constraint firstItem="3eK-pa-iFx" firstAttribute="centerY" secondItem="D9q-YL-Ycv" secondAttribute="centerY" multiplier="1.15" id="1kw-d4-Z03"/>
                             <constraint firstItem="uUL-tu-Vgi" firstAttribute="top" secondItem="v0y-Qd-Mdh" secondAttribute="top" constant="45" id="9IB-K3-dEk"/>
                             <constraint firstItem="YgV-Dj-bDE" firstAttribute="trailing" secondItem="D9q-YL-Ycv" secondAttribute="trailing" id="BrU-Fb-CnN"/>
                             <constraint firstItem="v0y-Qd-Mdh" firstAttribute="bottom" secondItem="YgV-Dj-bDE" secondAttribute="bottom" constant="30" id="K1A-Vh-Ztc"/>
-                            <constraint firstItem="YgV-Dj-bDE" firstAttribute="leading" secondItem="v0y-Qd-Mdh" secondAttribute="leading" id="Wh6-fY-BkP"/>
+                            <constraint firstItem="YgV-Dj-bDE" firstAttribute="leading" secondItem="D9q-YL-Ycv" secondAttribute="leading" id="Wh6-fY-BkP"/>
                             <constraint firstItem="pxO-EI-DEX" firstAttribute="top" secondItem="v0y-Qd-Mdh" secondAttribute="top" constant="52" id="cJS-04-GUI"/>
                             <constraint firstItem="3eK-pa-iFx" firstAttribute="centerX" secondItem="D9q-YL-Ycv" secondAttribute="centerX" id="eOb-pg-oiX"/>
                             <constraint firstItem="pxO-EI-DEX" firstAttribute="leading" secondItem="v0y-Qd-Mdh" secondAttribute="leading" constant="20" id="fq1-ux-c55"/>
