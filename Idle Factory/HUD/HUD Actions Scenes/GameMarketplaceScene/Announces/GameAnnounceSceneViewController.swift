@@ -11,7 +11,14 @@ import UIKit
 /**
  Game Announce scene controller.
  */
-class GameAnnounceSceneViewController: UIViewController {
+class GameAnnounceSceneViewController: UIViewController, NavigationCellDelegate {
+    func didButtonPressed() {
+        var mainView: UIStoryboard!
+        mainView = UIStoryboard(name: "FactoryDetailScene", bundle: nil)
+        let viewcontroller : UIViewController = mainView.instantiateViewController(withIdentifier: "FactoryDetailScene") as UIViewController
+        self.present(viewcontroller, animated: false)
+    }
+    
 
     @IBOutlet weak var collectionView: UICollectionView!
     
@@ -141,10 +148,13 @@ extension GameAnnounceSceneViewController: UICollectionViewDataSource {
 
         if let generatorOffer = announcesDict[playerAnnounces[indexPath.row].generatorID] {
             cell.pullMyAnnouncesFactories(factory: generatorOffer, offer: playerAnnounces[indexPath.row], premium: generatorOffer.type == .Basic ? false : true)
+            cell.configureCell()
+            cell.delegate = self
             return cell
 
         } else {
             cell.hideCell()
+            cell.delegate = self
             return cell
         }
         

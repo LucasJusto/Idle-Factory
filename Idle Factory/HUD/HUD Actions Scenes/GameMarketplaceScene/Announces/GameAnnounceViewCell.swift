@@ -31,6 +31,7 @@ class GameAnnounceViewCell: UICollectionViewCell {
     @IBOutlet weak var rightMargin: UIView!
     @IBOutlet weak var coinImage: UIImageView!
     @IBOutlet weak var priceLabel: UILabel!
+    var delegate: NavigationCellDelegate?
     
     // Button
     @IBOutlet weak var seeAnnounceButton: UIButton!
@@ -39,8 +40,13 @@ class GameAnnounceViewCell: UICollectionViewCell {
     @IBAction func buttonCell(_ sender: Any) {
         if offer?.buyerID == "none" {
             //abrir tela de detalhes
+            FactoryDetailSceneController.isBlue = false
+            FactoryDetailSceneController.generator = myFactoryAnnounce
+            FactoryDetailSceneController.offer = offer
+            delegate?.didButtonPressed()
         } else if offer?.isCollected == .no {
             // resgata o dinheiro e tira o gerador dessa lista
+            
         }
     }
     
