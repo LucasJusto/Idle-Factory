@@ -50,7 +50,7 @@ class GameSound {
      Stop playing background music
      */
     func stopBackgroundMusic() {
-        guard let audioPlayer = soundFXPlayer else { return }
+        guard let audioPlayer = musicPlayer else { return }
         audioPlayer.stop()
     }
     
