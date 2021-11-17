@@ -11,6 +11,7 @@ import SpriteKit
 class UpgradeFactorySceneController: UIViewController,  UITableViewDataSource, UITableViewDelegate {
     
     @IBAction func close(_ sender: Any) {
+        GameSound.shared.playSoundFXIfActivated(sound: .BUTTON_CLICK)
         self.dismiss(animated: false, completion: nil)
     }
     @IBOutlet weak var SKView: SKView!
@@ -50,6 +51,7 @@ class UpgradeFactorySceneController: UIViewController,  UITableViewDataSource, U
      Move a active factory of the GameScene to the Inventory.
      */
     @IBAction func moveToInventory(_ sender: Any) {
+        GameSound.shared.playSoundFXIfActivated(sound: .BUTTON_CLICK)
         if let factory = UpgradeFactorySceneController.generator {
             let position = factory.position
             factory.position = .none
@@ -84,14 +86,14 @@ class UpgradeFactorySceneController: UIViewController,  UITableViewDataSource, U
         let cell = tableView.dequeueReusableCell(withIdentifier: "UpgradeCell", for: indexPath) as! UpgradeCell
         if let factory = UpgradeFactorySceneController.generator {
             let resource = factory.resourcesArray[indexPath.row]
-            cell.qtdPerSec.text = "\(doubleToString(value: resource.perSec))/s"
-            cell.resourceImage.image = UIImage(named: getResourceImageName(resource: resource.type))
+            cell.qtdPerSec.text = "\(doubleToStringAsInt(value: resource.perSec))/s"
+            cell.resourceImage.image = UIImage(systemName: getResourceImageName(resource: resource.type))
             // TODO: Change upgrade cost
             cell.setFactory(factory: factory, resourceID: indexPath.row)
             cell.tableView = tableView
-            cell.upgradeCostLabel.text = "\(doubleToString(value: (resource.currentPrice) * (resource.pricePLevelIncreaseTax)))"
+            cell.upgradeCostLabel.text = "\(doubleToStringAsInt(value: (resource.currentPrice)))"
             let qtd = (resource.qttPLevel * Double(resource.currentLevel)) + resource.baseQtt
-            cell.resourceNameAndQtdPerSec.text = "\(doubleToString(value: qtd)) \(resource.type.description)/s"
+            cell.resourceNameAndQtdPerSec.text = "\(doubleToString(value: qtd)) \(resource.type.description)/s - \(NSLocalizedString("level", comment: "")): \(resource.currentLevel)"
         }
 
         return cell

@@ -78,26 +78,32 @@ class GameInventoryViewCell: UICollectionViewCell {
             resourceType1.isHidden = true
             quantityType1.isHidden = true
             resourceType2.image = UIImage(systemName: getResourceImageName(resource: resources[0].type))
-            quantityType2.text = "\(Int(resources[0].baseQtt))"
+            let qtd0 = (resources[0].qttPLevel * Double(resources[0].currentLevel)) + resources[0].baseQtt
+            quantityType2.text = "\(Int(qtd0))"
             resourceType3.isHidden = true
             quantityType3.isHidden = true
             
         case 2:
             resourceType1.image = UIImage(systemName: getResourceImageName(resource: resources[0].type))
-            quantityType1.text = "\(Int(resources[0].baseQtt))"
+            let qtd0 = (resources[0].qttPLevel * Double(resources[0].currentLevel)) + resources[0].baseQtt
+            quantityType1.text = "\(Int(qtd0))"
             resourceType2.image = UIImage(systemName: getResourceImageName(resource: resources[1].type))
-            quantityType2.text = "\(Int(resources[1].baseQtt))"
+            let qtd1 = (resources[1].qttPLevel * Double(resources[1].currentLevel)) + resources[1].baseQtt
+            quantityType2.text = "\(Int(qtd1))"
             resourceType3.isHidden = true
             quantityType3.isHidden = true
 
         case 3:
             leftMargin.isHidden = true
             resourceType1.image = UIImage(systemName: getResourceImageName(resource: resources[0].type))
-            quantityType1.text = "\(Int(resources[0].baseQtt))"
+            let qtd0 = (resources[0].qttPLevel * Double(resources[0].currentLevel)) + resources[0].baseQtt
+            quantityType1.text = "\(Int(qtd0))"
             resourceType2.image = UIImage(systemName: getResourceImageName(resource: resources[1].type))
-            quantityType2.text = "\(Int(resources[1].baseQtt))"
+            let qtd1 = (resources[1].qttPLevel * Double(resources[1].currentLevel)) + resources[1].baseQtt
+            quantityType2.text = "\(Int(qtd1))"
             resourceType3.image = UIImage(systemName: getResourceImageName(resource: resources[2].type))
-            quantityType3.text = "\(Int(resources[2].baseQtt))"
+            let qtd2 = (resources[2].qttPLevel * Double(resources[2].currentLevel)) + resources[2].baseQtt
+            quantityType3.text = "\(Int(qtd2))"
             rightMargin.isHidden = true
 
         default:

@@ -11,19 +11,29 @@ import SpriteKit
 /**
  Game Inventory scene controller. 
  */
-class GameInventorySceneController: UIViewController {
+class GameInventorySceneController: UIViewController, RefreshInventory{
+    func refresh() {
+        factoriesNotActive = getUserInventory()
+        DispatchQueue.main.async {
+            self.collectionView.reloadData()
+        }
+        
+    }
+    
     
     @IBOutlet weak var collectionView: UICollectionView!
-    
+    @IBOutlet weak var collectionViewHeight: NSLayoutConstraint!
+
     // MARK: - HEADER OUTLETS
     @IBOutlet weak var inventoryHeader: UILabel!
     @IBOutlet weak var purchaseFactoryButton: UIButton!
     @IBOutlet weak var closeButton: UIButton!
     
-    
     // MARK: - FACTORY DETAILS OUTLETS
     @IBOutlet weak var factoryInfoView: UIView!
     @IBOutlet weak var factoryAboutView: UIView!
+    @IBOutlet weak var widthInfo: NSLayoutConstraint!
+    @IBOutlet weak var heightInfo: NSLayoutConstraint!
     @IBOutlet weak var SKView: SKView!
     
     // First Product Generation
@@ -109,7 +119,9 @@ class GameInventorySceneController: UIViewController {
         
         // Info Factories
         totalProductionLabel.text = NSLocalizedString("TotalProductionLabel", comment: "")
-        
+//        widthInfo.constant = UIScreen.main.bounds.width * 0.3116
+        heightInfo.constant = UIScreen.main.bounds.height * 0.4923
+        collectionViewHeight.constant = UIScreen.main.bounds.height * 0.4923
         // Buttons
         sellFactoryButton.setTitle(NSLocalizedString("SellFactoryButton", comment: ""), for: .normal)
         insertFactoryButton.setTitle(clickedSlotPosition == .none ? NSLocalizedString("AnnounceFactoryButton", comment: "") : NSLocalizedString("InsertFactoryButton", comment: ""), for: .normal)
@@ -185,6 +197,7 @@ class GameInventorySceneController: UIViewController {
      Close Inventory scene.
      */
     @IBAction func closeInventory(_ sender: Any) {
+        GameSound.shared.playSoundFXIfActivated(sound: .BUTTON_CLICK)
         self.view.window!.rootViewController?.dismiss(animated: false, completion: nil)
     }
     
@@ -193,6 +206,7 @@ class GameInventorySceneController: UIViewController {
      Go to shop to purchase a factory.
      */
     @IBAction func goToShop(_ sender: Any) {
+        GameSound.shared.playSoundFXIfActivated(sound: .BUTTON_CLICK)
         let mainView = UIStoryboard(name: "GameShopScene", bundle: nil)
         let viewcontroller : UIViewController = mainView.instantiateViewController(withIdentifier: "ShopStoryboard") as UIViewController
         self.present(viewcontroller, animated: false)
@@ -203,8 +217,9 @@ class GameInventorySceneController: UIViewController {
      Modal message of Quick sell is displayed. Quick Sell is a way to earn main currency quickly. The gaining is calculated by 50% of the price paid for the generator.
      */
     @IBAction func quickSellModal(_ sender: Any) {
+        GameSound.shared.playSoundFXIfActivated(sound: .BUTTON_CLICK)
         hideQuickSellModal(status: false)
-        quickSellEarningLabel.text = "\(calculateQuickSell(factory: selectedFactory!))"
+        quickSellEarningLabel.text = "\(doubleToString(value:calculateQuickSell(factory: selectedFactory!)))"
     }
     
     
@@ -212,6 +227,7 @@ class GameInventorySceneController: UIViewController {
      Cancel the quick sell action.
      */
     @IBAction func cancelQuickSell(_ sender: Any) {
+        GameSound.shared.playSoundFXIfActivated(sound: .BUTTON_CLICK)
         hideQuickSellModal(status: true)
     }
     
@@ -220,6 +236,7 @@ class GameInventorySceneController: UIViewController {
      Confirm the quick sell action. Player lose the generator and cannot be recovered.
      */
     @IBAction func confirmQuickSell(_ sender: Any) {
+        GameSound.shared.playSoundFXIfActivated(sound: .BUTTON_CLICK)
         if let factory = selectedFactory, let factoryIndex = selectedFactoryIndex, let factoryIndex2 = selectedFactoryIndex2 {
             hideQuickSellModal(status: true)
             DispatchQueue.global().async {
@@ -267,6 +284,7 @@ class GameInventorySceneController: UIViewController {
      Insert a factory from the Inventory to park. Turn the factory as active to generate resource to the Idle game.
      */
     func insertOnPark() {
+        GameSound.shared.playSoundFXIfActivated(sound: .BUTTON_CLICK)
         if let factory = selectedFactory, let factoryIndex = selectedFactoryIndex {
             factory.isActive = .yes
             factory.position = clickedSlotPosition
@@ -362,7 +380,8 @@ class GameInventorySceneController: UIViewController {
      This function opens a box where the user will select the value he wants to advertise the generator on the marketplace. After selecting the value, he can confirm the announce or cancel.
      */
     func openBoxToSetValue() {
-        
+            GameSound.shared.playSoundFXIfActivated(sound: .BUTTON_CLICK)
+
             guard let myFactoriesSell = GameScene.user?.generators,
                   !myFactoriesSell.isEmpty
                 else {
@@ -374,6 +393,7 @@ class GameInventorySceneController: UIViewController {
             if let infoViewController = storyboard?.instantiateViewController(identifier: "InfoViewController") as? InputValueSellViewController {
                 infoViewController.modalPresentationStyle = .overCurrentContext
                 infoViewController.factory = factorySell
+                infoViewController.delegate = self
                 infoViewController.modalTransitionStyle = .crossDissolve
                 present(infoViewController, animated: true)
             }
@@ -426,7 +446,7 @@ extension GameInventorySceneController: UICollectionViewDelegateFlowLayout {
     
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        
+        GameSound.shared.playSoundFXIfActivated(sound: .BUTTON_CLICK)
         guard let cell = collectionView.cellForItem(at: indexPath) as? GameInventoryViewCell else { return }
                 cell.layer.borderWidth = 2
                 cell.layer.borderColor = UIColor.black.cgColor
@@ -462,9 +482,11 @@ extension GameInventorySceneController: UICollectionViewDelegateFlowLayout {
             quantityType1.text = ""
             generatePerSecType1.text = ""
             
+            let qtd0 = (resources[0].qttPLevel * Double(resources[0].currentLevel)) + resources[0].baseQtt
+            
             typeImage2.image = UIImage(systemName: getResourceImageName(resource: resources[0].type))
             coinImage2.image = UIImage(named: "Coin")
-            quantityType2.text = "\(Int(resources[0].baseQtt)) \(resources[0].type)"
+            quantityType2.text = "\(Int(qtd0)) \(resources[0].type)"
             generatePerSecType2.text = doubleToString(value: resources[0].perSec)
             
             typeImage3.isHidden = true
@@ -485,12 +507,17 @@ extension GameInventorySceneController: UICollectionViewDelegateFlowLayout {
             SKView.presentScene(scene)
             typeImage1.image = UIImage(systemName: getResourceImageName(resource: resources[0].type))
             coinImage1.image = UIImage(named: "Coin")
-            quantityType1.text = "\(Int(resources[0].baseQtt)) \(resources[0].type)"
+            
+            let qtd0 = (resources[0].qttPLevel * Double(resources[0].currentLevel)) + resources[0].baseQtt
+            
+            quantityType1.text = "\(Int(qtd0)) \(resources[0].type)"
             generatePerSecType1.text = doubleToString(value: resources[0].perSec)
+            
+            let qtd1 = (resources[1].qttPLevel * Double(resources[1].currentLevel)) + resources[1].baseQtt
             
             typeImage2.image = UIImage(systemName: getResourceImageName(resource: resources[1].type))
             coinImage2.image = UIImage(named: "Coin")
-            quantityType2.text = "\(Int(resources[1].baseQtt)) \(resources[1].type)"
+            quantityType2.text = "\(Int(qtd1)) \(resources[1].type)"
             generatePerSecType2.text = doubleToString(value: resources[1].perSec)
             
             typeImage3.isHidden = true
@@ -513,17 +540,26 @@ extension GameInventorySceneController: UICollectionViewDelegateFlowLayout {
             SKView.presentScene(scene)
             typeImage1.image = UIImage(systemName: getResourceImageName(resource: resources[0].type))
             coinImage1.image = UIImage(named: "Coin")
-            quantityType1.text = "\(Int(resources[0].baseQtt)) \(resources[0].type)"
+            
+            let qtd0 = (resources[0].qttPLevel * Double(resources[0].currentLevel)) + resources[0].baseQtt
+            
+            quantityType1.text = "\(Int(qtd0)) \(resources[0].type)"
             generatePerSecType1.text = doubleToString(value: resources[0].perSec)
             
             typeImage2.image = UIImage(systemName: getResourceImageName(resource: resources[1].type))
             coinImage2.image = UIImage(named: "Coin")
-            quantityType2.text = "\(Int(resources[1].baseQtt)) \(resources[1].type)"
+            
+            let qtd1 = (resources[1].qttPLevel * Double(resources[1].currentLevel)) + resources[1].baseQtt
+            
+            quantityType2.text = "\(Int(qtd1)) \(resources[1].type)"
             generatePerSecType2.text = doubleToString(value: resources[1].perSec)
             
             typeImage3.image = UIImage(systemName: getResourceImageName(resource: resources[2].type))
             coinImage3.image = UIImage(named: "Coin")
-            quantityType3.text = "\(Int(resources[2].baseQtt)) \(resources[2].type)"
+            
+            let qtd2 = (resources[2].qttPLevel * Double(resources[2].currentLevel)) + resources[2].baseQtt
+            
+            quantityType3.text = "\(Int(qtd2)) \(resources[2].type)"
             generatePerSecType3.text = doubleToString(value: resources[2].perSec)
             
             let total = resources[0].perSec + resources[1].perSec + resources[2].perSec
@@ -538,7 +574,7 @@ extension GameInventorySceneController: UICollectionViewDelegateFlowLayout {
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let cellSize = CGSize(width: 94, height: 90)
+        let cellSize = CGSize(width: UIScreen.main.bounds.width * 0.1113, height: UIScreen.main.bounds.height * 0.2307)
         return cellSize
     }
     
@@ -586,4 +622,8 @@ final class CustomVisualEffectView: UIVisualEffectView {
     private let theEffect: UIVisualEffect
     private let customIntensity: CGFloat
     private var animator: UIViewPropertyAnimator?
+}
+
+protocol RefreshInventory: AnyObject {
+    func refresh()
 }

@@ -91,6 +91,7 @@ class GameAnnounceSceneViewController: UIViewController, NavigationCellDelegate 
      Return to Marketplace scene.
      */
     @IBAction func returnToMarketplace(_ sender: Any) {
+        GameSound.shared.playSoundFXIfActivated(sound: .BUTTON_CLICK)
         self.dismiss(animated: false, completion: nil)
     }
     
@@ -157,8 +158,6 @@ extension GameAnnounceSceneViewController: UICollectionViewDataSource {
             cell.delegate = self
             return cell
         }
-        
-        
     }
 }
 

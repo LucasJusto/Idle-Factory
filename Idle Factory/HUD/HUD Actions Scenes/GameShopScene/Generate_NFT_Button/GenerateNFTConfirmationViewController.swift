@@ -41,10 +41,11 @@ class GenerateNFTConfirmationViewController: UIViewController {
         
     }
     @IBAction func cancelAction(_ sender: Any) {
+        GameSound.shared.playSoundFXIfActivated(sound: .BUTTON_CLICK)
         self.dismiss(animated: true)
     }
     @IBAction func confirmAction(_ sender: Any) {
-        
+        GameSound.shared.playSoundFXIfActivated(sound: .BUTTON_CLICK)
         let resourceArray: [ResourceType] = [ResourceType.headphone, ResourceType.smartTV, ResourceType.smartphone, ResourceType.tablet, ResourceType.computer]
         
         let nftFactories = createNFTFactory(resourceTypeArray: resourceArray)

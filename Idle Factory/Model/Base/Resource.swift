@@ -29,6 +29,8 @@ class Resource: Upgradable {
     
     var generatorType: FactoryType
     
+    var typeMultiplier: Double
+    
     init(id: String? = nil, basePrice: Double, baseQtt: Double, currentLevel: Int, qttPLevel: Double, type: ResourceType, pricePLevelIncreaseTax: Double, generatorType: FactoryType) {
         self.id = id
         self.currentLevel = currentLevel
@@ -39,12 +41,30 @@ class Resource: Upgradable {
         self.type = type
         self.generatorType = generatorType
         
-        if generatorType == .NFT{
-            currentPrice = (basePrice * 100) * pow(pricePLevelIncreaseTax, Double(currentLevel))
-        }else{
-            currentPrice = basePrice * pow(pricePLevelIncreaseTax, Double(currentLevel))
+        switch type {
+        case .computer:
+            typeMultiplier = 2
+            perSec = (baseQtt + (Double(currentLevel) * qttPLevel)) * typeMultiplier
+        case .tablet:
+            typeMultiplier = 1.5
+            perSec = (baseQtt + (Double(currentLevel) * qttPLevel)) * typeMultiplier
+        case .smartphone:
+            typeMultiplier = 1
+            perSec = (baseQtt + (Double(currentLevel) * qttPLevel)) * typeMultiplier
+        case .smartTV:
+            typeMultiplier = 2.5
+            perSec = (baseQtt + (Double(currentLevel) * qttPLevel)) * typeMultiplier
+        case .headphone:
+            typeMultiplier = 0.5
+            perSec = (baseQtt + (Double(currentLevel) * qttPLevel)) * typeMultiplier
         }
-        perSec = baseQtt + (Double(currentLevel) * qttPLevel)
+        
+        if generatorType == .NFT{
+            currentPrice = (basePrice * 100) * pow(pricePLevelIncreaseTax, Double(currentLevel)) * typeMultiplier
+        }else{
+            currentPrice = basePrice * pow(pricePLevelIncreaseTax, Double(currentLevel)) * typeMultiplier
+        }
+        
     }
     
     func upgrade() {

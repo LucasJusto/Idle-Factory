@@ -27,7 +27,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         self.identifier = application.beginBackgroundTask {
             
         }
+        
+        if GameSound.shared.backgroundMusicStatus {
+            GameSound.shared.stopBackgroundMusic()
+        }
+        
         GameViewController.scene?.background.removeAllChildren()
+        let semaphore = DispatchSemaphore(value: 0)
+        checkMyOffers(semaphore: semaphore)
+        semaphore.wait()
         CKRepository.currentUserQuickSave(user: GameScene.user!, userGenerators: GameScene.user!.generators, deletedGenerators: []) { _, _, _ in
             application.endBackgroundTask(self.identifier)
         }

@@ -35,8 +35,12 @@ class FactoryDetailSceneController: UIViewController,  UITableViewDataSource, UI
     
     @IBOutlet weak var priceValue: UILabel!
     @IBOutlet weak var tableView: UITableView!
+    weak var delegate: MarketPlaceRefresh?
+    
+    var timeToRefreshCurrency:Timer?
     
     @IBAction func BackAction(_ sender: Any) {
+        GameSound.shared.playSoundFXIfActivated(sound: .BUTTON_CLICK)
         if FactoryDetailSceneController.isBlue {
             var mainView: UIStoryboard!
             mainView = UIStoryboard(name: "GameShopScene", bundle: nil)
@@ -51,6 +55,7 @@ class FactoryDetailSceneController: UIViewController,  UITableViewDataSource, UI
     }
     
     @IBAction func buyAction(_ sender: Any) {
+        GameSound.shared.playSoundFXIfActivated(sound: .BUTTON_CLICK)
         if FactoryDetailSceneController.isBlue {
             if let generator = FactoryDetailSceneController.generator {
                 var resourceArray: [Resource] = []
@@ -75,7 +80,7 @@ class FactoryDetailSceneController: UIViewController,  UITableViewDataSource, UI
                                         }
                                     }
                                 }
-                                
+                                generator.userID = GameScene.user!.id
                                 GameScene.user?.generators.append(generator)
                                 GameScene.user?.removeMainCurrency(value: price)
                                 CKRepository.storeUserData(id: GameScene.user!.id , name:  GameScene.user?.name ?? "", mainCurrency:  GameScene.user!.mainCurrency , premiumCurrency:  GameScene.user!.premiumCurrency, timeLeftApp: AppDelegate.gameSave.transformToSeconds(time: AppDelegate.gameSave.getCurrentTime()) , completion: {_,_ in
@@ -95,6 +100,36 @@ class FactoryDetailSceneController: UIViewController,  UITableViewDataSource, UI
                 }
             }
         }
+        else {
+            self.dismiss(animated: true, completion: nil)
+            if FactoryDetailSceneController.generator?.type == .NFT {
+                if GameScene.user!.premiumCurrency >= FactoryDetailSceneController.offer!.price {
+                    CKRepository.buyOfferFromMarket(sellerID: FactoryDetailSceneController.offer!.sellerID, generatorID: FactoryDetailSceneController.offer!.generatorID, buyerID: GameScene.user!.id, price: FactoryDetailSceneController.offer!.price, currencyType: .premium) { savedRecord, error in
+                        if error == nil {
+                            GameScene.user!.removePremiumCurrency(value: FactoryDetailSceneController.offer!.price)
+                            FactoryDetailSceneController.generator?.userID = GameScene.user!.id
+                            FactoryDetailSceneController.generator!.isActive = .no
+                            FactoryDetailSceneController.generator!.isOffer = .no
+                            GameScene.user!.generators.append(FactoryDetailSceneController.generator!)
+                            self.delegate?.refresh(offer: FactoryDetailSceneController.offer!)
+                        }
+                    }
+                }
+            } else {
+                if GameScene.user!.mainCurrency >= FactoryDetailSceneController.offer!.price {
+                    CKRepository.buyOfferFromMarket(sellerID: FactoryDetailSceneController.offer!.sellerID, generatorID: FactoryDetailSceneController.offer!.generatorID, buyerID: GameScene.user!.id, price: FactoryDetailSceneController.offer!.price, currencyType: .premium) { savedRecord, error in
+                        if error == nil {
+                            GameScene.user!.removeMainCurrency(value: FactoryDetailSceneController.offer!.price)
+                            FactoryDetailSceneController.generator?.userID = GameScene.user!.id
+                            FactoryDetailSceneController.generator!.isActive = .no
+                            FactoryDetailSceneController.generator!.isOffer = .no
+                            GameScene.user!.generators.append(FactoryDetailSceneController.generator!)
+                            self.delegate?.refresh(offer: FactoryDetailSceneController.offer!)
+                        }
+                    }
+                }
+            }
+        }
     }
     override func viewDidLoad() {
         headerViewMainCurrency.layer.cornerRadius = 10
@@ -102,6 +137,9 @@ class FactoryDetailSceneController: UIViewController,  UITableViewDataSource, UI
         super.viewDidLoad()
         tableView.dataSource = self
         tableView.delegate = self
+        
+        timeToRefreshCurrency = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(loadPlayerCurrencies), userInfo: nil, repeats: true)
+        
         if !FactoryDetailSceneController.isBlue {
             nameLabel.text = NSLocalizedString("MarketplaceHeaderLabel", comment: "")
         }
@@ -144,7 +182,7 @@ class FactoryDetailSceneController: UIViewController,  UITableViewDataSource, UI
             var price = 0.0
             for n in 0..<(generator.resourcesArray.count) {
                 resourceArray.append((generator.resourcesArray[n]))
-                price += resourceArray[n].basePrice
+                price += resourceArray[n].currentPrice
             }
             
             priceLabel.text = "\(NSLocalizedString("Price", comment: "Price")) "
@@ -158,9 +196,23 @@ class FactoryDetailSceneController: UIViewController,  UITableViewDataSource, UI
             }
             if !FactoryDetailSceneController.isBlue {
                 priceValue.text = "\(doubleToString(value: FactoryDetailSceneController.offer!.price))"
+                if FactoryDetailSceneController.generator?.type == .NFT{
+                    if GameScene.user!.premiumCurrency < FactoryDetailSceneController.offer!.price{
+                        buttonIsEnable()
+                    }
+                }
+                else{
+                    if GameScene.user!.mainCurrency < FactoryDetailSceneController.offer!.price{
+                        buttonIsEnable()
+                    }
+                }
+                
             }
             else {
                 priceValue.text = "\(doubleToString(value: price))"
+                if GameScene.user!.mainCurrency < price {
+                    buttonIsEnable()
+                }
             }
         }
         view2.layer.borderWidth = 1
@@ -187,7 +239,47 @@ class FactoryDetailSceneController: UIViewController,  UITableViewDataSource, UI
         scene.scaleMode = .aspectFill
         SKview.presentScene(scene)
     }
-    
+    func buttonIsEnable(){
+        purchaseButton.backgroundColor = .gray
+        purchaseButton.isUserInteractionEnabled = false
+    }
+    func buttonIsNotEnable(){
+        purchaseButton.backgroundColor = UIColor(named: "actionColor1")
+        purchaseButton.isUserInteractionEnabled = true
+    }
+    @objc func loadPlayerCurrencies() {
+        mainCurrencyLabel.text = doubleToString(value: GameScene.user?.mainCurrency ?? 0.0)
+        premiumCurrencyLabel.text = doubleToString(value: GameScene.user?.premiumCurrency ?? 0.0)
+        
+        var resourceArray: [Resource] = []
+        var price = 0.0
+        for n in 0..<(FactoryDetailSceneController.generator!.resourcesArray.count) {
+            resourceArray.append((FactoryDetailSceneController.generator!.resourcesArray[n]))
+            price += resourceArray[n].currentPrice
+        }
+        
+        if !FactoryDetailSceneController.isBlue {
+            priceValue.text = "\(doubleToString(value: FactoryDetailSceneController.offer!.price))"
+            if FactoryDetailSceneController.generator?.type == .NFT{
+                if GameScene.user!.premiumCurrency >= FactoryDetailSceneController.offer!.price{
+                    buttonIsNotEnable()
+                }
+            }
+            else{
+                if GameScene.user!.mainCurrency >= FactoryDetailSceneController.offer!.price{
+                    buttonIsNotEnable()
+                }
+            }
+            
+        }
+        else {
+            priceValue.text = "\(doubleToString(value: price))"
+            if GameScene.user!.mainCurrency >= price {
+                buttonIsNotEnable()
+            }
+        }
+        
+    }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if let generator = FactoryDetailSceneController.generator {
@@ -202,9 +294,10 @@ class FactoryDetailSceneController: UIViewController,  UITableViewDataSource, UI
         if let generator = FactoryDetailSceneController.generator {
             let resource =  generator.resourcesArray[indexPath.row]
             let qtd = (resource.qttPLevel * Double(resource.currentLevel)) + resource.baseQtt
-            cell.name.text = "\(doubleToString(value: qtd)) \(resource.type.description)/s"
-            cell.price.text = "\(doubleToString(value: resource.perSec))/s"
-            cell.imageInCell.image = UIImage(named: getResourceImageName(resource: resource.type))
+            cell.name.text = "\(doubleToStringAsInt(value: qtd)) \(resource.type.description)/s - \(NSLocalizedString("level", comment: "")): \(resource.currentLevel)"
+            cell.price.text = "\(doubleToStringAsInt(value: resource.perSec))/s"
+            cell.imageInCell.image = UIImage(systemName: getResourceImageName(resource: resource.type))
+            cell.imageInCell.image?.withTintColor(.black)
             
             
         }

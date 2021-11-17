@@ -68,10 +68,11 @@
 //MARK: - Upgrade Screen
 "MoveToInventory" = "Move to inventory";
 "ChangeFactory" = "Change factory";
+"level" = "level";
 
 
 //MARK: - WelcomeBack PopUp
-"YouWon" = "You Won";
+"YouWon" = "You won";
 "OutOfTown" = "while you were out of town";
 "ok" = "Ok!";
 "Price" = "Price";
@@ -98,9 +99,18 @@
 
 
 //MARK: - Settings
-"resetButtonLabelText" = "Reset personal informations";
+"SettingHeader" = "Settings";
 "SongLabel" = "Song";
 "SoundEffectsLabel" = "Sound effects";
-"confirmButtonSettings" = "Reset";
-"cancelButtonSettings" = "Cancel";
-"confirmResetTitle" = "Clearing your personal data will change your username, do you want to continue?";
+"NameLabel" = "Name";
+"ResetPersonalDataLabel" = "Reset personal informations";
+"ConfirmResetQuestionTitle" = "Clearing your personal data will change your username, do you want to continue?";
+"CancelResetAction" = "Cancel";
+"ConfirmResetAction" = "Reset";
+
+
+//MARK: - Onboarding
+"Onboarding1" = "Acquire factories to increase your park";
+"Onboarding2" = "Upgrade your factories to produce more products";
+"Onboarding3" = "Acquire premium factories to unlock exclusive perks";
+"startPlaying" = "Start Playing";
