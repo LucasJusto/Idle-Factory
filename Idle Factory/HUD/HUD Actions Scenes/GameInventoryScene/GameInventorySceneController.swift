@@ -189,6 +189,7 @@ class GameInventorySceneController: UIViewController {
      Close Inventory scene.
      */
     @IBAction func closeInventory(_ sender: Any) {
+        GameSound.shared.playSoundFXIfActivated(sound: .BUTTON_CLICK)
         self.view.window!.rootViewController?.dismiss(animated: false, completion: nil)
     }
     
@@ -197,6 +198,7 @@ class GameInventorySceneController: UIViewController {
      Go to shop to purchase a factory.
      */
     @IBAction func goToShop(_ sender: Any) {
+        GameSound.shared.playSoundFXIfActivated(sound: .BUTTON_CLICK)
         let mainView = UIStoryboard(name: "GameShopScene", bundle: nil)
         let viewcontroller : UIViewController = mainView.instantiateViewController(withIdentifier: "ShopStoryboard") as UIViewController
         self.present(viewcontroller, animated: false)
@@ -207,6 +209,7 @@ class GameInventorySceneController: UIViewController {
      Modal message of Quick sell is displayed. Quick Sell is a way to earn main currency quickly. The gaining is calculated by 50% of the price paid for the generator.
      */
     @IBAction func quickSellModal(_ sender: Any) {
+        GameSound.shared.playSoundFXIfActivated(sound: .BUTTON_CLICK)
         hideQuickSellModal(status: false)
         quickSellEarningLabel.text = "\(calculateQuickSell(factory: selectedFactory!))"
     }
@@ -216,6 +219,7 @@ class GameInventorySceneController: UIViewController {
      Cancel the quick sell action.
      */
     @IBAction func cancelQuickSell(_ sender: Any) {
+        GameSound.shared.playSoundFXIfActivated(sound: .BUTTON_CLICK)
         hideQuickSellModal(status: true)
     }
     
@@ -224,6 +228,7 @@ class GameInventorySceneController: UIViewController {
      Confirm the quick sell action. Player lose the generator and cannot be recovered.
      */
     @IBAction func confirmQuickSell(_ sender: Any) {
+        GameSound.shared.playSoundFXIfActivated(sound: .BUTTON_CLICK)
         if let factory = selectedFactory, let factoryIndex = selectedFactoryIndex, let factoryIndex2 = selectedFactoryIndex2 {
             hideQuickSellModal(status: true)
             DispatchQueue.global().async {
@@ -271,6 +276,7 @@ class GameInventorySceneController: UIViewController {
      Insert a factory from the Inventory to park. Turn the factory as active to generate resource to the Idle game.
      */
     func insertOnPark() {
+        GameSound.shared.playSoundFXIfActivated(sound: .BUTTON_CLICK)
         if let factory = selectedFactory, let factoryIndex = selectedFactoryIndex {
             factory.isActive = .yes
             factory.position = clickedSlotPosition
@@ -366,7 +372,8 @@ class GameInventorySceneController: UIViewController {
      This function opens a box where the user will select the value he wants to advertise the generator on the marketplace. After selecting the value, he can confirm the announce or cancel.
      */
     func openBoxToSetValue() {
-        
+            GameSound.shared.playSoundFXIfActivated(sound: .BUTTON_CLICK)
+
             guard let myFactoriesSell = GameScene.user?.generators,
                   !myFactoriesSell.isEmpty
                 else {
@@ -430,7 +437,7 @@ extension GameInventorySceneController: UICollectionViewDelegateFlowLayout {
     
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        
+        GameSound.shared.playSoundFXIfActivated(sound: .BUTTON_CLICK)
         guard let cell = collectionView.cellForItem(at: indexPath) as? GameInventoryViewCell else { return }
                 cell.layer.borderWidth = 2
                 cell.layer.borderColor = UIColor.black.cgColor

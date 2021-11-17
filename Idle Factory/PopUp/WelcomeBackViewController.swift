@@ -37,6 +37,7 @@ class WelcomeBackViewController: UIViewController {
         okButton.titleLabel?.font = UIFont(name: "AustralSlabBlur-Regular", size: 13)
     }
     @IBAction func closePopUp(_ sender: Any) {
+        GameSound.shared.playSoundFXIfActivated(sound: .BUTTON_CLICK)
         self.view.window!.rootViewController?.dismiss(animated: false, completion: nil)
     }
 }

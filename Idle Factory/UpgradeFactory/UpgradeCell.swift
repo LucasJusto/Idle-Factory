@@ -16,6 +16,8 @@ class UpgradeCell: UITableViewCell {
     @IBOutlet weak var qtdPerSec: UILabel!
     @IBOutlet weak var resourceNameAndQtdPerSec: UILabel!
     @IBAction func UpgradeAction(_ sender: Any) {
+        GameSound.shared.playSoundFXIfActivated(sound: .UPGRADE)
+
         var value = (generator?.resourcesArray[thisResourceID].currentPrice ?? 0) * (generator?.resourcesArray[thisResourceID].pricePLevelIncreaseTax ?? 0)
        
         if(value <= GameScene.user!.mainCurrency) {

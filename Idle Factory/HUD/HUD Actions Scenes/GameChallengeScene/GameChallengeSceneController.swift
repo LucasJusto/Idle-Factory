@@ -38,6 +38,7 @@ class GameChallengeSceneController: UIViewController {
      Close Challenge scene.
      */
     @IBAction func closeChallenge(_ sender: Any) {
+        GameSound.shared.playSoundFXIfActivated(sound: .BUTTON_CLICK)
         self.view.window!.rootViewController?.dismiss(animated: false, completion: nil)
     }
     

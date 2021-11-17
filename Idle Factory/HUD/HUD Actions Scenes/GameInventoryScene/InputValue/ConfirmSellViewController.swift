@@ -19,10 +19,12 @@ class ConfirmSellViewController: UIViewController {
     @IBOutlet weak var typeOfMoneyImage: UIImageView!
     
     @IBAction func confirmSellButton(_ sender: Any) {
+        GameSound.shared.playSoundFXIfActivated(sound: .BUTTON_CLICK)
         delegate?.confirmSell()
     }
     
     @IBAction func cancellButton(_ sender: Any) {
+        GameSound.shared.playSoundFXIfActivated(sound: .BUTTON_CLICK)
         self.dismiss(animated: false, completion: nil)
     }
     

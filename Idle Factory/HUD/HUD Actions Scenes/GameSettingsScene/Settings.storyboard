@@ -32,7 +32,7 @@
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" verticalCompressionResistancePriority="751" text="Sound effects" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zQ9-ke-i0M">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" verticalCompressionResistancePriority="751" text="Sound effects" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zQ9-ke-i0M">
                                 <rect key="frame" x="302" y="191.66666666666666" width="149" height="24"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="24" id="WBA-eP-4Mc"/>
@@ -76,7 +76,7 @@
                                     <constraint firstAttribute="width" constant="24" id="cUl-Sy-Ngf"/>
                                 </constraints>
                             </view>
-                            <segmentedControl hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="1" translatesAutoresizingMaskIntoConstraints="NO" id="yZK-mR-B1Q">
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="1" translatesAutoresizingMaskIntoConstraints="NO" id="yZK-mR-B1Q">
                                 <rect key="frame" x="475" y="188" width="77" height="32"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
@@ -188,7 +188,9 @@
                         <outlet property="resetButton" destination="ClK-au-9Sw" id="fWx-Y0-I5H"/>
                         <outlet property="settingsHeader" destination="or0-wz-3Tg" id="dCF-yR-WBa"/>
                         <outlet property="songLabel" destination="aAX-H7-jZG" id="KWr-Qa-Poh"/>
+                        <outlet property="songSegmentedControl" destination="6Y1-l8-e0D" id="LAs-p2-M9I"/>
                         <outlet property="soundEffectsLabel" destination="zQ9-ke-i0M" id="qbJ-0b-h2w"/>
+                        <outlet property="soundFXSegmentedControl" destination="yZK-mR-B1Q" id="6xb-He-C5n"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

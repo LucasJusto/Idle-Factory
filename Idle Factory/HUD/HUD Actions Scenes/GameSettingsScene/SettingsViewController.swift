@@ -17,6 +17,10 @@ class SettingsViewController: UIViewController, ResetPersonalData {
     @IBOutlet weak var playerNameLabel: UILabel!
     @IBOutlet weak var resetButton: UIButton!
     
+    // MARK: - SEGMENTED CONTROL
+    @IBOutlet weak var songSegmentedControl: UISegmentedControl!
+    @IBOutlet weak var soundFXSegmentedControl: UISegmentedControl!
+    
     
     // MARK: - INIT
     override func viewDidLoad() {
@@ -24,6 +28,18 @@ class SettingsViewController: UIViewController, ResetPersonalData {
         
         loadOutletCustomizations()
         loadCustomFont()
+        
+        if GameSound.shared.backgroundMusicStatus {
+            songSegmentedControl.selectedSegmentIndex = 1
+        } else {
+            songSegmentedControl.selectedSegmentIndex = 0
+        }
+        
+        if GameSound.shared.soundFXStatus {
+            soundFXSegmentedControl.selectedSegmentIndex = 1
+        } else {
+            soundFXSegmentedControl.selectedSegmentIndex = 0
+        }
         
         // Setting Header
         settingsHeader.text = NSLocalizedString("SettingHeader", comment: "")
@@ -61,6 +77,7 @@ class SettingsViewController: UIViewController, ResetPersonalData {
      Close Inventory scene.
      */
     @IBAction func closeSettings(_ sender: Any) {
+        GameSound.shared.playSoundFXIfActivated(sound: .BUTTON_CLICK)
         self.dismiss(animated: false, completion: nil)
     }
     
@@ -77,7 +94,7 @@ class SettingsViewController: UIViewController, ResetPersonalData {
             GameSound.shared.startBackgroundMusic()
             GameSound.shared.saveBackgroundMusicSettings(status: true)
         default:
-            print("default")
+            break
         }
     }
     
@@ -88,13 +105,13 @@ class SettingsViewController: UIViewController, ResetPersonalData {
     @IBAction func SoundEffectsSegmentedControl(_ sender: UISegmentedControl) {
         switch sender.selectedSegmentIndex {
         case 0:
-            print("turn off SFX")
-            
+            GameSound.shared.playSoundFXIfActivated(sound: .DEACTIVATE_BUTTON)
+            GameSound.shared.saveSoundFXSettings(status: false)
         case 1:
-            print("turn on SFX")
-            
+            GameSound.shared.saveSoundFXSettings(status: true)
+
         default:
-            print("default")
+            break
         }
     }
     

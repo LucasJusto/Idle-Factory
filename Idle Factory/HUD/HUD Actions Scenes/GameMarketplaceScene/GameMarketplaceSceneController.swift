@@ -127,6 +127,7 @@ class GameMarketplaceSceneController: UIViewController, NavigationCellDelegate {
      Close Marketplace scene.
      */
     @IBAction func closeMarketplace(_ sender: Any) {
+        GameSound.shared.playSoundFXIfActivated(sound: .BUTTON_CLICK)
         self.view.window!.rootViewController?.dismiss(animated: false, completion: nil)
     }
     
@@ -135,6 +136,7 @@ class GameMarketplaceSceneController: UIViewController, NavigationCellDelegate {
      Call player inventory scene if clicks to sell a item.
      */
     @IBAction func displayInventory(_ sender: Any) {
+        GameSound.shared.playSoundFXIfActivated(sound: .BUTTON_CLICK)
         var mainView: UIStoryboard!
         mainView = UIStoryboard(name: "GameInventoryScene", bundle: nil)
         let viewcontroller : UIViewController = mainView.instantiateViewController(withIdentifier: "InventoryStoryboard") as UIViewController
@@ -146,6 +148,7 @@ class GameMarketplaceSceneController: UIViewController, NavigationCellDelegate {
      Call player announce scene.
      */
     @IBAction func displayMyAnnounces(_ sender: Any) {
+        GameSound.shared.playSoundFXIfActivated(sound: .BUTTON_CLICK)
         var mainView: UIStoryboard!
         mainView = UIStoryboard(name: "GameMarketplaceScene", bundle: nil)
         let viewcontroller : UIViewController = mainView.instantiateViewController(withIdentifier: "AnnounceStoryboard") as UIViewController
@@ -176,6 +179,7 @@ class GameMarketplaceSceneController: UIViewController, NavigationCellDelegate {
     
     
     func didButtonPressed() {
+        GameSound.shared.playSoundFXIfActivated(sound: .BUTTON_CLICK)
         var mainView: UIStoryboard!
         mainView = UIStoryboard(name: "FactoryDetailScene", bundle: nil)
         let viewcontroller : UIViewController = mainView.instantiateViewController(withIdentifier: "FactoryDetailScene") as UIViewController

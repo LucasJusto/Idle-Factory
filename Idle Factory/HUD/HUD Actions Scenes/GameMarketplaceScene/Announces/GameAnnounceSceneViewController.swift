@@ -84,6 +84,7 @@ class GameAnnounceSceneViewController: UIViewController {
      Return to Marketplace scene.
      */
     @IBAction func returnToMarketplace(_ sender: Any) {
+        GameSound.shared.playSoundFXIfActivated(sound: .BUTTON_CLICK)
         self.dismiss(animated: false, completion: nil)
     }
     

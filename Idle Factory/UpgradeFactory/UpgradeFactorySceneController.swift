@@ -11,6 +11,7 @@ import SpriteKit
 class UpgradeFactorySceneController: UIViewController,  UITableViewDataSource, UITableViewDelegate {
     
     @IBAction func close(_ sender: Any) {
+        GameSound.shared.playSoundFXIfActivated(sound: .BUTTON_CLICK)
         self.dismiss(animated: false, completion: nil)
     }
     @IBOutlet weak var SKView: SKView!
@@ -50,6 +51,7 @@ class UpgradeFactorySceneController: UIViewController,  UITableViewDataSource, U
      Move a active factory of the GameScene to the Inventory.
      */
     @IBAction func moveToInventory(_ sender: Any) {
+        GameSound.shared.playSoundFXIfActivated(sound: .BUTTON_CLICK)
         if let factory = UpgradeFactorySceneController.generator {
             let position = factory.position
             factory.position = .none

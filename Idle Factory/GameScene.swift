@@ -439,6 +439,7 @@ class GameScene: SKScene {
      Display game Settings.
      */
     func displaySettings() {
+        GameSound.shared.playSoundFXIfActivated(sound: .BUTTON_CLICK)
         let viewController = UIApplication.shared.windows.first!.rootViewController as! GameViewController
         viewController.displaySettings()
     }
@@ -448,6 +449,7 @@ class GameScene: SKScene {
      Display player inventory.
      */
     func displayInventory() {
+        GameSound.shared.playSoundFXIfActivated(sound: .BUTTON_CLICK)
         let viewController = UIApplication.shared.windows.first!.rootViewController as! GameViewController
         viewController.displayInventory()
     }
@@ -457,6 +459,7 @@ class GameScene: SKScene {
      Display in-game shop.
      */
     func displayShop() {
+        GameSound.shared.playSoundFXIfActivated(sound: .BUTTON_CLICK)
         let viewController = UIApplication.shared.windows.first!.rootViewController as! GameViewController
         viewController.displayShop()
     }
@@ -466,6 +469,7 @@ class GameScene: SKScene {
      Display marketplace.
      */
     func displayMarketplace() {
+        GameSound.shared.playSoundFXIfActivated(sound: .BUTTON_CLICK)
         let viewController = UIApplication.shared.windows.first!.rootViewController as! GameViewController
         viewController.displayMarketplace()
     }
@@ -475,6 +479,7 @@ class GameScene: SKScene {
      Display challenge.
      */
     func displayChallenge() {
+        GameSound.shared.playSoundFXIfActivated(sound: .BUTTON_CLICK)
         let viewController = UIApplication.shared.windows.first!.rootViewController as! GameViewController
         viewController.displayChallenge()
     }
