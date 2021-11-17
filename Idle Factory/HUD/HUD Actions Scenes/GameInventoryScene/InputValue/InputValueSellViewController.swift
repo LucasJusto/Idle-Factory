@@ -11,7 +11,12 @@ class InputValueSellViewController: UIViewController, ComeBackData, ConfirmSell{
     
     var factory: Factory?
     var typeOfMoney: CurrencyType = .basic
-    var valueSell: Double = 0
+    var valueSell: Double = 0 {
+        didSet {
+            let backgroundColor: UIColor = valueSell.isZero ? UIColor(named:"deactivatedActionColor1")! : UIColor(named:"actionColor1")!
+            confirmButton.backgroundColor = backgroundColor
+        }
+    }
     weak var delegate: RefreshInventory?
     
     func confirmSell() {
@@ -59,7 +64,12 @@ class InputValueSellViewController: UIViewController, ComeBackData, ConfirmSell{
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var backgroundView: UIView!
     @IBOutlet weak var cancelButton: UIButton!
-    @IBOutlet weak var confirmButton: UIButton!
+    @IBOutlet weak var confirmButton: UIButton! {
+        didSet {
+            let backgroundColor: UIColor = valueSell.isZero ? UIColor(named:"deactivatedActionColor1")! : UIColor(named:"actionColor1")!
+            confirmButton.backgroundColor = backgroundColor
+        }
+    }
     @IBOutlet var buttons: [UIButton]!
     
     // MARK: - BUTTONS THAT ADD VALUE
@@ -140,14 +150,18 @@ class InputValueSellViewController: UIViewController, ComeBackData, ConfirmSell{
         self.dismiss(animated: false, completion: nil)
     }
     @IBAction func confirmButton(_ sender: Any) {
-        GameSound.shared.playSoundFXIfActivated(sound: .BUTTON_CLICK)
-        if let infoViewController = storyboard?.instantiateViewController(identifier: "ConfirmSell") as? ConfirmSellViewController {
-            infoViewController.modalPresentationStyle = .overCurrentContext
-            infoViewController.delegate = self
-            infoViewController.value = valueSell
-            infoViewController.typeOfMoney = typeOfMoney
-            infoViewController.modalTransitionStyle = .crossDissolve
-            present(infoViewController, animated: true)
+        if valueSell.isZero {
+            GameSound.shared.playSoundFXIfActivated(sound: .DEACTIVATE_BUTTON)
+        } else {
+            GameSound.shared.playSoundFXIfActivated(sound: .BUTTON_CLICK)
+            if let infoViewController = storyboard?.instantiateViewController(identifier: "ConfirmSell") as? ConfirmSellViewController {
+                infoViewController.modalPresentationStyle = .overCurrentContext
+                infoViewController.delegate = self
+                infoViewController.value = valueSell
+                infoViewController.typeOfMoney = typeOfMoney
+                infoViewController.modalTransitionStyle = .crossDissolve
+                present(infoViewController, animated: true)
+            }
         }
     }
     
