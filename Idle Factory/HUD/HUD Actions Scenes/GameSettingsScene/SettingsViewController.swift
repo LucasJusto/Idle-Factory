@@ -120,6 +120,7 @@ class SettingsViewController: UIViewController, ResetPersonalData {
      Resets all personal informations allowed before by user.
      */
     @IBAction func resetPersonalInformation(_ sender: Any) {
+        GameSound.shared.playSoundFXIfActivated(sound: .BUTTON_CLICK)
         if let infoViewController = storyboard?.instantiateViewController(identifier: "ConfirmResetPersonalData") as? ConfirmResetPersonalDataViewController {
             infoViewController.modalPresentationStyle = .overCurrentContext
             infoViewController.delegate = self

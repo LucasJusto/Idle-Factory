@@ -7,17 +7,26 @@
 
 import AVFoundation
 
+/**
+ SoundFX. List of all sound effects of the game.
+ */
 enum SoundFX {
     case UPGRADE, BUTTON_CLICK, DEACTIVATE_BUTTON;
 }
 
+
+/**
+ Class responsible to manage all the audio of the game.
+ */
 class GameSound {
     static let shared = GameSound()
     private(set) var backgroundMusicStatus = UserDefaults.standard.bool(forKey: "background-music")
     private(set) var soundFXStatus = UserDefaults.standard.bool(forKey: "sound-effects")
-    private(set) var audioPlayer: AVAudioPlayer?
+    private(set) var soundFXPlayer: AVAudioPlayer?
+    private(set) var musicPlayer: AVAudioPlayer?
 
     
+    // MARK: - BACKGROUND MUSIC
     /**
      Start playing backbround music.
      */
@@ -25,8 +34,8 @@ class GameSound {
         if let bundle = Bundle.main.path(forResource: "bkg_music", ofType: "mp3") {
             let backgroundMusic = NSURL(fileURLWithPath: bundle)
             do {
-                audioPlayer = try AVAudioPlayer(contentsOf:backgroundMusic as URL)
-                guard let audioPlayer = audioPlayer else { return }
+                musicPlayer = try AVAudioPlayer(contentsOf:backgroundMusic as URL)
+                guard let audioPlayer = musicPlayer else { return }
                 audioPlayer.numberOfLoops = -1
                 audioPlayer.prepareToPlay()
                 audioPlayer.play()
@@ -41,11 +50,12 @@ class GameSound {
      Stop playing background music
      */
     func stopBackgroundMusic() {
-        guard let audioPlayer = audioPlayer else { return }
+        guard let audioPlayer = soundFXPlayer else { return }
         audioPlayer.stop()
     }
     
     
+    // MARK: - SOUND FX
     /**
      Play a sound effect based on what is received as argument.
      */
@@ -53,49 +63,36 @@ class GameSound {
         if soundFXStatus {
             switch sound {
             case .UPGRADE:
-                if let bundle = Bundle.main.path(forResource: "upgrade", ofType: "mp3") {
-                    let upgradeSound = NSURL(fileURLWithPath: bundle)
-                    do {
-                        audioPlayer = try AVAudioPlayer(contentsOf:upgradeSound as URL)
-                        guard let audioPlayer = audioPlayer else { return }
-                        audioPlayer.numberOfLoops = 0
-                        audioPlayer.prepareToPlay()
-                        audioPlayer.play()
-                    } catch {
-                        print(error)
-                    }
-                }
+                playFXAudio(filename: "upgrade")
             case .BUTTON_CLICK:
-                if let bundle = Bundle.main.path(forResource: "clicked_button", ofType: "mp3") {
-                    let clickButton = NSURL(fileURLWithPath: bundle)
-                    do {
-                        audioPlayer = try AVAudioPlayer(contentsOf:clickButton as URL)
-                        guard let audioPlayer = audioPlayer else { return }
-                        audioPlayer.numberOfLoops = 0
-                        audioPlayer.prepareToPlay()
-                        audioPlayer.play()
-                    } catch {
-                        print(error)
-                    }
-                }
+                playFXAudio(filename: "clicked_button")
             case .DEACTIVATE_BUTTON:
-                if let bundle = Bundle.main.path(forResource: "deactivated_button", ofType: "mp3") {
-                    let deactivateButton = NSURL(fileURLWithPath: bundle)
-                    do {
-                        audioPlayer = try AVAudioPlayer(contentsOf:deactivateButton as URL)
-                        guard let audioPlayer = audioPlayer else { return }
-                        audioPlayer.numberOfLoops = 0
-                        audioPlayer.prepareToPlay()
-                        audioPlayer.play()
-                    } catch {
-                        print(error)
-                    }
-                }
+                playFXAudio(filename: "deactivated_button")
             }
         }
     }
     
     
+    /**
+     Play an Sound FX based on the filename received as argument.
+     */
+    func playFXAudio(filename: String) {
+        if let bundle = Bundle.main.path(forResource: "\(filename)", ofType: "mp3") {
+            let audio = NSURL(fileURLWithPath: bundle)
+            do {
+                soundFXPlayer = try AVAudioPlayer(contentsOf: audio as URL)
+                guard let audioPlayer = soundFXPlayer else { return }
+                audioPlayer.numberOfLoops = 0
+                audioPlayer.prepareToPlay()
+                audioPlayer.play()
+            } catch {
+                print(error)
+            }
+        }
+    }
+    
+    
+    // MARK: - SAVE SETTINGS
     /**
      Save background music settings status.
      */
@@ -115,11 +112,10 @@ class GameSound {
     
     
     func isPlaying() -> Bool {
-        if let audioStatus = audioPlayer?.isPlaying {
+        if let audioStatus = soundFXPlayer?.isPlaying {
             return audioStatus
         } else {
             return false
         }
     }
-    
 }

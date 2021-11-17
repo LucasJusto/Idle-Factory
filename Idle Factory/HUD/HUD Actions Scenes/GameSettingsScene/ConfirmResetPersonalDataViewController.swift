@@ -57,6 +57,7 @@ class ConfirmResetPersonalDataViewController: UIViewController {
      Cancel reset action.
      */
     @IBAction func cancelReset(_ sender: Any) {
+        GameSound.shared.playSoundFXIfActivated(sound: .BUTTON_CLICK)
         self.dismiss(animated: false, completion: nil)
     }
     
@@ -65,6 +66,7 @@ class ConfirmResetPersonalDataViewController: UIViewController {
      Confirm reset data.
      */
     @IBAction func confirmReset(_ sender: Any) {
+        GameSound.shared.playSoundFXIfActivated(sound: .BUTTON_CLICK)
         delegate?.resetPersonalData()
     }
 }
