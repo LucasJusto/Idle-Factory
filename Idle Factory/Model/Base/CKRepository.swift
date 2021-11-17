@@ -212,7 +212,7 @@ public class CKRepository {
                     let id: String = offer.recordID.recordName
                     let sellerID: String = offer.value(forKey: MarketTable.sellerID.description) as? String ?? ""
                     let generatorID: String = offer.value(forKey: MarketTable.generatorID.description) as? String ?? ""
-                    let buyerID: String = offer.value(forKey: MarketTable.sellerID.description) as? String ?? ""
+                    let buyerID: String = offer.value(forKey: MarketTable.buyerID.description) as? String ?? ""
                     let price: Double = offer.value(forKey: MarketTable.price.description) as? Double ?? 0.0
                     let currencyTypeString: String = offer.value(forKey: MarketTable.currencyType.description) as? String ?? ""
                     let currencyType: CurrencyType = CurrencyType.getType(key: currencyTypeString)
@@ -474,6 +474,8 @@ public class CKRepository {
         publicDB.add(operation)
     }
     
+    
+    
     static func storeMarketPlaceOffer(sellerID: String, generatorID: String, currencyType: CurrencyType, price: Double, completion: @escaping(CKRecord?, Error?) -> Void){
         let publicDB = container.publicCloudDatabase
         let record = CKRecord(recordType: MarketTable.recordType.description)
@@ -582,6 +584,72 @@ public class CKRepository {
                     CKRepository.errorAlertHandler(CKErrorCode: ckError.code)
                 }
                 completion(savedRecords, error)
+            }
+            
+            publicDB.add(operation)
+        }
+    }
+    
+    static func redeemOfferPrice(offerID: String, completion: @escaping (Error?) -> Void) {
+        var recordsToEdit: [CKRecord] = []
+        var recordsToDelete: [CKRecord.ID] = []
+        let dispatchGroup = DispatchGroup()
+        var price: Double? = 0
+        var currencyType: CurrencyType? = .basic
+        
+        dispatchGroup.enter()
+        publicDB.fetch(withRecordID: CKRecord.ID(recordName: offerID)) { offer, error in
+            if let ckError = error as? CKError {
+                CKRepository.errorAlertHandler(CKErrorCode: ckError.code)
+            }
+            if let offer = offer {
+                price = offer.value(forKey: MarketTable.price.description) as? Double ?? 0
+                let currencyTypeString: String = offer.value(forKey: MarketTable.currencyType.description) as? String ?? ""
+                currencyType = CurrencyType.getType(key: currencyTypeString)
+                
+                if currencyType == .premium {
+                    GameScene.user!.addPremiumCurrency(value: price!)
+                }
+                else {
+                    GameScene.user?.addMainCurrency(value: price!)
+                }
+                recordsToDelete.append(offer.recordID)
+                dispatchGroup.leave()
+            }
+        }
+        
+        dispatchGroup.enter()
+        CKRepository.getUserId { id in
+            if let id = id {
+                publicDB.fetch(withRecordID: CKRecord.ID(recordName: id)) { user, error in
+                    if let ckError = error as? CKError {
+                        CKRepository.errorAlertHandler(CKErrorCode: ckError.code)
+                    }
+                    if let user = user {
+                        user.setObject(GameScene.user!.premiumCurrency as CKRecordValue?, forKey: UsersTable.premiumCurrency.description)
+                        user.setObject(GameScene.user!.mainCurrency as CKRecordValue?, forKey: UsersTable.mainCurrency.description)
+                        recordsToEdit.append(user)
+                        dispatchGroup.leave()
+                    }
+                }
+            }
+        }
+        dispatchGroup.notify(queue: .global()) {
+            let operation = CKModifyRecordsOperation(recordsToSave: recordsToEdit, recordIDsToDelete: recordsToDelete)
+            operation.savePolicy = .changedKeys
+            operation.modifyRecordsCompletionBlock = { savedRecords, _, error in
+                if let ckError = error as? CKError {
+                    CKRepository.errorAlertHandler(CKErrorCode: ckError.code)
+                }
+                if error != nil {
+                    if currencyType == .basic {
+                        GameScene.user!.removeMainCurrency(value: price!)
+                    }
+                    else {
+                        GameScene.user!.removePremiumCurrency(value: price!)
+                    }
+                }
+                completion(error)
             }
             
             

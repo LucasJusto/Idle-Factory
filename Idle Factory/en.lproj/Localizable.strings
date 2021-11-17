@@ -62,6 +62,7 @@
 "AboutAnnounceButton" = "See announce";
 "AnnounceInputPlaceholder" = "Type value";
 "EmptyAnnounceLabel" = "You do not have announces";
+"RedeemValueButton" = "Redeem";
 
 
 //MARK: - Upgrade Screen

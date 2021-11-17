@@ -31,14 +31,33 @@ class GameAnnounceViewCell: UICollectionViewCell {
     @IBOutlet weak var rightMargin: UIView!
     @IBOutlet weak var coinImage: UIImageView!
     @IBOutlet weak var priceLabel: UILabel!
+    var delegate: NavigationCellDelegate?
+    var delegate2: RefreshCollectionDelegate?
     
     // Button
     @IBOutlet weak var seeAnnounceButton: UIButton!
     
     
+    @IBAction func buttonCell(_ sender: Any) {
+        if offer?.buyerID == "none" {
+            //abrir tela de detalhes
+            FactoryDetailSceneController.isBlue = false
+            FactoryDetailSceneController.generator = myFactoryAnnounce
+            FactoryDetailSceneController.offer = offer
+            delegate?.didButtonPressed()
+        } else if offer?.isCollected == .no {
+            // resgata o dinheiro e tira o gerador dessa lista
+            CKRepository.redeemOfferPrice(offerID: offer!.id) { error in
+                if error == nil {
+                    self.delegate2?.refresh()
+                }
+            }
+        }
+    }
+    
     // MARK: - VARIABLES
     var myFactoryAnnounce: Factory?
-
+    var offer: Offer?
     
     // MARK: - CELL FUNCTIONS
     override func prepareForReuse() {
@@ -75,7 +94,13 @@ class GameAnnounceViewCell: UICollectionViewCell {
         priceLabel.font = UIFont(name: "AustralSlabBlur-Regular", size: 14)
         seeAnnounceButton.titleLabel?.font = UIFont(name: "AustralSlabBlur-Regular", size: 10)
         
-        seeAnnounceButton.setTitle(NSLocalizedString("AboutAnnounceButton", comment: ""), for: .normal)
+        if offer?.buyerID == "none" {
+            seeAnnounceButton.backgroundColor = UIColor(named: "actionColor1")
+            seeAnnounceButton.setTitle(NSLocalizedString("AboutNewFactoryButton", comment: ""), for: .normal)
+        } else if offer?.isCollected == .no {
+            seeAnnounceButton.backgroundColor = UIColor(named: "HudActions-background")
+            seeAnnounceButton.setTitle(NSLocalizedString("RedeemValueButton", comment: ""), for: .normal)
+        }
     }
     
     
@@ -83,6 +108,8 @@ class GameAnnounceViewCell: UICollectionViewCell {
      Pull purchasable factories to display on marketplace.
      */
     func pullMyAnnouncesFactories(factory: Factory, offer: Offer, premium: Bool) {
+        self.offer = offer
+        self.myFactoryAnnounce = factory
         let scene = FactoryScene(size: CGSize(width: 400, height: 400))
         scene.thisFactory = factory
         scene.thisYPosition = 12

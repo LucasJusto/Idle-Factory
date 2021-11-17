@@ -271,6 +271,7 @@
                                                     <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                                     <state key="normal" title="See more"/>
                                                     <connections>
+                                                        <action selector="buttonCell:" destination="cTY-oa-PUq" eventType="touchUpInside" id="zt2-UL-Vs5"/>
                                                         <action selector="seeMore:" destination="HPR-26-3fr" eventType="touchUpInside" id="kOa-9J-8NL"/>
                                                     </connections>
                                                 </button>
@@ -345,6 +346,7 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <exit id="cTY-oa-PUq" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="94.419642857142847" y="100.00000000000001"/>
         </scene>
@@ -557,6 +559,9 @@
                                                     <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                                     <state key="normal" title="See announce"/>
+                                                    <connections>
+                                                        <action selector="buttonCell:" destination="4cU-kW-R5j" eventType="touchUpInside" id="QVq-Zm-FdM"/>
+                                                    </connections>
                                                 </button>
                                             </subviews>
                                             <constraints>
