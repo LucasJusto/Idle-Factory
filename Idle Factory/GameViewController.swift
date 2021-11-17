@@ -63,7 +63,15 @@ class GameViewController: UIViewController {
             backgroundLoadingView.isHidden = true
             
             let viewController1 = UIApplication.shared.windows.first!.rootViewController as! GameViewController
-            viewController1.displayWelcomeBackPopUp()
+            if OnboardingManager.shared.isFirstLaunch {
+                var mainView: UIStoryboard!
+                mainView = UIStoryboard(name: "OnboardingScene", bundle: nil)
+                let viewcontroller : UIViewController = mainView.instantiateViewController(withIdentifier: "welcome") as UIViewController
+                self.present(viewcontroller, animated: false)
+                OnboardingManager.shared.isFirstLaunch = true
+               } else {
+                   viewController1.displayWelcomeBackPopUp()
+               }
         }
     }
     override var shouldAutorotate: Bool {
