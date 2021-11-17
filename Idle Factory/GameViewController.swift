@@ -64,6 +64,10 @@ class GameViewController: UIViewController {
             
             let viewController1 = UIApplication.shared.windows.first!.rootViewController as! GameViewController
             if OnboardingManager.shared.isFirstLaunch {
+                GameScene.user!.addMainCurrency(value: 10000)
+                GameScene.user!.addPremiumCurrency(value: 150)
+                CKRepository.storeUserData(id: GameScene.user!.id, name: GameScene.user!.name, mainCurrency: GameScene.user!.mainCurrency, premiumCurrency: GameScene.user!.premiumCurrency, timeLeftApp: nil) { _, _ in
+                }
                 var mainView: UIStoryboard!
                 mainView = UIStoryboard(name: "OnboardingScene", bundle: nil)
                 let viewcontroller : UIViewController = mainView.instantiateViewController(withIdentifier: "welcome") as UIViewController
