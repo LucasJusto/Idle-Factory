@@ -11,7 +11,15 @@ import SpriteKit
 /**
  Game Inventory scene controller. 
  */
-class GameInventorySceneController: UIViewController {
+class GameInventorySceneController: UIViewController, RefreshInventory{
+    func refresh() {
+        factoriesNotActive = getUserInventory()
+        DispatchQueue.main.async {
+            self.collectionView.reloadData()
+        }
+        
+    }
+    
     
     @IBOutlet weak var collectionView: UICollectionView!
     
@@ -374,6 +382,7 @@ class GameInventorySceneController: UIViewController {
             if let infoViewController = storyboard?.instantiateViewController(identifier: "InfoViewController") as? InputValueSellViewController {
                 infoViewController.modalPresentationStyle = .overCurrentContext
                 infoViewController.factory = factorySell
+                infoViewController.delegate = self
                 infoViewController.modalTransitionStyle = .crossDissolve
                 present(infoViewController, animated: true)
             }
@@ -586,4 +595,8 @@ final class CustomVisualEffectView: UIVisualEffectView {
     private let theEffect: UIVisualEffect
     private let customIntensity: CGFloat
     private var animator: UIViewPropertyAnimator?
+}
+
+protocol RefreshInventory: AnyObject {
+    func refresh()
 }
