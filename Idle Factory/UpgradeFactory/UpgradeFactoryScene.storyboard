@@ -23,14 +23,14 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nHu-41-Guf">
-                                <rect key="frame" x="357" y="96.5" width="1" height="221"/>
+                                <rect key="frame" x="357" y="96.5" width="1" height="256.5"/>
                                 <color key="backgroundColor" systemColor="labelColor"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="1" id="Dl2-61-unU"/>
                                 </constraints>
                             </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="GyE-cM-Qju">
-                                <rect key="frame" x="390" y="121" width="446" height="197"/>
+                                <rect key="frame" x="390" y="136" width="446" height="182"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="UpgradeCell" rowHeight="51" id="qXZ-UT-oyc" customClass="UpgradeCell" customModule="Idle_Factory" customModuleProvider="target">
@@ -85,7 +85,7 @@
                                                     </constraints>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="H08-tj-qib">
-                                                    <rect key="frame" x="127" y="14.5" width="34.5" height="16.5"/>
+                                                    <rect key="frame" x="127" y="16" width="34.5" height="14"/>
                                                     <fontDescription key="fontDescription" name="AustralSlabBlur-Regular" family="Austral Slab" pointSize="14"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -98,7 +98,7 @@
                                                     </constraints>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hfe-xt-dEg">
-                                                    <rect key="frame" x="190.5" y="16" width="29.5" height="14"/>
+                                                    <rect key="frame" x="190.5" y="17" width="29.5" height="12"/>
                                                     <fontDescription key="fontDescription" name="AustralSlabBlur-Regular" family="Austral Slab" pointSize="12"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -138,14 +138,14 @@
                                 </connections>
                             </button>
                             <skView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0Vy-77-CPo">
-                                <rect key="frame" x="134" y="99" width="156" height="168"/>
+                                <rect key="frame" x="134" y="109" width="156" height="168"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="168" id="NqI-U7-KwP"/>
                                     <constraint firstAttribute="width" constant="156" id="TYx-ma-W3j"/>
                                 </constraints>
                             </skView>
                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="9" translatesAutoresizingMaskIntoConstraints="NO" id="Tft-Z6-61q">
-                                <rect key="frame" x="93" y="287" width="240" height="27"/>
+                                <rect key="frame" x="93" y="297" width="240" height="27"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bOr-wD-CJg">
                                         <rect key="frame" x="0.0" y="0.0" width="115.5" height="27"/>
@@ -250,16 +250,16 @@
                             <constraint firstItem="Okw-57-4oq" firstAttribute="centerX" secondItem="5EZ-qb-Rvc" secondAttribute="centerX" id="0pn-Gf-sQN"/>
                             <constraint firstItem="nHu-41-Guf" firstAttribute="leading" secondItem="Tft-Z6-61q" secondAttribute="trailing" constant="24" id="E4Y-kF-XZq"/>
                             <constraint firstItem="3ax-gh-cGC" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" constant="41" id="IgE-x9-hU2"/>
-                            <constraint firstItem="nHu-41-Guf" firstAttribute="centerY" secondItem="5EZ-qb-Rvc" secondAttribute="centerY" id="Ji7-7C-Hlu"/>
                             <constraint firstItem="3ax-gh-cGC" firstAttribute="centerY" secondItem="Okw-57-4oq" secondAttribute="centerY" id="KkT-b5-IFX"/>
                             <constraint firstItem="Tft-Z6-61q" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="49" id="Vb6-RF-ywG"/>
-                            <constraint firstItem="GyE-cM-Qju" firstAttribute="top" secondItem="3ax-gh-cGC" secondAttribute="bottom" constant="35" id="bRz-kX-Stp"/>
+                            <constraint firstItem="GyE-cM-Qju" firstAttribute="top" secondItem="3ax-gh-cGC" secondAttribute="bottom" constant="50" id="bRz-kX-Stp"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="GyE-cM-Qju" secondAttribute="bottom" constant="75" id="lLw-DY-y6H"/>
                             <constraint firstItem="0Vy-77-CPo" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="90" id="rQt-a1-UWe"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="GyE-cM-Qju" secondAttribute="trailing" constant="16" id="rbp-cK-8br"/>
                             <constraint firstItem="Tft-Z6-61q" firstAttribute="top" secondItem="0Vy-77-CPo" secondAttribute="bottom" constant="20" id="swo-H1-yjd"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="3ax-gh-cGC" secondAttribute="trailing" constant="16" id="tCS-sh-je4"/>
-                            <constraint firstItem="0Vy-77-CPo" firstAttribute="top" secondItem="Okw-57-4oq" secondAttribute="bottom" constant="20" id="tOa-2d-O5Z"/>
+                            <constraint firstItem="0Vy-77-CPo" firstAttribute="top" secondItem="Okw-57-4oq" secondAttribute="bottom" constant="30" id="tOa-2d-O5Z"/>
+                            <constraint firstAttribute="bottomMargin" secondItem="nHu-41-Guf" secondAttribute="bottom" constant="40" id="uHQ-6N-H4J"/>
                             <constraint firstItem="nHu-41-Guf" firstAttribute="top" secondItem="5EZ-qb-Rvc" secondAttribute="topMargin" constant="96.5" id="uj7-39-inz"/>
                             <constraint firstItem="GyE-cM-Qju" firstAttribute="leading" secondItem="nHu-41-Guf" secondAttribute="trailing" constant="32" id="vFe-ol-LKo"/>
                         </constraints>

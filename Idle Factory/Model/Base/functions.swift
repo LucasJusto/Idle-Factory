@@ -81,12 +81,6 @@ func checkMyOffers(semaphore: DispatchSemaphore){
                         if generator.id == offer.generatorID {
                             if offer.buyerID != "none" {
                                 if myGeneratorsIDs.contains(generator.id) {
-                                    if offer.currencyType == .premium {
-                                        GameScene.user!.addPremiumCurrency(value: offer.price)
-                                    }
-                                    else {
-                                        GameScene.user!.addMainCurrency(value: offer.price)
-                                    }
                                     generatorsToDelete.append(generator)
                                 }
                             }
