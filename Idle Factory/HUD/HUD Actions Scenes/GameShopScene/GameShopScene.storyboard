@@ -211,7 +211,7 @@
                                                             </constraints>
                                                         </stackView>
                                                         <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="59d-PJ-HhZ">
-                                                            <rect key="frame" x="25" y="151" width="81" height="18"/>
+                                                            <rect key="frame" x="32.5" y="151" width="66.5" height="18"/>
                                                             <subviews>
                                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Coin" translatesAutoresizingMaskIntoConstraints="NO" id="rLh-s4-yYu">
                                                                     <rect key="frame" x="0.0" y="0.0" width="26" height="18"/>
@@ -221,7 +221,7 @@
                                                                     </constraints>
                                                                 </imageView>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XDh-yI-08t">
-                                                                    <rect key="frame" x="31" y="0.5" width="50" height="17"/>
+                                                                    <rect key="frame" x="31" y="0.5" width="35.5" height="17"/>
                                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                                     <nil key="textColor"/>
                                                                     <nil key="highlightedColor"/>
@@ -240,11 +240,11 @@
                                                         <constraint firstItem="tlx-zL-UGs" firstAttribute="leading" secondItem="Wwu-mR-IIJ" secondAttribute="leading" constant="8" id="JI2-0h-zFZ"/>
                                                         <constraint firstAttribute="bottom" secondItem="59d-PJ-HhZ" secondAttribute="bottom" constant="16" id="NCn-vs-4Mi"/>
                                                         <constraint firstItem="FUv-rU-gcX" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="Wwu-mR-IIJ" secondAttribute="leading" constant="10" id="PWk-XH-ImW"/>
-                                                        <constraint firstItem="59d-PJ-HhZ" firstAttribute="leading" secondItem="Wwu-mR-IIJ" secondAttribute="leading" constant="25" id="VWm-mA-yyS"/>
+                                                        <constraint firstItem="59d-PJ-HhZ" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="Wwu-mR-IIJ" secondAttribute="leading" constant="10" id="VWm-mA-yyS"/>
                                                         <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="FUv-rU-gcX" secondAttribute="trailing" constant="10" id="a0c-m1-KAH"/>
                                                         <constraint firstItem="59d-PJ-HhZ" firstAttribute="centerX" secondItem="Wwu-mR-IIJ" secondAttribute="centerX" id="fpI-sw-HHn"/>
                                                         <constraint firstItem="FUv-rU-gcX" firstAttribute="centerX" secondItem="Wwu-mR-IIJ" secondAttribute="centerX" id="iq2-VP-Xvb"/>
-                                                        <constraint firstAttribute="trailing" secondItem="59d-PJ-HhZ" secondAttribute="trailing" constant="25" id="jbO-QK-vUJ"/>
+                                                        <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="59d-PJ-HhZ" secondAttribute="trailing" constant="10" id="jbO-QK-vUJ"/>
                                                         <constraint firstItem="59d-PJ-HhZ" firstAttribute="top" secondItem="FUv-rU-gcX" secondAttribute="bottom" constant="13" id="lcb-IK-15V"/>
                                                     </constraints>
                                                 </view>

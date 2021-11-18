@@ -18,6 +18,7 @@ class FactoryDetailSceneController: UIViewController,  UITableViewDataSource, UI
     @IBOutlet weak var priceStack: UIStackView!
     @IBOutlet var mainView: UIView!
     @IBOutlet weak var view2: UIView!
+    @IBOutlet weak var view3: UIView!
     
     @IBOutlet weak var SKview: SKView!
     static var generator: Factory? = nil
@@ -137,6 +138,8 @@ class FactoryDetailSceneController: UIViewController,  UITableViewDataSource, UI
         super.viewDidLoad()
         tableView.dataSource = self
         tableView.delegate = self
+        
+        view3.backgroundColor = UIColor(named: FactoryDetailSceneController.isBlue ? "HudActions-background" : "Marketplace_background")
         
         timeToRefreshCurrency = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(loadPlayerCurrencies), userInfo: nil, repeats: true)
         
