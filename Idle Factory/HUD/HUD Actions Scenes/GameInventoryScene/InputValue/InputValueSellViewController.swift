@@ -9,6 +9,7 @@ import UIKit
 
 class InputValueSellViewController: UIViewController, ComeBackData, ConfirmSell{
     
+    var index: Int?
     var factory: Factory?
     var typeOfMoney: CurrencyType = .basic
     var valueSell: Double = 0 {
@@ -34,11 +35,11 @@ class InputValueSellViewController: UIViewController, ComeBackData, ConfirmSell{
                                 }
                             }
                             GameScene.user!.generators[index].isOffer = IsOffer.yes
-                            self.delegate?.refresh()
+                            self.delegate?.refresh(index: self.index!)
                             CKRepository.editGenerators(userID: id, generators: GameScene.user!.generators) { _, error in
                                 if error != nil {
                                     GameScene.user!.generators[index].isOffer = IsOffer.no
-                                    self.delegate?.refresh()
+                                    self.delegate?.refresh(index: self.index!)
                                     CKRepository.deleteMarketPlaceOffer(offerID: savedRecord?.recordID.recordName ?? "", completion: { deletedRecord, error in
                                         
                                     })

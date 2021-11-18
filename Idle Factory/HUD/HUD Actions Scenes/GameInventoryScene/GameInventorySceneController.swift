@@ -11,11 +11,13 @@ import SpriteKit
 /**
  Game Inventory scene controller. 
  */
-class GameInventorySceneController: UIViewController, RefreshInventory{
-    func refresh() {
+class GameInventorySceneController: UIViewController, RefreshInventory {
+    
+    func refresh(index:Int) {
         factoriesNotActive = getUserInventory()
         DispatchQueue.main.async {
             self.collectionView.reloadData()
+            //self.deselectCell(indexPath: IndexPath(row: index, section: 0))
         }
         
     }
@@ -101,6 +103,10 @@ class GameInventorySceneController: UIViewController, RefreshInventory{
     // MARK: - INIT
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+//        if let inventoryViewController = storyboard?.instantiateViewController(identifier: "HowMuch") as? InputValueSellViewController {
+//            inventoryViewController.delegate2
+//        }
         
         collectionView.dataSource = self
         collectionView.delegate = self
@@ -394,6 +400,7 @@ class GameInventorySceneController: UIViewController, RefreshInventory{
                 infoViewController.modalPresentationStyle = .overCurrentContext
                 infoViewController.factory = factorySell
                 infoViewController.delegate = self
+                infoViewController.index = selected
                 infoViewController.modalTransitionStyle = .crossDissolve
                 present(infoViewController, animated: true)
             }
@@ -625,5 +632,5 @@ final class CustomVisualEffectView: UIVisualEffectView {
 }
 
 protocol RefreshInventory: AnyObject {
-    func refresh()
+    func refresh(index:Int)
 }
