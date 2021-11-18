@@ -72,7 +72,12 @@ func checkMyOffers(semaphore: DispatchSemaphore){
                 offer.generatorID
             }
             CKRepository.getGeneratorsByIDs(generatorsIDs: generatorsIDs) { generators in
-                let myGeneratorsIDs = GameScene.user!.generators.map { generator in
+                guard let user = GameScene.user
+                else {
+                    semaphore.signal()
+                    return
+                }
+                let myGeneratorsIDs = user.generators.map { generator in
                     generator.id
                 }
                 var generatorsToDelete: [Factory] = []

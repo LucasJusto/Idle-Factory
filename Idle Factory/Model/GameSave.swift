@@ -100,6 +100,9 @@ class GameSave{
                     semaphore.signal()
                 }
             }
+            else {
+                semaphore.signal()
+            }
         }
         semaphore.wait()
         

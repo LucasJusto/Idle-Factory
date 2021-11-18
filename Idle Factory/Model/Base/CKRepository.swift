@@ -163,9 +163,12 @@ public class CKRepository {
                 CKRepository.getUserById(id: userID) { user2 in
                     if let user2 = user2 {
                         user = user2
-                        semaphore.signal()
                     }
+                    semaphore.signal()
                 }
+            }
+            else {
+                semaphore.signal()
             }
         }
         
@@ -175,9 +178,12 @@ public class CKRepository {
                 CKRepository.getUserGeneratorsByID(userID: userID) { generators in
                     if let user = user {
                         user.generators = generators
-                        semaphore.signal()
                     }
+                    semaphore.signal()
                 }
+            }
+            else {
+                semaphore.signal()
             }
         }
         semaphore.wait()
@@ -187,9 +193,12 @@ public class CKRepository {
                 CKRepository.getUserOffersByID(userID: userID) { offers in
                     if let user = user {
                         user.offers = offers
-                        semaphore.signal()
                     }
+                    semaphore.signal()
                 }
+            }
+            else {
+                semaphore.signal()
             }
         }
         

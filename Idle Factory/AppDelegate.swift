@@ -36,7 +36,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let semaphore = DispatchSemaphore(value: 0)
         checkMyOffers(semaphore: semaphore)
         semaphore.wait()
-        CKRepository.currentUserQuickSave(user: GameScene.user!, userGenerators: GameScene.user!.generators, deletedGenerators: []) { _, _, _ in
+        guard let user = GameScene.user
+        else {
+            return
+        }
+        CKRepository.currentUserQuickSave(user: user, userGenerators: user.generators, deletedGenerators: []) { _, _, _ in
             application.endBackgroundTask(self.identifier)
         }
     }
@@ -47,7 +51,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func applicationDidBecomeActive(_ application: UIApplication) {
         // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
-        let viewController = UIApplication.shared.windows.first!.rootViewController as! GameViewController
+        guard let viewController = UIApplication.shared.windows.first?.rootViewController as? GameViewController
+        else {
+            return
+        }
         viewController.reload(gameSave: AppDelegate.gameSave)
         
     }

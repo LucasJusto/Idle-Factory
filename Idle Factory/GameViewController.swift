@@ -31,6 +31,9 @@ class GameViewController: UIViewController {
                             self.didLoadUser()
                         }
                 }
+                else {
+                    print("userNotFound")
+                }
             }
         }
     }
@@ -51,7 +54,7 @@ class GameViewController: UIViewController {
             view.isHidden = false
             GameViewController.scene = GameScene(size: screenSize)
             // Set the scale mode to scale to fit the window
-            GameViewController.scene!.scaleMode = .aspectFill
+            GameViewController.scene?.scaleMode = .aspectFill
             
             // Present the scene
             view.presentScene(GameViewController.scene)
@@ -62,11 +65,10 @@ class GameViewController: UIViewController {
             gifView.isHidden = true
             backgroundLoadingView.isHidden = true
             
-            let viewController1 = UIApplication.shared.windows.first!.rootViewController as! GameViewController
-            if OnboardingManager.shared.isFirstLaunch {
-                GameScene.user!.addMainCurrency(value: 10000)
-                GameScene.user!.addPremiumCurrency(value: 150)
-                CKRepository.storeUserData(id: GameScene.user!.id, name: GameScene.user!.name, mainCurrency: GameScene.user!.mainCurrency, premiumCurrency: GameScene.user!.premiumCurrency, timeLeftApp: nil) { _, _ in
+            if OnboardingManager.shared.isFirstLaunch, let user = GameScene.user {
+                user.addMainCurrency(value: 10000)
+                user.addPremiumCurrency(value: 150)
+                CKRepository.storeUserData(id: user.id, name: user.name, mainCurrency: user.mainCurrency, premiumCurrency: user.premiumCurrency, timeLeftApp: nil) { _, _ in
                 }
                 var mainView: UIStoryboard!
                 mainView = UIStoryboard(name: "OnboardingScene", bundle: nil)
@@ -78,7 +80,7 @@ class GameViewController: UIViewController {
 
                 OnboardingManager.shared.isFirstLaunch = true
            } else {
-               viewController1.displayWelcomeBackPopUp()
+               self.displayWelcomeBackPopUp()
                if GameSound.shared.backgroundMusicStatus {
                    GameSound.shared.startBackgroundMusic()
                }
