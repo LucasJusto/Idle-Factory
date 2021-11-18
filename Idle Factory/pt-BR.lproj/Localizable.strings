@@ -66,6 +66,7 @@
 
 
 //MARK: - Upgrade Screen
+"UpgradeHeaderLabel" = "Upgrades";
 "MoveToInventory" = "Mover para o inventário";
 "ChangeFactory" = "Trocar fábrica";
 "level" = "nível";
