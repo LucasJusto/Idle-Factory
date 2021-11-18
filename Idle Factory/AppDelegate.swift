@@ -46,7 +46,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func applicationWillEnterForeground(_ application: UIApplication) {
-        
+        if GameSound.shared.backgroundMusicStatus {
+            GameSound.shared.startBackgroundMusic()
+        }
     }
     
     func applicationDidBecomeActive(_ application: UIApplication) {

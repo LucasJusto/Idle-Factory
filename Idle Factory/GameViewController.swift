@@ -81,9 +81,6 @@ class GameViewController: UIViewController {
                 OnboardingManager.shared.isFirstLaunch = true
            } else {
                self.displayWelcomeBackPopUp()
-               if GameSound.shared.backgroundMusicStatus {
-                   GameSound.shared.startBackgroundMusic()
-               }
            }
         }
     }

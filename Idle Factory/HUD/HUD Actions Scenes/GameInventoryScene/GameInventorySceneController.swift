@@ -413,6 +413,9 @@ class GameInventorySceneController: UIViewController, RefreshInventory {
 extension GameInventorySceneController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        if factoriesNotActive.count > 8 {
+            return factoriesNotActive.count
+        }
         return 8
     }
     
