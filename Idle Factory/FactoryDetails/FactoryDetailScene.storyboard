@@ -300,6 +300,7 @@
                         <outlet property="purchaseButton" destination="sWr-DH-FU2" id="4dt-8T-G4T"/>
                         <outlet property="tableView" destination="9p7-vw-wdv" id="G4u-dE-h4s"/>
                         <outlet property="view2" destination="ncd-Iu-cMB" id="oTJ-Y6-gae"/>
+                        <outlet property="view3" destination="3vp-La-CVn" id="3Ix-xr-4vw"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
