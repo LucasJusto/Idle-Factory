@@ -55,7 +55,7 @@
                                     <action selector="resetPersonalInformation:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="a1q-sf-rCX"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KnC-Ee-mTq">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KnC-Ee-mTq">
                                 <rect key="frame" x="821" y="41" width="45" height="45"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="45" id="Iqp-EL-7Zt"/>
