@@ -11,22 +11,34 @@ class UpgradeCell: UITableViewCell {
     
     @IBOutlet weak var resourceImage: UIImageView!
     @IBOutlet weak var upgradeCostLabel: UILabel!
-    @IBOutlet weak var button: UIButton!
-    
+    @IBOutlet weak var button: UIButton! {
+        didSet {
+            button.backgroundColor = (value <= GameScene.user!.mainCurrency) ? UIColor(named:"actionColor1")! : UIColor(named:"deactivatedActionColor1")!
+        }
+    }
     @IBOutlet weak var qtdPerSec: UILabel!
     @IBOutlet weak var resourceNameAndQtdPerSec: UILabel!
-    @IBAction func UpgradeAction(_ sender: Any) {
-        GameSound.shared.playSoundFXIfActivated(sound: .UPGRADE)
+    
+    private(set) var timeToRefreshCurrency: Timer?
 
-        var value = (generator?.resourcesArray[thisResourceID].currentPrice ?? 0) * (generator?.resourcesArray[thisResourceID].pricePLevelIncreaseTax ?? 0)
-       
+    var value: Double = 0 {
+        didSet {
+            button.backgroundColor = (value <= GameScene.user!.mainCurrency) ? UIColor(named:"actionColor1")! : UIColor(named:"deactivatedActionColor1")!
+        }
+    }
+    
+    @IBAction func UpgradeAction(_ sender: Any) {
+        value = (generator?.resourcesArray[thisResourceID].currentPrice ?? 0)
+        
         if(value <= GameScene.user!.mainCurrency) {
-            
+            GameSound.shared.playSoundFXIfActivated(sound: .UPGRADE)
             GameScene.user?.removeMainCurrency(value: value)
             generator?.upgrade(index: thisResourceID)
             tableView?.reloadData()
+        } else {
+            GameSound.shared.playSoundFXIfActivated(sound: .DEACTIVATE_BUTTON)
         }
-        value = (generator?.resourcesArray[thisResourceID].currentPrice ?? 0) * (generator?.resourcesArray[thisResourceID].pricePLevelIncreaseTax ?? 0)
+        value = (generator?.resourcesArray[thisResourceID].currentPrice ?? 0)
         upgradeCostLabel.text = "\(doubleToString(value: value))"
     }
     
@@ -37,6 +49,9 @@ class UpgradeCell: UITableViewCell {
     func setFactory(factory: Factory, resourceID: Int){
         thisResourceID = resourceID
         generator = factory
+        value = factory.resourcesArray[resourceID].currentPrice
+        upgradeCostLabel.text = "\(doubleToString(value: value))"
+
     }
     
     override func awakeFromNib() {
@@ -44,6 +59,15 @@ class UpgradeCell: UITableViewCell {
         button.layer.cornerRadius = 10
         button.titleLabel?.font = UIFont(name: "AustralSlabBlur-Regular", size: 10)
         button.titleLabel?.textColor = UIColor.black
-        button.backgroundColor = UIColor(named: "actionColor1")
+        timeToRefreshCurrency = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(loadPlayerCurrencies), userInfo: nil, repeats: true)
+    }
+    
+    @objc func loadPlayerCurrencies () {
+        if GameScene.user!.mainCurrency >= value {
+            button.backgroundColor = UIColor(named:"actionColor1")
+        } else {
+            button.backgroundColor = UIColor(named:"deactivatedActionColor1")!
+
+        }
     }
 }

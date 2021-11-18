@@ -10,40 +10,83 @@ import SpriteKit
 
 class UpgradeFactorySceneController: UIViewController,  UITableViewDataSource, UITableViewDelegate {
     
-    @IBAction func close(_ sender: Any) {
-        GameSound.shared.playSoundFXIfActivated(sound: .BUTTON_CLICK)
-        self.dismiss(animated: false, completion: nil)
-    }
+    @IBOutlet weak var upgradeHeader: UILabel!
+    @IBOutlet weak var mainCurrencyView: UIView!
+    @IBOutlet weak var premiumCurrencyView: UIView!
+    @IBOutlet weak var mainCurrencyLabel: UILabel!
+    @IBOutlet weak var premiumCurrencyLabel: UILabel!
     @IBOutlet weak var SKView: SKView!
     @IBOutlet weak var changeFactoryButton: UIButton!
     @IBOutlet weak var moveToInventoryButton: UIButton!
     @IBOutlet weak var tableView: UITableView!
     
     static var generator: Factory?
+    private(set) var timeToRefreshCurrency: Timer?
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.dataSource = self
         tableView.delegate = self
         
-        changeFactoryButton.layer.cornerRadius = 10
-        moveToInventoryButton.layer.cornerRadius = 10
-        
+        loadOutletCustomizations()
+        loadCustomFont()
+        loadPlayerCurrencies()
+
+        upgradeHeader.text = NSLocalizedString("UpgradeHeaderLabel", comment: "")
         changeFactoryButton.setTitle(NSLocalizedString("ChangeFactory", comment: ""), for: UIControl.State.normal)
         moveToInventoryButton.setTitle(NSLocalizedString("MoveToInventory", comment: ""), for: UIControl.State.normal)
         
-        changeFactoryButton.titleLabel?.font = UIFont(name: "AustralSlabBlur-Regular", size: 10)
-        moveToInventoryButton.titleLabel?.font = UIFont(name: "AustralSlabBlur-Regular", size: 10)
-        
-        changeFactoryButton.backgroundColor = UIColor(named: "actionColor1")
-        moveToInventoryButton.backgroundColor = UIColor(named: "HudActions-background")
-        
-        //self.view.layoutIfNeeded()
-        // Do any additional setup after loading the view.
         let scene = FactoryScene(size: CGSize(width: 400, height: 400))
         scene.thisFactory = UpgradeFactorySceneController.generator
         scene.scaleMode = .aspectFill
         SKView.presentScene(scene)
+        
+        timeToRefreshCurrency = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(loadPlayerCurrencies), userInfo: nil, repeats: true)
+    }
+    
+    
+    // MARK: - DESIGN FUNCTIONS
+    /**
+     Load outlet customizations.
+     */
+    func loadOutletCustomizations() {
+        // INVENTORY HEADER
+        mainCurrencyView.layer.cornerRadius = 10
+        mainCurrencyView.layer.borderColor = UIColor.black.cgColor
+        mainCurrencyView.layer.borderWidth = 1
+        
+        premiumCurrencyView.layer.cornerRadius = 10
+        premiumCurrencyView.layer.borderColor = UIColor.black.cgColor
+        premiumCurrencyView.layer.borderWidth = 1
+        
+        // BUTTONS
+        changeFactoryButton.layer.cornerRadius = 10
+        moveToInventoryButton.layer.cornerRadius = 10
+        changeFactoryButton.backgroundColor = UIColor(named: "actionColor1")
+        moveToInventoryButton.backgroundColor = UIColor(named: "HudActions-background")
+    }
+    
+    
+    /**
+     Load custom font to all labels and button text.
+     */
+    func loadCustomFont() {
+        // LABELS
+        upgradeHeader.font = UIFont(name: "AustralSlabBlur-Regular", size: 27)
+        mainCurrencyLabel.font = UIFont(name: "AustralSlabBlur-Regular", size: 10)
+        premiumCurrencyLabel.font = UIFont(name: "AustralSlabBlur-Regular", size: 10)
+        
+        // BUTTONS
+        changeFactoryButton.titleLabel?.font = UIFont(name: "AustralSlabBlur-Regular", size: 10)
+        moveToInventoryButton.titleLabel?.font = UIFont(name: "AustralSlabBlur-Regular", size: 10)
+    }
+    
+    
+    // MARK: - ACTIONS
+    @IBAction func close(_ sender: Any) {
+        GameSound.shared.playSoundFXIfActivated(sound: .BUTTON_CLICK)
+        self.dismiss(animated: false, completion: nil)
     }
     
     
@@ -73,6 +116,16 @@ class UpgradeFactorySceneController: UIViewController,  UITableViewDataSource, U
         }
     }
     
+    // MARK: - LOAD DATA
+    /**
+     Load player actual currencies value.
+     */
+    @objc func loadPlayerCurrencies() {
+        mainCurrencyLabel.text = doubleToString(value: GameScene.user?.mainCurrency ?? 0.0)
+        premiumCurrencyLabel.text = doubleToString(value: GameScene.user?.premiumCurrency ?? 0.0)
+    }
+    
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if let factory = UpgradeFactorySceneController.generator {
             return factory.resourcesArray.count
@@ -91,7 +144,7 @@ class UpgradeFactorySceneController: UIViewController,  UITableViewDataSource, U
             // TODO: Change upgrade cost
             cell.setFactory(factory: factory, resourceID: indexPath.row)
             cell.tableView = tableView
-            cell.upgradeCostLabel.text = "\(doubleToStringAsInt(value: (resource.currentPrice)))"
+            cell.upgradeCostLabel.text = "\(doubleToString(value: (resource.currentPrice)))"
             let qtd = (resource.qttPLevel * Double(resource.currentLevel)) + resource.baseQtt
             cell.resourceNameAndQtdPerSec.text = "\(doubleToString(value: qtd)) \(resource.type.description)/s - \(NSLocalizedString("level", comment: "")): \(resource.currentLevel)"
         }
