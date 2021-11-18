@@ -641,7 +641,7 @@
                                                 <rect key="frame" x="0.0" y="0.0" width="286.5" height="160"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Por qual valor você quer vender?" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lBA-k3-uCD">
-                                                        <rect key="frame" x="23.5" y="25" width="243.5" height="54"/>
+                                                        <rect key="frame" x="16.5" y="25" width="258" height="54"/>
                                                         <fontDescription key="fontDescription" name="AustralSlabBlur-Regular" family="Austral Slab" pointSize="27"/>
                                                         <color key="textColor" name="Rightbar_background"/>
                                                         <nil key="highlightedColor"/>
@@ -683,7 +683,7 @@
                                                     <constraint firstItem="OMX-Jl-40D" firstAttribute="centerX" secondItem="lBA-k3-uCD" secondAttribute="centerX" id="LZ9-lr-9j2"/>
                                                     <constraint firstItem="OMX-Jl-40D" firstAttribute="top" secondItem="lBA-k3-uCD" secondAttribute="bottom" constant="18" id="PmE-ze-Wud"/>
                                                     <constraint firstItem="lBA-k3-uCD" firstAttribute="centerX" secondItem="Cs1-hk-OgE" secondAttribute="centerX" constant="2" id="ZpS-Yh-VFb"/>
-                                                    <constraint firstItem="lBA-k3-uCD" firstAttribute="width" secondItem="Cs1-hk-OgE" secondAttribute="width" multiplier="0.85" id="oHr-LO-ebm"/>
+                                                    <constraint firstItem="lBA-k3-uCD" firstAttribute="width" secondItem="Cs1-hk-OgE" secondAttribute="width" multiplier="0.9" id="oHr-LO-ebm"/>
                                                 </constraints>
                                             </view>
                                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="XVD-Uv-xtf">
