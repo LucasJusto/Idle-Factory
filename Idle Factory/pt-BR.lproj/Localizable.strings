@@ -50,7 +50,7 @@
 "SellAItemButton" = "Vender um item";
 "MyAnnouncesButton" = "Meus anúncios";
 "AboutNewFactoryButton" = "Ver mais";
-"EmptyMarketplaceLabel" = "No momento não temos geradores a venda no marketplace";
+"EmptyMarketplaceLabel" = "No momento não temos fábricas a venda no marketplace";
 
 
 // MARK: - CHALLENGES

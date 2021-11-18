@@ -139,6 +139,7 @@ class GameAnnounceSceneViewController: UIViewController, NavigationCellDelegate,
      Load player announced generators.
      */
     func loadPlayerAnnounces() {
+        let semaphore2 = DispatchSemaphore(value: 0)
         CKRepository.getUserOffersByID(userID: GameScene.user!.id) { offers in
             let generatorsId: [String] = offers.map { offer in
                 offer.generatorID
@@ -153,10 +154,12 @@ class GameAnnounceSceneViewController: UIViewController, NavigationCellDelegate,
             semaphore.wait()
 
             self.playerAnnounces = offers
+            semaphore2.signal()
         }
-        
+        semaphore2.wait()
         if self.playerAnnounces.count != 0 {
             self.emptyAnnounceLabel.isHidden = true
+            self.collectionView.reloadData()
         } else {
             self.emptyAnnounceLabel.isHidden = false
         }
@@ -168,6 +171,7 @@ class GameAnnounceSceneViewController: UIViewController, NavigationCellDelegate,
 extension GameAnnounceSceneViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        print(playerAnnounces.count)
         return playerAnnounces.count
     }
     

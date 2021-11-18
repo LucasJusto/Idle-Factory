@@ -57,8 +57,8 @@ class GameViewController: UIViewController {
             view.presentScene(GameViewController.scene)
             view.ignoresSiblingOrder = true
             
-            view.showsFPS = true
-            view.showsNodeCount = true
+//            view.showsFPS = true
+//            view.showsNodeCount = true
             gifView.isHidden = true
             backgroundLoadingView.isHidden = true
             
