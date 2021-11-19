@@ -17,6 +17,26 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        window = UIWindow()
+        if !OnboardingManager.shared.isFirstLaunch {
+            CKRepository.getUserId { userID in
+                if let userID = userID {
+                    CKRepository.getUserById(id: userID) { _ in
+                    }
+                }
+            }
+            let storyboard = UIStoryboard(name: "OnboardingScene", bundle: .main)
+            let viewcontroller : UIViewController = storyboard.instantiateViewController(withIdentifier: "welcome") as UIViewController
+            window?.rootViewController = viewcontroller
+            GameSound.shared.saveBackgroundMusicSettings(status: true)
+            GameSound.shared.startBackgroundMusic()
+            GameSound.shared.saveSoundFXSettings(status: true)
+        } else {
+            let storyboard = UIStoryboard(name: "Main", bundle: .main)
+            let viewcontroller = storyboard.instantiateInitialViewController()
+            window?.rootViewController = viewcontroller
+        }
+        window?.makeKeyAndVisible()
         return true
     }
     
@@ -24,12 +44,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func applicationWillResignActive(_ application: UIApplication) {
         // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
-        self.identifier = application.beginBackgroundTask {
-            
-        }
-        
         if GameSound.shared.backgroundMusicStatus {
             GameSound.shared.stopBackgroundMusic()
+        }
+        guard UIApplication.shared.windows.first?.rootViewController as? GameViewController != nil
+        else {
+            return
+        }
+        self.identifier = application.beginBackgroundTask {
+            
         }
         
         GameViewController.scene?.background.removeAllChildren()
@@ -40,6 +63,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         else {
             return
         }
+        user.timeLeftApp = AppDelegate.gameSave.transformToSeconds(time: AppDelegate.gameSave.getCurrentTime())
         CKRepository.currentUserQuickSave(user: user, userGenerators: user.generators, deletedGenerators: []) { _, _, _ in
             application.endBackgroundTask(self.identifier)
         }
@@ -57,10 +81,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         else {
             return
         }
-        viewController.reload(gameSave: AppDelegate.gameSave)
-        
+        viewController.reload()
     }
-    
-    
 }
 

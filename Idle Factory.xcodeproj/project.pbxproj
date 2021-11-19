@@ -725,10 +725,11 @@
 				CODE_SIGN_ENTITLEMENTS = "Idle Factory/Idle Factory.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 3;
 				DEVELOPMENT_TEAM = 6GD2RK7JQN;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Idle-Factory-Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "Industries Park";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -760,10 +761,11 @@
 				CODE_SIGN_ENTITLEMENTS = "Idle Factory/Idle Factory.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 3;
 				DEVELOPMENT_TEAM = 6GD2RK7JQN;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Idle-Factory-Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "Industries Park";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;

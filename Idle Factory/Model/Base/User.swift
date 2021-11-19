@@ -13,7 +13,7 @@ class User {
     private(set) var name: String
     private(set) var mainCurrency: Double
     private(set) var premiumCurrency: Double
-    private(set) var timeLeftApp: Double
+    var timeLeftApp: Double
     
     var offers: [Offer] = []
     var generators: [Factory] = []

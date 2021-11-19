@@ -378,7 +378,7 @@
                                                         <constraint firstAttribute="width" secondItem="DJ2-CY-FKD" secondAttribute="height" multiplier="1:1" id="ksJ-XW-GEt"/>
                                                     </constraints>
                                                 </imageView>
-                                                <skView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Zvy-Ka-w9c">
+                                                <skView userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Zvy-Ka-w9c">
                                                     <rect key="frame" x="5" y="10" width="83" height="62"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="55" id="5v9-ZB-TAO"/>

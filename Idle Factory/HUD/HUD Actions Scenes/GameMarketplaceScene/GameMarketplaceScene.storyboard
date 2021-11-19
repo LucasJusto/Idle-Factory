@@ -176,7 +176,7 @@
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="auJ-6b-ZqW">
                                                     <rect key="frame" x="0.0" y="0.0" width="131" height="185"/>
                                                     <subviews>
-                                                        <skView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bAn-mb-2hG">
+                                                        <skView userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bAn-mb-2hG">
                                                             <rect key="frame" x="8" y="8" width="115" height="110"/>
                                                         </skView>
                                                         <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" alignment="center" spacing="1" translatesAutoresizingMaskIntoConstraints="NO" id="XBS-CF-vpz">
@@ -466,7 +466,7 @@
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="B1D-Pg-ZWi">
                                                     <rect key="frame" x="0.0" y="0.0" width="131" height="185"/>
                                                     <subviews>
-                                                        <skView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2pV-BJ-xfq">
+                                                        <skView userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2pV-BJ-xfq">
                                                             <rect key="frame" x="8" y="8" width="115" height="110"/>
                                                         </skView>
                                                         <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" alignment="center" spacing="1" translatesAutoresizingMaskIntoConstraints="NO" id="uwc-AH-6Hz">
