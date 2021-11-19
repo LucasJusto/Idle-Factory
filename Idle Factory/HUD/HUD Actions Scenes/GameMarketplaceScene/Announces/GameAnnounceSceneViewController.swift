@@ -12,6 +12,7 @@ import UIKit
  Game Announce scene controller.
  */
 class GameAnnounceSceneViewController: UIViewController, NavigationCellDelegate, RefreshCollectionDelegate {
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     func refresh() {
         CKRepository.getUserOffersByID(userID: GameScene.user!.id) { offers in
             let generatorsId: [String] = offers.map { offer in
@@ -84,7 +85,7 @@ class GameAnnounceSceneViewController: UIViewController, NavigationCellDelegate,
         loadPlayerCurrencies()
         
         // Load player announces
-        DispatchQueue.main.async {
+        DispatchQueue.global().async {
             self.loadPlayerAnnounces()
         }
         
@@ -139,6 +140,9 @@ class GameAnnounceSceneViewController: UIViewController, NavigationCellDelegate,
      Load player announced generators.
      */
     func loadPlayerAnnounces() {
+        DispatchQueue.main.async {
+            self.activityIndicator.startAnimating()
+        }
         let semaphore2 = DispatchSemaphore(value: 0)
         CKRepository.getUserOffersByID(userID: GameScene.user!.id) { offers in
             let generatorsId: [String] = offers.map { offer in
@@ -157,11 +161,15 @@ class GameAnnounceSceneViewController: UIViewController, NavigationCellDelegate,
             semaphore2.signal()
         }
         semaphore2.wait()
-        if self.playerAnnounces.count != 0 {
-            self.emptyAnnounceLabel.isHidden = true
-            self.collectionView.reloadData()
-        } else {
-            self.emptyAnnounceLabel.isHidden = false
+        DispatchQueue.main.async {
+            self.activityIndicator.stopAnimating()
+            self.activityIndicator.isHidden = true
+            if self.playerAnnounces.count != 0 {
+                self.emptyAnnounceLabel.isHidden = true
+                self.collectionView.reloadData()
+            } else {
+                self.emptyAnnounceLabel.isHidden = false
+            }
         }
     }
 }

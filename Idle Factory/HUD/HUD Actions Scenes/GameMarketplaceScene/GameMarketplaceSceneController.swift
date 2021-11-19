@@ -14,6 +14,7 @@ import UIKit
 class GameMarketplaceSceneController: UIViewController, NavigationCellDelegate {
     
     
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var collectionView: UICollectionView!
     
     // MARK: - MARKETPLACE HEADER
@@ -72,7 +73,7 @@ class GameMarketplaceSceneController: UIViewController, NavigationCellDelegate {
 
         loadPlayerCurrencies()
         
-        DispatchQueue.main.async {
+        DispatchQueue.global().async {
             self.loadMarketplace()
         }
 
@@ -204,6 +205,10 @@ class GameMarketplaceSceneController: UIViewController, NavigationCellDelegate {
      Load marketplace offers. Marketplace contains a selector between basic and premium offers. The default option of the selector is Basic, so this function loads only the basic offers first.
      */
     func loadMarketplace() {
+        DispatchQueue.main.async {
+            self.activityIndicator.startAnimating()
+        }
+        
         CKRepository.getMarketPlaceOffers(completion: { offers in
             let generatorsId: [String] = offers.map { offer in
                 offer.generatorID
@@ -220,6 +225,11 @@ class GameMarketplaceSceneController: UIViewController, NavigationCellDelegate {
             self.offerArray = offers.filter({ offer in
                 offer.currencyType == .basic
             })
+            DispatchQueue.main.async {
+                self.activityIndicator.stopAnimating()
+                self.activityIndicator.isHidden = true
+            }
+            
         })
     }
 }

@@ -315,14 +315,23 @@
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="Une-kZ-yRe">
+                                <rect key="frame" x="423" y="182" width="50" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="50" id="3sw-ZC-ylR"/>
+                                    <constraint firstAttribute="height" constant="50" id="y7Q-NZ-FyS"/>
+                                </constraints>
+                            </activityIndicatorView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
                         <color key="backgroundColor" name="Marketplace_background"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="iEe-xV-qjF" secondAttribute="trailing" id="Fdc-GU-K31"/>
+                            <constraint firstItem="Une-kZ-yRe" firstAttribute="centerX" secondItem="5EZ-qb-Rvc" secondAttribute="centerX" id="H5X-1I-Wjd"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="zpB-Pn-JzX" secondAttribute="trailing" constant="20" id="QFx-U3-are"/>
                             <constraint firstItem="iEe-xV-qjF" firstAttribute="leading" secondItem="5EZ-qb-Rvc" secondAttribute="leading" id="R6D-iR-8Na"/>
                             <constraint firstItem="vUy-E1-zRZ" firstAttribute="centerY" secondItem="5EZ-qb-Rvc" secondAttribute="centerY" multiplier="1.15" id="TTx-FJ-1xn"/>
+                            <constraint firstItem="Une-kZ-yRe" firstAttribute="centerY" secondItem="5EZ-qb-Rvc" secondAttribute="centerY" id="YPn-9y-G30"/>
                             <constraint firstItem="iEe-xV-qjF" firstAttribute="top" secondItem="T6z-zc-YC5" secondAttribute="bottom" constant="17" id="hg4-xW-Z7D"/>
                             <constraint firstItem="T6z-zc-YC5" firstAttribute="centerX" secondItem="5EZ-qb-Rvc" secondAttribute="centerX" id="hy8-Yr-t0u"/>
                             <constraint firstItem="zpB-Pn-JzX" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" constant="52" id="joT-p2-hNs"/>
@@ -334,6 +343,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="activityIndicator" destination="Une-kZ-yRe" id="ym5-wZ-5ht"/>
                         <outlet property="collectionView" destination="iEe-xV-qjF" id="6XW-nm-8Ue"/>
                         <outlet property="emptyMarketplaceLabel" destination="vUy-E1-zRZ" id="wkp-mk-vKg"/>
                         <outlet property="itemTypeSelector" destination="ka5-pU-UL4" id="2SI-84-kJk"/>
@@ -601,11 +611,19 @@
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="juL-7A-Kqo">
+                                <rect key="frame" x="423" y="182" width="50" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="r78-Yb-yDQ"/>
+                                    <constraint firstAttribute="width" constant="50" id="ukU-cK-MXj"/>
+                                </constraints>
+                            </activityIndicatorView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="v0y-Qd-Mdh"/>
                         <color key="backgroundColor" name="Marketplace_background"/>
                         <constraints>
                             <constraint firstItem="3eK-pa-iFx" firstAttribute="centerY" secondItem="D9q-YL-Ycv" secondAttribute="centerY" multiplier="1.15" id="1kw-d4-Z03"/>
+                            <constraint firstItem="juL-7A-Kqo" firstAttribute="centerX" secondItem="D9q-YL-Ycv" secondAttribute="centerX" id="2qL-OP-caG"/>
                             <constraint firstItem="uUL-tu-Vgi" firstAttribute="top" secondItem="v0y-Qd-Mdh" secondAttribute="top" constant="45" id="9IB-K3-dEk"/>
                             <constraint firstItem="YgV-Dj-bDE" firstAttribute="trailing" secondItem="D9q-YL-Ycv" secondAttribute="trailing" id="BrU-Fb-CnN"/>
                             <constraint firstItem="v0y-Qd-Mdh" firstAttribute="bottom" secondItem="YgV-Dj-bDE" secondAttribute="bottom" constant="30" id="K1A-Vh-Ztc"/>
@@ -613,11 +631,13 @@
                             <constraint firstItem="pxO-EI-DEX" firstAttribute="top" secondItem="v0y-Qd-Mdh" secondAttribute="top" constant="52" id="cJS-04-GUI"/>
                             <constraint firstItem="3eK-pa-iFx" firstAttribute="centerX" secondItem="D9q-YL-Ycv" secondAttribute="centerX" id="eOb-pg-oiX"/>
                             <constraint firstItem="pxO-EI-DEX" firstAttribute="leading" secondItem="v0y-Qd-Mdh" secondAttribute="leading" constant="20" id="fq1-ux-c55"/>
+                            <constraint firstItem="juL-7A-Kqo" firstAttribute="centerY" secondItem="D9q-YL-Ycv" secondAttribute="centerY" id="jjE-y4-Ck0"/>
                             <constraint firstItem="YgV-Dj-bDE" firstAttribute="top" secondItem="pxO-EI-DEX" secondAttribute="bottom" constant="52" id="obR-uY-uVy"/>
                             <constraint firstItem="uUL-tu-Vgi" firstAttribute="centerX" secondItem="D9q-YL-Ycv" secondAttribute="centerX" id="qt4-AO-Cvw"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="activityIndicator" destination="juL-7A-Kqo" id="wZ2-Tw-kfA"/>
                         <outlet property="announceHeaderLabel" destination="rxV-fj-xZV" id="LaM-pJ-9gI"/>
                         <outlet property="collectionView" destination="YgV-Dj-bDE" id="Dod-Ke-sm6"/>
                         <outlet property="emptyAnnounceLabel" destination="3eK-pa-iFx" id="pxR-5L-rud"/>
