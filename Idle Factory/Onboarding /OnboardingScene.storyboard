@@ -131,6 +131,14 @@
                                     <action selector="startAction:" destination="1YM-BF-RFa" eventType="touchUpInside" id="3hl-pG-RMm"/>
                                 </connections>
                             </button>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="qLd-5d-KBn">
+                                <rect key="frame" x="781" y="328" width="50" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="50" id="hAW-qS-hYy"/>
+                                    <constraint firstAttribute="height" constant="50" id="oKD-ck-1sZ"/>
+                                </constraints>
+                                <color key="color" name="announceInputBackgroundColor"/>
+                            </activityIndicatorView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="SMe-vW-lmz"/>
                         <color key="backgroundColor" name="HudActions-background"/>
@@ -138,7 +146,9 @@
                             <constraint firstItem="7zX-zF-2cs" firstAttribute="leading" secondItem="TgS-TX-9kI" secondAttribute="trailing" constant="21" id="1ES-Pd-rjs"/>
                             <constraint firstItem="SMe-vW-lmz" firstAttribute="bottom" secondItem="DAT-ob-1Ky" secondAttribute="bottom" constant="15" id="39H-hD-T9a"/>
                             <constraint firstItem="7zX-zF-2cs" firstAttribute="centerY" secondItem="eVE-ri-Qdo" secondAttribute="centerY" id="3Gw-w4-t3F"/>
+                            <constraint firstItem="SMe-vW-lmz" firstAttribute="bottom" secondItem="qLd-5d-KBn" secondAttribute="bottom" constant="15" id="a6g-Db-ktk"/>
                             <constraint firstItem="SMe-vW-lmz" firstAttribute="trailing" secondItem="DAT-ob-1Ky" secondAttribute="trailing" constant="21" id="eqJ-b2-eDB"/>
+                            <constraint firstItem="SMe-vW-lmz" firstAttribute="trailing" secondItem="qLd-5d-KBn" secondAttribute="trailing" constant="21" id="iWU-et-hkO"/>
                             <constraint firstItem="TgS-TX-9kI" firstAttribute="centerY" secondItem="eVE-ri-Qdo" secondAttribute="centerY" id="lTC-Cm-ShX"/>
                             <constraint firstItem="SMe-vW-lmz" firstAttribute="trailing" secondItem="7zX-zF-2cs" secondAttribute="trailing" constant="21" id="sFh-Tj-QJW"/>
                             <constraint firstItem="TgS-TX-9kI" firstAttribute="leading" secondItem="SMe-vW-lmz" secondAttribute="leading" constant="152" id="zY5-fm-bxW"/>
@@ -146,6 +156,7 @@
                     </view>
                     <connections>
                         <outlet property="Label" destination="TgS-TX-9kI" id="1v4-4y-Sgy"/>
+                        <outlet property="activityIndicator" destination="qLd-5d-KBn" id="iDT-w4-vLx"/>
                         <outlet property="startButton" destination="DAT-ob-1Ky" id="Wwd-1N-bwF"/>
                     </connections>
                 </viewController>
@@ -160,6 +171,9 @@
         <image name="I3" width="198" height="229"/>
         <namedColor name="HudActions-background">
             <color red="0.10199999809265137" green="0.65499997138977051" blue="0.82700002193450928" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="announceInputBackgroundColor">
+            <color red="0.9100000262260437" green="0.9100000262260437" blue="0.9100000262260437" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
     </resources>
 </document>

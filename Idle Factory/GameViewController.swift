@@ -13,10 +13,11 @@ class GameViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         backgroundLoadingView.loadGif(asset: "fundo-faster")
+        reload()
     }
     
     
-    func reload(gameSave: GameSave){
+    func reload(){
         gifView.isHidden = false
         backgroundLoadingView.isHidden = false
         
@@ -45,7 +46,7 @@ class GameViewController: UIViewController {
 
         if let view = self.view as! SKView? {
             // Load the SKScene from 'GameScene.sks'
-            
+            self.displayWelcomeBackPopUp()
             let screenSize = CGSize(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
             
             
@@ -65,23 +66,7 @@ class GameViewController: UIViewController {
             gifView.isHidden = true
             backgroundLoadingView.isHidden = true
             
-            if OnboardingManager.shared.isFirstLaunch, let user = GameScene.user {
-                user.addMainCurrency(value: 10000)
-                user.addPremiumCurrency(value: 150)
-                CKRepository.storeUserData(id: user.id, name: user.name, mainCurrency: user.mainCurrency, premiumCurrency: user.premiumCurrency, timeLeftApp: nil) { _, _ in
-                }
-                var mainView: UIStoryboard!
-                mainView = UIStoryboard(name: "OnboardingScene", bundle: nil)
-                let viewcontroller : UIViewController = mainView.instantiateViewController(withIdentifier: "welcome") as UIViewController
-                self.present(viewcontroller, animated: false)
-                GameSound.shared.saveBackgroundMusicSettings(status: true)
-                GameSound.shared.startBackgroundMusic()
-                GameSound.shared.saveSoundFXSettings(status: true)
-
-                OnboardingManager.shared.isFirstLaunch = true
-           } else {
-               self.displayWelcomeBackPopUp()
-           }
+            
         }
     }
     override var shouldAutorotate: Bool {
