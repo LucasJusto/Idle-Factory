@@ -54,7 +54,7 @@
 
 
 // MARK: - CHALLENGES
-"UnderConstructionLabel" = "Esta seção está em construção.";
+"UnderConstructionLabel" = "Em Breve";
 
 
 //MARK: - Announces
@@ -67,7 +67,7 @@
 
 //MARK: - Upgrade Screen
 "UpgradeHeaderLabel" = "Upgrades";
-"MoveToInventory" = "Mover para o inventário";
+"MoveToInventory" = "Guardar no inventário";
 "ChangeFactory" = "Trocar fábrica";
 "level" = "nível";
 

@@ -101,7 +101,7 @@ class GameMarketplaceViewCell: UICollectionViewCell {
         thisGenerator = factory
         let scene = FactoryScene(size: CGSize(width: 400, height: 400))
         scene.thisFactory = thisGenerator
-        scene.thisYPosition = 12
+        scene.thisYPosition = 0
         scene.scaleMode = .aspectFill
         SKView.presentScene(scene)
         let resources = factory.resourcesArray
