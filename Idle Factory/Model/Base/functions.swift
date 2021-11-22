@@ -366,15 +366,15 @@ func getFactorySpendings(factory: Factory) -> Double {
         if factory.type == .NFT {
             spendingR *= 100
         }
-        
-        for level in 1...resource.currentLevel {
-            if factory.type == .Basic {
-                spendingR += resource.basePrice * pow(resource.pricePLevelIncreaseTax, Double(level)) * resource.typeMultiplier
+        if resource.currentLevel > 0 {
+            for level in 1...resource.currentLevel {
+                if factory.type == .Basic {
+                    spendingR += resource.basePrice * pow(resource.pricePLevelIncreaseTax, Double(level)) * resource.typeMultiplier
+                }
+                else {
+                    spendingR += (resource.basePrice * 100) * pow(resource.pricePLevelIncreaseTax, Double(level)) * resource.typeMultiplier
+                }
             }
-            else {
-                spendingR += (resource.basePrice * 100) * pow(resource.pricePLevelIncreaseTax, Double(level)) * resource.typeMultiplier
-            }
-            
         }
         spendings += spendingR
     }
