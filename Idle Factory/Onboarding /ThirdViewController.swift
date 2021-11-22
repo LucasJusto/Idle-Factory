@@ -20,8 +20,8 @@ class ThirdViewController: UIViewController {
             CKRepository.refreshCurrentUser { user in
                 if let userNotnull = user {
                     GameScene.user = userNotnull
-                    userNotnull.addMainCurrency(value: 10000)
-                    userNotnull.addPremiumCurrency(value: 150)
+                    userNotnull.addMainCurrency(value: 50000)
+                    userNotnull.addPremiumCurrency(value: 250)
                     CKRepository.storeUserData(id: userNotnull.id, name: userNotnull.name, mainCurrency: userNotnull.mainCurrency, premiumCurrency: userNotnull.premiumCurrency, timeLeftApp: nil) { _, error in
                         guard error == nil
                         else {
