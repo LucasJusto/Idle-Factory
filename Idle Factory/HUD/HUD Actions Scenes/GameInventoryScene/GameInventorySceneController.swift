@@ -126,8 +126,8 @@ class GameInventorySceneController: UIViewController, RefreshInventory {
         // Info Factories
         totalProductionLabel.text = NSLocalizedString("TotalProductionLabel", comment: "")
 //        widthInfo.constant = UIScreen.main.bounds.width * 0.3116
-        heightInfo.constant = UIScreen.main.bounds.height * 0.4923
-        collectionViewHeight.constant = UIScreen.main.bounds.height * 0.4923
+        heightInfo.constant = UIScreen.main.bounds.height * 0.6153
+        collectionViewHeight.constant = UIScreen.main.bounds.height * 0.6153
         // Buttons
         sellFactoryButton.setTitle(NSLocalizedString("SellFactoryButton", comment: ""), for: .normal)
         insertFactoryButton.setTitle(clickedSlotPosition == .none ? NSLocalizedString("AnnounceFactoryButton", comment: "") : NSLocalizedString("InsertFactoryButton", comment: ""), for: .normal)
@@ -175,26 +175,26 @@ class GameInventorySceneController: UIViewController, RefreshInventory {
         // LABELS
         inventoryHeader.font = UIFont(name: "AustralSlabBlur-Regular", size: 27)
         emptySlotLabel.font = UIFont(name: "AustralSlabBlur-Regular", size: 27)
-        quantityType1.font = UIFont(name: "AustralSlabBlur-Regular", size: 10)
-        generatePerSecType1.font = UIFont(name: "AustralSlabBlur-Regular", size: 10)
-        quantityType2.font = UIFont(name: "AustralSlabBlur-Regular", size: 10)
-        generatePerSecType2.font = UIFont(name: "AustralSlabBlur-Regular", size: 10)
-        quantityType3.font = UIFont(name: "AustralSlabBlur-Regular", size: 10)
-        generatePerSecType3.font = UIFont(name: "AustralSlabBlur-Regular", size: 10)
-        totalProductionLabel.font = UIFont(name: "AustralSlabBlur-Regular", size: 10)
-        totalProductionPerSec.font = UIFont(name: "AustralSlabBlur-Regular", size: 10)
-        factorySerial_ID.font = UIFont(name: "AustralSlabBlur-Regular", size: 7)
+        quantityType1.font = UIFont(name: "AustralSlabBlur-Regular", size: 14)
+        generatePerSecType1.font = UIFont(name: "AustralSlabBlur-Regular", size: 12)
+        quantityType2.font = UIFont(name: "AustralSlabBlur-Regular", size: 14)
+        generatePerSecType2.font = UIFont(name: "AustralSlabBlur-Regular", size: 12)
+        quantityType3.font = UIFont(name: "AustralSlabBlur-Regular", size: 14)
+        generatePerSecType3.font = UIFont(name: "AustralSlabBlur-Regular", size: 12)
+        totalProductionLabel.font = UIFont(name: "AustralSlabBlur-Regular", size: 13)
+        totalProductionPerSec.font = UIFont(name: "AustralSlabBlur-Regular", size: 13)
+        factorySerial_ID.font = UIFont(name: "AustralSlabBlur-Regular", size: 10)
         quickSellQuestionLabel.font = UIFont(name: "AustralSlabBlur-Regular", size: 27)
-        quickSellEarnLabel.font = UIFont(name: "AustralSlabBlur-Regular", size: 10)
+        quickSellEarnLabel.font = UIFont(name: "AustralSlabBlur-Regular", size: 14)
         quickSellEarningLabel.font = UIFont(name: "AustralSlabBlur-Regular", size: 17)
         
         // BUTTONS
-        purchaseFactoryButton.titleLabel?.font = UIFont(name: "AustralSlabBlur-Regular", size: 10)
-        purchaseFactoryEmptySlotButton.titleLabel?.font = UIFont(name: "AustralSlabBlur-Regular", size: 10)
-        sellFactoryButton.titleLabel?.font = UIFont(name: "AustralSlabBlur-Regular", size: 10)
-        insertFactoryButton.titleLabel?.font = UIFont(name: "AustralSlabBlur-Regular", size: 10)
-        cancelQuickSell.titleLabel?.font = UIFont(name: "AustralSlabBlur-Regular", size: 10)
-        confirmQuickSell.titleLabel?.font = UIFont(name: "AustralSlabBlur-Regular", size: 10)
+        purchaseFactoryButton.titleLabel?.font = UIFont(name: "AustralSlabBlur-Regular", size: 14)
+        purchaseFactoryEmptySlotButton.titleLabel?.font = UIFont(name: "AustralSlabBlur-Regular", size: 14)
+        sellFactoryButton.titleLabel?.font = UIFont(name: "AustralSlabBlur-Regular", size: 14)
+        insertFactoryButton.titleLabel?.font = UIFont(name: "AustralSlabBlur-Regular", size: 14)
+        cancelQuickSell.titleLabel?.font = UIFont(name: "AustralSlabBlur-Regular", size: 14)
+        confirmQuickSell.titleLabel?.font = UIFont(name: "AustralSlabBlur-Regular", size: 14)
     }
     
     
@@ -413,10 +413,10 @@ class GameInventorySceneController: UIViewController, RefreshInventory {
 extension GameInventorySceneController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        if factoriesNotActive.count > 8 {
+        if factoriesNotActive.count > 9 {
             return factoriesNotActive.count
         }
-        return 8
+        return 9
     }
     
     
@@ -584,7 +584,7 @@ extension GameInventorySceneController: UICollectionViewDelegateFlowLayout {
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let cellSize = CGSize(width: UIScreen.main.bounds.width * 0.1113, height: UIScreen.main.bounds.height * 0.2307)
+        let cellSize = CGSize(width: UIScreen.main.bounds.width * 0.157, height: UIScreen.main.bounds.height * 0.278)
         return cellSize
     }
     

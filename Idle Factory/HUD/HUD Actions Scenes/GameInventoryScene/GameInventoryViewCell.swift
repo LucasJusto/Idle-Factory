@@ -49,6 +49,10 @@ class GameInventoryViewCell: UICollectionViewCell {
      */
     func configureCell() {
         self.contentView.layer.cornerRadius = 10
+        
+        quantityType1.font = UIFont(name: "AustralSlabBlur-Regular", size: 10)
+        quantityType2.font = UIFont(name: "AustralSlabBlur-Regular", size: 10)
+        quantityType3.font = UIFont(name: "AustralSlabBlur-Regular", size: 10)
     }
     
     
