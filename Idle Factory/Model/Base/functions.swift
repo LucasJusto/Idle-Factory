@@ -355,14 +355,31 @@ func calculateCurrencyAway() -> Double{
 }
 
 func calculateQuickSell(factory: Factory) -> Double {
-    var earnings: Double = 0
+    return getFactorySpendings(factory: factory) / 2
+}
+
+func getFactorySpendings(factory: Factory) -> Double {
+    var spendings: Double = 0.0
     
-    let resources = factory.resourcesArray
-    for i in 0..<resources.count {
-        earnings += resources[i].currentPrice
+    for resource in factory.resourcesArray {
+        var spendingR = resource.basePrice
+        if factory.type == .NFT {
+            spendingR *= 100
+        }
+        
+        for level in 1...resource.currentLevel {
+            if factory.type == .Basic {
+                spendingR += resource.basePrice * pow(resource.pricePLevelIncreaseTax, Double(level)) * resource.typeMultiplier
+            }
+            else {
+                spendingR += (resource.basePrice * 100) * pow(resource.pricePLevelIncreaseTax, Double(level)) * resource.typeMultiplier
+            }
+            
+        }
+        spendings += spendingR
     }
     
-    return earnings / 2
+    return spendings
 }
 
 func changeAllNodeFamilyNames(node: SKNode, name: String) {
