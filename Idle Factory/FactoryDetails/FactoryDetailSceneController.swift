@@ -60,10 +60,9 @@ class FactoryDetailSceneController: UIViewController,  UITableViewDataSource, UI
         if FactoryDetailSceneController.isBlue {
             if let generator = FactoryDetailSceneController.generator {
                 var resourceArray: [Resource] = []
-                var price = 0.0
+                var price = getFactorySpendings(factory: generator)
                 for n in 0..<(generator.resourcesArray.count) {
                     resourceArray.append((generator.resourcesArray[n]))
-                    price += resourceArray[n].basePrice
                 }
                 self.dismiss(animated: false, completion: nil)
                 DispatchQueue.global().async {
@@ -182,10 +181,9 @@ class FactoryDetailSceneController: UIViewController,  UITableViewDataSource, UI
                 id.text = ""
             }
             var resourceArray: [Resource] = []
-            var price = 0.0
+            var price = getFactorySpendings(factory: generator)
             for n in 0..<(generator.resourcesArray.count) {
                 resourceArray.append((generator.resourcesArray[n]))
-                price += resourceArray[n].currentPrice
             }
             
             priceLabel.text = "\(NSLocalizedString("Price", comment: "Price")) "
@@ -255,10 +253,9 @@ class FactoryDetailSceneController: UIViewController,  UITableViewDataSource, UI
         premiumCurrencyLabel.text = doubleToString(value: GameScene.user?.premiumCurrency ?? 0.0)
         
         var resourceArray: [Resource] = []
-        var price = 0.0
+        var price = getFactorySpendings(factory: FactoryDetailSceneController.generator!)
         for n in 0..<(FactoryDetailSceneController.generator!.resourcesArray.count) {
             resourceArray.append((FactoryDetailSceneController.generator!.resourcesArray[n]))
-            price += resourceArray[n].currentPrice
         }
         
         if !FactoryDetailSceneController.isBlue {

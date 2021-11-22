@@ -104,7 +104,7 @@ class GameShopViewCell: UICollectionViewCell {
             resourceType2.image = UIImage(systemName: getResourceImageName(resource: resources[0].type))
             resourceQuantityType2.text = "\(Int(qtd))"
             resourceType3.isHidden = true
-            priceLabel.text = "\(doubleToString(value: resources[0].currentPrice))"
+            priceLabel.text = "\(doubleToString(value: getFactorySpendings(factory: factory)))"
             resourceQuantityType3.isHidden = true
             
         case 2:
@@ -115,7 +115,7 @@ class GameShopViewCell: UICollectionViewCell {
             resourceType2.image = UIImage(systemName: getResourceImageName(resource: resources[1].type))
             resourceQuantityType2.text = "\(Int(qtd1))"
             resourceType3.isHidden = true
-            priceLabel.text = "\(doubleToString(value: resources[0].currentPrice + resources[1].currentPrice))"
+            priceLabel.text = "\(doubleToString(value: getFactorySpendings(factory: factory)))"
             resourceQuantityType3.isHidden = true
 
         case 3:
@@ -129,7 +129,7 @@ class GameShopViewCell: UICollectionViewCell {
             resourceType3.image = UIImage(systemName: getResourceImageName(resource: resources[2].type))
             let qtd2 = (resources[2].qttPLevel * Double(resources[2].currentLevel)) + resources[2].baseQtt
             resourceQuantityType3.text = "\(Int(qtd2))"
-            priceLabel.text = "\(doubleToString(value: resources[0].currentPrice + resources[1].currentPrice + resources[2].currentPrice))"
+            priceLabel.text = "\(doubleToString(value: getFactorySpendings(factory: factory)))"
             rightMargin.isHidden = true
 
         default:

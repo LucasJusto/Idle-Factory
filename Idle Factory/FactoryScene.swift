@@ -38,7 +38,7 @@ class FactoryScene: SKScene {
                 else {
                     if let y = thisYPosition {
                         factoryNode.position.y = CGFloat(y)
-                        if y != 12{
+                        if y == 25{
                             factoryNode.texture = SKTexture(imageNamed: "teste")
                         }
                     }
