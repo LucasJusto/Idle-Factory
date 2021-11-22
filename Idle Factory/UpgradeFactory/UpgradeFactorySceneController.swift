@@ -74,12 +74,12 @@ class UpgradeFactorySceneController: UIViewController,  UITableViewDataSource, U
     func loadCustomFont() {
         // LABELS
         upgradeHeader.font = UIFont(name: "AustralSlabBlur-Regular", size: 27)
-        mainCurrencyLabel.font = UIFont(name: "AustralSlabBlur-Regular", size: 10)
-        premiumCurrencyLabel.font = UIFont(name: "AustralSlabBlur-Regular", size: 10)
+        mainCurrencyLabel.font = UIFont(name: "AustralSlabBlur-Regular", size: 12)
+        premiumCurrencyLabel.font = UIFont(name: "AustralSlabBlur-Regular", size: 12)
         
         // BUTTONS
-        changeFactoryButton.titleLabel?.font = UIFont(name: "AustralSlabBlur-Regular", size: 10)
-        moveToInventoryButton.titleLabel?.font = UIFont(name: "AustralSlabBlur-Regular", size: 10)
+        changeFactoryButton.titleLabel?.font = UIFont(name: "AustralSlabBlur-Regular", size: 12)
+        moveToInventoryButton.titleLabel?.font = UIFont(name: "AustralSlabBlur-Regular", size: 12)
     }
     
     
