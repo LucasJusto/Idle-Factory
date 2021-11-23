@@ -108,6 +108,7 @@
 "ConfirmResetQuestionTitle" = "Limpar os dados pessoais vai alterar o seu nome de usuário, deseja continuar?";
 "CancelResetAction" = "Cancelar";
 "ConfirmResetAction" = "Apagar";
+"HapticsLabel" = "Feedback Tátil";
 
 
 //MARK: - Onboarding

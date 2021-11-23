@@ -42,6 +42,7 @@ class FactoryDetailSceneController: UIViewController,  UITableViewDataSource, UI
     
     @IBAction func BackAction(_ sender: Any) {
         GameSound.shared.playSoundFXIfActivated(sound: .BUTTON_CLICK)
+        Haptics.shared.activateHaptics(sound: .sucess)
         if FactoryDetailSceneController.isBlue {
             var mainView: UIStoryboard!
             mainView = UIStoryboard(name: "GameShopScene", bundle: nil)
@@ -57,6 +58,7 @@ class FactoryDetailSceneController: UIViewController,  UITableViewDataSource, UI
     
     @IBAction func buyAction(_ sender: Any) {
         GameSound.shared.playSoundFXIfActivated(sound: .BUTTON_CLICK)
+        Haptics.shared.activateHaptics(sound: .sucess)
         if FactoryDetailSceneController.isBlue {
             if let generator = FactoryDetailSceneController.generator {
                 var resourceArray: [Resource] = []

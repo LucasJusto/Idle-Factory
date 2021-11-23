@@ -58,6 +58,7 @@ class ConfirmResetPersonalDataViewController: UIViewController {
      */
     @IBAction func cancelReset(_ sender: Any) {
         GameSound.shared.playSoundFXIfActivated(sound: .BUTTON_CLICK)
+        Haptics.shared.activateHaptics(sound: .sucess)
         self.dismiss(animated: false, completion: nil)
     }
     
@@ -67,6 +68,7 @@ class ConfirmResetPersonalDataViewController: UIViewController {
      */
     @IBAction func confirmReset(_ sender: Any) {
         GameSound.shared.playSoundFXIfActivated(sound: .BUTTON_CLICK)
+        Haptics.shared.activateHaptics(sound: .sucess)
         delegate?.resetPersonalData()
     }
 }

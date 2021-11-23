@@ -32,15 +32,6 @@
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" verticalCompressionResistancePriority="751" text="Sound effects" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zQ9-ke-i0M">
-                                <rect key="frame" x="303" y="191.66666666666666" width="148" height="24"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="24" id="WBA-eP-4Mc"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" name="AustralSlabBlur-Regular" family="Austral Slab" pointSize="24"/>
-                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ClK-au-9Sw">
                                 <rect key="frame" x="348" y="342" width="230" height="30"/>
                                 <color key="backgroundColor" name="HudActions-background"/>
@@ -76,52 +67,101 @@
                                     <constraint firstAttribute="width" constant="24" id="cUl-Sy-Ngf"/>
                                 </constraints>
                             </view>
-                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="1" translatesAutoresizingMaskIntoConstraints="NO" id="yZK-mR-B1Q">
-                                <rect key="frame" x="475" y="188" width="77" height="32"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="bottom" spacing="29" translatesAutoresizingMaskIntoConstraints="NO" id="JAY-dL-Otz">
+                                <rect key="frame" x="321.33333333333337" y="110" width="283.33333333333337" height="151"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="24" translatesAutoresizingMaskIntoConstraints="NO" id="PzC-z6-G9h">
+                                        <rect key="frame" x="0.0" y="0.0" width="283.33333333333331" height="31"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" verticalCompressionResistancePriority="751" text="Song" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aAX-H7-jZG">
+                                                <rect key="frame" x="0.0" y="0.0" width="182.33333333333334" height="31"/>
+                                                <fontDescription key="fontDescription" name="AustralSlabBlur-Regular" family="Austral Slab" pointSize="24"/>
+                                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="1" translatesAutoresizingMaskIntoConstraints="NO" id="6Y1-l8-e0D">
+                                                <rect key="frame" x="206.33333333333331" y="0.0" width="77" height="32"/>
+                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="77" id="Noo-CB-34L"/>
+                                                    <constraint firstAttribute="height" constant="31" id="P7A-Rl-Dtj"/>
+                                                </constraints>
+                                                <segments>
+                                                    <segment title="Off"/>
+                                                    <segment title="On"/>
+                                                </segments>
+                                                <color key="selectedSegmentTintColor" name="HudActions-background"/>
+                                                <connections>
+                                                    <action selector="songSegmentedControl:" destination="Y6W-OH-hqX" eventType="valueChanged" id="XSQ-mP-n0v"/>
+                                                </connections>
+                                            </segmentedControl>
+                                        </subviews>
+                                    </stackView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="24" translatesAutoresizingMaskIntoConstraints="NO" id="bAQ-2W-h7i">
+                                        <rect key="frame" x="0.0" y="60" width="283.33333333333331" height="31"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" verticalCompressionResistancePriority="751" text="Sound effects" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zQ9-ke-i0M">
+                                                <rect key="frame" x="0.0" y="0.0" width="182.33333333333334" height="31"/>
+                                                <fontDescription key="fontDescription" name="AustralSlabBlur-Regular" family="Austral Slab" pointSize="24"/>
+                                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="1" translatesAutoresizingMaskIntoConstraints="NO" id="yZK-mR-B1Q">
+                                                <rect key="frame" x="206.33333333333331" y="0.0" width="77" height="32"/>
+                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="31" id="PW1-Kp-kSK"/>
+                                                    <constraint firstAttribute="width" constant="77" id="Po0-nh-ZwZ"/>
+                                                </constraints>
+                                                <segments>
+                                                    <segment title="Off"/>
+                                                    <segment title="On"/>
+                                                </segments>
+                                                <color key="selectedSegmentTintColor" name="HudActions-background"/>
+                                                <connections>
+                                                    <action selector="SoundEffectsSegmentedControl:" destination="Y6W-OH-hqX" eventType="valueChanged" id="12O-po-Qo2"/>
+                                                </connections>
+                                            </segmentedControl>
+                                        </subviews>
+                                    </stackView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="30" translatesAutoresizingMaskIntoConstraints="NO" id="BzD-Nd-VYZ">
+                                        <rect key="frame" x="0.0" y="120" width="283.33333333333331" height="31"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" verticalCompressionResistancePriority="751" text="Haptic Feedback" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZH4-XK-h1x">
+                                                <rect key="frame" x="0.0" y="0.0" width="176.33333333333334" height="31"/>
+                                                <fontDescription key="fontDescription" name="AustralSlabBlur-Regular" family="Austral Slab" pointSize="24"/>
+                                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="1" translatesAutoresizingMaskIntoConstraints="NO" id="wEN-fM-ZVw">
+                                                <rect key="frame" x="206.33333333333331" y="0.0" width="77" height="32"/>
+                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="31" id="1Nd-v3-sgA"/>
+                                                    <constraint firstAttribute="width" constant="77" id="79E-Nd-23P"/>
+                                                </constraints>
+                                                <segments>
+                                                    <segment title="Off"/>
+                                                    <segment title="On"/>
+                                                </segments>
+                                                <color key="selectedSegmentTintColor" name="HudActions-background"/>
+                                                <connections>
+                                                    <action selector="hapticSegmentedControlAction:" destination="Y6W-OH-hqX" eventType="valueChanged" id="d6w-yE-x5S"/>
+                                                </connections>
+                                            </segmentedControl>
+                                        </subviews>
+                                    </stackView>
+                                </subviews>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="77" id="Wk4-Zi-ieL"/>
-                                    <constraint firstAttribute="height" constant="31" id="YLP-Is-Ja4"/>
+                                    <constraint firstItem="bAQ-2W-h7i" firstAttribute="leading" secondItem="JAY-dL-Otz" secondAttribute="leading" id="3Eq-Du-dGd"/>
+                                    <constraint firstItem="PzC-z6-G9h" firstAttribute="leading" secondItem="JAY-dL-Otz" secondAttribute="leading" id="BM5-bM-oq0"/>
+                                    <constraint firstAttribute="trailing" secondItem="PzC-z6-G9h" secondAttribute="trailing" id="LNh-Th-uJR"/>
+                                    <constraint firstAttribute="trailing" secondItem="bAQ-2W-h7i" secondAttribute="trailing" id="Zsq-eY-sCP"/>
                                 </constraints>
-                                <segments>
-                                    <segment title="Off"/>
-                                    <segment title="On"/>
-                                </segments>
-                                <color key="selectedSegmentTintColor" name="HudActions-background"/>
-                                <connections>
-                                    <action selector="SoundEffectsSegmentedControl:" destination="Y6W-OH-hqX" eventType="valueChanged" id="12O-po-Qo2"/>
-                                </connections>
-                            </segmentedControl>
-                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="1" translatesAutoresizingMaskIntoConstraints="NO" id="6Y1-l8-e0D">
-                                <rect key="frame" x="475" y="127.66666666666669" width="77" height="32"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="77" id="dKC-Tr-tvD"/>
-                                    <constraint firstAttribute="height" constant="31" id="vwV-MN-1Bs"/>
-                                </constraints>
-                                <segments>
-                                    <segment title="Off"/>
-                                    <segment title="On"/>
-                                </segments>
-                                <color key="selectedSegmentTintColor" name="HudActions-background"/>
-                                <connections>
-                                    <action selector="songSegmentedControl:" destination="Y6W-OH-hqX" eventType="valueChanged" id="XSQ-mP-n0v"/>
-                                </connections>
-                            </segmentedControl>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" verticalCompressionResistancePriority="751" text="Song" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aAX-H7-jZG">
-                                <rect key="frame" x="397" y="131" width="54" height="24"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="24" id="NFW-gc-D19"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" name="AustralSlabBlur-Regular" family="Austral Slab" pointSize="24"/>
-                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" verticalCompressionResistancePriority="751" text="Marcelo Diefenbach" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vv4-ZD-Maa">
-                                <rect key="frame" x="475" y="253" width="213" height="24"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="24" id="EaG-dj-GuH"/>
-                                </constraints>
+                            </stackView>
+                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" verticalCompressionResistancePriority="751" fixedFrame="YES" text="Marcelo Diefenbach" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vv4-ZD-Maa">
+                                <rect key="frame" x="694" y="345" width="213" height="24"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" name="AustralSlabBlur-Regular" family="Austral Slab" pointSize="24"/>
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
@@ -142,11 +182,9 @@
                                     <constraint firstAttribute="width" constant="24" id="o4K-ka-BvP"/>
                                 </constraints>
                             </view>
-                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" verticalCompressionResistancePriority="751" text="Name" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8Q4-dW-JJl">
-                                <rect key="frame" x="389" y="253" width="62" height="24"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="24" id="Aqr-EX-X67"/>
-                                </constraints>
+                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" verticalCompressionResistancePriority="751" fixedFrame="YES" text="Name" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8Q4-dW-JJl">
+                                <rect key="frame" x="608" y="345" width="62" height="24"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" name="AustralSlabBlur-Regular" family="Austral Slab" pointSize="24"/>
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
@@ -157,32 +195,24 @@
                         <constraints>
                             <constraint firstItem="dNl-4r-8uG" firstAttribute="centerX" secondItem="vDu-zF-Fre" secondAttribute="centerX" id="17h-OD-B7Z"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="ClK-au-9Sw" secondAttribute="bottom" constant="35" id="5x4-t3-5BG"/>
-                            <constraint firstItem="vv4-ZD-Maa" firstAttribute="leading" secondItem="dNl-4r-8uG" secondAttribute="trailing" id="7Dg-ag-NpG"/>
+                            <constraint firstItem="JAY-dL-Otz" firstAttribute="top" secondItem="or0-wz-3Tg" secondAttribute="bottom" constant="30" id="AUa-sA-quY"/>
                             <constraint firstItem="or0-wz-3Tg" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" constant="46" id="FK1-1k-alX"/>
                             <constraint firstItem="Snm-Vq-bmJ" firstAttribute="centerX" secondItem="vDu-zF-Fre" secondAttribute="centerX" id="GcC-EU-4Vg"/>
-                            <constraint firstItem="Snm-Vq-bmJ" firstAttribute="leading" secondItem="aAX-H7-jZG" secondAttribute="trailing" id="K7L-99-Ans"/>
                             <constraint firstItem="c1b-wP-qhw" firstAttribute="centerY" secondItem="vDu-zF-Fre" secondAttribute="centerY" id="KQ7-PL-RI5"/>
                             <constraint firstItem="dNl-4r-8uG" firstAttribute="top" secondItem="c1b-wP-qhw" secondAttribute="bottom" constant="9.5" id="SP4-Hf-gMJ"/>
-                            <constraint firstItem="6Y1-l8-e0D" firstAttribute="centerY" secondItem="Snm-Vq-bmJ" secondAttribute="centerY" id="Uxv-GU-sYq"/>
-                            <constraint firstItem="aAX-H7-jZG" firstAttribute="centerY" secondItem="Snm-Vq-bmJ" secondAttribute="centerY" id="WlU-4M-aog"/>
-                            <constraint firstItem="yZK-mR-B1Q" firstAttribute="leading" secondItem="c1b-wP-qhw" secondAttribute="trailing" id="YnE-KV-G6e"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="KnC-Ee-mTq" secondAttribute="trailing" constant="16" id="Z8z-zA-Vvj"/>
                             <constraint firstItem="c1b-wP-qhw" firstAttribute="centerX" secondItem="vDu-zF-Fre" secondAttribute="centerX" id="bUm-Gh-O28"/>
-                            <constraint firstItem="c1b-wP-qhw" firstAttribute="leading" secondItem="zQ9-ke-i0M" secondAttribute="trailing" id="bla-bU-bsK"/>
-                            <constraint firstItem="dNl-4r-8uG" firstAttribute="leading" secondItem="8Q4-dW-JJl" secondAttribute="trailing" id="g2O-0m-cfT"/>
                             <constraint firstItem="c1b-wP-qhw" firstAttribute="top" secondItem="Snm-Vq-bmJ" secondAttribute="bottom" constant="8.5" id="gKZ-HM-8p3"/>
                             <constraint firstItem="KnC-Ee-mTq" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" constant="41" id="gVh-Ql-h31"/>
                             <constraint firstItem="ClK-au-9Sw" firstAttribute="centerX" secondItem="vDu-zF-Fre" secondAttribute="centerX" id="h2z-bz-JY9"/>
-                            <constraint firstItem="6Y1-l8-e0D" firstAttribute="leading" secondItem="Snm-Vq-bmJ" secondAttribute="trailing" id="hIr-d1-Nfa"/>
-                            <constraint firstItem="yZK-mR-B1Q" firstAttribute="centerY" secondItem="c1b-wP-qhw" secondAttribute="centerY" id="o76-NH-6AP"/>
-                            <constraint firstItem="vv4-ZD-Maa" firstAttribute="centerY" secondItem="dNl-4r-8uG" secondAttribute="centerY" id="puP-rd-BQ9"/>
                             <constraint firstItem="KnC-Ee-mTq" firstAttribute="width" secondItem="KnC-Ee-mTq" secondAttribute="height" multiplier="1:1" id="pvH-lc-BiU"/>
-                            <constraint firstItem="zQ9-ke-i0M" firstAttribute="centerY" secondItem="c1b-wP-qhw" secondAttribute="centerY" id="pxT-9E-5t6"/>
-                            <constraint firstItem="8Q4-dW-JJl" firstAttribute="centerY" secondItem="dNl-4r-8uG" secondAttribute="centerY" id="tIk-cz-taf"/>
+                            <constraint firstItem="JAY-dL-Otz" firstAttribute="centerX" secondItem="5EZ-qb-Rvc" secondAttribute="centerX" id="vRu-qX-oaw"/>
                             <constraint firstItem="or0-wz-3Tg" firstAttribute="centerX" secondItem="vDu-zF-Fre" secondAttribute="centerX" id="x5Q-tb-rFQ"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="hapticsSegmentedControl" destination="wEN-fM-ZVw" id="Bm3-bg-Fsh"/>
+                        <outlet property="hapticslabel" destination="ZH4-XK-h1x" id="HvX-CV-qRC"/>
                         <outlet property="nameLabel" destination="8Q4-dW-JJl" id="cMU-PS-ARJ"/>
                         <outlet property="playerNameLabel" destination="vv4-ZD-Maa" id="hcW-uz-rXy"/>
                         <outlet property="resetButton" destination="ClK-au-9Sw" id="fWx-Y0-I5H"/>

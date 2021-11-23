@@ -32,11 +32,13 @@ class UpgradeCell: UITableViewCell {
         
         if(value <= GameScene.user!.mainCurrency) {
             GameSound.shared.playSoundFXIfActivated(sound: .UPGRADE)
+            Haptics.shared.activateHaptics(sound: .sucess)
             GameScene.user?.removeMainCurrency(value: value)
             generator?.upgrade(index: thisResourceID)
             tableView?.reloadData()
         } else {
             GameSound.shared.playSoundFXIfActivated(sound: .DEACTIVATE_BUTTON)
+            Haptics.shared.activateHaptics(sound: .error)
         }
         value = (generator?.resourcesArray[thisResourceID].currentPrice ?? 0)
         upgradeCostLabel.text = "\(doubleToString(value: value))"
