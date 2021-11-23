@@ -86,6 +86,7 @@ class UpgradeFactorySceneController: UIViewController,  UITableViewDataSource, U
     // MARK: - ACTIONS
     @IBAction func close(_ sender: Any) {
         GameSound.shared.playSoundFXIfActivated(sound: .BUTTON_CLICK)
+        Haptics.shared.activateHaptics(sound: .sucess)
         self.dismiss(animated: false, completion: nil)
     }
     
@@ -95,6 +96,7 @@ class UpgradeFactorySceneController: UIViewController,  UITableViewDataSource, U
      */
     @IBAction func moveToInventory(_ sender: Any) {
         GameSound.shared.playSoundFXIfActivated(sound: .BUTTON_CLICK)
+        Haptics.shared.activateHaptics(sound: .error)
         if let factory = UpgradeFactorySceneController.generator {
             let position = factory.position
             factory.position = .none

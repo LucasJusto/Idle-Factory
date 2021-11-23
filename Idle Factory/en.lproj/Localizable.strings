@@ -108,6 +108,7 @@
 "ConfirmResetQuestionTitle" = "Clearing your personal data will change your username, do you want to continue?";
 "CancelResetAction" = "Cancel";
 "ConfirmResetAction" = "Reset";
+"HapticsLabel" = "Haptics Feedback";
 
 
 //MARK: - Onboarding

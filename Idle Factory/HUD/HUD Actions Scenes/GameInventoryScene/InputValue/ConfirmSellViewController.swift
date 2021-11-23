@@ -20,11 +20,13 @@ class ConfirmSellViewController: UIViewController {
     
     @IBAction func confirmSellButton(_ sender: Any) {
         GameSound.shared.playSoundFXIfActivated(sound: .BUTTON_CLICK)
+        Haptics.shared.activateHaptics(sound: .sucess)
         delegate?.confirmSell()
     }
     
     @IBAction func cancellButton(_ sender: Any) {
         GameSound.shared.playSoundFXIfActivated(sound: .BUTTON_CLICK)
+        Haptics.shared.activateHaptics(sound: .sucess)
         self.dismiss(animated: false, completion: nil)
     }
     

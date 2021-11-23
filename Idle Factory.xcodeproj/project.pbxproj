@@ -71,6 +71,7 @@
 		DFA8A113273D86EA00623847 /* InputValueSellViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFA8A10F273D86EA00623847 /* InputValueSellViewController.swift */; };
 		F8BF29E9273AECE6009152CA /* WelcomeBackViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8BF29E8273AECE6009152CA /* WelcomeBackViewController.swift */; };
 		F8BF29ED273AED58009152CA /* WelcomeBack.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F8BF29EC273AED58009152CA /* WelcomeBack.storyboard */; };
+		F8CCA941274D506100BF6492 /* Haptic.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8CCA940274D506100BF6492 /* Haptic.swift */; };
 		F8CD9B54273C4007002349B1 /* GenerateNFTConfirmation.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F8CD9B53273C4007002349B1 /* GenerateNFTConfirmation.storyboard */; };
 		F8CD9B57273C4574002349B1 /* GenerateNFTConfirmationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8CD9B56273C4574002349B1 /* GenerateNFTConfirmationViewController.swift */; };
 /* End PBXBuildFile section */
@@ -146,6 +147,7 @@
 		DFA8A10F273D86EA00623847 /* InputValueSellViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InputValueSellViewController.swift; sourceTree = "<group>"; };
 		F8BF29E8273AECE6009152CA /* WelcomeBackViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeBackViewController.swift; sourceTree = "<group>"; };
 		F8BF29EC273AED58009152CA /* WelcomeBack.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = WelcomeBack.storyboard; sourceTree = "<group>"; };
+		F8CCA940274D506100BF6492 /* Haptic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Haptic.swift; sourceTree = "<group>"; };
 		F8CD9B53273C4007002349B1 /* GenerateNFTConfirmation.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = GenerateNFTConfirmation.storyboard; sourceTree = "<group>"; };
 		F8CD9B56273C4574002349B1 /* GenerateNFTConfirmationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenerateNFTConfirmationViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -308,6 +310,7 @@
 		487A19EE2715504000723065 /* Idle Factory */ = {
 			isa = PBXGroup;
 			children = (
+				F8CCA93F274D504300BF6492 /* HapticFeedback */,
 				558ADE8C2744272A008EB9F0 /* Onboarding  */,
 				55A0B4AC2732F66700161FE8 /* FactoryDetails */,
 				555DFCB52729BDC5006C60D9 /* UpgradeFactory */,
@@ -418,6 +421,14 @@
 				F8BF29EC273AED58009152CA /* WelcomeBack.storyboard */,
 			);
 			path = PopUp;
+			sourceTree = "<group>";
+		};
+		F8CCA93F274D504300BF6492 /* HapticFeedback */ = {
+			isa = PBXGroup;
+			children = (
+				F8CCA940274D506100BF6492 /* Haptic.swift */,
+			);
+			path = HapticFeedback;
 			sourceTree = "<group>";
 		};
 		F8CD9B55273C453E002349B1 /* Generate_NFT_Button */ = {
@@ -552,6 +563,7 @@
 				487A19F82715504000723065 /* GameViewController.swift in Sources */,
 				55A0B4B027330B2000161FE8 /* FactoryDetailSceneController.swift in Sources */,
 				55BD52A92718BC2C0057C7C0 /* User.swift in Sources */,
+				F8CCA941274D506100BF6492 /* Haptic.swift in Sources */,
 				55439BC52721E87400F69461 /* functions.swift in Sources */,
 				55A0B4B227330EA500161FE8 /* FactoryDetailCell.swift in Sources */,
 				2B9C3146271F4BC3008A7676 /* GameHud.swift in Sources */,

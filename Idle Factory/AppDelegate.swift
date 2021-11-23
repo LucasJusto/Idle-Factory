@@ -31,6 +31,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             GameSound.shared.saveBackgroundMusicSettings(status: true)
             GameSound.shared.startBackgroundMusic()
             GameSound.shared.saveSoundFXSettings(status: true)
+            Haptics.shared.activateHaptics(sound: .sucess)
+            Haptics.shared.saveHapticsSettings(status: true)
         } else {
             if GameSound.shared.backgroundMusicStatus {
                 GameSound.shared.startBackgroundMusic()
@@ -58,7 +60,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             
         }
         
-        GameViewController.scene?.background.removeAllChildren()
+        GameScene.background.removeAllChildren()
         let semaphore = DispatchSemaphore(value: 0)
         checkMyOffers(semaphore: semaphore)
         semaphore.wait()

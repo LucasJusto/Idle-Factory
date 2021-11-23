@@ -95,6 +95,7 @@ class GameShopSceneViewController: UIViewController, NavigationCellDelegate {
      */
     @IBAction func closeShop(_ sender: Any) {
         GameSound.shared.playSoundFXIfActivated(sound: .BUTTON_CLICK)
+        Haptics.shared.activateHaptics(sound: .sucess)
         self.view.window!.rootViewController?.dismiss(animated: false, completion: nil)
     }
 
@@ -105,6 +106,7 @@ class GameShopSceneViewController: UIViewController, NavigationCellDelegate {
      */
     @IBAction func generateNFT(_ sender: Any) {
         GameSound.shared.playSoundFXIfActivated(sound: .BUTTON_CLICK)
+        Haptics.shared.activateHaptics(sound: .sucess)
         var mainView: UIStoryboard!
         mainView = UIStoryboard(name: "GenerateNFTConfirmation", bundle: nil)
         let viewcontroller : UIViewController = mainView.instantiateViewController(withIdentifier: "PopUpConfirmation") as UIViewController
@@ -117,6 +119,7 @@ class GameShopSceneViewController: UIViewController, NavigationCellDelegate {
      */
     @IBAction func displayMarketplace(_ sender: Any) {
         GameSound.shared.playSoundFXIfActivated(sound: .BUTTON_CLICK)
+        Haptics.shared.activateHaptics(sound: .sucess)
         var mainView: UIStoryboard!
         mainView = UIStoryboard(name: "GameMarketplaceScene", bundle: nil)
         let viewcontroller : UIViewController = mainView.instantiateViewController(withIdentifier: "MarketplaceStoryboard") as UIViewController
@@ -131,6 +134,7 @@ class GameShopSceneViewController: UIViewController, NavigationCellDelegate {
     
     func didButtonPressed() {
         GameSound.shared.playSoundFXIfActivated(sound: .BUTTON_CLICK)
+        Haptics.shared.activateHaptics(sound: .sucess)
         print(#function)
         var mainView: UIStoryboard!
         mainView = UIStoryboard(name: "FactoryDetailScene", bundle: nil)

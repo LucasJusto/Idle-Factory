@@ -86,6 +86,7 @@ class GameAnnounceSceneViewController: UIViewController, NavigationCellDelegate,
      */
     @IBAction func returnToMarketplace(_ sender: Any) {
         GameSound.shared.playSoundFXIfActivated(sound: .BUTTON_CLICK)
+        Haptics.shared.activateHaptics(sound: .sucess)
         self.dismiss(animated: false, completion: nil)
     }
     
