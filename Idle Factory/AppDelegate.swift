@@ -32,6 +32,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             GameSound.shared.startBackgroundMusic()
             GameSound.shared.saveSoundFXSettings(status: true)
         } else {
+            if GameSound.shared.backgroundMusicStatus {
+                GameSound.shared.startBackgroundMusic()
+            }
             let storyboard = UIStoryboard(name: "Main", bundle: .main)
             let viewcontroller = storyboard.instantiateInitialViewController()
             window?.rootViewController = viewcontroller

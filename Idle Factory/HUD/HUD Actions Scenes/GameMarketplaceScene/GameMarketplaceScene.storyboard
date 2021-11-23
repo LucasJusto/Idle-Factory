@@ -178,6 +178,10 @@
                                                     <subviews>
                                                         <skView userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bAn-mb-2hG">
                                                             <rect key="frame" x="8" y="8" width="144" height="134"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="width" secondItem="bAn-mb-2hG" secondAttribute="height" multiplier="72:67" id="ADC-3o-2kH"/>
+                                                                <constraint firstAttribute="width" priority="999" constant="144" id="JkP-bD-Wed"/>
+                                                            </constraints>
                                                         </skView>
                                                         <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" alignment="center" spacing="1" translatesAutoresizingMaskIntoConstraints="NO" id="XBS-CF-vpz">
                                                             <rect key="frame" x="10" y="147" width="140" height="15"/>
@@ -264,7 +268,6 @@
                                                     <rect key="frame" x="22" y="198" width="116" height="24"/>
                                                     <color key="backgroundColor" name="actionColor1"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="width" constant="87" id="JGs-dw-yxj"/>
                                                         <constraint firstAttribute="height" constant="24" id="Y8j-Nx-IvL"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="10"/>
@@ -460,7 +463,7 @@
                                 <rect key="frame" x="0.0" y="111" width="896" height="277"/>
                                 <color key="backgroundColor" name="Marketplace_background"/>
                                 <inset key="scrollIndicatorInsets" minX="2" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="zkK-Tp-u9Q">
+                                <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="zkK-Tp-u9Q">
                                     <size key="itemSize" width="160" height="225"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
@@ -479,6 +482,10 @@
                                                     <subviews>
                                                         <skView userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2pV-BJ-xfq">
                                                             <rect key="frame" x="8" y="8" width="144" height="134"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="width" constant="144" id="clu-mD-mTk"/>
+                                                                <constraint firstAttribute="width" secondItem="2pV-BJ-xfq" secondAttribute="height" multiplier="72:67" id="ffH-sT-D0w"/>
+                                                            </constraints>
                                                         </skView>
                                                         <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" alignment="center" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="uwc-AH-6Hz">
                                                             <rect key="frame" x="10" y="147" width="140" height="15"/>
@@ -565,7 +572,6 @@
                                                     <rect key="frame" x="22" y="198" width="116" height="24"/>
                                                     <color key="backgroundColor" name="actionColor1"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="width" constant="87" id="Z21-RG-pWb"/>
                                                         <constraint firstAttribute="height" constant="24" id="yCl-yY-ze0"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="10"/>
