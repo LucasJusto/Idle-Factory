@@ -39,6 +39,7 @@ class GameChallengeSceneController: UIViewController {
      */
     @IBAction func closeChallenge(_ sender: Any) {
         GameSound.shared.playSoundFXIfActivated(sound: .BUTTON_CLICK)
+        Haptics.shared.activateHaptics(sound: .sucess)
         self.view.window!.rootViewController?.dismiss(animated: false, completion: nil)
     }
     

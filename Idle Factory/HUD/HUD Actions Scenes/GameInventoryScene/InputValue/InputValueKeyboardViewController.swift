@@ -17,6 +17,7 @@ class InputValueKeyboardViewController: UIViewController {
     @IBOutlet weak var buttonDone: UIButton!
     @IBAction func confirmButton(_ sender: Any) {
         GameSound.shared.playSoundFXIfActivated(sound: .BUTTON_CLICK)
+        Haptics.shared.activateHaptics(sound: .sucess)
         guard let validText = inputField.text else {return}
         
         if let x = Double(validText) {

@@ -16,10 +16,12 @@ class SettingsViewController: UIViewController, ResetPersonalData {
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var playerNameLabel: UILabel!
     @IBOutlet weak var resetButton: UIButton!
+    @IBOutlet weak var hapticslabel: UILabel!
     
     // MARK: - SEGMENTED CONTROL
     @IBOutlet weak var songSegmentedControl: UISegmentedControl!
     @IBOutlet weak var soundFXSegmentedControl: UISegmentedControl!
+    @IBOutlet weak var hapticsSegmentedControl: UISegmentedControl!
     
     
     // MARK: - INIT
@@ -41,6 +43,12 @@ class SettingsViewController: UIViewController, ResetPersonalData {
             soundFXSegmentedControl.selectedSegmentIndex = 0
         }
         
+        if Haptics.shared.hapticStatus {
+            hapticsSegmentedControl.selectedSegmentIndex = 1
+        } else {
+            hapticsSegmentedControl.selectedSegmentIndex = 0
+        }
+        
         // Setting Header
         settingsHeader.text = NSLocalizedString("SettingHeader", comment: "")
         
@@ -49,6 +57,7 @@ class SettingsViewController: UIViewController, ResetPersonalData {
         soundEffectsLabel.text = NSLocalizedString("SoundEffectsLabel", comment: "")
         nameLabel.text = NSLocalizedString("NameLabel", comment: "")
         resetButton.setTitle(NSLocalizedString("ResetPersonalDataLabel", comment: ""), for: .normal)
+        hapticslabel.text = NSLocalizedString("HapticsLabel", comment: "")
     }
     
     
@@ -78,6 +87,7 @@ class SettingsViewController: UIViewController, ResetPersonalData {
      */
     @IBAction func closeSettings(_ sender: Any) {
         GameSound.shared.playSoundFXIfActivated(sound: .BUTTON_CLICK)
+        Haptics.shared.activateHaptics(sound: .sucess)
         self.dismiss(animated: false, completion: nil)
     }
     
@@ -97,6 +107,17 @@ class SettingsViewController: UIViewController, ResetPersonalData {
             break
         }
     }
+    @IBAction func hapticSegmentedControlAction(_ sender: UISegmentedControl) {
+        switch sender.selectedSegmentIndex {
+        case 0:
+            Haptics.shared.activateHaptics(sound: .error)
+            Haptics.shared.saveHapticsSettings(status: false)
+        case 1:
+            Haptics.shared.saveHapticsSettings(status: true)
+        default:
+            break
+        }
+    }
     
     
     /**
@@ -106,6 +127,7 @@ class SettingsViewController: UIViewController, ResetPersonalData {
         switch sender.selectedSegmentIndex {
         case 0:
             GameSound.shared.playSoundFXIfActivated(sound: .DEACTIVATE_BUTTON)
+            Haptics.shared.activateHaptics(sound: .sucess)
             GameSound.shared.saveSoundFXSettings(status: false)
         case 1:
             GameSound.shared.saveSoundFXSettings(status: true)
@@ -121,6 +143,7 @@ class SettingsViewController: UIViewController, ResetPersonalData {
      */
     @IBAction func resetPersonalInformation(_ sender: Any) {
         GameSound.shared.playSoundFXIfActivated(sound: .BUTTON_CLICK)
+        Haptics.shared.activateHaptics(sound: .sucess)
         if let infoViewController = storyboard?.instantiateViewController(identifier: "ConfirmResetPersonalData") as? ConfirmResetPersonalDataViewController {
             infoViewController.modalPresentationStyle = .overCurrentContext
             infoViewController.delegate = self

@@ -440,6 +440,7 @@ class GameScene: SKScene {
      */
     func displaySettings() {
         GameSound.shared.playSoundFXIfActivated(sound: .BUTTON_CLICK)
+        Haptics.shared.activateHaptics(sound: .sucess)
         let viewController = UIApplication.shared.windows.first!.rootViewController as! GameViewController
         viewController.displaySettings()
     }
@@ -450,6 +451,7 @@ class GameScene: SKScene {
      */
     func displayInventory() {
         GameSound.shared.playSoundFXIfActivated(sound: .BUTTON_CLICK)
+        Haptics.shared.activateHaptics(sound: .sucess)
         let viewController = UIApplication.shared.windows.first!.rootViewController as! GameViewController
         viewController.displayInventory()
     }
@@ -460,6 +462,7 @@ class GameScene: SKScene {
      */
     func displayShop() {
         GameSound.shared.playSoundFXIfActivated(sound: .BUTTON_CLICK)
+        Haptics.shared.activateHaptics(sound: .sucess)
         let viewController = UIApplication.shared.windows.first!.rootViewController as! GameViewController
         viewController.displayShop()
     }
@@ -470,6 +473,7 @@ class GameScene: SKScene {
      */
     func displayMarketplace() {
         GameSound.shared.playSoundFXIfActivated(sound: .BUTTON_CLICK)
+        Haptics.shared.activateHaptics(sound: .sucess)
         let viewController = UIApplication.shared.windows.first!.rootViewController as! GameViewController
         viewController.displayMarketplace()
     }
@@ -480,6 +484,7 @@ class GameScene: SKScene {
      */
     func displayChallenge() {
         GameSound.shared.playSoundFXIfActivated(sound: .BUTTON_CLICK)
+        Haptics.shared.activateHaptics(sound: .sucess)
         let viewController = UIApplication.shared.windows.first!.rootViewController as! GameViewController
         viewController.displayChallenge()
     }

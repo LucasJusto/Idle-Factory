@@ -204,6 +204,7 @@ class GameInventorySceneController: UIViewController, RefreshInventory {
      */
     @IBAction func closeInventory(_ sender: Any) {
         GameSound.shared.playSoundFXIfActivated(sound: .BUTTON_CLICK)
+        Haptics.shared.activateHaptics(sound: .sucess)
         self.view.window!.rootViewController?.dismiss(animated: false, completion: nil)
     }
     
@@ -213,6 +214,7 @@ class GameInventorySceneController: UIViewController, RefreshInventory {
      */
     @IBAction func goToShop(_ sender: Any) {
         GameSound.shared.playSoundFXIfActivated(sound: .BUTTON_CLICK)
+        Haptics.shared.activateHaptics(sound: .sucess)
         let mainView = UIStoryboard(name: "GameShopScene", bundle: nil)
         let viewcontroller : UIViewController = mainView.instantiateViewController(withIdentifier: "ShopStoryboard") as UIViewController
         self.present(viewcontroller, animated: false)
@@ -224,6 +226,7 @@ class GameInventorySceneController: UIViewController, RefreshInventory {
      */
     @IBAction func quickSellModal(_ sender: Any) {
         GameSound.shared.playSoundFXIfActivated(sound: .BUTTON_CLICK)
+        Haptics.shared.activateHaptics(sound: .sucess)
         hideQuickSellModal(status: false)
         quickSellEarningLabel.text = "\(doubleToString(value:calculateQuickSell(factory: selectedFactory!)))"
     }
@@ -234,6 +237,7 @@ class GameInventorySceneController: UIViewController, RefreshInventory {
      */
     @IBAction func cancelQuickSell(_ sender: Any) {
         GameSound.shared.playSoundFXIfActivated(sound: .BUTTON_CLICK)
+        Haptics.shared.activateHaptics(sound: .sucess)
         hideQuickSellModal(status: true)
     }
     
@@ -243,6 +247,7 @@ class GameInventorySceneController: UIViewController, RefreshInventory {
      */
     @IBAction func confirmQuickSell(_ sender: Any) {
         GameSound.shared.playSoundFXIfActivated(sound: .BUTTON_CLICK)
+        Haptics.shared.activateHaptics(sound: .sucess)
         if let factory = selectedFactory, let factoryIndex = selectedFactoryIndex, let factoryIndex2 = selectedFactoryIndex2 {
             hideQuickSellModal(status: true)
             DispatchQueue.global().async {
@@ -291,6 +296,7 @@ class GameInventorySceneController: UIViewController, RefreshInventory {
      */
     func insertOnPark() {
         GameSound.shared.playSoundFXIfActivated(sound: .BUTTON_CLICK)
+        Haptics.shared.activateHaptics(sound: .sucess)
         if let factory = selectedFactory, let factoryIndex = selectedFactoryIndex {
             factory.isActive = .yes
             factory.position = clickedSlotPosition
@@ -387,6 +393,7 @@ class GameInventorySceneController: UIViewController, RefreshInventory {
      */
     func openBoxToSetValue() {
             GameSound.shared.playSoundFXIfActivated(sound: .BUTTON_CLICK)
+        Haptics.shared.activateHaptics(sound: .sucess)
 
             guard let myFactoriesSell = GameScene.user?.generators,
                   !myFactoriesSell.isEmpty
@@ -457,6 +464,7 @@ extension GameInventorySceneController: UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         GameSound.shared.playSoundFXIfActivated(sound: .BUTTON_CLICK)
+        Haptics.shared.activateHaptics(sound: .sucess)
         guard let cell = collectionView.cellForItem(at: indexPath) as? GameInventoryViewCell else { return }
                 cell.layer.borderWidth = 2
                 cell.layer.borderColor = UIColor.black.cgColor

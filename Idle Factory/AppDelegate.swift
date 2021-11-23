@@ -31,6 +31,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             GameSound.shared.saveBackgroundMusicSettings(status: true)
             GameSound.shared.startBackgroundMusic()
             GameSound.shared.saveSoundFXSettings(status: true)
+            Haptics.shared.activateHaptics(sound: .sucess)
+            Haptics.shared.saveHapticsSettings(status: true)
         } else {
             let storyboard = UIStoryboard(name: "Main", bundle: .main)
             let viewcontroller = storyboard.instantiateInitialViewController()
