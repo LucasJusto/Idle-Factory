@@ -169,7 +169,7 @@ class FactoryDetailSceneController: UIViewController,  UITableViewDataSource, UI
         purchaseButton.setTitle(NSLocalizedString("Purchase", comment: ""), for: UIControl.State.normal)
         
         
-        purchaseButton.titleLabel?.font = UIFont(name: "AustralSlabBlur-Regular", size: 10)
+        purchaseButton.titleLabel?.font = UIFont(name: "AustralSlabBlur-Regular", size: 14)
         
         
         purchaseButton.backgroundColor = UIColor(named: "actionColor1")
