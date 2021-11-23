@@ -421,7 +421,12 @@ extension GameInventorySceneController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if factoriesNotActive.count > 9 {
-            return factoriesNotActive.count
+            let cell_number = factoriesNotActive.count % 3
+            if cell_number == 0 {
+                return factoriesNotActive.count
+            } else {
+                return (factoriesNotActive.count - cell_number) + 3
+            }
         }
         return 9
     }

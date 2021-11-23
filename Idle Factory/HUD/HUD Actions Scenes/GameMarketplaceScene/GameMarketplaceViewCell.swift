@@ -83,11 +83,11 @@ class GameMarketplaceViewCell: UICollectionViewCell {
         seeMoreButton.layer.cornerRadius = 10
         
         // FONT
-        resourceQuantityType1.font = UIFont(name: "AustralSlabBlur-Regular", size: 8)
-        resourceQuantityType2.font = UIFont(name: "AustralSlabBlur-Regular", size: 8)
-        resourceQuantityType3.font = UIFont(name: "AustralSlabBlur-Regular", size: 8)
+        resourceQuantityType1.font = UIFont(name: "AustralSlabBlur-Regular", size: 12)
+        resourceQuantityType2.font = UIFont(name: "AustralSlabBlur-Regular", size: 12)
+        resourceQuantityType3.font = UIFont(name: "AustralSlabBlur-Regular", size: 12)
         priceLabel.font = UIFont(name: "AustralSlabBlur-Regular", size: 14)
-        seeMoreButton.titleLabel?.font = UIFont(name: "AustralSlabBlur-Regular", size: 10)
+        seeMoreButton.titleLabel?.font = UIFont(name: "AustralSlabBlur-Regular", size: 14)
         
         seeMoreButton.setTitle(NSLocalizedString("AboutNewFactoryButton", comment: ""), for: .normal)
     }

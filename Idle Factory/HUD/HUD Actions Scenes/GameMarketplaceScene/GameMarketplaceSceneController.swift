@@ -114,11 +114,11 @@ class GameMarketplaceSceneController: UIViewController, NavigationCellDelegate {
         emptyMarketplaceLabel.font = UIFont(name: "AustralSlabBlur-Regular", size: 27)
         
         // BUTTONS
-        sellAItemButton.titleLabel?.font = UIFont(name: "AustralSlabBlur-Regular", size: 10)
-        myAnnouncesButton.titleLabel?.font = UIFont(name: "AustralSlabBlur-Regular", size: 10)
+        sellAItemButton.titleLabel?.font = UIFont(name: "AustralSlabBlur-Regular", size: 14)
+        myAnnouncesButton.titleLabel?.font = UIFont(name: "AustralSlabBlur-Regular", size: 14)
         
         // UI SEGMENTED CONTROL
-        let attr = NSDictionary(object: UIFont(name: "AustralSlabBlur-Regular", size: 10)!, forKey: NSAttributedString.Key.font as NSCopying)
+        let attr = NSDictionary(object: UIFont(name: "AustralSlabBlur-Regular", size: 14)!, forKey: NSAttributedString.Key.font as NSCopying)
         itemTypeSelector.setTitleTextAttributes(attr as? [NSAttributedString.Key: Any] , for: .normal)
     }
     
@@ -276,7 +276,7 @@ extension GameMarketplaceSceneController: UICollectionViewDataSource {
 extension GameMarketplaceSceneController: UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let cellSize = CGSize(width: 131, height: 195)
+        let cellSize = CGSize(width: 160, height: 225)
         return cellSize
     }
     
