@@ -104,6 +104,7 @@ class Factory: Generator  {
                     node.texture = SKTexture(imageNamed: "Basic_Factory_level_2")
                     textureName = "Basic_Factory_level_2"
                 }
+                NotificationCenter.default.post(name: .didUpgradeFactory, object: self)
             }
         }
     }
@@ -278,5 +279,7 @@ enum FactoryType: CustomStringConvertible, CaseIterable {
     }
 }
 
-
+extension Notification.Name {
+    static let didUpgradeFactory = Notification.Name(rawValue: "didUpgradeFactory")
+}
 

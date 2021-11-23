@@ -18,14 +18,14 @@ class GameScene: SKScene {
     
     
     // MARK: - FACTORY POSITIONS
-    static var factoriesPositions: [(slot: SKSpriteNode, x: CGFloat, y: CGFloat)] =
+    static var factoriesPositions: [(id: String?, slot: SKSpriteNode, x: CGFloat, y: CGFloat)] =
     [
-        (slot: SKSpriteNode(imageNamed: "Factory_add_new"), x: -417.78, y: -68.25),
-        (slot: SKSpriteNode(imageNamed: "Factory_add_new"), x: -114.40, y: 110),
-        (slot: SKSpriteNode(imageNamed: "Factory_add_new"), x: -117.40, y: -235),
-        (slot: SKSpriteNode(imageNamed: "Factory_add_new"), x: 184.78, y: -68.25),
-        (slot: SKSpriteNode(imageNamed: "Factory_add_new"), x: 181.78, y: -410),
-        (slot: SKSpriteNode(imageNamed: "Factory_add_new"), x: 480.70, y: -235)
+        (id: nil, slot: SKSpriteNode(imageNamed: "Factory_add_new"), x: -417.78, y: -68.25),
+        (id: nil, slot: SKSpriteNode(imageNamed: "Factory_add_new"), x: -114.40, y: 110),
+        (id: nil, slot: SKSpriteNode(imageNamed: "Factory_add_new"), x: -117.40, y: -235),
+        (id: nil, slot: SKSpriteNode(imageNamed: "Factory_add_new"), x: 184.78, y: -68.25),
+        (id: nil, slot: SKSpriteNode(imageNamed: "Factory_add_new"), x: 181.78, y: -410),
+        (id: nil, slot: SKSpriteNode(imageNamed: "Factory_add_new"), x: 480.70, y: -235)
     ]
 
     
@@ -64,10 +64,10 @@ class GameScene: SKScene {
     
     
     // MARK: - NODES
-    var background: SKSpriteNode = SKSpriteNode()
+    static var background: SKSpriteNode = SKSpriteNode()
     private var loadingScreen: SKSpriteNode = SKSpriteNode()
     public lazy var cameraNode: Camera = {
-        let cameraNode = Camera(sceneView: self.view!, scenario: background)
+        let cameraNode = Camera(sceneView: self.view!, scenario: GameScene.background)
         cameraNode.position = CGPoint(x: GameScene.deviceScreenWidth / 50, y: GameScene.deviceScreenHeight / 4)
         cameraNode.applyZoomScale(scale: 0.43)
         
@@ -78,6 +78,16 @@ class GameScene: SKScene {
     // MARK: - USER
     static var user: User? = nil
     
+    @objc
+    func didUpgradeFactory(notification: Notification) {
+        if let factory = notification.object as? Factory {
+            for s in 0..<GameScene.factoriesPositions.count {
+                if GameScene.factoriesPositions[s].id == factory.id {
+                    GameScene.factoriesPositions[s].slot.texture = factory.node.texture
+                }
+            }
+        }
+    }
     
     // MARK: - INIT
     override func didMove(to view: SKView) {
@@ -94,12 +104,7 @@ class GameScene: SKScene {
         addChild(cameraNode)
         
         startIncrement()
-                
-//        for g in GameScene.user!.generators {
-//            CKRepository.deleteGeneratorByID(generator: g, completion: { _ in
-//            })
-//        }
-
+        NotificationCenter.default.addObserver(self, selector: #selector(didUpgradeFactory(notification:)), name: .didUpgradeFactory, object: nil)
     }
     
     
@@ -171,10 +176,10 @@ class GameScene: SKScene {
      Create scene background.
      */
     func createBackground(){
-        background = SKSpriteNode(imageNamed: "BG_Streets")
-        background.name = "Background"
+        GameScene.background = SKSpriteNode(imageNamed: "BG_Streets")
+        GameScene.background.name = "Background"
         
-        addChild(background)
+        addChild(GameScene.background)
     }
     
     
@@ -189,7 +194,7 @@ class GameScene: SKScene {
             slot.zPosition = 1
             slot.name = "factory_slot_\(n)_empty"
             slot.removeFromParent()
-            background.addChild(slot)
+            GameScene.background.addChild(slot)
         }
     }
     
@@ -312,8 +317,9 @@ class GameScene: SKScene {
                 GameScene.factoriesPositions[0].slot.removeFromParent()
                 GameScene.factoriesPositions[0].slot = factory.node
                 changeAllNodeFamilyNames(node: factory.node, name: "factory_slot_0_occupied")
-                background.addChild(factory.node)
+                GameScene.background.addChild(factory.node)
             }
+                GameScene.factoriesPositions[0].id = factory.id
             factory.node.zPosition = 5
         case .second:
             if factory.type == .Basic {
@@ -324,8 +330,9 @@ class GameScene: SKScene {
                 GameScene.factoriesPositions[1].slot.removeFromParent()
                 GameScene.factoriesPositions[1].slot = factory.node
                 changeAllNodeFamilyNames(node: factory.node, name: "factory_slot_1_occupied")
-                background.addChild(factory.node)
+                GameScene.background.addChild(factory.node)
             }
+            GameScene.factoriesPositions[1].id = factory.id
             factory.node.zPosition = 2
         case .third:
             if factory.type == .Basic {
@@ -336,8 +343,9 @@ class GameScene: SKScene {
                 GameScene.factoriesPositions[2].slot.removeFromParent()
                 GameScene.factoriesPositions[2].slot = factory.node
                 changeAllNodeFamilyNames(node: factory.node, name: "factory_slot_2_occupied")
-                background.addChild(factory.node)
+                GameScene.background.addChild(factory.node)
             }
+            GameScene.factoriesPositions[2].id = factory.id
             factory.node.zPosition = 20
         case .fourth:
             if factory.type == .Basic {
@@ -348,8 +356,9 @@ class GameScene: SKScene {
                 GameScene.factoriesPositions[3].slot.removeFromParent()
                 GameScene.factoriesPositions[3].slot = factory.node
                 changeAllNodeFamilyNames(node: factory.node, name: "factory_slot_3_occupied")
-                background.addChild(factory.node)
+                GameScene.background.addChild(factory.node)
             }
+            GameScene.factoriesPositions[3].id = factory.id
             factory.node.zPosition = 15
         case .fifth:
             if factory.type == .Basic {
@@ -360,8 +369,9 @@ class GameScene: SKScene {
                 GameScene.factoriesPositions[4].slot.removeFromParent()
                 GameScene.factoriesPositions[4].slot = factory.node
                 changeAllNodeFamilyNames(node: factory.node, name: "factory_slot_4_occupied")
-                background.addChild(factory.node)
+                GameScene.background.addChild(factory.node)
             }
+            GameScene.factoriesPositions[4].id = factory.id
             factory.node.zPosition = 25
         case .sixth:
             if factory.type == .Basic {
@@ -372,8 +382,9 @@ class GameScene: SKScene {
                 GameScene.factoriesPositions[5].slot.removeFromParent()
                 GameScene.factoriesPositions[5].slot = factory.node
                 changeAllNodeFamilyNames(node: factory.node, name: "factory_slot_5_occupied")
-                background.addChild(factory.node)
+                GameScene.background.addChild(factory.node)
             }
+            GameScene.factoriesPositions[5].id = factory.id
             factory.node.zPosition = 20
         case .none:
             let _ = 0
@@ -408,13 +419,14 @@ class GameScene: SKScene {
      Clean slot to a empty slot again.
      */
     func cleanSlot(positionIndex: Int) {
+        GameScene.factoriesPositions[positionIndex].id = nil
         GameScene.factoriesPositions[positionIndex].slot.removeFromParent()
         GameScene.factoriesPositions[positionIndex].slot = SKSpriteNode(imageNamed: "Factory_add_new")
         GameScene.factoriesPositions[positionIndex].slot.anchorPoint = CGPoint(x: 0.5, y: 0)
         GameScene.factoriesPositions[positionIndex].slot.position = CGPoint(x: GameScene.factoriesPositions[positionIndex].x, y: GameScene.factoriesPositions[positionIndex].y)
         GameScene.factoriesPositions[positionIndex].slot.zPosition = 5
         GameScene.factoriesPositions[positionIndex].slot.name = "factory_slot_\(positionIndex)_empty"
-        background.addChild(GameScene.factoriesPositions[positionIndex].slot)
+        GameScene.background.addChild(GameScene.factoriesPositions[positionIndex].slot)
     }
     
     
