@@ -88,11 +88,11 @@ class GameAnnounceViewCell: UICollectionViewCell {
         seeAnnounceButton.layer.cornerRadius = 10
         
         // FONT
-        resourceQuantityType1.font = UIFont(name: "AustralSlabBlur-Regular", size: 8)
-        resourceQuantityType2.font = UIFont(name: "AustralSlabBlur-Regular", size: 8)
-        resourceQuantityType3.font = UIFont(name: "AustralSlabBlur-Regular", size: 8)
+        resourceQuantityType1.font = UIFont(name: "AustralSlabBlur-Regular", size: 12)
+        resourceQuantityType2.font = UIFont(name: "AustralSlabBlur-Regular", size: 12)
+        resourceQuantityType3.font = UIFont(name: "AustralSlabBlur-Regular", size: 12)
         priceLabel.font = UIFont(name: "AustralSlabBlur-Regular", size: 14)
-        seeAnnounceButton.titleLabel?.font = UIFont(name: "AustralSlabBlur-Regular", size: 10)
+        seeAnnounceButton.titleLabel?.font = UIFont(name: "AustralSlabBlur-Regular", size: 14)
         
         if offer?.buyerID == "none" {
             seeAnnounceButton.backgroundColor = UIColor(named: "actionColor1")

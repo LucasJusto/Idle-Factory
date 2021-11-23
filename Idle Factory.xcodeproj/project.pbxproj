@@ -375,8 +375,8 @@
 			isa = PBXGroup;
 			children = (
 				55A0B4AD2732F6C900161FE8 /* FactoryDetailScene.storyboard */,
-				55A0B4AF27330B2000161FE8 /* FactoryDetailSceneController.swift */,
 				55A0B4B127330EA500161FE8 /* FactoryDetailCell.swift */,
+				55A0B4AF27330B2000161FE8 /* FactoryDetailSceneController.swift */,
 			);
 			path = FactoryDetails;
 			sourceTree = "<group>";

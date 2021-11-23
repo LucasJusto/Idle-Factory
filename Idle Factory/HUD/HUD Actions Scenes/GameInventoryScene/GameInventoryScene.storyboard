@@ -25,7 +25,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="bWn-IA-vOF">
-                                <rect key="frame" x="325" y="53" width="246" height="27"/>
+                                <rect key="frame" x="325" y="35" width="246" height="27"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" verticalCompressionResistancePriority="751" text="Inventory" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mcm-ao-HBP">
                                         <rect key="frame" x="0.0" y="0.0" width="124" height="27"/>
@@ -52,7 +52,7 @@
                                 </constraints>
                             </stackView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="55m-EB-zmS">
-                                <rect key="frame" x="807" y="44" width="45" height="45"/>
+                                <rect key="frame" x="807" y="26" width="45" height="45"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="55m-EB-zmS" secondAttribute="height" multiplier="1:1" id="99y-bU-jmI"/>
                                     <constraint firstAttribute="height" constant="45" id="VHb-dY-2In"/>
@@ -65,7 +65,7 @@
                                 </connections>
                             </button>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YPY-6k-DAS">
-                                <rect key="frame" x="538" y="120.5" width="309" height="209"/>
+                                <rect key="frame" x="538" y="102.5" width="309" height="209"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Jg4-5c-c8Y">
                                         <rect key="frame" x="0.0" y="0.0" width="309" height="209"/>
@@ -352,7 +352,7 @@
                                 </constraints>
                             </view>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="rF0-R9-7mq">
-                                <rect key="frame" x="49" y="120" width="479" height="210"/>
+                                <rect key="frame" x="49" y="102" width="479" height="210"/>
                                 <color key="backgroundColor" name="Inventory_background"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="210" id="eWv-ah-4hf"/>
@@ -563,7 +563,7 @@
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="YPY-6k-DAS" secondAttribute="trailing" constant="5" id="3e0-nT-YdB"/>
                             <constraint firstItem="rF0-R9-7mq" firstAttribute="top" secondItem="bWn-IA-vOF" secondAttribute="bottom" constant="40" id="Btp-P8-tJf"/>
                             <constraint firstItem="8WR-EG-h3O" firstAttribute="leading" secondItem="5EZ-qb-Rvc" secondAttribute="leading" id="DRm-gf-0IQ"/>
-                            <constraint firstItem="bWn-IA-vOF" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" constant="53" id="Hsj-L9-TZy"/>
+                            <constraint firstItem="bWn-IA-vOF" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" constant="35" id="Hsj-L9-TZy"/>
                             <constraint firstItem="8WR-EG-h3O" firstAttribute="bottom" secondItem="5EZ-qb-Rvc" secondAttribute="bottom" id="KAd-rg-Y4S"/>
                             <constraint firstItem="55m-EB-zmS" firstAttribute="centerY" secondItem="bWn-IA-vOF" secondAttribute="centerY" id="Ka2-j1-xjm"/>
                             <constraint firstItem="rF0-R9-7mq" firstAttribute="centerY" secondItem="YPY-6k-DAS" secondAttribute="centerY" id="TUp-vn-HI8"/>

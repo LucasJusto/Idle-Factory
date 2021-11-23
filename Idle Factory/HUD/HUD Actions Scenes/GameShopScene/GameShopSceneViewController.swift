@@ -84,8 +84,8 @@ class GameShopSceneViewController: UIViewController, NavigationCellDelegate {
         premiumCurrencyLabel.font = UIFont(name: "AustralSlabBlur-Regular", size: 14)
         
         // BUTTONS
-        generateNFTButton.titleLabel?.font = UIFont(name: "AustralSlabBlur-Regular", size: 10)
-        openMarketplaceButton.titleLabel?.font = UIFont(name: "AustralSlabBlur-Regular", size: 10)
+        generateNFTButton.titleLabel?.font = UIFont(name: "AustralSlabBlur-Regular", size: 14)
+        openMarketplaceButton.titleLabel?.font = UIFont(name: "AustralSlabBlur-Regular", size: 14)
     }
     
     
@@ -175,7 +175,7 @@ extension GameShopSceneViewController: UICollectionViewDataSource {
 extension GameShopSceneViewController: UICollectionViewDelegateFlowLayout {
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let cellSize = CGSize(width: 131, height: 201)
+        let cellSize = CGSize(width: 160, height: 225)
         return cellSize
     }
 

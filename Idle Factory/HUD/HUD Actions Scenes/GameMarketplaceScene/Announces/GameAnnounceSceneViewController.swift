@@ -210,7 +210,7 @@ extension GameAnnounceSceneViewController: UICollectionViewDataSource {
 extension GameAnnounceSceneViewController: UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let cellSize = CGSize(width: 131, height: 201)
+        let cellSize = CGSize(width: 160, height: 225)
         return cellSize
     }
     
