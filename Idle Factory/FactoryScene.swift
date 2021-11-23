@@ -25,8 +25,13 @@ class FactoryScene: SKScene {
         return cameraNode
     }()
     
+    @objc
+    func didUpgradeFactory(notification: Notification) {
+        factoryNode.texture = thisFactory?.node.texture
+    }
+    
     override func didMove(to view: SKView) {
-        
+        NotificationCenter.default.addObserver(self, selector: #selector(didUpgradeFactory(notification:)), name: .didUpgradeFactory, object: thisFactory)
         if let factory = thisFactory {
             if factory.type == .NFT {
                 factoryNode = FactoryVisualGenerator.getNode(visual: factory.visual!)

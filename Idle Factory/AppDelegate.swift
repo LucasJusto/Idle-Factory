@@ -57,7 +57,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             
         }
         
-        GameViewController.scene?.background.removeAllChildren()
+        GameScene.background.removeAllChildren()
         let semaphore = DispatchSemaphore(value: 0)
         checkMyOffers(semaphore: semaphore)
         semaphore.wait()
