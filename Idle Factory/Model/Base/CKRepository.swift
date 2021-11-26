@@ -791,6 +791,21 @@ public class CKRepository {
         }
     }
     
+    static func deleteMarketPlaceOffers(offerIDs: [String], completion: @escaping([CKRecord.ID?]?, Error?) -> Void) {
+        let recordsToDelete:[CKRecord.ID] = offerIDs.map { offerID in
+            CKRecord.ID(recordName: offerID)
+        }
+        let operation = CKModifyRecordsOperation(recordsToSave: nil, recordIDsToDelete: recordsToDelete)
+        operation.savePolicy = .changedKeys
+        operation.modifyRecordsCompletionBlock = { _, deletedRecords, error in
+            if let ckError = error as? CKError {
+                CKRepository.errorAlertHandler(CKErrorCode: ckError.code)
+            }
+            completion(deletedRecords, error)
+        }
+        publicDB.add(operation)
+    }
+    
     static func errorAlertHandler(CKErrorCode: CKError.Code){
         
         let notLoggedInTitle = NSLocalizedString("CKErrorNotLoggedInTitle", comment: "Not logged in iCloud")

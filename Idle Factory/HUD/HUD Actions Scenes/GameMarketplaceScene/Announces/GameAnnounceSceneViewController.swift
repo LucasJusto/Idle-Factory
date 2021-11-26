@@ -158,8 +158,24 @@ class GameAnnounceSceneViewController: UIViewController, NavigationCellDelegate,
                 semaphore.signal()
             }
             semaphore.wait()
-
-            self.playerAnnounces = offers
+            
+            var offersToDelete: [String] = []
+            
+            for index in 0..<offers.count {
+                let aux = self.announcesDict[offers[index].generatorID]
+                if aux == nil {
+                    offersToDelete.append(offers[index].id)
+                }
+            }
+            
+            self.playerAnnounces = offers.filter({ offer in
+                !(offersToDelete.contains(offer.id))
+            })
+            CKRepository.deleteMarketPlaceOffers(offerIDs: offersToDelete) { _, _ in
+                
+            }
+            
+            //self.playerAnnounces = offers
             semaphore2.signal()
         }
         semaphore2.wait()

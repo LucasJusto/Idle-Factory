@@ -69,6 +69,7 @@ class GameAnnounceViewCell: UICollectionViewCell {
         resourceType3.isHidden = false
         resourceQuantityType3.isHidden = false
         rightMargin.isHidden = false
+        totalCardView.isHidden = false
     }
     
     

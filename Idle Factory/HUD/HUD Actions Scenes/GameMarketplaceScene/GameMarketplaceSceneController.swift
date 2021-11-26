@@ -170,11 +170,35 @@ class GameMarketplaceSceneController: UIViewController, NavigationCellDelegate {
                 self.offerArray = offers.filter({ offer in
                     offer.currencyType == .basic
                 })
+                var offersToDelete: [String] = []
+                
+                for index in 0..<self.offerArray.count {
+                    let aux = self.generatorDict[self.offerArray[index].generatorID]
+                    if aux == nil {
+                        offersToDelete.append(self.offerArray[index].id)
+                    }
+                }
+                
+                self.offerArray = self.offerArray.filter({ offer in
+                    !(offersToDelete.contains(offer.id))
+                })
             })
         case 1:
             CKRepository.getMarketPlaceOffers(completion: { offers in
                 self.offerArray = offers.filter({ offer in
                     offer.currencyType == .premium
+                })
+                var offersToDelete: [String] = []
+                
+                for index in 0..<self.offerArray.count {
+                    let aux = self.generatorDict[self.offerArray[index].generatorID]
+                    if aux == nil {
+                        offersToDelete.append(self.offerArray[index].id)
+                    }
+                }
+                
+                self.offerArray = self.offerArray.filter({ offer in
+                    !(offersToDelete.contains(offer.id))
                 })
             })
         default: break
@@ -213,7 +237,7 @@ class GameMarketplaceSceneController: UIViewController, NavigationCellDelegate {
             self.activityIndicator.startAnimating()
         }
         
-        CKRepository.getMarketPlaceOffers(completion: { offers in
+        CKRepository.getMarketPlaceOffers(completion: { [self] offers in
             let generatorsId: [String] = offers.map { offer in
                 offer.generatorID
             }
@@ -225,10 +249,28 @@ class GameMarketplaceSceneController: UIViewController, NavigationCellDelegate {
                 semaphore.signal()
             }
             semaphore.wait()
-
+            
             self.offerArray = offers.filter({ offer in
                 offer.currencyType == .basic
             })
+            
+            var offersToDelete: [String] = []
+            
+            for index in 0..<self.offerArray.count {
+                let aux = self.generatorDict[self.offerArray[index].generatorID]
+                if aux == nil {
+                    offersToDelete.append(self.offerArray[index].id)
+                }
+            }
+            
+            self.offerArray = self.offerArray.filter({ offer in
+                !(offersToDelete.contains(offer.id))
+            })
+            
+            CKRepository.deleteMarketPlaceOffers(offerIDs: offersToDelete) { _, _ in
+                
+            }
+            
             DispatchQueue.main.async {
                 self.activityIndicator.stopAnimating()
                 self.activityIndicator.isHidden = true
